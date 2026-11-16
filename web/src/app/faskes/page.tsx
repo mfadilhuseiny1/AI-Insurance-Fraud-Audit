@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } fro
 import { Badge, Sheet, useToast } from "../jkn-mobile/_ui/kit";
 import { ALAT, DEVICE, PASIEN, deviceById, lokasi, namaDevice, pasienById, type Alat } from "./_lib/data";
 import { AMBANG_OTOMATIS, aktifDevice, aktifSlot, cocokkan, kunciPasangan, type Binding, type Usul } from "./_lib/match";
+import { durasi, ringkasanPulang } from "./_lib/ringkasan";
 import { Bagian, Banner, C, DaftarAlasan, Ikon, Saklar, Skor, Tanda, Teks, isoLokal, jam, kodeTanggal, lama, tglJam, useSekarang, type Notif } from "./_ui/parts";
 import { PreloadScan, ScanKamera, type JenisScan } from "./_ui/ScanKamera";
 
@@ -13,7 +14,8 @@ import { PreloadScan, ScanKamera, type JenisScan } from "./_ui/ScanKamera";
    docs/IOT_KONTRAK.md. "Scan" plays a recorded camera scan; data stays on this phone (localStorage). */
 
 type Tab = "binding" | "pasien" | "device" | "notif";
-type Simpan = { bindings: Binding[]; notifs: Notif[]; seq: number };
+/** pulang: patient ID → discharge time (a discharged patient's sessions are closed and cannot be bound again) */
+type Simpan = { bindings: Binding[]; notifs: Notif[]; seq: number; pulang?: Record<string, string> };
 type Sesi = { pasien: string[]; device: string[]; tolak: string[] };
 const KUNCI = "faskes-iot-binding:v1";
 const SESI_KOSONG: Sesi = { pasien: [], device: [], tolak: [] };
@@ -32,6 +34,7 @@ export default function FaskesBinding() {
   const [manual, setManual] = useState<JenisScan | null>(null);
   const [banner, setBanner] = useState<Notif[]>([]);
   const [detail, setDetail] = useState<{ jenis: JenisScan; id: string } | null>(null);
+  const [ringkas, setRingkas] = useState<string | null>(null);
   const [toast, say] = useToast();
   const now = useSekarang();
 
@@ -83,6 +86,23 @@ export default function FaskesBinding() {
     kabar({ jenis: "info", judul: "Binding dilepas", isi: `${b.device} dilepas dari ${b.pasien}. Sesi ${b.sesi} ditutup.`, device: b.device });
   };
 
+  const pulang = db.pulang ?? {};
+  /** Discharge: close every IoT session of the patient at once and show the device-use summary for E-Klaim. */
+  const pulangkan = (pid: string) => {
+    const p = pasienById(pid);
+    const waktu = new Date().toISOString();
+    const ditutup = db.bindings.filter((b) => !b.selesai && b.pasien === pid).length;
+    setDb((x) => ({
+      ...x, pulang: { ...(x.pulang ?? {}), [pid]: waktu },
+      bindings: x.bindings.map((b) => (!b.selesai && b.pasien === pid ? { ...b, selesai: waktu } : b)),
+    }));
+    setSesi((x) => ({ ...x, pasien: x.pasien.filter((id) => id !== pid) }));
+    if (terakhir?.pasien === pid) setTerakhir(null);
+    setDetail(null);
+    setRingkas(pid);
+    kabar({ jenis: "info", judul: "Pasien pulang", isi: `${p.id} ${p.nama}: ${ditutup} sesi IoT ditutup. Ringkasan pemakaian alat siap untuk E-Klaim.` });
+  };
+
   const hasil = useMemo(() => cocokkan(sesi.pasien, sesi.device, db.bindings, sesi.tolak), [sesi, db.bindings]);
   const tunggu = hasil.usul.filter((u) => u.jenis !== "otomatis" || !auto).filter((u) => u.device !== proses?.usul.device);
 
@@ -117,7 +137,7 @@ export default function FaskesBinding() {
   const berikut = (jenis: JenisScan): string | undefined => {
     const b = db.bindings;
     if (jenis === "pasien") {
-      const bebas = PASIEN.filter((p) => !sesi.pasien.includes(p.id));
+      const bebas = PASIEN.filter((p) => !sesi.pasien.includes(p.id) && !pulang[p.id]);
       const dev = sesi.device.map(deviceById);
       return (bebas.find((p) => dev.some((d) => d.unit === p.unit && d.bed === p.bed && p.order.includes(d.alat)))
         ?? bebas.find((p) => p.order.some((a) => !aktifSlot(b, p.id, a))) ?? bebas[0])?.id;
@@ -131,6 +151,7 @@ export default function FaskesBinding() {
   const tambah = (jenis: JenisScan, id: string, cara: "scan" | "manual") => {
     const daftar = jenis === "pasien" ? sesi.pasien : sesi.device;
     setTabRaw("binding");
+    if (jenis === "pasien" && pulang[id]) { say(`${id} sudah pulang ${jam(pulang[id])}: tidak bisa diikat lagi`); return; }
     if (daftar.includes(id)) { say(`${id} sudah ada di sesi scan`); return; }
     setSesi((x) => (jenis === "pasien" ? { ...x, pasien: [...x.pasien, id] } : { ...x, device: [...x.device, id] }));
     setTerakhir(null);
@@ -147,8 +168,9 @@ export default function FaskesBinding() {
 
   const aktif = db.bindings.filter((b) => !b.selesai);
   const unread = db.notifs.filter((n) => !n.baca).length;
-  const kurang = PASIEN.reduce((n, p) => n + p.order.filter((a) => !aktifSlot(db.bindings, p.id, a)).length, 0);
-  const terpantau = PASIEN.filter((p) => aktif.some((b) => b.pasien === p.id)).length;
+  const dirawat = PASIEN.filter((p) => !pulang[p.id]);
+  const kurang = dirawat.reduce((n, p) => n + p.order.filter((a) => !aktifSlot(db.bindings, p.id, a)).length, 0);
+  const terpantau = dirawat.filter((p) => aktif.some((b) => b.pasien === p.id)).length;
   const tutupBanner = useCallback(() => setBanner((q) => q.slice(1)), []);
 
   return (
@@ -174,7 +196,7 @@ export default function FaskesBinding() {
             <>
               <div className="grid grid-cols-3 gap-2">
                 <Angka nilai={aktif.length} label="Binding aktif" />
-                <Angka nilai={`${terpantau}/${PASIEN.length}`} label="Pasien terpantau" />
+                <Angka nilai={`${terpantau}/${dirawat.length}`} label="Pasien terpantau" />
                 <Angka nilai={kurang} label="Alat dipesan belum terikat" warna={kurang ? "#b45309" : "#15803d"} />
               </div>
 
@@ -231,7 +253,7 @@ export default function FaskesBinding() {
                   </div>
                 </Bagian>
               )}
-              <ResetDemo onReset={() => { setDb({ bindings: [], notifs: [], seq: 0 }); setSesi(SESI_KOSONG); setTerakhir(null); setBanner([]); say("Data dikosongkan"); }} />
+              <ResetDemo onReset={() => { setDb({ bindings: [], notifs: [], seq: 0, pulang: {} }); setSesi(SESI_KOSONG); setTerakhir(null); setBanner([]); say("Data dikosongkan"); }} />
             </>
           )}
 
@@ -240,14 +262,16 @@ export default function FaskesBinding() {
               <p className="px-1 pb-1 text-[12.5px] text-[#5f6b7c]">Setiap alat yang dipesan dokter harus terikat ke device IoT, agar jam pemakaiannya tercatat dan klaim bisa dibuktikan.</p>
               {PASIEN.map((p) => {
                 const isi = p.order.filter((a) => aktifSlot(db.bindings, p.id, a)).length;
+                const pl = pulang[p.id];
                 return (
-                  <Kartu key={p.id} onClick={() => setDetail({ jenis: "pasien", id: p.id })}>
-                    <div className="flex items-start gap-3">
+                  <Kartu key={p.id} onClick={() => (pl ? setRingkas(p.id) : setDetail({ jenis: "pasien", id: p.id }))}>
+                    <div className={`flex items-start gap-3 ${pl ? "opacity-70" : ""}`}>
                       <Inisial nama={p.nama} />
                       <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-2"><p className="truncate text-[15px] font-semibold">{p.nama}</p><Badge tone={isi === p.order.length ? "green" : isi ? "amber" : "gray"}>{isi}/{p.order.length} alat</Badge></div>
+                        <div className="flex items-center gap-2"><p className="truncate text-[15px] font-semibold">{p.nama}</p>{pl ? <Badge tone="blue">Pulang {jam(pl)}</Badge> : <Badge tone={isi === p.order.length ? "green" : isi ? "amber" : "gray"}>{isi}/{p.order.length} alat</Badge>}</div>
                         <p className="text-[12.5px] text-[#5f6b7c]"><span className="font-mono">{p.id}</span> · {lokasi(p)}</p>
-                        <div className="mt-2 flex flex-wrap gap-1.5">{p.order.map((a) => <SlotChip key={a} alat={a} b={aktifSlot(db.bindings, p.id, a)} />)}</div>
+                        {pl ? <p className="mt-1.5 text-[12.5px] font-medium" style={{ color: C }}>Lihat ringkasan pemakaian alat ›</p>
+                          : <div className="mt-2 flex flex-wrap gap-1.5">{p.order.map((a) => <SlotChip key={a} alat={a} b={aktifSlot(db.bindings, p.id, a)} />)}</div>}
                       </div>
                     </div>
                   </Kartu>
@@ -295,11 +319,12 @@ export default function FaskesBinding() {
       </nav>
 
       {scan && <ScanKamera jenis={scan.jenis} onSelesai={selesaiScan} onBatal={() => setScan(null)} onManual={() => { const j = scan.jenis; setScan(null); setManual(j); }} />}
-      {manual && <PilihManual jenis={manual} sesi={sesi} bindings={db.bindings} onPilih={(id) => { tambah(manual, id, "manual"); setManual(null); }} onTutup={() => setManual(null)} />}
+      {manual && <PilihManual jenis={manual} sesi={sesi} bindings={db.bindings} pulang={pulang} onPilih={(id) => { tambah(manual, id, "manual"); setManual(null); }} onTutup={() => setManual(null)} />}
       {detail && (
-        <Detail d={detail} bindings={db.bindings} now={now} onTutup={() => setDetail(null)} onLepas={lepas}
+        <Detail d={detail} bindings={db.bindings} now={now} onTutup={() => setDetail(null)} onLepas={lepas} onPulang={pulangkan}
           onScan={(j, id) => { setDetail(null); setScan({ jenis: j, target: id }); }} />
       )}
+      {ringkas && pulang[ringkas] && <RingkasanPulang pid={ringkas} pada={pulang[ringkas]} bindings={db.bindings} onTutup={() => setRingkas(null)} />}
       {banner[0] && <Banner n={banner[0]} onTutup={tutupBanner} onTap={() => { tutupBanner(); if (banner[0].device) setDetail({ jenis: "device", id: banner[0].device }); }} />}
       {toast}
     </div>
@@ -524,11 +549,11 @@ function TabDevice({ bindings, now, onBuka }: { bindings: Binding[]; now: number
   );
 }
 
-function PilihManual({ jenis, sesi, bindings, onPilih, onTutup }: { jenis: JenisScan; sesi: Sesi; bindings: Binding[]; onPilih: (id: string) => void; onTutup: () => void }) {
+function PilihManual({ jenis, sesi, bindings, pulang, onPilih, onTutup }: { jenis: JenisScan; sesi: Sesi; bindings: Binding[]; pulang: Record<string, string>; onPilih: (id: string) => void; onTutup: () => void }) {
   const [q, setQ] = useState("");
   const cari = q.trim().toLowerCase();
   const rows = jenis === "pasien"
-    ? PASIEN.filter((p) => !cari || `${p.id} ${p.nama} ${p.bed}`.toLowerCase().includes(cari)).map((p) => ({ id: p.id, judul: p.nama, sub: lokasi(p), diSesi: sesi.pasien.includes(p.id), status: `${p.order.filter((a) => aktifSlot(bindings, p.id, a)).length}/${p.order.length} alat` }))
+    ? PASIEN.filter((p) => !cari || `${p.id} ${p.nama} ${p.bed}`.toLowerCase().includes(cari)).map((p) => ({ id: p.id, judul: p.nama, sub: lokasi(p), diSesi: sesi.pasien.includes(p.id) || !!pulang[p.id], status: pulang[p.id] ? "pulang" : `${p.order.filter((a) => aktifSlot(bindings, p.id, a)).length}/${p.order.length} alat` }))
     : DEVICE.filter((d) => !cari || `${d.id} ${namaDevice(d)} ${d.bed ?? ""}`.toLowerCase().includes(cari)).map((d) => ({ id: d.id, judul: namaDevice(d), sub: lokasi(d), diSesi: sesi.device.includes(d.id), status: aktifDevice(bindings, d.id) ? `terikat ${aktifDevice(bindings, d.id)!.pasien}` : "bebas" }));
   return (
     <Sheet open onClose={onTutup} title={jenis === "pasien" ? "Input manual · Patient ID" : "Input manual · Device ID"}>
@@ -538,7 +563,7 @@ function PilihManual({ jenis, sesi, bindings, onPilih, onTutup }: { jenis: Jenis
         {rows.map((r) => (
           <button key={r.id} disabled={r.diSesi} onClick={() => onPilih(r.id)} className="flex w-full items-center gap-3 rounded-xl border border-[#e3e7ec] px-3 py-2.5 text-left active:bg-[#f0f3f6] disabled:opacity-50">
             <span className="min-w-0 flex-1"><span className="block truncate text-[14px] font-semibold"><span className="font-mono">{r.id}</span> · {r.judul}</span><span className="block text-[12.5px] text-[#5f6b7c]">{r.sub}</span></span>
-            <span className="shrink-0 text-[12px] text-[#738091]">{r.diSesi ? "di sesi" : r.status}</span>
+            <span className="shrink-0 text-[12px] text-[#738091]">{r.status === "pulang" ? "pulang" : r.diSesi ? "di sesi" : r.status}</span>
           </button>
         ))}
       </div>
@@ -550,8 +575,9 @@ function Baris({ k, v, mono }: { k: string; v: ReactNode; mono?: boolean }) {
   return <div className="flex gap-3 border-b border-[#eef1f4] py-2 text-[13.5px] last:border-0"><span className="w-[120px] shrink-0 text-[#5f6b7c]">{k}</span><span className={`min-w-0 flex-1 break-words ${mono ? "font-mono text-[12.5px]" : ""}`}>{v}</span></div>;
 }
 
-function Detail({ d, bindings, now, onTutup, onLepas, onScan }: {
-  d: { jenis: JenisScan; id: string }; bindings: Binding[]; now: number; onTutup: () => void; onLepas: (b: Binding) => void; onScan: (j: JenisScan, id: string) => void;
+function Detail({ d, bindings, now, onTutup, onLepas, onPulang, onScan }: {
+  d: { jenis: JenisScan; id: string }; bindings: Binding[]; now: number; onTutup: () => void; onLepas: (b: Binding) => void;
+  onPulang: (pid: string) => void; onScan: (j: JenisScan, id: string) => void;
 }) {
   if (d.jenis === "pasien") {
     const p = pasienById(d.id);
@@ -586,6 +612,7 @@ function Detail({ d, bindings, now, onTutup, onLepas, onScan }: {
           })}
         </div>
         <button onClick={() => onScan("pasien", p.id)} className="mt-4 flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl text-[15px] font-semibold text-white" style={{ background: C }}>{Ikon.qr} Scan QR gelang pasien ini</button>
+        <TombolPulang sesi={bindings.filter((b) => !b.selesai && b.pasien === p.id).length} onPulang={() => onPulang(p.id)} />
       </Sheet>
     );
   }
@@ -630,6 +657,60 @@ function Detail({ d, bindings, now, onTutup, onLepas, onScan }: {
         </>
       )}
       <button onClick={() => onScan("device", dv.id)} className="mt-4 flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl text-[15px] font-semibold text-white" style={{ background: "#0b4f4a" }}>{Ikon.qr} Scan QR device ini</button>
+    </Sheet>
+  );
+}
+
+/** Discharge asks twice: it closes every IoT session of the patient. */
+function TombolPulang({ sesi, onPulang }: { sesi: number; onPulang: () => void }) {
+  const [yakin, setYakin] = useState(false);
+  useEffect(() => {
+    if (!yakin) return;
+    const t = setTimeout(() => setYakin(false), 4000);
+    return () => clearTimeout(t);
+  }, [yakin]);
+  return (
+    <button onClick={() => (yakin ? onPulang() : setYakin(true))}
+      className={`mt-2.5 min-h-[46px] w-full rounded-xl border-[1.5px] text-[14.5px] font-semibold ${yakin ? "border-[#1f4fa8] bg-[#1f4fa8] text-white" : "border-[#1f4fa8] text-[#1f4fa8]"}`}>
+      {yakin ? `Ketuk lagi: pulangkan & tutup ${sesi} sesi IoT` : "Pulangkan pasien"}
+    </button>
+  );
+}
+
+/** Device-use summary at discharge: each IoT session, and the E-Klaim duration fields read from the devices. */
+function RingkasanPulang({ pid, pada, bindings, onTutup }: { pid: string; pada: string; bindings: Binding[]; onTutup: () => void }) {
+  const p = pasienById(pid);
+  const r = ringkasanPulang(pid, bindings, pada);
+  const angka = (n: number) => n.toLocaleString("id-ID", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  return (
+    <Sheet open onClose={onTutup} title={`Ringkasan pemakaian alat · ${p.nama}`}>
+      <p className="text-[13px] text-[#4a5563]"><span className="font-mono">{p.id}</span> · {lokasi(p)} · pulang {tglJam(pada)}<br />SEP <span className="font-mono">{p.sep}</span></p>
+      <h3 className="mb-1.5 mt-4 text-[13px] font-semibold uppercase tracking-wide text-[#5f6b7c]">Sesi IoT selama rawat</h3>
+      {r.baris.length === 0 ? (
+        <p className="rounded-xl bg-[#fdf1d8] p-3 text-[13px] text-[#8a5a00]">Tidak ada alat IoT yang terikat selama rawat: jam pemakaian alat di klaim tidak punya bukti dari alat.</p>
+      ) : (
+        <div className="space-y-1.5">
+          {r.baris.map((x) => (
+            <div key={x.sesi} className="rounded-xl border border-[#e3e7ec] px-3 py-2">
+              <div className="flex items-center gap-2"><span className="font-mono text-[13.5px] font-semibold">{x.device}</span><span className="text-[12.5px] text-[#5f6b7c]">{namaDevice(deviceById(x.device))}</span>
+                <span className="ml-auto text-[13px] font-semibold tabular-nums">{durasi(x.jam)}</span></div>
+              <div className="flex items-center gap-2 text-[12px] text-[#738091]"><span className="font-mono">{x.sesi}</span> · {jam(x.mulai)}–{jam(x.selesai)}
+                <span className={`ml-auto rounded-full px-1.5 text-[11px] font-medium ${x.mode === "jalan" ? "bg-[#e1f4e8] text-[#1c6e42]" : "bg-[#fdf1d8] text-[#8a5a00]"}`}>{x.mode}</span></div>
+            </div>
+          ))}
+        </div>
+      )}
+      <h3 className="mb-1.5 mt-4 text-[13px] font-semibold uppercase tracking-wide text-[#5f6b7c]">Isian E-Klaim dari data alat</h3>
+      <div className="rounded-xl bg-[#0f1b1a] px-3 py-2.5 font-mono text-[12.5px] leading-relaxed text-[#cde9e5]">
+        {[["jam_ventilator", angka(r.eklaim.jam_ventilator)], ["jam_niv", angka(r.eklaim.jam_niv)], ["sesi_hemodialisis", String(r.eklaim.sesi_hemodialisis)]].map(([k, v]) => (
+          <div key={k} className="flex gap-2"><span className="w-[140px] shrink-0 text-[#7fb8b0]">{k}</span><span>{v}</span></div>
+        ))}
+      </div>
+      <p className="mt-2 text-[12.5px] leading-snug text-[#5f6b7c]">
+        Angka diambil dari sensor alat, tidak diketik ulang. Hanya jam saat alat <b>jalan</b> yang dihitung{r.jamSiaga > 0 ? `; ${durasi(r.jamSiaga)} siaga tidak ikut` : ""}.
+        Ventilasi mekanik ≥ 96 jam berturut-turut dikode 96.72.
+      </p>
+      <button onClick={onTutup} className="mt-4 min-h-[46px] w-full rounded-xl text-[14.5px] font-semibold text-white" style={{ background: C }}>Selesai</button>
     </Sheet>
   );
 }
