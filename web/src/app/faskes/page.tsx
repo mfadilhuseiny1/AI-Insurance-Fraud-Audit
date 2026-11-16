@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } fro
 import { Badge, Sheet, useToast } from "../jkn-mobile/_ui/kit";
 import { ALAT, DEVICE, PASIEN, deviceById, lokasi, namaDevice, pasienById, type Alat } from "./_lib/data";
 import { AMBANG_OTOMATIS, aktifDevice, aktifSlot, cocokkan, kunciPasangan, type Binding, type Usul } from "./_lib/match";
+import { daftarPeringatan, type Peringatan } from "./_lib/peringatan";
 import { durasi, ringkasanPulang } from "./_lib/ringkasan";
 import { Bagian, Banner, C, DaftarAlasan, Ikon, Saklar, Skor, Tanda, Teks, isoLokal, jam, kodeTanggal, lama, tglJam, useSekarang, type Notif } from "./_ui/parts";
 import { PreloadScan, ScanKamera, type JenisScan } from "./_ui/ScanKamera";
@@ -13,7 +14,7 @@ import { PreloadScan, ScanKamera, type JenisScan } from "./_ui/ScanKamera";
    the rest wait for confirmation. Each binding opens an IoT session (sesi_id / device_id / peserta / kunjungan) as in
    docs/IOT_KONTRAK.md. "Scan" plays a recorded camera scan; data stays on this phone (localStorage). */
 
-type Tab = "binding" | "pasien" | "device" | "notif";
+type Tab = "binding" | "pasien" | "device" | "peringatan" | "notif";
 /** pulang: patient ID → discharge time (a discharged patient's sessions are closed and cannot be bound again) */
 type Simpan = { bindings: Binding[]; notifs: Notif[]; seq: number; pulang?: Record<string, string> };
 type Sesi = { pasien: string[]; device: string[]; tolak: string[] };
@@ -171,6 +172,7 @@ export default function FaskesBinding() {
   const dirawat = PASIEN.filter((p) => !pulang[p.id]);
   const kurang = dirawat.reduce((n, p) => n + p.order.filter((a) => !aktifSlot(db.bindings, p.id, a)).length, 0);
   const terpantau = dirawat.filter((p) => aktif.some((b) => b.pasien === p.id)).length;
+  const peringatan = daftarPeringatan(db.bindings, pulang);
   const tutupBanner = useCallback(() => setBanner((q) => q.slice(1)), []);
 
   return (
@@ -282,6 +284,14 @@ export default function FaskesBinding() {
 
           {tab === "device" && <TabDevice bindings={db.bindings} now={now} onBuka={(id) => setDetail({ jenis: "device", id })} />}
 
+          {tab === "peringatan" && (
+            <TabPeringatan list={peringatan} onAksi={(w) => {
+              if (w.aksi === "scan-device" && w.device) setScan({ jenis: "device", target: w.device });
+              else if (w.aksi === "buka-device" && w.device) setDetail({ jenis: "device", id: w.device });
+              else if (w.pasien) setDetail({ jenis: "pasien", id: w.pasien });
+            }} />
+          )}
+
           {tab === "notif" && (
             <div className="space-y-2">
               {db.notifs.length === 0 ? (
@@ -308,6 +318,7 @@ export default function FaskesBinding() {
             { key: "binding", label: "Binding", icon: Ikon.qr, badge: tunggu.length },
             { key: "pasien", label: "Pasien", icon: Ikon.user, badge: 0 },
             { key: "device", label: "Device", icon: Ikon.chip, badge: 0 },
+            { key: "peringatan", label: "Peringatan", icon: Ikon.alarm, badge: peringatan.length },
             { key: "notif", label: "Notifikasi", icon: Ikon.bell, badge: unread },
           ] as const).map((t) => (
             <button key={t.key} onClick={() => setTab(t.key)} className="relative flex min-h-[58px] flex-1 flex-col items-center justify-center gap-0.5 text-[11px] font-medium" style={{ color: tab === t.key ? C : "#738091" }}>
@@ -658,6 +669,37 @@ function Detail({ d, bindings, now, onTutup, onLepas, onPulang, onScan }: {
       )}
       <button onClick={() => onScan("device", dv.id)} className="mt-4 flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl text-[15px] font-semibold text-white" style={{ background: "#0b4f4a" }}>{Ikon.qr} Scan QR device ini</button>
     </Sheet>
+  );
+}
+
+/** What to fix now so device use is recorded right: running devices with no patient, bound devices on standby or
+    offline, orders with no device. Each card says why in plain words and offers the next step. */
+function TabPeringatan({ list, onAksi }: { list: Peringatan[]; onAksi: (w: Peringatan) => void }) {
+  const tinggi = list.filter((w) => w.tingkat === "tinggi").length;
+  return (
+    <div className="space-y-2">
+      <p className="px-1 pb-1 text-[12.5px] leading-snug text-[#5f6b7c]">
+        Hal yang perlu ditindak sekarang supaya pemakaian alat tercatat benar, sebelum menjadi temuan saat klaim diaudit.
+        {list.length > 0 && <> <b className="text-[#b42318]">{tinggi} penting</b> · {list.length - tinggi} perlu dicek.</>}
+      </p>
+      {list.length === 0 ? (
+        <p className="rounded-xl border border-dashed border-[#b7e2c5] bg-[#f3fbf6] px-4 py-10 text-center text-[13.5px] text-[#1c6e42]">Tidak ada peringatan. Semua alat yang menyala sudah terikat ke pasien, dan semua order alat sudah punya device.</p>
+      ) : list.map((w) => (
+        <div key={w.id} className="flex overflow-hidden rounded-xl border border-[#e3e7ec] bg-white">
+          <span className={`w-1.5 shrink-0 ${w.tingkat === "tinggi" ? "bg-[#d33d17]" : "bg-[#e0a43a]"}`} />
+          <div className="min-w-0 flex-1 p-3">
+            <div className="flex items-start gap-2">
+              <span className={`mt-0.5 shrink-0 ${w.tingkat === "tinggi" ? "text-[#b42318]" : "text-[#b45309]"}`}>{Ikon.warn}</span>
+              <p className="min-w-0 flex-1 text-[14px] font-semibold leading-snug"><Teks>{w.judul}</Teks></p>
+            </div>
+            <p className="mt-1 text-[12.5px] leading-snug text-[#4a5563]"><Teks>{w.isi}</Teks></p>
+            <button onClick={() => onAksi(w)} className="mt-2 flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-[13px] font-semibold text-white" style={{ background: w.aksi === "scan-device" ? "#0b4f4a" : C }}>
+              {w.aksi === "scan-device" ? <><span className="[&_svg]:h-4 [&_svg]:w-4">{Ikon.qr}</span> Scan QR device</> : w.aksi === "buka-device" ? "Buka device" : "Buka pasien"}
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }
 
