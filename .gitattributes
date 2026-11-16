@@ -1,0 +1,19 @@
+# Line endings: text files are stored with LF and checked out per platform; Windows scripts keep CRLF everywhere
+# (cmd.exe misreads LF-only batch files). Binary assets are never converted or diffed.
+* text=auto
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.mp4 binary
+*.pdf binary
+*.joblib binary
+*.npz binary
+*.pkl binary
+*.zip binary
