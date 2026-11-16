@@ -1,0 +1,1696 @@
+/* The Jupyter Code Workspace editor, styled after JupyterLab 4 (its Light and Dark theme variables). */
+
+.jp-Lab {
+  --jp-ui-font-family: system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", helvetica, arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --jp-content-font-family: system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", helvetica, arial, sans-serif;
+  --jp-code-font-family: menlo, consolas, "DejaVu Sans Mono", monospace;
+  --jp-ui-font-size0: 0.83333em;
+  --jp-ui-font-size1: 13px;
+  --jp-ui-font-size2: 1.2em;
+  --jp-content-font-size1: 14px;
+  --jp-code-font-size: 13px;
+  --jp-code-line-height: 1.3077;
+  --jp-code-padding: 5px;
+  --jp-cell-prompt-width: 64px;
+  --jp-cell-collapser-width: 8px;
+  --jp-cell-padding: 5px;
+  --jp-notebook-padding: 10px;
+  --jp-toolbar-height: 24px;
+  --jp-statusbar-height: 24px;
+  --jp-sidebar-tab-width: 33px;
+
+  --jp-layout-color0: #fff;
+  --jp-layout-color1: #fff;
+  --jp-layout-color2: #eee;
+  --jp-layout-color3: #bdbdbd;
+  --jp-layout-color4: #757575;
+  --jp-border-color0: #9e9e9e;
+  --jp-border-color1: #bdbdbd;
+  --jp-border-color2: #e0e0e0;
+  --jp-border-color3: #eee;
+  --jp-ui-font-color0: rgba(0, 0, 0, 1);
+  --jp-ui-font-color1: rgba(0, 0, 0, 0.87);
+  --jp-ui-font-color2: rgba(0, 0, 0, 0.54);
+  --jp-ui-font-color3: rgba(0, 0, 0, 0.38);
+  --jp-ui-inverse-font-color1: #fff;
+  --jp-content-font-color0: rgba(0, 0, 0, 1);
+  --jp-content-font-color1: rgba(0, 0, 0, 0.87);
+  --jp-content-font-color2: rgba(0, 0, 0, 0.54);
+  --jp-content-link-color: #1e88e5;
+  --jp-brand-color0: #0d47a1;
+  --jp-brand-color1: #1976d2;
+  --jp-brand-color2: #64b5f6;
+  --jp-brand-color3: #bbdefb;
+  --jp-brand-color4: #e3f2fd;
+  --jp-accent-color1: #388e3c;
+  --jp-warn-color0: #e65100;
+  --jp-warn-color1: #f57c00;
+  --jp-error-color1: #d32f2f;
+  --jp-success-color1: #388e3c;
+  --jp-cell-editor-background: #f5f5f5;
+  --jp-cell-editor-border-color: #e0e0e0;
+  --jp-cell-editor-active-background: #fff;
+  --jp-cell-editor-active-border-color: #1976d2;
+  --jp-cell-inprompt-font-color: #307fc1;
+  --jp-cell-outprompt-font-color: #bf5b3d;
+  --jp-notebook-multiselected-color: #e3f2fd;
+  --jp-rendermime-error-background: #fdd;
+  --jp-rendermime-table-row-background: #f5f5f5;
+  --jp-rendermime-table-row-hover-background: #e1f5fe;
+  --jp-input-background: #fff;
+  --jp-input-border-color: #bdbdbd;
+  --jp-shadow: 0 2px 6px rgba(0, 0, 0, 0.24), 0 1px 18px rgba(0, 0, 0, 0.1);
+  --jp-icon-color: #616161;
+  --jp-mirror-editor-keyword-color: #008000;
+  --jp-mirror-editor-atom-color: #88f;
+  --jp-mirror-editor-number-color: #080;
+  --jp-mirror-editor-def-color: #00f;
+  --jp-mirror-editor-variable-color: #212121;
+  --jp-mirror-editor-variable-2-color: #05a;
+  --jp-mirror-editor-punctuation-color: #05a;
+  --jp-mirror-editor-property-color: #05a;
+  --jp-mirror-editor-operator-color: #a2f;
+  --jp-mirror-editor-comment-color: #408080;
+  --jp-mirror-editor-string-color: #ba2121;
+  --jp-mirror-editor-meta-color: #a2f;
+  --jp-mirror-editor-builtin-color: #008000;
+  --jp-mirror-editor-header-color: #00f;
+  --jp-mirror-editor-quote-color: #090;
+  --jp-mirror-editor-link-color: #00c;
+  --jp-mirror-editor-cursor-color: #000;
+  --jp-editor-selected-background: #d9d9d9;
+  --jp-editor-selected-focused-background: #d7d4f0;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  background: var(--jp-layout-color3);
+  color: var(--jp-ui-font-color1);
+  font-family: var(--jp-ui-font-family);
+  font-size: var(--jp-ui-font-size1);
+  line-height: normal;
+  color-scheme: light;
+}
+
+.jp-Lab[data-jp-theme="dark"] {
+  --jp-layout-color0: #111;
+  --jp-layout-color1: #212121;
+  --jp-layout-color2: #424242;
+  --jp-layout-color3: #616161;
+  --jp-layout-color4: #757575;
+  --jp-border-color0: #616161;
+  --jp-border-color1: #616161;
+  --jp-border-color2: #424242;
+  --jp-border-color3: #333;
+  --jp-ui-font-color0: rgba(255, 255, 255, 1);
+  --jp-ui-font-color1: rgba(255, 255, 255, 0.87);
+  --jp-ui-font-color2: rgba(255, 255, 255, 0.54);
+  --jp-ui-font-color3: rgba(255, 255, 255, 0.38);
+  --jp-content-font-color0: rgba(255, 255, 255, 1);
+  --jp-content-font-color1: rgba(255, 255, 255, 1);
+  --jp-content-font-color2: rgba(255, 255, 255, 0.7);
+  --jp-content-link-color: #64b5f6;
+  --jp-brand-color0: #1976d2;
+  --jp-brand-color1: #1976d2;
+  --jp-brand-color2: #1565c0;
+  --jp-brand-color3: #0d47a1;
+  --jp-brand-color4: #0d47a1;
+  --jp-cell-editor-background: #111;
+  --jp-cell-editor-border-color: #616161;
+  --jp-cell-editor-active-background: #000;
+  --jp-cell-inprompt-font-color: #307fc1;
+  --jp-cell-outprompt-font-color: #bf5b3d;
+  --jp-notebook-multiselected-color: rgba(33, 150, 243, 0.24);
+  --jp-rendermime-error-background: rgba(244, 67, 54, 0.28);
+  --jp-rendermime-table-row-background: #424242;
+  --jp-rendermime-table-row-hover-background: rgba(3, 169, 244, 0.2);
+  --jp-input-background: #424242;
+  --jp-input-border-color: #616161;
+  --jp-shadow: 0 2px 6px rgba(0, 0, 0, 0.6), 0 1px 18px rgba(0, 0, 0, 0.4);
+  --jp-icon-color: #bdbdbd;
+  --jp-mirror-editor-keyword-color: #00e676;
+  --jp-mirror-editor-atom-color: #b2ccd6;
+  --jp-mirror-editor-number-color: #c3e88d;
+  --jp-mirror-editor-def-color: #82aaff;
+  --jp-mirror-editor-variable-color: #eee;
+  --jp-mirror-editor-variable-2-color: #a5d6ff;
+  --jp-mirror-editor-punctuation-color: #a5d6ff;
+  --jp-mirror-editor-property-color: #a5d6ff;
+  --jp-mirror-editor-operator-color: #c792ea;
+  --jp-mirror-editor-comment-color: #8bc34a;
+  --jp-mirror-editor-string-color: #ff7070;
+  --jp-mirror-editor-meta-color: #c792ea;
+  --jp-mirror-editor-builtin-color: #00e676;
+  --jp-mirror-editor-header-color: #64b5f6;
+  --jp-mirror-editor-quote-color: #90ee90;
+  --jp-mirror-editor-link-color: #82aaff;
+  --jp-mirror-editor-cursor-color: #fff;
+  --jp-editor-selected-background: #424242;
+  --jp-editor-selected-focused-background: #3d4a6b;
+  color-scheme: dark;
+}
+
+.jp-Lab *,
+.jp-Lab *::before,
+.jp-Lab *::after {
+  box-sizing: border-box;
+}
+.jp-Lab button {
+  font: inherit;
+  color: inherit;
+}
+.jp-icon {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  fill: var(--jp-icon-color);
+}
+
+/* ---------------------------------------------------------------- top panel: logo + menu bar */
+.jp-TopPanel {
+  display: flex;
+  align-items: center;
+  height: 33px;
+  background: var(--jp-layout-color1);
+  border-bottom: 1px solid var(--jp-border-color0);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
+  z-index: 3;
+  flex: none;
+}
+.jp-Logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 100%;
+}
+.jp-MenuBar {
+  display: flex;
+  height: 100%;
+}
+.jp-MenuBar-item {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  border: none;
+  background: transparent;
+  cursor: default;
+  color: var(--jp-ui-font-color1);
+}
+.jp-MenuBar-item.jp-mod-active {
+  background: var(--jp-layout-color2);
+}
+.jp-TopPanel-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 10px;
+  color: var(--jp-ui-font-color2);
+  font-size: 12px;
+}
+.jp-TopPanel-right a,
+.jp-TopPanel-right button {
+  color: var(--jp-ui-font-color2);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.jp-TopPanel-right a:hover,
+.jp-TopPanel-right button:hover {
+  color: var(--jp-ui-font-color0);
+}
+
+.jp-Menu {
+  position: fixed;
+  z-index: 10000;
+  min-width: 260px;
+  padding: 4px 0;
+  background: var(--jp-layout-color0);
+  color: var(--jp-ui-font-color1);
+  border: 1px solid var(--jp-border-color1);
+  box-shadow: var(--jp-shadow);
+  font-size: var(--jp-ui-font-size1);
+  user-select: none;
+}
+.jp-Menu-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 24px;
+  padding: 0 8px 0 0;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: default;
+  white-space: nowrap;
+}
+.jp-Menu-item:not(:disabled):hover,
+.jp-Menu-item.jp-mod-active {
+  background: var(--jp-layout-color2);
+}
+.jp-Menu-item:disabled {
+  color: var(--jp-ui-font-color3);
+}
+.jp-Menu-itemCheck {
+  width: 28px;
+  display: flex;
+  justify-content: center;
+  flex: none;
+}
+.jp-Menu-itemLabel {
+  flex: 1;
+  padding-right: 24px;
+}
+.jp-Menu-itemShortcut {
+  color: var(--jp-ui-font-color2);
+  font-size: 12px;
+}
+.jp-Menu-sep {
+  height: 1px;
+  margin: 4px 0;
+  background: var(--jp-border-color2);
+}
+
+/* ---------------------------------------------------------------- main area */
+.jp-MainArea {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+.jp-SideBar {
+  display: flex;
+  flex-direction: column;
+  width: var(--jp-sidebar-tab-width);
+  flex: none;
+  background: var(--jp-layout-color2);
+  border-right: 1px solid var(--jp-border-color1);
+}
+.jp-SideBar-tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  border: none;
+  border-bottom: 1px solid var(--jp-border-color2);
+  background: var(--jp-layout-color2);
+  cursor: pointer;
+}
+.jp-SideBar-tab .jp-icon {
+  width: 20px;
+  height: 20px;
+}
+.jp-SideBar-tab:hover {
+  background: var(--jp-layout-color1);
+}
+.jp-SideBar-tab.jp-mod-current {
+  background: var(--jp-layout-color1);
+}
+.jp-SideBar-tab.jp-mod-current::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--jp-brand-color1);
+}
+.jp-SidePanel {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  min-width: 180px;
+  background: var(--jp-layout-color1);
+  border-right: 1px solid var(--jp-border-color1);
+  overflow: hidden;
+}
+.jp-SidePanel-header {
+  padding: 8px 12px 4px;
+  font-size: var(--jp-ui-font-size1);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--jp-ui-font-color1);
+}
+.jp-Splitter {
+  width: 4px;
+  margin-left: -2px;
+  margin-right: -2px;
+  cursor: ew-resize;
+  z-index: 2;
+  flex: none;
+}
+.jp-Splitter:hover {
+  background: var(--jp-brand-color2);
+}
+.jp-DockArea {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  background: var(--jp-layout-color3);
+  padding: 2px 4px 4px;
+}
+
+/* tab bar of the dock */
+.jp-TabBar {
+  display: flex;
+  min-height: 28px;
+  flex: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+.jp-TabBar-tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 36px;
+  max-width: 240px;
+  height: 28px;
+  margin-right: -1px;
+  padding: 0 6px 0 10px;
+  border: 1px solid var(--jp-border-color1);
+  border-bottom: none;
+  background: var(--jp-layout-color2);
+  color: var(--jp-ui-font-color1);
+  cursor: default;
+  flex: none;
+}
+.jp-TabBar-tab:hover:not(.jp-mod-current) {
+  background: var(--jp-layout-color1);
+}
+.jp-TabBar-tab.jp-mod-current {
+  background: var(--jp-layout-color1);
+  z-index: 1;
+  height: 29px;
+}
+.jp-TabBar-tab.jp-mod-current::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  height: 2px;
+  background: var(--jp-brand-color1);
+}
+.jp-TabBar-tabLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.jp-TabBar-tabClose {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: none;
+  border-radius: 2px;
+  background: transparent;
+  flex: none;
+}
+.jp-TabBar-tabClose:hover {
+  background: var(--jp-layout-color3);
+}
+.jp-TabBar-tabClose .jp-icon {
+  width: 12px;
+  height: 12px;
+}
+.jp-TabBar-dirty {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--jp-ui-font-color1);
+}
+.jp-TabBar-tab:hover .jp-TabBar-dirty {
+  display: none;
+}
+.jp-TabBar-tab:not(:hover) .jp-TabBar-tabClose.jp-mod-dirty .jp-icon {
+  display: none;
+}
+.jp-DockPanel {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  background: var(--jp-layout-color1);
+  border: 1px solid var(--jp-border-color1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.jp-DockPanel-widget {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* status bar */
+.jp-StatusBar {
+  display: flex;
+  align-items: center;
+  height: var(--jp-statusbar-height);
+  padding: 0 4px;
+  flex: none;
+  background: var(--jp-layout-color1);
+  border-top: 1px solid var(--jp-border-color1);
+  color: var(--jp-ui-font-color1);
+  font-size: 12px;
+  z-index: 2;
+}
+.jp-StatusBar-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  padding: 0 6px;
+  white-space: nowrap;
+  border: none;
+  background: none;
+  cursor: default;
+}
+button.jp-StatusBar-item:hover {
+  background: var(--jp-layout-color2);
+}
+.jp-StatusBar-right {
+  margin-left: auto;
+  display: flex;
+  height: 100%;
+}
+.jp-Switch {
+  position: relative;
+  display: inline-block;
+  width: 26px;
+  height: 14px;
+  border-radius: 7px;
+  background: var(--jp-layout-color3);
+  transition: background 0.15s;
+}
+.jp-Switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  transition: left 0.15s;
+}
+.jp-Switch.jp-mod-on {
+  background: var(--jp-brand-color1);
+}
+.jp-Switch.jp-mod-on::after {
+  left: 14px;
+}
+
+/* ---------------------------------------------------------------- toolbars and inputs */
+.jp-Toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  min-height: calc(var(--jp-toolbar-height) + 6px);
+  padding: 2px 4px;
+  flex: none;
+  background: var(--jp-layout-color1);
+  border-bottom: 1px solid var(--jp-border-color1);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.24);
+  z-index: 1;
+}
+.jp-ToolbarButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: var(--jp-toolbar-height);
+  min-width: 24px;
+  padding: 0 4px;
+  border: none;
+  border-radius: 2px;
+  background: transparent;
+  color: var(--jp-ui-font-color1);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.jp-ToolbarButton:hover:not(:disabled) {
+  background: var(--jp-layout-color2);
+}
+.jp-ToolbarButton:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.jp-ToolbarButton.jp-mod-accent {
+  background: var(--jp-brand-color1);
+  color: #fff;
+}
+.jp-ToolbarButton.jp-mod-accent .jp-icon {
+  fill: #fff;
+}
+.jp-ToolbarButton.jp-mod-accent:hover {
+  background: var(--jp-brand-color0);
+}
+.jp-Toolbar-spacer {
+  flex: 1;
+}
+.jp-Toolbar-sep {
+  width: 1px;
+  height: 16px;
+  margin: 0 4px;
+  background: var(--jp-border-color2);
+}
+.jp-HTMLSelect {
+  height: 24px;
+  padding: 0 20px 0 6px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  background: transparent;
+  color: var(--jp-ui-font-color1);
+  font: inherit;
+  font-size: var(--jp-ui-font-size1);
+  cursor: pointer;
+}
+.jp-HTMLSelect:hover {
+  border-color: var(--jp-border-color1);
+}
+.jp-HTMLSelect option {
+  background: var(--jp-layout-color1);
+  color: var(--jp-ui-font-color1);
+}
+.jp-InputGroup,
+.jp-Lab input.jp-mod-styled,
+.jp-Lab select.jp-mod-styled,
+.jp-Lab textarea.jp-mod-styled {
+  width: 100%;
+  height: 28px;
+  padding: 0 8px;
+  border: 1px solid var(--jp-input-border-color);
+  border-radius: 0;
+  background: var(--jp-input-background);
+  color: var(--jp-ui-font-color0);
+  font: inherit;
+  font-size: var(--jp-ui-font-size1);
+  outline: none;
+}
+.jp-Lab input.jp-mod-styled:focus,
+.jp-Lab select.jp-mod-styled:focus {
+  border-color: var(--jp-brand-color1);
+  box-shadow: inset 0 0 0 1px var(--jp-brand-color1);
+}
+.jp-Button {
+  height: 28px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 2px;
+  background: var(--jp-layout-color3);
+  color: var(--jp-ui-font-color0);
+  font-size: var(--jp-ui-font-size1);
+  cursor: pointer;
+}
+.jp-Button.jp-mod-accept {
+  background: var(--jp-brand-color1);
+  color: #fff;
+}
+.jp-Button.jp-mod-reject {
+  background: #757575;
+  color: #fff;
+}
+.jp-Button.jp-mod-warn {
+  background: var(--jp-error-color1);
+  color: #fff;
+}
+.jp-Button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.jp-Button:not(:disabled):hover {
+  filter: brightness(0.92);
+}
+.jp-Button.jp-mod-small {
+  height: 24px;
+  padding: 0 8px;
+}
+
+/* dialogs */
+.jp-Dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.25);
+}
+.jp-Dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: min(560px, calc(100vw - 32px));
+  max-height: calc(100vh - 48px);
+  padding: 24px;
+  border-radius: 2px;
+  background: var(--jp-layout-color1);
+  color: var(--jp-ui-font-color1);
+  box-shadow: var(--jp-shadow);
+  font-size: var(--jp-ui-font-size1);
+}
+.jp-Dialog-header {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--jp-ui-font-color0);
+}
+.jp-Dialog-body {
+  overflow: auto;
+  line-height: 1.5;
+}
+.jp-Dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 8px;
+}
+
+/* ---------------------------------------------------------------- file browser */
+.jp-FileBrowser {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+.jp-FileBrowser-toolbar {
+  display: flex;
+  gap: 2px;
+  padding: 4px 8px;
+}
+.jp-FileBrowser-filter {
+  padding: 2px 8px 6px;
+}
+.jp-FileBrowser-filter input {
+  height: 24px !important;
+}
+.jp-BreadCrumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 2px 12px 6px;
+  color: var(--jp-ui-font-color1);
+}
+.jp-BreadCrumbs-item {
+  padding: 0 2px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.jp-BreadCrumbs-item:hover {
+  background: var(--jp-layout-color2);
+}
+.jp-DirListing {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  outline: none;
+}
+.jp-DirListing-header {
+  display: flex;
+  height: 24px;
+  border-top: 1px solid var(--jp-border-color2);
+  border-bottom: 1px solid var(--jp-border-color1);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
+  flex: none;
+  font-weight: 500;
+}
+.jp-DirListing-headerItem {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+}
+.jp-DirListing-headerItem:hover {
+  background: var(--jp-layout-color2);
+}
+.jp-DirListing-headerItem + .jp-DirListing-headerItem {
+  border-left: 1px solid var(--jp-border-color2);
+}
+.jp-DirListing-content {
+  flex: 1;
+  overflow: auto;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.jp-DirListing-item {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 12px;
+  gap: 6px;
+  cursor: default;
+  user-select: none;
+}
+.jp-DirListing-item:hover:not(.jp-mod-selected) {
+  background: var(--jp-layout-color2);
+}
+.jp-DirListing-item.jp-mod-selected {
+  background: var(--jp-brand-color1);
+  color: #fff;
+}
+.jp-DirListing-item.jp-mod-selected .jp-icon {
+  fill: #fff;
+}
+.jp-DirListing-item.jp-mod-dropTarget {
+  outline: 2px dashed var(--jp-brand-color1);
+  outline-offset: -2px;
+}
+.jp-DirListing-itemName {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.jp-DirListing-itemName input {
+  width: 100%;
+  height: 20px;
+  font: inherit;
+  border: 1px solid var(--jp-brand-color1);
+  background: var(--jp-input-background);
+  color: var(--jp-ui-font-color0);
+}
+.jp-DirListing-itemModified {
+  flex: none;
+  width: 92px;
+  text-align: right;
+  color: var(--jp-ui-font-color2);
+}
+.jp-DirListing-item.jp-mod-selected .jp-DirListing-itemModified {
+  color: #fff;
+}
+.jp-DirListing-running {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--jp-success-color1);
+  margin-left: -9px;
+  margin-right: 3px;
+  flex: none;
+}
+.jp-DirListing-empty {
+  padding: 12px;
+  color: var(--jp-ui-font-color2);
+}
+.jp-DropZone {
+  outline: 2px dashed var(--jp-brand-color1);
+  outline-offset: -4px;
+}
+
+/* side panels: running, table of contents, workspace */
+.jp-PanelSection {
+  border-bottom: 1px solid var(--jp-border-color2);
+}
+.jp-PanelSection-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 8px 0 12px;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--jp-ui-font-color1);
+}
+.jp-PanelSection-header button {
+  margin-left: auto;
+}
+.jp-PanelRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 24px;
+  padding: 2px 12px;
+}
+.jp-PanelRow:hover {
+  background: var(--jp-layout-color2);
+}
+.jp-PanelRow-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.jp-PanelRow-muted {
+  color: var(--jp-ui-font-color2);
+  font-size: 12px;
+}
+.jp-PanelBody {
+  padding: 6px 12px 12px;
+  line-height: 1.5;
+}
+.jp-PanelBody p {
+  margin: 4px 0;
+}
+.jp-PanelBody label {
+  display: block;
+  margin-top: 8px;
+  color: var(--jp-ui-font-color2);
+  font-size: 12px;
+}
+.jp-PanelBody label > input,
+.jp-PanelBody label > select {
+  margin-top: 2px;
+}
+.jp-Muted {
+  color: var(--jp-ui-font-color2);
+}
+.jp-Small {
+  font-size: 12px;
+}
+.jp-ErrorText {
+  color: var(--jp-error-color1);
+  white-space: pre-wrap;
+}
+.jp-WarnText {
+  color: var(--jp-warn-color0);
+}
+.jp-OkText {
+  color: var(--jp-success-color1);
+}
+.jp-Code {
+  font-family: var(--jp-code-font-family);
+  font-size: 12px;
+}
+.jp-Snippet {
+  margin: 4px 0 0;
+  padding: 6px 8px;
+  overflow-x: auto;
+  background: var(--jp-cell-editor-background);
+  border: 1px solid var(--jp-cell-editor-border-color);
+  font-family: var(--jp-code-font-family);
+  font-size: 11px;
+  line-height: 1.4;
+  white-space: pre;
+}
+.jp-TOC-item {
+  display: block;
+  width: 100%;
+  padding: 3px 12px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.jp-TOC-item:hover {
+  background: var(--jp-layout-color2);
+}
+.jp-TOC-item.jp-mod-active {
+  background: var(--jp-brand-color4);
+}
+.jp-Lab[data-jp-theme="dark"] .jp-TOC-item.jp-mod-active {
+  background: var(--jp-layout-color2);
+}
+
+/* ---------------------------------------------------------------- launcher */
+.jp-Launcher {
+  flex: 1;
+  overflow: auto;
+  padding: 32px 48px;
+  background: var(--jp-layout-color0);
+}
+.jp-Launcher-section {
+  max-width: 1000px;
+  margin: 0 auto 32px;
+}
+.jp-Launcher-sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--jp-border-color2);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--jp-ui-font-color1);
+}
+.jp-Launcher-sectionHeader .jp-icon {
+  width: 26px;
+  height: 26px;
+}
+.jp-Launcher-cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.jp-LauncherCard {
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+  height: 162px;
+  padding: 0;
+  border: none;
+  border-radius: 2px;
+  background: var(--jp-layout-color1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  overflow: hidden;
+}
+.jp-LauncherCard:hover {
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px rgba(0, 0, 0, 0.14), 0 1px 18px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
+}
+.jp-LauncherCard-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+}
+.jp-LauncherCard-icon .jp-icon {
+  width: 52px;
+  height: 52px;
+}
+.jp-LauncherCard-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  padding: 0 6px;
+  font-size: 12px;
+  text-align: center;
+  color: var(--jp-ui-font-color1);
+  line-height: 1.2;
+}
+.jp-Launcher-note {
+  max-width: 1000px;
+  margin: 0 auto;
+  color: var(--jp-ui-font-color2);
+  font-size: 12px;
+}
+
+/* ---------------------------------------------------------------- notebook */
+.jp-NotebookPanel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+.jp-Notebook {
+  flex: 1;
+  overflow: auto;
+  padding: var(--jp-notebook-padding);
+  padding-bottom: 50vh;
+  background: var(--jp-layout-color0);
+  outline: none;
+}
+.jp-Notebook.jp-mod-simple .jp-Cell {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.jp-Cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--jp-cell-padding);
+  margin: 0;
+  border: none;
+  background: transparent;
+}
+.jp-Cell.jp-mod-selected {
+  background: var(--jp-notebook-multiselected-color);
+}
+.jp-Cell.jp-mod-active.jp-mod-selected:not(.jp-mod-multi) {
+  background: transparent;
+}
+.jp-Collapser {
+  position: absolute;
+  left: 0;
+  width: var(--jp-cell-collapser-width);
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 1;
+}
+.jp-Collapser.jp-mod-input {
+  top: var(--jp-cell-padding);
+}
+.jp-Collapser-child {
+  position: absolute;
+  inset: 0 2px 0 0;
+  border-radius: 1px;
+}
+.jp-Collapser:hover .jp-Collapser-child {
+  background: var(--jp-brand-color2);
+}
+.jp-Cell.jp-mod-active .jp-Collapser-child {
+  background: var(--jp-brand-color1);
+}
+.jp-Cell-inputWrapper,
+.jp-Cell-outputWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.jp-InputArea,
+.jp-OutputArea-child {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.jp-InputPrompt,
+.jp-OutputPrompt {
+  flex: 0 0 var(--jp-cell-prompt-width);
+  width: var(--jp-cell-prompt-width);
+  padding: var(--jp-code-padding);
+  font-family: var(--jp-code-font-family);
+  font-size: var(--jp-code-font-size);
+  line-height: var(--jp-code-line-height);
+  text-align: right;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  user-select: none;
+  cursor: move;
+  opacity: 0.5;
+}
+.jp-Cell.jp-mod-active .jp-InputPrompt,
+.jp-Cell.jp-mod-active .jp-OutputPrompt {
+  opacity: 1;
+}
+.jp-InputPrompt {
+  color: var(--jp-cell-inprompt-font-color);
+}
+.jp-OutputPrompt {
+  color: var(--jp-cell-outprompt-font-color);
+}
+.jp-InputArea-editor {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 1px solid var(--jp-cell-editor-border-color);
+  border-radius: 0;
+  background: var(--jp-cell-editor-background);
+  overflow: hidden;
+}
+.jp-Cell.jp-mod-editMode .jp-InputArea-editor {
+  border-color: var(--jp-cell-editor-active-border-color);
+  background: var(--jp-cell-editor-active-background);
+  box-shadow: none;
+}
+.jp-MarkdownCell .jp-InputArea-editor {
+  min-height: 26px;
+}
+.jp-Cell.jp-mod-dragTarget::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -2px;
+  height: 3px;
+  background: var(--jp-brand-color2);
+}
+.jp-Placeholder {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  height: 26px;
+  padding: 0 8px;
+  margin: 0;
+  border: 1px solid var(--jp-cell-editor-border-color);
+  background: var(--jp-cell-editor-background);
+  color: var(--jp-ui-font-color2);
+  font-family: var(--jp-code-font-family);
+  cursor: pointer;
+}
+.jp-OutputPlaceholder {
+  display: flex;
+  align-items: center;
+  height: 22px;
+  margin-left: var(--jp-cell-prompt-width);
+  padding: 0 8px;
+  color: var(--jp-ui-font-color2);
+  font-family: var(--jp-code-font-family);
+  cursor: pointer;
+}
+.jp-OutputArea {
+  overflow-y: visible;
+}
+.jp-OutputArea.jp-mod-scrolled {
+  max-height: 24em;
+  overflow-y: auto;
+  box-shadow: inset 0 0 6px 2px rgba(0, 0, 0, 0.3);
+}
+.jp-OutputArea-output {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: var(--jp-code-padding) 0;
+  overflow-x: auto;
+  user-select: text;
+}
+.jp-OutputArea-output.jp-mod-stderr,
+.jp-OutputArea-output.jp-mod-error {
+  background: var(--jp-rendermime-error-background);
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.jp-OutputArea-output.jp-mod-stderr + * {
+  margin-top: 0;
+}
+.jp-OutputArea-output pre,
+.jp-RenderedText pre {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--jp-content-font-color1);
+  font-family: var(--jp-code-font-family);
+  font-size: var(--jp-code-font-size);
+  line-height: var(--jp-code-line-height);
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+.jp-OutputArea-output img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  background: transparent;
+}
+.jp-Lab[data-jp-theme="dark"] .jp-OutputArea-output img.jp-mod-png {
+  background: #fff;
+}
+.jp-OutputArea-stdin {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--jp-code-font-family);
+  font-size: var(--jp-code-font-size);
+}
+.jp-OutputArea-stdin input {
+  flex: 1;
+  max-width: 420px;
+  height: 22px;
+  padding: 0 4px;
+  border: 1px solid var(--jp-input-border-color);
+  background: var(--jp-input-background);
+  color: var(--jp-content-font-color1);
+  font: inherit;
+  outline: none;
+}
+.jp-OutputArea-stdin input:focus {
+  border-color: var(--jp-brand-color1);
+}
+
+/* rendered HTML (pandas tables) and markdown */
+.jp-RenderedHTMLCommon {
+  color: var(--jp-content-font-color1);
+  font-family: var(--jp-content-font-family);
+  font-size: var(--jp-content-font-size1);
+  line-height: 1.5;
+  padding-right: 20px;
+}
+.jp-RenderedHTMLCommon > :first-child {
+  margin-top: 0;
+}
+.jp-RenderedHTMLCommon > :last-child {
+  margin-bottom: 0;
+}
+.jp-RenderedHTMLCommon h1,
+.jp-RenderedHTMLCommon h2,
+.jp-RenderedHTMLCommon h3,
+.jp-RenderedHTMLCommon h4,
+.jp-RenderedHTMLCommon h5,
+.jp-RenderedHTMLCommon h6 {
+  margin: 1em 0 0.5em;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--jp-content-font-color0);
+}
+.jp-RenderedHTMLCommon h1 {
+  font-size: 1.85em;
+  margin-top: 0.62em;
+}
+.jp-RenderedHTMLCommon h2 {
+  font-size: 1.57em;
+  margin-top: 0.64em;
+}
+.jp-RenderedHTMLCommon h3 {
+  font-size: 1.28em;
+}
+.jp-RenderedHTMLCommon h4 {
+  font-size: 1em;
+}
+.jp-RenderedHTMLCommon h5,
+.jp-RenderedHTMLCommon h6 {
+  font-size: 0.9em;
+}
+.jp-RenderedHTMLCommon p {
+  margin: 0 0 1em;
+  text-align: left;
+}
+.jp-RenderedHTMLCommon ul,
+.jp-RenderedHTMLCommon ol {
+  margin: 0 0 1em;
+  padding-left: 2em;
+}
+.jp-RenderedHTMLCommon ul {
+  list-style: disc;
+}
+.jp-RenderedHTMLCommon ol {
+  list-style: decimal;
+}
+.jp-RenderedHTMLCommon li > p {
+  margin: 0;
+}
+.jp-RenderedHTMLCommon a {
+  color: var(--jp-content-link-color);
+  text-decoration: none;
+}
+.jp-RenderedHTMLCommon a:hover {
+  text-decoration: underline;
+}
+.jp-RenderedHTMLCommon hr {
+  border: none;
+  border-top: 1px solid var(--jp-border-color1);
+  margin: 1em 0;
+}
+.jp-RenderedHTMLCommon blockquote {
+  margin: 0 0 1em;
+  padding: 0 1em;
+  border-left: 5px solid var(--jp-border-color2);
+  color: var(--jp-content-font-color2);
+}
+.jp-RenderedHTMLCommon code {
+  padding: 1px 5px;
+  background: var(--jp-layout-color2);
+  font-family: var(--jp-code-font-family);
+  font-size: 0.9em;
+}
+.jp-RenderedHTMLCommon pre {
+  margin: 0 0 1em;
+  padding: 6px 8px;
+  overflow: auto;
+  background: var(--jp-cell-editor-background);
+  font-family: var(--jp-code-font-family);
+  font-size: var(--jp-code-font-size);
+  line-height: var(--jp-code-line-height);
+}
+.jp-RenderedHTMLCommon pre code {
+  padding: 0;
+  background: none;
+}
+.jp-RenderedHTMLCommon img {
+  max-width: 100%;
+}
+.jp-RenderedHTMLCommon table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 1em;
+  color: var(--jp-ui-font-color1);
+  font-size: 12px;
+  table-layout: fixed;
+}
+.jp-RenderedHTMLCommon thead {
+  border-bottom: 1px solid var(--jp-border-color1);
+  vertical-align: bottom;
+}
+.jp-RenderedHTMLCommon td,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon tr {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+.jp-RenderedHTMLCommon th {
+  font-weight: bold;
+}
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd) {
+  background: var(--jp-rendermime-table-row-background);
+}
+.jp-RenderedHTMLCommon tbody tr:hover {
+  background: var(--jp-rendermime-table-row-hover-background);
+}
+.jp-MarkdownOutput {
+  padding: var(--jp-code-padding) 2px var(--jp-code-padding) 4px;
+  min-height: 26px;
+  cursor: default;
+  user-select: text;
+}
+.jp-MarkdownOutput.jp-mod-empty {
+  color: var(--jp-ui-font-color3);
+  font-style: italic;
+}
+.jp-RenderedJSON {
+  font-family: var(--jp-code-font-family);
+  font-size: var(--jp-code-font-size);
+  white-space: pre-wrap;
+}
+
+/* the side toolbar of the active cell */
+.jp-cell-toolbar {
+  position: absolute;
+  top: -12px;
+  right: 8px;
+  z-index: 3;
+  display: flex;
+  gap: 1px;
+  padding: 1px;
+  border: 1px solid var(--jp-border-color1);
+  border-radius: 3px;
+  background: var(--jp-layout-color0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+.jp-cell-toolbar .jp-ToolbarButton {
+  height: 20px;
+  min-width: 22px;
+}
+.jp-cell-toolbar .jp-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* the kernel's status */
+.jp-KernelStatus {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 6px;
+}
+.jp-KernelStatus-circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid var(--jp-ui-font-color1);
+}
+.jp-KernelStatus-circle.jp-mod-busy {
+  background: var(--jp-ui-font-color1);
+}
+.jp-KernelStatus-circle.jp-mod-dead {
+  border-style: dashed;
+  border-color: var(--jp-error-color1);
+}
+.jp-KernelStatus-circle.jp-mod-starting {
+  border-style: dotted;
+  animation: jp-spin 1.6s linear infinite;
+}
+@keyframes jp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.jp-ComputeButton {
+  border: 1px solid var(--jp-border-color1) !important;
+  padding: 0 6px !important;
+}
+.jp-ComputeButton.jp-mod-gpu {
+  border-color: #7cb342 !important;
+}
+.jp-Banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  background: var(--jp-brand-color4);
+  border-bottom: 1px solid var(--jp-border-color2);
+  font-size: 12px;
+  flex: none;
+}
+.jp-Lab[data-jp-theme="dark"] .jp-Banner {
+  background: var(--jp-layout-color2);
+}
+.jp-Banner.jp-mod-warn {
+  background: #fff3e0;
+  color: #8a3b00;
+}
+.jp-Lab[data-jp-theme="dark"] .jp-Banner.jp-mod-warn {
+  background: #4e2a00;
+  color: #ffcc80;
+}
+.jp-Banner.jp-mod-error {
+  background: var(--jp-rendermime-error-background);
+}
+
+/* the compute choices in the Select Kernel dialog */
+.jp-ComputeChoice {
+  display: flex;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--jp-border-color2);
+  cursor: pointer;
+  align-items: flex-start;
+}
+.jp-ComputeChoice + .jp-ComputeChoice {
+  border-top: none;
+}
+.jp-ComputeChoice.jp-mod-selected {
+  background: var(--jp-brand-color4);
+  border-color: var(--jp-brand-color2);
+}
+.jp-Lab[data-jp-theme="dark"] .jp-ComputeChoice.jp-mod-selected,
+.jp-Dialog[data-jp-theme="dark"] .jp-ComputeChoice.jp-mod-selected {
+  background: var(--jp-layout-color2);
+}
+.jp-ComputeChoice.jp-mod-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.jp-ComputeChoice-title {
+  font-weight: 600;
+  color: var(--jp-ui-font-color0);
+}
+.jp-ComputeChoice-desc {
+  color: var(--jp-ui-font-color2);
+  font-size: 12px;
+  margin-top: 2px;
+}
+.jp-ComputeChoice-opts {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* the file editor */
+.jp-FileEditor {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--jp-layout-color0);
+}
+.jp-FileEditor .cm-editor {
+  height: 100%;
+}
+.jp-FileEditor-preview {
+  flex: 1;
+  overflow: auto;
+  padding: 16px 24px;
+  background: var(--jp-layout-color0);
+}
+
+/* CodeMirror inside the Lab */
+.jp-Lab .cm-editor {
+  background: transparent;
+  color: var(--jp-content-font-color1);
+  font-family: var(--jp-code-font-family);
+  font-size: var(--jp-code-font-size);
+  line-height: var(--jp-code-line-height);
+}
+.jp-Lab .cm-editor.cm-focused {
+  outline: none;
+}
+.jp-Lab .cm-scroller {
+  font-family: inherit;
+  line-height: inherit;
+}
+.jp-Lab .cm-content {
+  padding: var(--jp-code-padding) 0;
+  caret-color: var(--jp-mirror-editor-cursor-color);
+}
+.jp-Lab .cm-line {
+  padding: 0 var(--jp-code-padding);
+}
+.jp-Lab .cm-cursor {
+  border-left-color: var(--jp-mirror-editor-cursor-color);
+}
+.jp-Lab .cm-selectionBackground {
+  background: var(--jp-editor-selected-background) !important;
+}
+.jp-Lab .cm-focused .cm-selectionBackground {
+  background: var(--jp-editor-selected-focused-background) !important;
+}
+.jp-Lab .cm-gutters {
+  background: transparent;
+  border-right: 1px solid var(--jp-border-color2);
+  color: var(--jp-ui-font-color2);
+}
+.jp-Lab .cm-activeLine,
+.jp-Lab .cm-activeLineGutter {
+  background: transparent;
+}
+.jp-FileEditor .cm-activeLine {
+  background: rgba(127, 127, 127, 0.06);
+}
+.jp-Lab .cm-matchingBracket {
+  background: rgba(0, 160, 0, 0.15) !important;
+  color: inherit !important;
+  outline: 1px solid rgba(0, 160, 0, 0.35);
+}
+.jp-Lab .cm-tooltip {
+  border: 1px solid var(--jp-border-color1);
+  background: var(--jp-layout-color0);
+  color: var(--jp-ui-font-color1);
+  box-shadow: var(--jp-shadow);
+}
+.jp-Lab .cm-tooltip-autocomplete > ul {
+  font-family: var(--jp-code-font-family);
+  font-size: var(--jp-code-font-size);
+  max-height: 20em;
+}
+.jp-Lab .cm-tooltip-autocomplete > ul > li {
+  padding: 2px 8px !important;
+}
+.jp-Lab .cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background: var(--jp-brand-color1);
+  color: #fff;
+}
+.jp-Lab .cm-completionIcon {
+  display: none;
+}
+.jp-Tooltip {
+  position: fixed;
+  z-index: 10002;
+  max-width: min(720px, 80vw);
+  max-height: 320px;
+  overflow: auto;
+  padding: 6px 8px;
+  border: 1px solid var(--jp-border-color1);
+  background: var(--jp-layout-color0);
+  box-shadow: var(--jp-shadow);
+}
+.jp-Tooltip pre {
+  margin: 0;
+  font-family: var(--jp-code-font-family);
+  font-size: 12px;
+  white-space: pre-wrap;
+  color: var(--jp-content-font-color1);
+}
+
+/* ANSI colors (JupyterLab's) */
+.ansi-black-fg { color: #3e424d; }
+.ansi-red-fg { color: #e75c58; }
+.ansi-green-fg { color: #00a250; }
+.ansi-yellow-fg { color: #ddb62b; }
+.ansi-blue-fg { color: #208ffb; }
+.ansi-magenta-fg { color: #d160c4; }
+.ansi-cyan-fg { color: #60c6c8; }
+.ansi-white-fg { color: #c5c1b4; }
+.ansi-black-bg { background-color: #3e424d; }
+.ansi-red-bg { background-color: #e75c58; }
+.ansi-green-bg { background-color: #00a250; }
+.ansi-yellow-bg { background-color: #ddb62b; }
+.ansi-blue-bg { background-color: #208ffb; }
+.ansi-magenta-bg { background-color: #d160c4; }
+.ansi-cyan-bg { background-color: #60c6c8; }
+.ansi-white-bg { background-color: #c5c1b4; }
+.ansi-black-intense-fg { color: #282c36; }
+.ansi-red-intense-fg { color: #b22b31; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-yellow-intense-fg { color: #b27d12; }
+.ansi-blue-intense-fg { color: #0065ca; }
+.ansi-magenta-intense-fg { color: #a03196; }
+.ansi-cyan-intense-fg { color: #258f8f; }
+.ansi-white-intense-fg { color: #a1a6b2; }
+.ansi-black-intense-bg { background-color: #282c36; }
+.ansi-red-intense-bg { background-color: #b22b31; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-intense-bg { background-color: #b27d12; }
+.ansi-blue-intense-bg { background-color: #0065ca; }
+.ansi-magenta-intense-bg { background-color: #a03196; }
+.ansi-cyan-intense-bg { background-color: #258f8f; }
+.ansi-white-intense-bg { background-color: #a1a6b2; }
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+.ansi-italic { font-style: italic; }
+
+/* versions: diffs, Git status letters, the commit message */
+.jp-Diff pre {
+  margin: 0;
+  border: 1px solid var(--jp-border-color2);
+  font-family: var(--jp-code-font-family);
+  font-size: 12px;
+  line-height: 1.45;
+  overflow: auto;
+}
+.jp-Diff pre > div {
+  padding: 0 8px;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.jp-Diff-stats {
+  margin-bottom: 4px;
+  font-size: 12px;
+}
+.jp-Diff-add {
+  background: rgba(46, 160, 67, 0.16);
+}
+.jp-Diff-del {
+  background: rgba(248, 81, 73, 0.16);
+}
+.jp-Diff-hunk {
+  background: var(--jp-brand-color4);
+  color: var(--jp-ui-font-color2);
+}
+.jp-Lab[data-jp-theme="dark"] .jp-Diff-hunk,
+.jp-Dialog[data-jp-theme="dark"] .jp-Diff-hunk {
+  background: var(--jp-layout-color2);
+}
+.jp-Diff-file {
+  color: var(--jp-ui-font-color2);
+  font-weight: 600;
+}
+.jp-GitStatus {
+  width: 16px;
+  flex: none;
+  text-align: center;
+  font-family: var(--jp-code-font-family);
+  font-size: 11px;
+  font-weight: 700;
+}
+.jp-GitStatus-modified { color: #e5a00d; }
+.jp-GitStatus-added, .jp-GitStatus-untracked { color: var(--jp-success-color1); }
+.jp-GitStatus-deleted { color: var(--jp-error-color1); }
+.jp-GitStatus-renamed, .jp-GitStatus-conflict { color: var(--jp-brand-color1); }
+.jp-GitMessage {
+  width: 100%;
+  resize: vertical;
+  padding: 6px 8px;
+  border: 1px solid var(--jp-input-border-color);
+  background: var(--jp-input-background);
+  color: var(--jp-ui-font-color0);
+  font: inherit;
+  font-size: var(--jp-ui-font-size1);
+  outline: none;
+}
+.jp-GitMessage:focus {
+  border-color: var(--jp-brand-color1);
+}

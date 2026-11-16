@@ -1,0 +1,8 @@
+{
+ "files_scanned": 1,
+ "gb_scanned": 0.05,
+ "files_with_real_ids": {},
+ "weak_numeric_matches": {},
+ "secs": 14,
+ "catatan": "files_with_real_ids: alphanumeric real visit ids (13-16 chars) or real participant numbers in participant columns; weak_numeric_matches: 10-12 digit numbers equal to a real numeric visit id (can be chance: timestamps, counts)"
+}

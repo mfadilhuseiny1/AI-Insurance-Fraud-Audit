@@ -1,0 +1,384 @@
+<title>Uji Lintas Generator</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column (max 1040px) of report sections; each section = short claim + one visual; data in mono */
+:root {
+  --bg: #f2f5f4; --surface: #ffffff; --ink: #11201c; --muted: #56665f; --line: #d6dfdb; --soft: #e8eeeb;
+  --accent: #0b7564; --warn: #a86b00; --risk: #b83f12; --ok: #13805c;
+  --g1: #2f6fd0; --g2: #b07400; --g3: #12855e; --g4: #7c4dcc; --base: #8a9792;
+  --f-display: "Sora", "Segoe UI", system-ui, sans-serif; --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0d1412; --surface: #151f1c; --ink: #e4eeea; --muted: #94a59e; --line: #263430; --soft: #1c2925;
+  --accent: #3cc0a6; --warn: #e0a83a; --risk: #f0875a; --ok: #44c496;
+  --g1: #4a86dc; --g2: #c08a14; --g3: #2aa87a; --g4: #9470e0; --base: #6f7d78; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0d1412; --surface: #151f1c; --ink: #e4eeea; --muted: #94a59e; --line: #263430; --soft: #1c2925;
+  --accent: #3cc0a6; --warn: #e0a83a; --risk: #f0875a; --ok: #44c496;
+  --g1: #4a86dc; --g2: #c08a14; --g3: #2aa87a; --g4: #9470e0; --base: #6f7d78; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.55 }
+.wrap { max-width: 1040px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 64px; display: grid; gap: 56px }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; letter-spacing: -0.01em }
+h1 { font-size: clamp(34px, 6vw, 54px); line-height: 1.05; font-weight: 700 }
+h2 { font-size: clamp(22px, 3vw, 28px); line-height: 1.2; font-weight: 600 }
+h3 { font-size: 16px; font-weight: 600 }
+p { margin: 0; max-width: 66ch }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent) }
+.muted { color: var(--muted) }
+.mono, .num { font-family: var(--f-mono); font-variant-numeric: tabular-nums }
+section { display: grid; gap: 18px; min-width: 0 }
+.lede { font-size: 17px; color: var(--muted) }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); background: var(--surface); max-width: 100% }
+[hidden] { display: none !important }
+.chip.dash { border-style: dashed }
+.chip .dot { width: 8px; height: 8px; border-radius: 50% }
+.row { display: flex; flex-wrap: wrap; gap: 8px }
+.grid { display: grid; gap: 14px }
+.g2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) }
+.g2x { grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)) }
+.g3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) }
+.g4 { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)) }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: grid; gap: 10px; min-width: 0; align-content: start }
+.stat .v { font-family: var(--f-display); font-size: 30px; font-weight: 600; line-height: 1.1 }
+.stat .k { font-size: 13px; color: var(--muted) }
+.hero { display: grid; gap: 18px; padding-bottom: 8px; border-bottom: 1px solid var(--line) }
+.gen-card { border-top: 3px solid var(--c); }
+.gen-card .role { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--c) }
+.kv { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--muted) }
+.kv b { font-family: var(--f-mono); font-weight: 500; color: var(--ink) }
+/* architecture flow */
+.flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; align-items: stretch }
+.node { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px; display: grid; gap: 4px; position: relative; min-width: 0 }
+.node .t { font-weight: 600; font-size: 14px }
+.node .s { font-size: 12.5px; color: var(--muted) }
+.node .step { font-family: var(--f-mono); font-size: 11px; color: var(--accent) }
+.node.human { border-color: var(--accent); border-style: dashed }
+.zones { display: grid; gap: 4px }
+.zone { font-size: 12px; padding: 3px 7px; border-radius: 5px; background: var(--soft); display: flex; justify-content: space-between; gap: 6px }
+.zone b { font-weight: 600 }
+.zone.tahan b { color: var(--risk) } .zone.ragu b { color: var(--warn) } .zone.lolos b { color: var(--ok) }
+/* charts */
+svg { display: block; width: 100%; height: auto; overflow: visible }
+svg text { fill: var(--muted); font-family: var(--f-mono); font-size: 11px }
+svg .ink { fill: var(--ink) }
+.legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: 12.5px; color: var(--muted) }
+.legend span { display: inline-flex; align-items: center; gap: 6px }
+.legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block }
+.verdict { display: grid; gap: 6px }
+.verdict .v { font-family: var(--f-display); font-size: 22px; font-weight: 600 }
+.callout { border-left: 3px solid var(--accent); padding: 4px 0 4px 14px; color: var(--ink) }
+.banner { border-radius: 10px; padding: 16px 18px; border: 1px solid var(--line); background: var(--surface); display: flex; gap: 14px; align-items: flex-start; flex-wrap: wrap }
+.banner .badge { font-family: var(--f-mono); font-size: 12px; padding: 4px 10px; border-radius: 6px; color: var(--surface); background: var(--accent); white-space: nowrap }
+.banner.no .badge { background: var(--warn) }
+.list { display: grid; gap: 10px; padding: 0; margin: 0; list-style: none }
+.list li { display: grid; grid-template-columns: 22px 1fr; gap: 8px; align-items: start }
+.list li::before { content: ""; width: 10px; height: 10px; margin-top: 6px; border-radius: 2px; background: var(--accent) }
+.list.warn li::before { background: var(--warn) }
+.tip { position: fixed; pointer-events: none; background: var(--ink); color: var(--bg); font-family: var(--f-mono); font-size: 12px; padding: 6px 8px; border-radius: 6px; max-width: 260px; z-index: 20; opacity: 0; transition: opacity .1s }
+.small { font-size: 12.5px }
+footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px; display: grid; gap: 4px }
+.pending { border: 1px dashed var(--line); border-radius: 10px; padding: 18px; color: var(--muted) }
+@media (prefers-reduced-motion: no-preference) { .bar-anim { transition: width .5s ease } }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px }
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="eyebrow">BluesandAI · Healthkathon · laporan teknis</span>
+    <h1>Uji Lintas Generator</h1>
+    <p class="lede">Detektor klaim tidak wajar sering terlihat hebat di data tempat ia dilatih, lalu jatuh di data yang dibuat dengan cara lain. Kami menguji sistem audit klaim JKN kami di empat dunia sintetis, mencari tahu kenapa skornya turun, lalu memperbaikinya dengan protokol yang bisa diperiksa ulang.</p>
+    <div class="grid g3" id="hero-stats"></div>
+    <div class="row"><span class="chip dash">Semua angka dari data sintetis, bukan angka fraud BPJS sebenarnya</span><span class="chip">FPR = klaim normal yang ikut ditandai</span><span class="chip">prec@2% = precision bila 2% klaim adalah fraud</span></div>
+  </header>
+
+  <section id="dunia">
+    <span class="eyebrow">Bahan uji</span>
+    <h2>Empat dunia sintetis, dua untuk belajar, dua untuk ujian</h2>
+    <p class="muted">Setiap generator membuat klaim rumah sakit dan menanam skema fraud dengan caranya sendiri. Model hanya belajar dari generator 1 dan 2.</p>
+    <div class="grid g4" id="gen-cards"></div>
+  </section>
+
+  <section id="arsitektur">
+    <span class="eyebrow">Sistem</span>
+    <h2>Rule engine, ML, lalu AI Agent Swarm untuk klaim yang meragukan</h2>
+    <div class="flow">
+      <div class="node"><span class="step">1 · masuk</span><span class="t">Klaim batch</span><span class="s">dari rumah sakit, per Kantor Cabang</span></div>
+      <div class="node"><span class="step">2 · aturan</span><span class="t">Rule engine</span><span class="s">aturan Permenkes; aturan baru bisa ditulis dalam bahasa biasa, diuji, lalu disetujui admin</span></div>
+      <div class="node"><span class="step">3 · skor</span><span class="t">Model ML</span><span class="s">LightGBM × 3 seed; fitur klaim, graph tetangga (peserta, RS, kode INA-CBG), mekanisme</span></div>
+      <div class="node"><span class="step">4 · zona</span><span class="t">Tiga zona</span>
+        <div class="zones"><span class="zone tahan"><b>TAHAN</b><span>skor sangat tinggi</span></span><span class="zone ragu"><b>RAGU</b><span>ke swarm</span></span><span class="zone lolos"><b>LOLOS</b><span>sisanya</span></span></div></div>
+      <div class="node"><span class="step">5 · telaah</span><span class="t">AI Agent Swarm</span><span class="s">Google ADK: spesialis koding, tagihan, episode bekerja paralel; hakim menimbang</span></div>
+      <div class="node human"><span class="step">6 · putusan</span><span class="t">Verifikator Kantor Cabang</span><span class="s">manusia yang memutuskan; hasilnya jadi tag di ledger dan Box Karantina</span></div>
+    </div>
+  </section>
+
+  <section id="masalah">
+    <span class="eyebrow">Masalah</span>
+    <h2>Setiap versi model membaik, tetapi skor tetap turun di dunia yang belum pernah dilihat</h2>
+    <div class="panel"><div class="legend" id="leg-evo"></div><div id="chart-evo"></div>
+      <p class="small muted">Recall pada ambang beku (FPR target 1%). Generator 3 di sini: seed baru gen3-ml6, dinilai sekali.</p></div>
+  </section>
+
+  <section id="diagnosis">
+    <span class="eyebrow">Diagnosis</span>
+    <h2>Yang bergeser adalah klaim fraud, bukan klaim normal</h2>
+    <p class="muted">Sesuai saran reviewer, kami memeriksa data dulu sebelum mengganti algoritma: median, sebaran, dan arah sinyal fraud vs normal di setiap generator, memakai model ML v5 yang dibekukan.</p>
+    <div class="grid g4" id="dx-tiles"></div>
+    <div class="panel"><h3>Sebaran skor model untuk klaim fraud</h3><div class="grid g3" id="dx-hist"></div>
+      <p class="small muted">Batang pudar = di bawah ambang (lolos). Di generator 3, sebagian besar fraud mendapat skor seperti klaim normal.</p></div>
+    <div class="grid g2">
+      <div class="panel"><h3>Recall per famili skema</h3><div class="legend" id="leg-fam"></div><div id="dx-fam"></div></div>
+      <div class="panel"><h3>Sidik jari generator latih</h3><div class="row" id="dx-sidik"></div>
+        <p class="small">Di generator 1 dan 2, fraud ditanam pada peserta dari wilayah lain dan dengan jeda kunjungan tak wajar. Di generator 3 pelakunya peserta lokal dengan jadwal biasa, jadi sinyal ini kosong.</p>
+        <div id="dx-gain"></div><div class="legend" id="leg-gain"></div></div>
+    </div>
+  </section>
+
+  <section id="perbaikan">
+    <span class="eyebrow">Perbaikan</span>
+    <h2>Tiga langkah, urutan dari reviewer</h2>
+    <div class="grid g3">
+      <div class="panel"><span class="eyebrow">Langkah 1 · data</span><h3>Hapus sidik jari di generator latih</h3><p class="small">Varian "halus" generator 2: phantom billing, kartu dipinjam, dan cincin kolusi memakai peserta lokal yang punya riwayat. Ditambahkan ke data latih.</p></div>
+      <div class="panel"><span class="eyebrow">Langkah 2 · validasi</span><h3>Leave-one-generator-out</h3><p class="small">Latih di generator 1 → uji di generator 2, dan sebaliknya. Kandidat dinilai dari arah terburuknya, bukan rata-rata.</p></div>
+      <div class="panel"><span class="eyebrow">Langkah 3 · algoritma</span><h3>Domain generalization</h3><p class="small">A2 bobot seimbang per generator · A3 group DRO per generator × famili · A4 acak konteks pada fitur yang tidak stabil antar generator.</p></div>
+    </div>
+    <div class="panel" id="logo-panel"><h3>Seleksi kandidat (generator 3 dan 4 tidak disentuh)</h3><div class="legend" id="leg-logo"></div><div id="chart-logo"></div><p class="small muted" id="logo-note"></p></div>
+  </section>
+
+  <section id="hasil">
+    <span class="eyebrow">Hasil akhir · dinilai sekali</span>
+    <h2 id="hasil-judul">Hasil di keempat generator</h2>
+    <div id="hasil-banner"></div>
+    <div class="legend" id="leg-hasil"></div>
+    <div class="grid g2x" id="hasil-grid"></div>
+    <div class="grid g2">
+      <div class="panel" id="hasil-fam-panel"><h3>Generator 4 per famili skema</h3><div class="legend" id="leg-hfam"></div><div id="hasil-fam"></div></div>
+      <div class="panel" id="hasil-skema"><h3>Skema baru di generator 4: mana yang tertangkap</h3></div>
+    </div>
+    <p class="callout" id="hasil-pesan"></p>
+  </section>
+
+  <section id="swarm">
+    <span class="eyebrow">Lapisan AI Agent Swarm</span>
+    <h2>Swarm hanya membaca klaim di zona RAGU, dan justru membantu saat data bergeser</h2>
+    <div class="grid g2"><div class="panel"><div class="legend" id="leg-swarm"></div><div id="chart-swarm"></div></div>
+      <div class="panel" id="swarm-side"></div></div>
+  </section>
+
+  <section id="jujur">
+    <span class="eyebrow">Protokol</span>
+    <h2>Cara kami menjaga angka tetap jujur</h2>
+    <div class="grid g2">
+      <ul class="list">
+        <li><span><b>Pra-registrasi.</b> Kandidat, aturan seleksi, dan aturan adopsi ditulis ke file sebelum model dilatih.</span></li>
+        <li><span><b>Seleksi hanya di data latih/dev.</b> Generator 3 dan 4 tidak dipakai untuk memilih apa pun.</span></li>
+        <li><span><b>Seed baru, dinilai sekali.</b> Skrip menolak menjalankan benchmark kedua kali.</span></li>
+      </ul>
+      <ul class="list">
+        <li><span><b>Generator 4 ditulis buta</b> oleh agen terpisah yang tidak membaca model, fitur, rule engine, atau diagnosis.</span></li>
+        <li><span><b>CI bootstrap per peserta</b> untuk setiap selisih yang diklaim.</span></li>
+        <li><span><b>Cek overfit:</b> AUPRC latih vs cross-validation per peserta vs dev, sebaran antar-seed.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="batas">
+    <span class="eyebrow">Batasan</span>
+    <h2>Yang belum bisa dibuktikan laporan ini</h2>
+    <ul class="list warn">
+      <li><span>Semua data sintetis. Angka di sini mengukur ketahanan antar-dunia, bukan tingkat fraud di BPJS.</span></li>
+      <li><span>Diagnosis melihat label generator 3, jadi seed generator 3 yang baru tidak sepenuhnya asing. Karena itu generator 4 menjadi uji utama.</span></li>
+      <li><span>Recall di dunia asing masih jauh dari dunia latih. Klaim tetap diputuskan verifikator, AI menyiapkan antrean dan bukti.</span></li>
+      <li><span>Klaim normal generator 4 memakai dunia generator 3; yang baru hanya mekanik fraud-nya.</span></li>
+      <li><span>Di generator 3 dan 4, FPR klaim normal naik ke sekitar 1,3–1,4% (target 1%). Ambang perlu dikalibrasi ulang di data Kantor Cabang sebelum dipakai.</span></li>
+    </ul>
+  </section>
+
+  <footer><span id="foot-gen"></span><span>Sumber: testing/diagnosa_shift.py, ml_v5.py, ml_v6.py, ml_v7.py, v5.py, kriteria_ml_v7.json (repo ai-jkn-synthetic).</span></footer>
+</div>
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script>
+const DATA = {"dibuat":"2026-11-13 14:54","evolusi":{"g1":{"v3_bersih":{"recall":0.7253,"fpr":0.00468,"prec":0.7596,"auprc":0.8819},"v4":{"recall":0.8788,"fpr":0.00568,"prec":0.7596,"auprc":0.9381},"ml_v5":{"recall":0.8414,"fpr":0.00703,"prec":0.7096,"auprc":0.93}},"g2":{"v3_bersih":{"recall":0.3848,"fpr":0.01413,"prec":0.3572,"auprc":0.2825},"v4":{"recall":0.4799,"fpr":0.01572,"prec":0.3839,"auprc":0.4302},"ml_v5":{"recall":0.6512,"fpr":0.01521,"prec":0.4663,"auprc":0.6005}},"g3":{"v3_bersih":{"recall":0.2473,"fpr":0.0125,"prec":0.2877,"auprc":0.164},"v4":{"recall":0.3037,"fpr":0.01257,"prec":0.3302,"auprc":0.2538},"ml_v5":{"recall":0.3938,"fpr":0.01392,"prec":0.3661,"auprc":0.3088}}},"shift":{"model":{"g1":{"fpr":0.00703,"recall":0.8414,"med_fraud":0.845,"hist":[0.06465,0.01313,0.0101,0.01717,0.02727,0.0202,0.01212,0.02222,0.01717,0.0202,0.01717,0.01313,0.02424,0.04747,0.05253,0.0596,0.06869,0.12222,0.20505,0.16566],"auroc":0.9841},"g2":{"fpr":0.01521,"recall":0.6512,"med_fraud":0.527,"hist":[0.11416,0.06977,0.03488,0.04123,0.03488,0.03277,0.03805,0.0444,0.037,0.03594,0.02643,0.02537,0.02114,0.0518,0.0518,0.04228,0.07188,0.08457,0.08245,0.0592],"auroc":0.9589},"g3":{"fpr":0.01414,"recall":0.3982,"med_fraud":0.122,"hist":[0.38214,0.09286,0.04286,0.0256,0.02798,0.02083,0.01726,0.01369,0.01726,0.01726,0.01905,0.02679,0.03095,0.04643,0.05238,0.04762,0.0375,0.03333,0.03512,0.0131],"auroc":0.8788}},"ambang":0.3297,"famili":{"g1":{"koding":0.9828,"tagihan":1.0,"episode":0.25,"identitas":0.9812,"jaringan":0.6461},"g2":{"koding":0.4839,"tagihan":0.8465,"episode":0.4491,"identitas":0.8258,"jaringan":0.7193},"g3":{"koding":0.1683,"tagihan":0.6688,"episode":0.3594,"identitas":0.4982,"jaringan":0.0822}},"porsi_g3":{"koding":0.3077,"tagihan":0.2821,"episode":0.2054,"identitas":0.1613,"jaringan":0.0435},"pola":{"terbalik":0,"hilang":4,"total":54,"gain":{"tetap":0.5696,"melemah":0.0206,"hilang":0.1054,"terbalik":0.0,"lain":0.3044},"kor_g2_g3":0.873},"sidik":["v4: domisili_fktp_jarak","klaim: hari_sejak_sebelumnya","v4: domisili_tinggal_jarak","tetangga RS sama: klaim: hari_sejak_sebelumnya"],"dekomposisi":{"recall_g2":0.6512,"recall_g3":0.3982,"recall_g3_dengan_campuran_g2":0.3721,"recall_g2_dengan_campuran_g3":0.6444,"recall_g1":0.8414,"recall_g3_dengan_campuran_g1":0.303},"profil":{"g1":{"label":"Generator 1","klaim":12091,"fraud":990,"prevalensi":0.08188,"pertama_normal":0.0885,"pertama_fraud":0.5798,"skema":13},"g2":{"label":"Generator 2","klaim":40005,"fraud":946,"prevalensi":0.02365,"pertama_normal":0.3785,"pertama_fraud":0.6142,"skema":17},"g3":{"label":"Generator 3","klaim":80547,"fraud":1680,"prevalensi":0.02086,"pertama_normal":0.2447,"pertama_fraud":0.3065,"skema":22}}},"swarm":{"klaim":40259,"fraud":798,"ragu":1553,"v4":{"recall":0.3346,"fpr":0.01219,"prec":0.3591,"auprc":null},"v5":{"recall":0.3722,"fpr":0.00907,"prec":0.4557,"auprc":null},"ci":{"recall":[0.0137,0.0615],"fpr":[-0.0042,-0.002],"presisi_prev2":[0.0663,0.1272]},"usd":2.08,"panggilan":780,"zona":{"fraud_dipertahankan_p05":0.669,"normal_dibuang_p05":0.74,"n":1553,"fraud":284,"auroc_koding":0.7286,"auroc_tagihan":0.7726,"auroc_episode":0.7624,"auroc_hakim":0.7725,"auroc_model_B":0.6509,"hist_p":{"batas":[0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0],"fraud":[9,23,20,14,28,67,40,22,35,26],"normal":[291,249,204,76,119,182,61,39,37,11]}},"lolos":true},"v7_kartu":{"pilihan":"A1","logo":{"A1":{"latih_G1_uji_G2":{"recall_fpr1":0.4153,"auprc":0.4208},"latih_G2_uji_G1":{"recall_fpr1":0.5244,"auprc":0.7062},"terburuk":0.4153,"rata":0.4698},"A2":{"latih_G1_uji_G2":{"recall_fpr1":0.4153,"auprc":0.4208,"catatan":"satu generator: sama dengan A1"},"latih_G2_uji_G1":{"recall_fpr1":0.5193,"auprc":0.7041},"terburuk":0.4153,"rata":0.4673},"A3":{"latih_G1_uji_G2":{"recall_fpr1":0.3725,"auprc":0.3968},"latih_G2_uji_G1":{"recall_fpr1":0.5395,"auprc":0.6967},"terburuk":0.3725,"rata":0.456},"A4":{"latih_G1_uji_G2":{"recall_fpr1":0.4153,"auprc":0.4208},"latih_G2_uji_G1":{"recall_fpr1":0.5244,"auprc":0.7062},"terburuk":0.4153,"rata":0.4698}},"gabungan":{"A0":{"per_dev":{"g1":0.7546,"g2":0.6456,"g2h":0.5124},"rata":0.6375},"A1":{"per_dev":{"g1":0.7395,"g2":0.6637,"g2h":0.5711},"rata":0.6581},"A2":{"per_dev":{"g1":0.6908,"g2":0.6772,"g2h":0.6072},"rata":0.6584},"A3":{"per_dev":{"g1":0.6891,"g2":0.6569,"g2h":0.5688},"rata":0.6383},"A4":{"per_dev":{"g1":0.7193,"g2":0.6546,"g2h":0.5508},"rata":0.6416}},"tidak_stabil":59,"latih":{"g1_tr":89122,"g2_tr":40005,"g2h_tr":40009},"sidik_v7":0.0961,"sidik_v5":0.1054,"overfit":{"auprc_latih_insample":0.9038,"auprc_latih_oof_per_peserta":0.8577,"auprc_dev":{"g1":0.842,"g2":0.6929,"g2h":0.5936},"peringatan":[]}},"v7":{"pilihan":"A1","adopsi":{"lolos":true,"aturan":"ML v7 (= pilihan seleksi) menggantikan ML v5 bila CI bootstrap per peserta untuk selisih recall (ML v7 - ML v5) di generator 4 punya batas bawah > 0, dan prec@2% di generator 4 tidak turun > 2 poin. Kalau tidak, ML v5 tetap; hasil dilaporkan apa adanya.","ci_recall_g4":[0.0091,0.0276],"selisih_prec2_g4":0.0085},"set":{"g1":{"klaim":12091,"fraud":990,"skema":13,"famili_n":{"episode":32,"identitas":160,"jaringan":356,"koding":232,"tagihan":210},"model":{"v3_bersih":{"recall":0.7253,"fpr":0.00468,"prec":0.7596,"auprc":0.8819,"famili":{"episode":0.5938,"identitas":0.9125,"jaringan":0.3652,"koding":0.9526,"tagihan":0.9619}},"v4":{"recall":0.8788,"fpr":0.00568,"prec":0.7596,"auprc":0.9381,"famili":{"episode":0.25,"identitas":0.975,"jaringan":0.7669,"koding":0.9612,"tagihan":1.0}},"A0":{"recall":0.8414,"fpr":0.00703,"prec":0.7096,"auprc":0.93,"famili":{"episode":0.25,"identitas":0.9812,"jaringan":0.6461,"koding":0.9828,"tagihan":1.0}},"A1":{"recall":0.8475,"fpr":0.00775,"prec":0.6906,"auprc":0.9415,"famili":{"episode":0.1562,"identitas":0.9875,"jaringan":0.677,"koding":0.9698,"tagihan":1.0}},"A2":{"recall":0.796,"fpr":0.00577,"prec":0.7381,"auprc":0.9325,"famili":{"episode":0.1562,"identitas":0.9812,"jaringan":0.5562,"koding":0.9397,"tagihan":1.0}},"A3":{"recall":0.8222,"fpr":0.00775,"prec":0.6841,"auprc":0.9399,"famili":{"episode":0.1562,"identitas":0.9688,"jaringan":0.6236,"koding":0.9569,"tagihan":1.0}},"A4":{"recall":0.8343,"fpr":0.00721,"prec":0.7026,"auprc":0.9397,"famili":{"episode":0.1875,"identitas":0.9875,"jaringan":0.6404,"koding":0.9655,"tagihan":1.0}}},"ci":{"A1":{"recall":[-0.0053,0.0188],"fpr":[0.0,0.0015],"presisi_prev2":[-0.0412,0.0007]},"A2":{"recall":[-0.0599,-0.0308],"fpr":[-0.0023,-0.0001],"presisi_prev2":[-0.0074,0.0629]},"A3":{"recall":[-0.0331,-0.0041],"fpr":[-0.0004,0.0019],"presisi_prev2":[-0.0585,0.0052]},"A4":{"recall":[-0.0199,0.0061],"fpr":[-0.0007,0.0011],"presisi_prev2":[-0.0356,0.02]}},"ci_v4":{"recall":[-0.0463,-0.0167],"fpr":[0.0011,0.0032],"presisi_prev2":[-0.1011,-0.0403]},"skema_pilihan":{"cincin_bentuk_baru":0.6553,"cincin_kolusi":0.7067,"dx_sekunder":1.0,"kartu_dipinjam":1.0,"kelas_naik":1.0,"klaim_ganda":1.0,"kloning":0.975,"kode_tidak_sesuai":1.0,"los_bergeser":0.1562,"prosedur_fiktif":1.0,"topup_fiktif":1.0,"topup_inflasi":1.0,"upcoding":0.7812},"skema_v3":{"cincin_bentuk_baru":0.2864,"cincin_kolusi":0.4733,"dx_sekunder":1.0,"kartu_dipinjam":0.9667,"kelas_naik":0.9714,"klaim_ganda":0.9,"kloning":0.9,"kode_tidak_sesuai":0.9833,"los_bergeser":0.5938,"prosedur_fiktif":0.9857,"topup_fiktif":0.9143,"topup_inflasi":1.0,"upcoding":0.7188}},"g2":{"klaim":40005,"fraud":946,"skema":17,"famili_n":{"episode":167,"identitas":132,"jaringan":114,"koding":279,"tagihan":254},"model":{"v3_bersih":{"recall":0.3848,"fpr":0.01413,"prec":0.3572,"auprc":0.2825,"famili":{"episode":0.4311,"identitas":0.4394,"jaringan":0.4737,"koding":0.319,"tagihan":0.3583}},"v4":{"recall":0.4799,"fpr":0.01572,"prec":0.3839,"auprc":0.4302,"famili":{"episode":0.4192,"identitas":0.6212,"jaringan":0.6754,"koding":0.3441,"tagihan":0.5079}},"A0":{"recall":0.6512,"fpr":0.01521,"prec":0.4663,"auprc":0.6005,"famili":{"episode":0.4491,"identitas":0.8258,"jaringan":0.7193,"koding":0.4839,"tagihan":0.8465}},"A1":{"recall":0.6564,"fpr":0.01531,"prec":0.4667,"auprc":0.6234,"famili":{"episode":0.4491,"identitas":0.8939,"jaringan":0.6667,"koding":0.5018,"tagihan":0.8346}},"A2":{"recall":0.6776,"fpr":0.01482,"prec":0.4826,"auprc":0.651,"famili":{"episode":0.4491,"identitas":0.9545,"jaringan":0.6842,"koding":0.5125,"tagihan":0.8622}},"A3":{"recall":0.6364,"fpr":0.01508,"prec":0.4627,"auprc":0.602,"famili":{"episode":0.4551,"identitas":0.803,"jaringan":0.6228,"koding":0.5233,"tagihan":0.7992}},"A4":{"recall":0.6469,"fpr":0.01505,"prec":0.4672,"auprc":0.6129,"famili":{"episode":0.4311,"identitas":0.9167,"jaringan":0.6667,"koding":0.4803,"tagihan":0.8228}}},"ci":{"A1":{"recall":[-0.0083,0.0208],"fpr":[-0.0005,0.0007],"presisi_prev2":[-0.0112,0.0119]},"A2":{"recall":[0.0108,0.0431],"fpr":[-0.0013,0.0005],"presisi_prev2":[0.0007,0.0332]},"A3":{"recall":[-0.0308,0.0021],"fpr":[-0.001,0.0007],"presisi_prev2":[-0.0184,0.011]},"A4":{"recall":[-0.0206,0.0131],"fpr":[-0.001,0.0006],"presisi_prev2":[-0.013,0.0155]}},"ci_v4":{"recall":[0.1487,0.2034],"fpr":[-0.0014,0.0006],"presisi_prev2":[0.0616,0.1045]},"skema_pilihan":{"cincin_kolusi":0.6667,"dx_sekunder":0.2656,"episode_hari_sama":1.0,"kartu_dipinjam":1.0,"kelas_naik":0.9531,"klaim_ganda":0.975,"kloning":0.6389,"kode_tidak_sesuai":0.8958,"los_bergeser":0.1408,"pemecahan_episode":0.5156,"phantom_billing":0.7234,"prosedur_fiktif":0.4583,"readmisi":1.0,"topup_fiktif":0.7292,"topup_inflasi":1.0,"upcoding":0.4366,"upcoding_prosedur":0.5625},"skema_v3":{"cincin_kolusi":0.4737,"dx_sekunder":0.0781,"episode_hari_sama":1.0,"kartu_dipinjam":0.5,"kelas_naik":0.9375,"klaim_ganda":0.425,"kloning":0.0278,"kode_tidak_sesuai":0.7083,"los_bergeser":0.0986,"pemecahan_episode":0.5156,"phantom_billing":0.0,"prosedur_fiktif":0.4375,"readmisi":1.0,"topup_fiktif":0.4375,"topup_inflasi":0.2083,"upcoding":0.1127,"upcoding_prosedur":0.4375}},"g3":{"klaim":40314,"fraud":929,"skema":22,"famili_n":{"episode":174,"identitas":135,"jaringan":44,"koding":323,"tagihan":253},"model":{"v3_bersih":{"recall":0.2411,"fpr":0.01176,"prec":0.2951,"auprc":0.1895,"famili":{"episode":0.3966,"identitas":0.3481,"jaringan":0.1136,"koding":0.096,"tagihan":0.2846}},"v4":{"recall":0.2971,"fpr":0.01206,"prec":0.3345,"auprc":0.276,"famili":{"episode":0.3563,"identitas":0.4519,"jaringan":0.0227,"koding":0.1084,"tagihan":0.4625}},"A0":{"recall":0.3918,"fpr":0.01295,"prec":0.3818,"auprc":0.3364,"famili":{"episode":0.3851,"identitas":0.4593,"jaringan":0.0227,"koding":0.1858,"tagihan":0.6877}},"A1":{"recall":0.4069,"fpr":0.01348,"prec":0.3812,"auprc":0.3473,"famili":{"episode":0.4023,"identitas":0.4741,"jaringan":0.0455,"koding":0.195,"tagihan":0.7075}},"A2":{"recall":0.4026,"fpr":0.01391,"prec":0.3713,"auprc":0.3274,"famili":{"episode":0.4023,"identitas":0.4593,"jaringan":0.1136,"koding":0.1858,"tagihan":0.6996}},"A3":{"recall":0.3918,"fpr":0.01366,"prec":0.3692,"auprc":0.3302,"famili":{"episode":0.4023,"identitas":0.4593,"jaringan":0.0455,"koding":0.1981,"tagihan":0.6561}},"A4":{"recall":0.4166,"fpr":0.01348,"prec":0.3867,"auprc":0.3575,"famili":{"episode":0.4023,"identitas":0.4667,"jaringan":0.0227,"koding":0.2012,"tagihan":0.7431}}},"ci":{"A1":{"recall":[0.0054,0.0256],"fpr":[0.0,0.0011],"presisi_prev2":[-0.0118,0.0107]},"A2":{"recall":[-0.0046,0.0256],"fpr":[0.0003,0.0017],"presisi_prev2":[-0.0263,0.004]},"A3":{"recall":[-0.0137,0.0132],"fpr":[0.0001,0.0014],"presisi_prev2":[-0.0278,0.0019]},"A4":{"recall":[0.0123,0.0377],"fpr":[-0.0001,0.0011],"presisi_prev2":[-0.0085,0.0185]}},"ci_v4":{"recall":[0.0868,0.1318],"fpr":[0.0004,0.0024],"presisi_prev2":[0.0238,0.0692]},"skema_pilihan":{"diagnosis_utama_diganti":0.0909,"dokter_tiga_rs":0.0435,"geser_bertahap":0.875,"kartu_dipinjam":0.0256,"klaim_berulang":0.7407,"klaim_fiktif":0.0,"kloning":0.2,"los_diperpanjang":0.0,"naik_kelas":0.44,"obat_alkes_fiktif":0.5366,"operasi_batal_ditagih":0.1429,"pemecahan_episode":0.2048,"pulang_dini_readmisi":0.4091,"rawat_inap_tanpa_indikasi":0.1429,"readmisi_direncanakan":0.7778,"rujukan_semu":0.0476,"sesi_rutin_fiktif":0.0,"tagihan_gelembung":0.9667,"tidak_sesuai_indikasi":0.0877,"tindakan_fiktif":0.2262,"topup_gelembung":0.686,"upcoding_keparahan":0.4603},"skema_v3":{"diagnosis_utama_diganti":0.0455,"dokter_tiga_rs":0.0,"geser_bertahap":0.0,"kartu_dipinjam":0.0,"klaim_berulang":0.5679,"klaim_fiktif":0.0,"kloning":0.0667,"los_diperpanjang":0.0,"naik_kelas":0.4,"obat_alkes_fiktif":0.2439,"operasi_batal_ditagih":0.0357,"pemecahan_episode":0.2771,"pulang_dini_readmisi":0.4091,"rawat_inap_tanpa_indikasi":0.0,"readmisi_direncanakan":0.7778,"rujukan_semu":0.2381,"sesi_rutin_fiktif":0.0,"tagihan_gelembung":0.3,"tidak_sesuai_indikasi":0.0702,"tindakan_fiktif":0.2143,"topup_gelembung":0.2907,"upcoding_keparahan":0.1111}},"g4":{"klaim":40321,"fraud":734,"skema":20,"famili_n":{"episode":128,"identitas":187,"jaringan":100,"koding":237,"tagihan":82},"model":{"v3_bersih":{"recall":0.1621,"fpr":0.0093,"prec":0.2625,"auprc":0.078,"famili":{"episode":0.4844,"identitas":0.0374,"jaringan":0.09,"koding":0.1224,"tagihan":0.1463}},"v4":{"recall":0.0995,"fpr":0.01271,"prec":0.1377,"auprc":0.0788,"famili":{"episode":0.1328,"identitas":0.0267,"jaringan":0.07,"koding":0.1308,"tagihan":0.1585}},"A0":{"recall":0.124,"fpr":0.01329,"prec":0.16,"auprc":0.11,"famili":{"episode":0.1484,"identitas":0.0374,"jaringan":0.06,"koding":0.1899,"tagihan":0.1707}},"A1":{"recall":0.1417,"fpr":0.01427,"prec":0.1685,"auprc":0.1174,"famili":{"episode":0.1484,"identitas":0.0428,"jaringan":0.09,"koding":0.2236,"tagihan":0.1829}},"A2":{"recall":0.1499,"fpr":0.01405,"prec":0.1788,"auprc":0.1175,"famili":{"episode":0.1484,"identitas":0.0535,"jaringan":0.07,"koding":0.2447,"tagihan":0.1951}},"A3":{"recall":0.1526,"fpr":0.01437,"prec":0.1781,"auprc":0.1202,"famili":{"episode":0.1484,"identitas":0.0535,"jaringan":0.09,"koding":0.2405,"tagihan":0.2073}},"A4":{"recall":0.1417,"fpr":0.01415,"prec":0.1697,"auprc":0.1179,"famili":{"episode":0.1484,"identitas":0.0642,"jaringan":0.1,"koding":0.2025,"tagihan":0.1829}}},"ci":{"A1":{"recall":[0.0091,0.0276],"fpr":[0.0005,0.0015],"presisi_prev2":[-0.0022,0.0193]},"A2":{"recall":[0.0118,0.0418],"fpr":[-0.0,0.0015],"presisi_prev2":[0.0013,0.0358]},"A3":{"recall":[0.0147,0.0436],"fpr":[0.0004,0.0018],"presisi_prev2":[0.0017,0.035]},"A4":{"recall":[0.0056,0.0297],"fpr":[0.0002,0.0016],"presisi_prev2":[-0.0057,0.0242]}},"ci_v4":{"recall":[0.0277,0.0576],"fpr":[0.0006,0.0027],"presisi_prev2":[0.0121,0.0498]},"skema_pilihan":{"admisi_ulang_kronis":0.8947,"calo_katarak":0.0,"jam_ventilator_digenapkan":0.1111,"kartu_almarhum":0.0,"kelas_penuh_dalih":0.619,"kemo_batal_ditagih":0.0,"komorbid_titipan":0.381,"kontrol_tambahan":0.0,"mri_ditagihkan":0.0294,"nik_ganda_bergantian":0.0263,"obat_lintas_rs":0.1622,"operator_dua_rs":0.0,"pindah_ruang_jadi_admisi":0.0588,"poli_dipecah_sehari":0.0,"rajal_naik_prosedur":0.0,"rawat_inap_ringan":0.0323,"resume_disalin":0.0143,"rs_satu_pemilik":0.25,"sepsis_dikodekan":0.037,"tindakan_ditempel_ri":0.52},"skema_v3":{"admisi_ulang_kronis":0.8947,"calo_katarak":0.0,"jam_ventilator_digenapkan":0.1111,"kartu_almarhum":0.0,"kelas_penuh_dalih":0.4762,"kemo_batal_ditagih":0.0,"komorbid_titipan":0.1111,"kontrol_tambahan":0.0,"mri_ditagihkan":0.0294,"nik_ganda_bergantian":0.0,"obat_lintas_rs":0.1892,"operator_dua_rs":0.0,"pindah_ruang_jadi_admisi":0.0588,"poli_dipecah_sehari":1.0,"rajal_naik_prosedur":0.0,"rawat_inap_ringan":0.0,"resume_disalin":0.0,"rs_satu_pemilik":0.25,"sepsis_dikodekan":0.037,"tindakan_ditempel_ri":0.42}}}}};
+const G = { g1: "Generator 1", g2: "Generator 2", g3: "Generator 3", g4: "Generator 4" };
+const C = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const GC = { g1: "--g1", g2: "--g2", g3: "--g3", g4: "--g4" };
+const FAM = { koding: "Koding & klinis", tagihan: "Tagihan", episode: "Episode", identitas: "Identitas", jaringan: "Jaringan" };
+const NAMA = { v3_bersih: "v3", v4: "v4", ml_v5: "ML v5", A0: "ML v5", A1: "A1 data", A2: "A2 seimbang", A3: "A3 DRO", A4: "A4 acak konteks" };
+const id = (v, d = 0) => (v == null || isNaN(v)) ? "—" : Number(v).toLocaleString("id-ID", { minimumFractionDigits: d, maximumFractionDigits: d });
+const pct = (v, d = 1) => (v == null || isNaN(v)) ? "—" : id(v * 100, d) + "%";
+const pt = (v, d = 1) => (v > 0 ? "+" : "") + id(v * 100, d);
+const $ = (s) => document.getElementById(s);
+const el = (tag, attrs = {}, kids = []) => { const e = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) { if (k === "html") e.innerHTML = v; else if (k === "text") e.textContent = v; else e.setAttribute(k, v); } for (const k of [].concat(kids)) if (k) e.append(k); return e; };
+const NS = "http://www.w3.org/2000/svg";
+const s = (tag, attrs = {}, text) => { const e = document.createElementNS(NS, tag); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); if (text != null) e.textContent = text; return e; };
+const tip = $("tip");
+document.addEventListener("pointermove", (e) => { const t = e.target.closest && e.target.closest("[data-tip]"); if (t) { tip.textContent = t.getAttribute("data-tip"); tip.style.opacity = 1; const x = Math.min(e.clientX + 14, innerWidth - 270); tip.style.left = x + "px"; tip.style.top = (e.clientY + 14) + "px"; } else tip.style.opacity = 0; });
+const legend = (box, items) => { box.replaceChildren(...items.map(([n, c, dash]) => el("span", {}, [el("i", { style: `background:${dash ? "transparent" : C(c)};border:${dash ? "1.5px dashed " + C(c) : "0"}` }), n]))); };
+
+/* grouped horizontal bars: rows = groups, each with series bars */
+function grouped(box, groups, series, getv, opt = {}) {
+  const W = Math.max(300, box.clientWidth || 640), bh = 12, gap = 4, gpad = 18, lw = Math.min(118, W * 0.3), mx = opt.max || 1;
+  let y = 6; const svg = s("svg", { viewBox: `0 0 ${W} 10`, role: "img", "aria-label": opt.label || "grafik" });
+  for (const g of groups) {
+    svg.append(s("text", { x: 0, y: y + 10, class: "ink", "font-size": 12 }, g.label));
+    let yy = y + 18;
+    for (const [k, nm, c, faint] of series) {
+      const v = getv(g.key, k); if (v == null) continue;
+      const w = Math.max(2, (v / mx) * (W - lw - 70));
+      const r = s("rect", { x: lw, y: yy, width: w, height: bh, rx: 3, fill: C(c), opacity: faint ? 0.38 : 1, "data-tip": `${g.label} · ${nm}: ${opt.fmt ? opt.fmt(v) : pct(v)}${opt.extra ? opt.extra(g.key, k) : ""}` });
+      svg.append(s("text", { x: lw - 8, y: yy + 10, "text-anchor": "end" }, nm), r, s("text", { x: lw + w + 6, y: yy + 10, class: faint ? "" : "ink" }, opt.fmt ? opt.fmt(v) : pct(v)));
+      yy += bh + gap;
+    }
+    y = yy + gpad;
+  }
+  svg.setAttribute("viewBox", `0 0 ${W} ${y}`); box.replaceChildren(svg);
+}
+
+/* fraud-score histogram */
+function histo(box, hist, c, ambang, title, sub) {
+  const W = Math.max(240, (box.clientWidth || 900) / (innerWidth < 760 ? 1 : 3) - 14), H = 110, n = hist.length, bw = W / n, mx = Math.max(...hist, 0.001);
+  const svg = s("svg", { viewBox: `0 -16 ${W} ${H + 34}`, role: "img", "aria-label": title });
+  svg.append(s("text", { x: 0, y: -4, class: "ink", "font-size": 12 }, title), s("text", { x: W, y: -4, "text-anchor": "end" }, sub));
+  svg.append(s("line", { x1: 0, x2: W, y1: H, y2: H, stroke: C("--line") }));
+  hist.forEach((v, i) => { const h = (v / mx) * (H - 6); svg.append(s("rect", { x: i * bw + 1, y: H - h, width: bw - 2, height: Math.max(h, 0.5), rx: 2, fill: C(c), opacity: (i + 0.5) / n > ambang ? 1 : 0.35, "data-tip": `skor ${id(i / n, 2)}–${id((i + 1) / n, 2)}: ${pct(v)} klaim fraud` })); });
+  svg.append(s("line", { x1: ambang * W, x2: ambang * W, y1: 0, y2: H, stroke: C("--ink"), "stroke-dasharray": "3 3" }), s("text", { x: ambang * W + 4, y: 10 }, "ambang"));
+  svg.append(s("text", { x: 0, y: H + 14 }, "skor 0"), s("text", { x: W, y: H + 14, "text-anchor": "end" }, "1"));
+  box.append(el("div", {}, [svg]));
+}
+
+/* dot rows on 0..max */
+function dots(box, rows, series, opt = {}) {
+  const W = Math.max(300, box.clientWidth || 640), lw = Math.min(130, W * 0.32), rh = 30, mx = opt.max || 1;
+  const svg = s("svg", { viewBox: `0 0 ${W} ${rows.length * rh + 24}`, role: "img", "aria-label": opt.label || "grafik titik" });
+  rows.forEach((r, i) => {
+    const y = i * rh + 14;
+    svg.append(s("text", { x: 0, y: y + 4, class: "ink", "font-size": 12 }, r.label));
+    svg.append(s("line", { x1: lw, x2: W - 10, y1: y, y2: y, stroke: C("--line") }));
+    for (const [k, nm, c] of series) {
+      const v = r.vals[k]; if (v == null) continue;
+      svg.append(s("circle", { cx: lw + (v / mx) * (W - lw - 10), cy: y, r: 6, fill: C(c), stroke: C("--surface"), "stroke-width": 2, "data-tip": `${r.label} · ${nm}: ${pct(v, 0)}` }));
+    }
+  });
+  const yb = rows.length * rh + 16;
+  [0, 0.5, 1].forEach((t) => svg.append(s("text", { x: lw + t * (W - lw - 10), y: yb, "text-anchor": t === 0 ? "start" : t === 1 ? "end" : "middle" }, pct(t * mx, 0))));
+  box.replaceChildren(svg);
+}
+
+function stat(v, k, sub) { return el("div", { class: "panel stat" }, [el("div", { class: "v num", text: v }), el("div", { class: "k", text: k }), sub ? el("div", { class: "small muted", text: sub }) : null]); }
+
+function render() {
+  const D = DATA, V7 = D.v7, K7 = D.v7_kartu, P = V7 ? V7.pilihan : (K7 ? K7.pilihan : null);
+  // hero stats
+  const hs = $("hero-stats");
+  if (V7) {
+    const g4 = V7.set.g4.model, ad = V7.adopsi;
+    hs.append(stat(`${pct(g4.A0.recall, 1)} → ${pct(g4[P].recall, 1)}`, `Recall di generator 4 (ditulis buta): ML v5 → ML v7 (${NAMA[P]})`, `CI selisih ${pt(ad.ci_recall_g4[0])} s/d ${pt(ad.ci_recall_g4[1])} poin · ${ad.lolos ? "lolos aturan adopsi" : "belum lolos aturan adopsi"}`));
+  } else hs.append(stat("menunggu", "Hasil ML v7 di generator 4"));
+  hs.append(stat(`${pct(D.swarm.v4.prec, 0)} → ${pct(D.swarm.v5.prec, 0)}`, "Precision (prec@2%) di generator 3 setelah AI Agent Swarm menelaah zona RAGU", `biaya ≈ $${id(D.swarm.usd, 2)} untuk ${id(D.swarm.klaim)} klaim`));
+  const sm = D.shift.model;
+  hs.append(stat(`${pct(sm.g1.fpr, 1)} · ${pct(sm.g2.fpr, 1)} · ${pct(sm.g3.fpr, 1)}`, "FPR klaim normal di generator 1 · 2 · 3: tetap di sekitar target 1%", "klaim normal tetap jarang ikut ditandai; yang turun adalah recall"));
+  // generator cards
+  const desc = { g1: ["latih", "Asal", "Klaim sintetis dari pola klaim; skema fraud ditanam langsung."],
+    g2: ["latih", "Lebih realistis", "Kunjungan pertama yang normal, skema baru; ditambah varian halus untuk latih ML v7."],
+    g3: ["uji · seed baru", "Mekanik berbeda", "Dunia klaim dari pola harian; skema dengan nama dan cara sendiri."],
+    g4: ["uji utama · buta", "Ditulis buta", "Ditulis agen terpisah yang tidak melihat model, fitur, rule engine, atau diagnosis."] };
+  const src = V7 ? V7.set : null;
+  for (const g of ["g1", "g2", "g3", "g4"]) {
+    const [role, nm, d] = desc[g]; const st = src && src[g];
+    $("gen-cards").append(el("div", { class: "panel gen-card", style: `--c:var(${GC[g]})` }, [el("span", { class: "role", text: role }), el("h3", { text: `${G[g]} · ${nm}` }), el("p", { class: "small", text: d }),
+      st ? el("div", { class: "kv", html: `<span><b>${id(st.klaim)}</b> klaim uji</span><span><b>${pct(st.fraud / st.klaim, 1)}</b> fraud</span><span><b>${st.skema}</b> skema</span>` }) : null]));
+  }
+  // evolution
+  const evoS = [["v3_bersih", "v3", "--base", true], ["v4", "v4", "--g1", false], ["ml_v5", "ML v5", "--accent", false]];
+  legend($("leg-evo"), evoS.map(([k, n, c]) => [n, c]));
+  grouped($("chart-evo"), ["g1", "g2", "g3"].map((g) => ({ key: g, label: G[g] + (g === "g3" ? " · data asing" : " · data latih") })), evoS, (g, k) => D.evolusi[g][k].recall,
+    { label: "Recall per generator per versi", extra: (g, k) => ` · prec@2% ${pct(D.evolusi[g][k].prec, 0)}` });
+  // diagnosis tiles
+  const sp = D.shift, dk = sp.dekomposisi;
+  const tiles = [["Klaim normal: shift kecil", `${pct(sm.g1.fpr)} · ${pct(sm.g2.fpr)} · ${pct(sm.g3.fpr)}`, "FPR di ambang beku, generator 1 · 2 · 3"],
+    ["Klaim fraud: shift besar", `${id(sm.g1.med_fraud, 2)} → ${id(sm.g2.med_fraud, 2)} → ${id(sm.g3.med_fraud, 2)}`, "median skor klaim fraud"],
+    ["Arah sinyal tidak terbalik", `${sp.pola.terbalik} dari ${sp.pola.total}`, `${sp.pola.hilang} sinyal hilang di generator 3; memegang ${pct(sp.pola.gain.hilang, 0)} keputusan model`],
+    ["Campuran skema bukan penyebab", `${pct(dk.recall_g3_dengan_campuran_g2)} vs ${pct(dk.recall_g3)}`, "recall generator 3 bila campuran famili disamakan dengan generator 2, vs sebenarnya"]];
+  for (const [t, v, k] of tiles) $("dx-tiles").append(el("div", { class: "panel verdict" }, [el("h3", { text: t }), el("div", { class: "v num", text: v }), el("p", { class: "small muted", text: k })]));
+  for (const g of ["g1", "g2", "g3"]) histo($("dx-hist"), sm[g].hist, GC[g], sp.ambang, G[g], `median ${id(sm[g].med_fraud, 2)} · lolos ${pct(1 - sm[g].recall, 0)}`);
+  const famS = [["g1", G.g1, "--g1"], ["g2", G.g2, "--g2"], ["g3", G.g3, "--g3"]];
+  legend($("leg-fam"), famS.map(([, n, c]) => [n, c]));
+  dots($("dx-fam"), Object.keys(FAM).map((f) => ({ label: FAM[f], vals: { g1: sp.famili.g1[f], g2: sp.famili.g2[f], g3: sp.famili.g3[f] } })), famS, { label: "Recall per famili" });
+  for (const f of sp.sidik) $("dx-sidik").append(el("span", { class: "chip dash", text: f.replace(/^v4: |^klaim: /, "").replace(/_/g, " ") }));
+  const gp = sp.pola.gain, parts = [["tetap", "sinyal tetap", "--ok"], ["melemah", "melemah", "--warn"], ["hilang", "hilang di generator 3", "--risk"], ["lain", "fitur lain", "--base"]];
+  const bar = el("div", { style: "display:flex;height:14px;border-radius:4px;overflow:hidden;gap:2px", role: "img", "aria-label": "porsi gain model" });
+  for (const [k, n, c] of parts) if (gp[k] > 0) bar.append(el("div", { style: `width:${gp[k] * 100}%;background:var(${c})`, "data-tip": `${n}: ${pct(gp[k], 1)} keputusan model` }));
+  $("dx-gain").replaceChildren(el("div", { class: "small muted", text: "Porsi keputusan ML v5 (gain), menurut nasib sinyalnya di generator 3" }), bar);
+  legend($("leg-gain"), parts.filter(([k]) => gp[k] > 0).map(([k, n, c]) => [`${n} ${pct(gp[k], 0)}`, c]));
+  // LOGO
+  if (K7) {
+    const KS = ["A1", "A2", "A3", "A4"];
+    const lg = [["latih_G1_uji_G2", "latih G1 → uji G2", "--g2"], ["latih_G2_uji_G1", "latih G2 → uji G1", "--g1"]];
+    legend($("leg-logo"), lg.map(([, n, c]) => [n, c]).concat([["arah terburuk = skor", "--ink"]]));
+    const box = $("chart-logo"), W = Math.max(300, box.clientWidth || 640), lw = Math.min(150, W * 0.34), rh = 34, mx = 1;
+    const svg = s("svg", { viewBox: `0 0 ${W} ${KS.length * rh + 24}`, role: "img", "aria-label": "Seleksi leave-one-generator-out" });
+    KS.forEach((k, i) => {
+      const y = i * rh + 16, L = K7.logo[k];
+      svg.append(s("text", { x: 0, y: y + 4, class: "ink", "font-size": 12, "font-weight": k === P ? 700 : 400 }, NAMA[k] + (k === P ? "  ✓ dipilih" : "")));
+      svg.append(s("line", { x1: lw, x2: W - 60, y1: y, y2: y, stroke: C("--line") }));
+      const xs = (v) => lw + (v / mx) * (W - lw - 60);
+      svg.append(s("rect", { x: xs(0), y: y - 3, width: xs(L.terburuk) - xs(0), height: 6, rx: 3, fill: C("--ink"), opacity: 0.18 }));
+      for (const [a, n, c] of lg) svg.append(s("circle", { cx: xs(L[a].recall_fpr1), cy: y, r: 6, fill: C(c), stroke: C("--surface"), "stroke-width": 2, "data-tip": `${NAMA[k]} · ${n}: recall ${pct(L[a].recall_fpr1)} · AUPRC ${id(L[a].auprc, 3)}` }));
+      svg.append(s("text", { x: W, y: y + 4, "text-anchor": "end", class: "ink" }, pct(L.terburuk)));
+    });
+    [0, 0.5, 1].forEach((t) => svg.append(s("text", { x: lw + t * (W - lw - 60), y: KS.length * rh + 18, "text-anchor": t === 0 ? "start" : t === 1 ? "end" : "middle" }, pct(t, 0))));
+    $("chart-logo").replaceChildren(svg);
+    $("logo-note").textContent = `Recall pada FPR 1%. Dev gabungan rata-rata: ${KS.map((k) => `${k} ${pct(K7.gabungan[k].rata)}`).join(" · ")} (ML v5 ${pct(K7.gabungan.A0.rata)}). Fitur tidak stabil antar generator latih: ${K7.tidak_stabil}.`;
+  } else $("logo-panel").replaceChildren(el("div", { class: "pending", text: "Seleksi ML v7 sedang berjalan." }));
+  // final results
+  if (V7) {
+    const ad = V7.adopsi, ser = [["v3_bersih", "v3 (+ rule route)", "--ink", true], ["v4", "v4", "--base", true], ["A0", "ML v5", "--g1", false], [P, `ML v7 (${NAMA[P]})`, "--accent", false]];
+    const others = ["A1", "A2", "A3", "A4"].filter((k) => k !== P);
+    $("hasil-judul").textContent = ad.lolos ? `ML v7 lolos aturan adopsi di generator 4` : `ML v7 belum lolos aturan adopsi; ML v5 tetap`;
+    $("hasil-banner").replaceChildren(el("div", { class: "banner" + (ad.lolos ? "" : " no") }, [el("span", { class: "badge", text: ad.lolos ? "DIADOPSI" : "TIDAK DIADOPSI" }),
+      el("p", { class: "small", html: `Aturan yang ditulis sebelum uji: CI selisih recall (ML v7 − ML v5) di generator 4 harus di atas nol, dan prec@2% tidak turun lebih dari 2 poin. Hasil: CI recall <b class="mono">${pt(ad.ci_recall_g4[0])} s/d ${pt(ad.ci_recall_g4[1])}</b> poin, selisih prec@2% <b class="mono">${pt(ad.selisih_prec2_g4)}</b> poin.` })]));
+    legend($("leg-hasil"), ser.map(([, n, c, f]) => [n, c, false]).concat([["kandidat lain", "--base", true]]));
+    const nanti = [];
+    for (const g of ["g1", "g2", "g3", "g4"]) {
+      const st = V7.set[g], mm = st.model, ci = st.ci[P];
+      const p = el("div", { class: "panel gen-card", style: `--c:var(${GC[g]})` });
+      p.append(el("div", { class: "row", style: "justify-content:space-between;align-items:baseline" }, [el("h3", { text: G[g] }), el("span", { class: "role", text: g === "g4" ? "uji utama · buta" : g === "g3" ? "seed baru · sekali" : "dikenal" })]));
+      const box = el("div"); p.append(box); $("hasil-grid").append(p);
+      const rows = ser.concat(others.map((k) => [k, NAMA[k], "--base", true]));
+      nanti.push(() => grouped(box, [{ key: g, label: "recall" }], rows, (gg, k) => mm[k] ? mm[k].recall : null, { extra: (gg, k) => ` · prec@2% ${pct(mm[k].prec, 0)} · FPR ${pct(mm[k].fpr, 2)}` }));
+      p.append(el("div", { class: "kv", html: `<span>ML v5 → ML v7</span><span>prec@2% <b>${pct(mm.A0.prec, 0)} → ${pct(mm[P].prec, 0)}</b></span><span>FPR <b>${pct(mm.A0.fpr, 2)} → ${pct(mm[P].fpr, 2)}</b></span><span>CI recall <b>${pt(ci.recall[0])} s/d ${pt(ci.recall[1])}</b> poin</span>` }));
+    }
+    nanti.forEach((f) => f());
+    const f4 = V7.set.g4.model, fams = Object.keys(V7.set.g4.famili_n).filter((f) => FAM[f]);
+    const hs2 = [["v3_bersih", "v3 (+ rule route)", "--ink"], ["A0", "ML v5", "--g1"], [P, "ML v7", "--accent"]];
+    legend($("leg-hfam"), hs2.map(([, n, c]) => [n, c]));
+    dots($("hasil-fam"), fams.map((f) => ({ label: `${FAM[f]} (${V7.set.g4.famili_n[f]})`, vals: Object.fromEntries(hs2.map(([k]) => [k, f4[k].famili[f]])) })), hs2, { label: "Recall generator 4 per famili" });
+    const sp4 = V7.set.g4.skema_pilihan, s3 = V7.set.g4.skema_v3, kunci = Object.keys(sp4).sort((a, b) => sp4[b] - sp4[a]);
+    const nm = (k) => k.replace(/_/g, " ");
+    const kena = kunci.filter((k) => sp4[k] >= 0.25), lolos = kunci.filter((k) => sp4[k] === 0 && !(s3[k] > 0)), ruleSaja = kunci.filter((k) => sp4[k] < 0.25 && s3[k] >= 0.5);
+    const blok = (judul, ks, f) => el("div", { class: "grid", style: "gap:6px" }, [el("span", { class: "small muted", text: judul }), el("div", { class: "row" }, ks.map((k) => el("span", { class: "chip" + (f ? " dash" : ""), "data-tip": `ML v7 ${pct(sp4[k], 0)} · v3 ${pct(s3[k], 0)}`, text: `${nm(k)} ${pct(f === "v3" ? s3[k] : sp4[k], 0)}` })))]);
+    $("hasil-skema").append(blok(`Tertangkap ML v7 (≥ 25%): ${kena.length} skema`, kena), blok(`Tertangkap rule route v3, tidak oleh ML: ${ruleSaja.length}`, ruleSaja, "v3"), blok(`Lolos dari semua model: ${lolos.length} dari ${kunci.length} skema`, lolos, true));
+    const g4m = V7.set.g4.model;
+    $("hasil-pesan").textContent = `Generator 4 menunjukkan batasnya: ML saja menangkap ${pct(g4m[P].recall, 0)} fraud dengan skema yang belum pernah dilihat, dan ${lolos.length} dari ${kunci.length} skema lolos sepenuhnya. v3 lebih tinggi (${pct(g4m.v3_bersih.recall, 0)}) karena rule route-nya menangkap klaim yang dipecah di hari yang sama. Karena itu sistem lengkap tetap berlapis: rule engine, ML, AI Agent Swarm, lalu verifikator.`;
+  } else {
+    $("hasil-grid").replaceChildren(el("div", { class: "pending", text: "Benchmark akhir (generator 3 seed baru + generator 4) belum dijalankan." }));
+    $("hasil-fam-panel").hidden = true;
+  }
+  // swarm
+  const sw = D.swarm, swS = [["v4", "Model saja (v4)", "--base", true], ["v5", "+ AI Agent Swarm (v5)", "--accent", false]];
+  legend($("leg-swarm"), swS.map(([, n, c]) => [n, c]));
+  const mets = [{ key: "recall", label: "Recall" }, { key: "prec", label: "prec@2%" }];
+  grouped($("chart-swarm"), mets, swS, (m, k) => sw[k][m], { label: "Swarm vs model saja" });
+  $("swarm-side").append(el("h3", { text: `Generator 3, seed baru · ${id(sw.klaim)} klaim` }),
+    el("div", { class: "kv", html: `<span>zona RAGU <b>${id(sw.ragu)}</b> klaim (${pct(sw.ragu / sw.klaim, 1)})</span><span>panggilan agen <b>${id(sw.panggilan)}</b></span><span>biaya <b>$${id(sw.usd, 2)}</b></span>` }),
+    el("div", { class: "kv", html: `<span>CI recall <b>${pt(sw.ci.recall[0])} s/d ${pt(sw.ci.recall[1])}</b></span><span>CI prec@2% <b>${pt(sw.ci.presisi_prev2[0])} s/d ${pt(sw.ci.presisi_prev2[1])}</b></span><span>FPR <b>${pct(sw.v4.fpr, 2)} → ${pct(sw.v5.fpr, 2)}</b></span>` }),
+    el("p", { class: "small", text: `Di zona RAGU, swarm mempertahankan ${pct(sw.zona.fraud_dipertahankan_p05, 0)} klaim fraud dan membuang ${pct(sw.zona.normal_dibuang_p05, 0)} klaim normal dari antrean. Agen hanya membaca berkas fakta klaim, bukan skor model atau label.` }));
+  $("foot-gen").textContent = `Dibuat dari file hasil repo pada ${D.dibuat}. Data sintetis.`;
+}
+try { render(); } catch (e) { document.querySelector(".wrap").prepend(el("div", { class: "pending", text: "Gagal menggambar: " + e.message })); }
+</script>

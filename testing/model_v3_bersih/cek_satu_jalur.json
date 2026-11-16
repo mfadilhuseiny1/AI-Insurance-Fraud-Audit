@@ -1,0 +1,56 @@
+{
+ "dibuat": "2026-11-12 19:35",
+ "model": "model_v3_bersih",
+ "jalur_identik": true,
+ "split_bising": {
+  "model1": 2,
+  "koding": 0,
+  "tagihan": 0,
+  "episode": 0,
+  "identitas": 0
+ },
+ "split": {
+  "model1": {
+   "split": 673,
+   "split_total": 4200,
+   "gain_pct": 9.2,
+   "bising": 2,
+   "bising_gain_pct": 0.0
+  },
+  "koding": {
+   "split": 887,
+   "split_total": 4200,
+   "gain_pct": 81.73,
+   "bising": 0,
+   "bising_gain_pct": 0.0
+  },
+  "tagihan": {
+   "split": 840,
+   "split_total": 4173,
+   "gain_pct": 57.66,
+   "bising": 0,
+   "bising_gain_pct": 0.0
+  },
+  "episode": {
+   "split": 589,
+   "split_total": 4200,
+   "gain_pct": 11.12,
+   "bising": 0,
+   "bising_gain_pct": 0.0
+  },
+  "identitas": {
+   "split": 530,
+   "split_total": 4200,
+   "gain_pct": 30.44,
+   "bising": 0,
+   "bising_gain_pct": 0.0
+  }
+ },
+ "snap_validasi": {
+  "klaim": 6582,
+  "nilai_fitur_berubah": 7,
+  "keputusan_berubah": 0
+ },
+ "lulus": true,
+ "kriteria": "jalur batch == per klaim (bit), snap mengubah 0 keputusan validasi, sisa split mepet < 0,1% gain per lapisan"
+}

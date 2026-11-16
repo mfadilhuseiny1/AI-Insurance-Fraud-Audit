@@ -1,0 +1,104 @@
+{
+ "ditulis": "2026-11-12, sebelum data_v4 selesai dibangun dan sebelum satu pun varian v4 dilatih atau dinilai",
+ "tujuan_pengguna": "precision dan recall setinggi mungkin, idealnya >= 80% keduanya, juga di data generator lain; graph + rule, graph + DL dicoba",
+ "data": {
+  "latih": "aliran replay (.tmp/v2_stream_satu_jalur.npz + .tmp/data_v4/stream_x4.npz) + data_v4 chunk 0-7 (peserta peran latih)",
+  "validasi": "data_v4 chunk 8-9 (peserta peran validasi): SATU-SATUNYA tempat memilih varian, ambang, rule, dan hiperparameter",
+  "uji_akhir": {
+   "generator3": "ANGKA UTAMA di luar distribusi: generator independen, ditulis tanpa melihat generator 1/2",
+   "gen2_seed3": "PENDUKUNG, bukan independen: desain data_v4 dipengaruhi temuan generator 2",
+   "uji_c2": "PENDUKUNG: generator 1, peserta peran uji_c, klaim sumber di luar uji C"
+  },
+  "dipakai_sekali": "setiap set uji akhir dinilai satu kali per varian terpilih; tidak ada pemilihan ulang setelah melihatnya"
+ },
+ "varian": {
+  "A": "v3 (fitur graph tetangga + rule + LightGBM + spesialis + fusi), dilatih ulang pada data_v4",
+  "B": "A + X4 (fitur dan rule mekanisme: duplikat/klon mirip, domisili, lama rawat pendek, readmisi setelah rawat pendek, drift RS, top-up)",
+  "C": "B + lapisan level RS x periode",
+  "D": "GNN (GraphSAGE dan R-GCN) pada graph klaim-peserta-RS-kode dengan atribut node yang sama",
+  "E": "hybrid: embedding GNN sebagai fitur LightGBM",
+  "F": "deep learning tabular (MLP / FT-Transformer) pada fitur yang sama",
+  "fusi_dan_keputusan": "fusi yang memberi bobot ke spesialis dan keputusan dua tingkat dinilai di atas varian terbaik"
+ },
+ "ukuran_pemilihan": {
+  "utama": "recall pada FPR 1% (antrean periksa), rata-rata 3 seed",
+  "kedua": "precision pada FPR 0,1% (tahan otomatis) dihitung pada prevalensi 2%",
+  "seri": "selisih < 1 poin recall dianggap seri; pilih yang lebih sederhana (urutan: A < B < C < E < D < F)",
+  "dilaporkan": "AUPRC, recall per skema, FPR kunjungan pertama vs pasien lama, FPR menurut jumlah klaim peserta"
+ },
+ "target_dua_tingkat": {
+  "periksa": "recall >= 80% pada FPR <= 1% (precision dilaporkan pada prevalensi 0,5%, 2%, 5%)",
+  "tahan": "FPR <= 0,1%, precision >= 90% pada prevalensi 2%"
+ },
+ "rule_baru": "rule dari X4 dipilih dan diberi ambang hanya pada validasi; laju menyala di klaim normal data latih dicatat; daftar final ditulis di sini (adendum) sebelum uji akhir",
+ "kriteria_antar_generator": "K1-K5 dari kriteria_langkah4.json berlaku lagi untuk varian terpilih (generator 3 vs uji C2)",
+ "aturan_tambahan": {
+  "ditulis": "2026-11-12 21:20, masih sebelum data_v4 selesai dan sebelum varian apa pun dilatih",
+  "C_lapisan_rs": "kausal: hanya klaim RS itu yang tanggalnya sebelum klaim, jendela berjalan 30 dan 90 hari; dibandingkan dengan RS sejenis (tipe dan kelas sama); profil RS dibangun hanya dari klaim peserta peran latih + aliran; tanpa statistik set uji",
+  "fusi": "dipasang hanya pada skor out-of-fold chunk latih; diperiksa di validasi; tidak ada yang dipasang pada set uji",
+  "keputusan_dua_tingkat": "ambang dari klaim normal validasi: TAHAN pada FPR <= 0,1%, PERIKSA pada FPR <= 1%; dibekukan sebelum penilaian akhir; FPR yang tercapai per tingkat dilaporkan di setiap set uji di samping targetnya",
+  "metrik_sekunder_setiap_varian_dan_uji": [
+   "K1 rasio FPR kunjungan pertama / pasien lama",
+   "FPR menurut jumlah klaim peserta di jendela (1, 2, 3-4, 5+)",
+   "recall per skema",
+   "interval 95% dari bootstrap tingkat peserta"
+  ],
+  "rule_baru": "setiap rule dari permintaan 'tambah rule' adalah pilihan desain: dicantumkan dengan angka validasinya di file ini (adendum) sebelum penilaian akhir"
+ },
+ "adendum": [
+  {
+   "ditulis": "2026-11-12 21:29, sebelum uji akhir mana pun",
+   "rule_v4_dipilih": [
+    {
+     "aturan": "KLON_MIRIP",
+     "fitur": "v4: klon_mirip_3h",
+     "ambang": 2,
+     "laju_normal_latih": 0.00195,
+     "validasi_precision": 0.75,
+     "validasi_recall": 0.0353
+    },
+    {
+     "aturan": "KLON_MIRIP_14H",
+     "fitur": "v4: klon_mirip_14h",
+     "ambang": 2,
+     "laju_normal_latih": 0.00385,
+     "validasi_precision": 0.6571,
+     "validasi_recall": 0.0387
+    },
+    {
+     "aturan": "KARTU_DI_RS_LAIN_HARI_SAMA",
+     "fitur": "v4: peserta_hari_sama_rs_lain",
+     "ambang": 2,
+     "laju_normal_latih": 0.00022,
+     "validasi_precision": 1.0,
+     "validasi_recall": 0.005
+    },
+    {
+     "aturan": "TOPUP_JAUH_DI_ATAS_KODE",
+     "fitur": "v4: topup_rasio_median_kode",
+     "ambang": 2.0,
+     "laju_normal_latih": 0.00124,
+     "validasi_precision": 0.7674,
+     "validasi_recall": 0.0555
+    },
+    {
+     "aturan": "DX_SEKUNDER_DI_ATAS_P90",
+     "fitur": "v4: dx_sekunder_di_atas_p90",
+     "ambang": 3,
+     "laju_normal_latih": 0.00365,
+     "validasi_precision": 0.6143,
+     "validasi_recall": 0.0723
+    }
+   ],
+   "syarat": {
+    "maks_laju_normal_latih": 0.005,
+    "min_precision_validasi": 0.3
+   }
+  },
+  {
+   "ditulis": "2026-11-13 04:19, sebelum satu pun varian dinilai",
+   "keputusan_pengguna": "varian D (GNN), E (hybrid embedding GNN) dan F (DL tabular) ditunda karena waktu (perkiraan 1,5-2 jam latihan di CPU); pemilihan hanya di antara A, B dan C (bila modul lapisan RS lulus tesnya)",
+   "catatan": "kode D/E/F yang sudah ditulis disimpan, tidak dijalankan; hasilnya tidak dilaporkan sebagai kalah atau menang"
+  }
+ ]
+}

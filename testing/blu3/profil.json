@@ -1,0 +1,15 @@
+{
+ "aktif": "v3",
+ "cart": {
+  "Klaim Berisiko (BPJS)": "187af224f2cc41dd",
+  "Peserta Klaim Berisiko (BPJS)": "6cc8e3ea2df1455d",
+  "Skor Risiko Klaim ML (BPJS)": "634c9286930c44fe",
+  "Risiko Faskes ML (BPJS)": "4b727ca5d20b4952"
+ },
+ "v3": {
+  "Klaim Berisiko (BPJS)": "413afcf84ed24185",
+  "Skor Risiko Klaim ML (BPJS)": "9bd421cc4b154672",
+  "Risiko Faskes ML (BPJS)": "269d5dd6a1654107",
+  "Peserta Klaim Berisiko (BPJS)": "047ae794b75f475f"
+ }
+}

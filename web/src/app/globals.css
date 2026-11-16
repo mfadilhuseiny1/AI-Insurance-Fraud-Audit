@@ -1,0 +1,428 @@
+@import "tailwindcss";
+
+/* BluesandAI: deep-sea blue surfaces, ocean-blue accent, sand highlight. */
+@theme {
+  --color-ink: #070b12;
+  --color-panel: #0d131d;
+  --color-panel-2: #121a27;
+  --color-line: #1d2735;
+  --color-line-2: #2a3647;
+  --color-muted: #8391a7;
+  --color-soft: #c3ccda;
+  --color-strong: #f1f5fb;
+  --color-ocean: #3d8bfd;
+  --color-ocean-deep: #1f5fd1;
+  --color-sand: #e2b866;
+  --color-ok: #34c38f;
+  --color-warn: #f0a843;
+  --color-bad: #f0616d;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-arabic: var(--font-naskh);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--color-ink);
+  color: #e8edf5;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Light theme: chosen with the sidebar toggle, stored on <html data-theme="light">.
+   Most of the UI is built from the tokens above, so swapping them flips the surfaces. */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-ink: #f3f5f8;
+  --color-panel: #ffffff;
+  --color-panel-2: #eef2f6;
+  --color-line: #dce2e9;
+  --color-line-2: #c6d0db;
+  --color-muted: #637184;
+  --color-soft: #334255;
+  --color-strong: #111a26;
+  --color-ocean: #1f6fd6;
+  --color-ocean-deep: #1857ad;
+  --color-sand: #a86b12;
+  --color-ok: #15845a;
+  --color-warn: #a65d10;
+  --color-bad: #c03a47;
+}
+:root:not([data-theme="light"]) {
+  color-scheme: dark;
+}
+/* the logo: white wordmark on the dark theme, the original blue on the light one (Logo.tsx) */
+:root:not([data-theme="light"]) .brand-light,
+:root[data-theme="light"] .brand-dark {
+  display: none;
+}
+:root[data-theme="light"] body {
+  color: #1c2633;
+}
+/* "text-white" is the strong-text colour on dark surfaces; on light ones it becomes ink. */
+:root[data-theme="light"] .text-white,
+:root[data-theme="light"] .hover\:text-white:hover,
+:root[data-theme="light"] .group:hover .group-hover\:text-white {
+  color: #111a26;
+}
+/* ...but white text on a solid coloured fill (buttons, badges) stays white. */
+:root[data-theme="light"] :is(.bg-ocean, .bg-ocean-deep, .bg-bad, .bg-ok, .bg-warn, .bg-sand, .bg-black, [class*="bg-black/"],
+    [class*="bg-"][class*="-500"], [class*="bg-"][class*="-600"], [class*="bg-"][class*="-700"],
+    [class*="bg-"][class*="-800"], [class*="bg-"][class*="-900"]):is(.text-white, .hover\:text-white:hover),
+:root[data-theme="light"] :is(.bg-ocean, .bg-ocean-deep, .bg-bad, .bg-ok, .bg-black, [class*="bg-black/"]) .text-white {
+  color: #ffffff;
+}
+:root[data-theme="light"] .dot-grid {
+  background-image: radial-gradient(rgba(60, 76, 96, 0.14) 1px, transparent 1px);
+}
+:root[data-theme="light"] .md-body h1,
+:root[data-theme="light"] .md-body h2,
+:root[data-theme="light"] .md-body h3,
+:root[data-theme="light"] .md-body strong {
+  color: #111a26;
+}
+/* Python token colours tuned for a light editor background */
+:root[data-theme="light"] .code-editor .tok-kw { color: #7c3aed; }
+:root[data-theme="light"] .code-editor .tok-str { color: #3f7d16; }
+:root[data-theme="light"] .code-editor .tok-com { color: #6b7a90; }
+:root[data-theme="light"] .code-editor .tok-num { color: #c2410c; }
+:root[data-theme="light"] .code-editor .tok-dec { color: #a16207; }
+:root[data-theme="light"] .code-editor .tok-fn { color: #1d4ed8; }
+:root[data-theme="light"] .code-editor .tok-bi { color: #0e7490; }
+
+/* faint dot grid behind the workspace */
+.dot-grid {
+  background-image: radial-gradient(rgba(131, 145, 167, 0.12) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+/* Contour, Quiver and the Foundry apps keep their reference light tints when the light theme is on;
+   in the dark theme they fall back to the global dark tokens like every other page. */
+:root[data-theme="light"] .contour-shell {
+  --color-ink: #f4f6f8;
+  --color-panel: #ffffff;
+  --color-panel-2: #f4f7f9;
+  --color-line: #dce2e8;
+  --color-line-2: #c9d2dc;
+  --color-muted: #687786;
+  --color-soft: #344454;
+  --color-ocean: #1976b9;
+  --color-ocean-deep: #135f96;
+  background: var(--color-ink);
+  color: #263746;
+}
+
+:root[data-theme="light"] .quiver-shell {
+  --color-ink: #f1f3f5;
+  --color-panel: #ffffff;
+  --color-panel-2: #f7f8fa;
+  --color-line: #dfe4e8;
+  --color-line-2: #cbd3da;
+  --color-muted: #667584;
+  --color-soft: #344454;
+  --color-ocean: #1976b9;
+  --color-ocean-deep: #135f96;
+  background: #f1f3f5;
+  color: #273746;
+}
+:root[data-theme="light"] .quiver-shell .dot-grid {
+  background-image: radial-gradient(rgba(105, 120, 136, 0.13) 1px, transparent 1px);
+}
+/* Foundry reference surfaces used by Applications Portal, Workshop, and Slate. */
+:root[data-theme="light"] .foundry-light {
+  --color-ink: #f6f8fa;
+  --color-panel: #ffffff;
+  --color-panel-2: #f1f4f7;
+  --color-line: #d9e0e7;
+  --color-line-2: #c4ced8;
+  --color-muted: #687789;
+  --color-soft: #354252;
+  --color-ocean: #2677c9;
+  --color-ocean-deep: #175da4;
+  --color-sand: #a86912;
+  --color-ok: #16875b;
+  --color-warn: #a85c13;
+  --color-bad: #b53d48;
+  color: #202b38;
+  background: var(--color-ink);
+}
+:root[data-theme="light"] .foundry-light .dot-grid {
+  background-image: linear-gradient(rgba(36, 56, 74, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(36, 56, 74, 0.035) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+:root[data-theme="light"] .foundry-light .bg-panel\/90 { background-color: rgba(255, 255, 255, 0.94); }
+
+[dir="rtl"] {
+  font-family: var(--font-arabic), "Traditional Arabic", serif;
+  line-height: 2.1;
+}
+
+.result-table table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.85rem;
+}
+.result-table th,
+.result-table td {
+  border: 1px solid var(--color-line-2);
+  padding: 0.35rem 0.5rem;
+  text-align: start;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-line-2);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Markdown in pipeline text nodes and explanations */
+.md-body h1,
+.md-body h2,
+.md-body h3 {
+  font-weight: 600;
+  color: white;
+  margin: 0.2em 0 0.4em;
+}
+.md-body h1 {
+  font-size: 1.25em;
+}
+.md-body h2 {
+  font-size: 1.1em;
+}
+.md-body h3 {
+  font-size: 1em;
+}
+.md-body p,
+.md-body ul,
+.md-body ol,
+.md-body pre,
+.md-body blockquote {
+  margin: 0 0 0.5em;
+}
+.md-body ul {
+  list-style: disc;
+  padding-left: 1.2em;
+}
+.md-body ol {
+  list-style: decimal;
+  padding-left: 1.2em;
+}
+.md-body code {
+  font-family: ui-monospace, monospace;
+  background: var(--color-ink);
+  border-radius: 3px;
+  padding: 0 3px;
+}
+.md-body pre {
+  background: var(--color-ink);
+  border-radius: 4px;
+  padding: 6px;
+  overflow: auto;
+}
+.md-body pre code {
+  padding: 0;
+}
+.md-body blockquote {
+  border-left: 2px solid var(--color-line-2);
+  padding-left: 0.6em;
+  color: var(--color-muted);
+}
+.md-body a {
+  color: var(--color-ocean);
+  text-decoration: underline;
+}
+.md-body hr {
+  border-color: var(--color-line-2);
+  margin: 0.5em 0;
+}
+.md-body strong {
+  color: white;
+}
+/* a wide table scrolls inside its own box, the text around it keeps the panel's width */
+.md-body .md-table {
+  margin: 0 0 0.5em;
+  overflow-x: auto;
+}
+.md-body table {
+  border-collapse: collapse;
+  font-size: 0.92em;
+}
+.md-body th,
+.md-body td {
+  border: 1px solid var(--color-line-2);
+  padding: 3px 6px;
+  text-align: left;
+  vertical-align: top;
+}
+.md-body th {
+  background: var(--color-ink);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* AIP Agent Studio: a citation chip linking an answer to the object it is based on */
+.agent-answer a.cite {
+  display: inline-block;
+  margin: 0 0.15rem;
+  padding: 0 0.4rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  line-height: 1.3rem;
+  vertical-align: baseline;
+  white-space: nowrap;
+  color: var(--color-sand);
+  background: color-mix(in srgb, var(--color-sand) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-sand) 35%, transparent);
+  text-decoration: none;
+}
+.agent-answer a.cite:hover {
+  background: color-mix(in srgb, var(--color-sand) 22%, transparent);
+}
+
+/* Code Repositories editor: Python tokens */
+.code-editor .tok-kw { color: #c792ea; }
+.code-editor .tok-str { color: #c3e88d; }
+.code-editor .tok-com { color: #6b7a90; font-style: italic; }
+.code-editor .tok-num { color: #f78c6c; }
+.code-editor .tok-dec { color: #e2b866; }
+.code-editor .tok-fn { color: #82aaff; }
+.code-editor .tok-bi { color: #89ddff; }
+
+/* Data Lineage: "Flow" animates the edges in the direction data moves */
+.lineage-flow {
+  animation: lineage-flow 0.9s linear infinite;
+}
+@keyframes lineage-flow {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lineage-flow {
+    animation: none;
+  }
+}
+
+/* Notepad keeps a paper-like canvas while using the same light reading surface as its reference. */
+.notepad-markdown h1,
+.notepad-markdown h2,
+.notepad-markdown h3,
+.notepad-markdown h4,
+.notepad-markdown h5,
+.notepad-markdown h6 {
+  margin: 0.2em 0 0.45em;
+  color: var(--color-strong);
+  font-weight: 650;
+}
+.notepad-markdown h1 { font-size: 1.8rem; }
+.notepad-markdown h2 { font-size: 1.45rem; }
+.notepad-markdown h3 { font-size: 1.15rem; }
+.notepad-markdown p,
+.notepad-markdown ul,
+.notepad-markdown ol,
+.notepad-markdown blockquote,
+.notepad-markdown pre { margin: 0 0 0.7em; }
+.notepad-markdown ul { list-style: disc; padding-left: 1.4em; }
+.notepad-markdown ol { list-style: decimal; padding-left: 1.4em; }
+.notepad-markdown blockquote { border-left: 3px solid var(--color-line-2); padding-left: 0.8em; color: var(--color-muted); }
+.notepad-markdown code { border-radius: 3px; background: var(--color-panel-2); padding: 0.05em 0.25em; font-family: ui-monospace, monospace; }
+.notepad-markdown pre { overflow: auto; border-radius: 5px; background: var(--color-panel-2); padding: 0.75em; }
+.notepad-markdown a { color: var(--color-ocean); text-decoration: underline; }
+
+@media print {
+  html,
+  body {
+    height: auto !important;
+    overflow: visible !important;
+    background: white !important;
+  }
+  body {
+    display: block !important;
+    color: #111 !important;
+  }
+  body > * { visibility: hidden; }
+  .notepad-shell,
+  .notepad-shell * { visibility: visible; }
+  .notepad-shell {
+    position: absolute !important;
+    inset: 0 auto auto 0 !important;
+    display: block !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    background: white !important;
+    color: #111 !important;
+  }
+  .notepad-shell .overflow-hidden,
+  .notepad-shell .overflow-y-auto {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  .notepad-ui-chrome { display: none !important; }
+  .notepad-paper {
+    width: 100% !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0.5in !important;
+    box-shadow: none !important;
+  }
+  .notepad-page-break {
+    break-before: page !important;
+    page-break-before: always !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    color: transparent !important;
+  }
+}
+
+@media print {
+  body > * { visibility: hidden !important; }
+  .reports-print-page,
+  .reports-print-page * { visibility: visible !important; }
+  .reports-print-page {
+    position: absolute !important;
+    inset: 0 auto auto 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0.45in !important;
+    overflow: visible !important;
+    background: white !important;
+    color: #111 !important;
+  }
+  .reports-ui-chrome { display: none !important; }
+  .reports-shell,
+  .reports-shell section,
+  .reports-shell article { height: auto !important; max-height: none !important; overflow: visible !important; background: white !important; }
+  .reports-print-page h1,
+  .reports-print-page h2,
+  .reports-print-page section { break-inside: avoid; }
+}
+
+/* print mode (?print=1): rendered reports for scheduled emails (api/report_render.py) */
+html[data-print="1"] [data-app-sidebar] {
+  display: none !important;
+}
+
+/* The sidebar collapsed to its icon rail (Sidebar.tsx sets html[data-sidebar="rail"]): page columns take the
+   11rem it frees, so pages use the room instead of widening their margins. Dialogs centre themselves without
+   mx-auto and keep their size. */
+@media (min-width: 768px) {
+  html[data-sidebar="rail"] .mx-auto.max-w-4xl { max-width: calc(var(--container-4xl) + 11rem); }
+  html[data-sidebar="rail"] .mx-auto.max-w-5xl { max-width: calc(var(--container-5xl) + 11rem); }
+  html[data-sidebar="rail"] .mx-auto.max-w-6xl { max-width: calc(var(--container-6xl) + 11rem); }
+  html[data-sidebar="rail"] .mx-auto.max-w-7xl { max-width: calc(var(--container-7xl) + 11rem); }
+}

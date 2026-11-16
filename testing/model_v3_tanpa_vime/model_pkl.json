@@ -1,0 +1,67 @@
+{
+ "file": "model.pkl",
+ "dibuat": "2026-11-12 14:41",
+ "arsitektur": "v3 tanpa VIME",
+ "isi": {
+  "komponen": {
+   "model1": "LGBMClassifier, semua kolom X1",
+   "koding": "LGBMClassifier, 211 kolom X1",
+   "tagihan": "LGBMClassifier, 159 kolom X1",
+   "episode": "LGBMClassifier, 135 kolom X1",
+   "identitas": "LGBMClassifier, 111 kolom X1"
+  },
+  "urutan_fusi": [
+   "model1",
+   "koding",
+   "tagihan",
+   "episode",
+   "identitas"
+  ],
+  "stacker": "LGBMClassifier",
+  "kalibrasi": "IsotonicRegression",
+  "ambang_peluang": 0.5,
+  "rute_rule": [
+   "s:KLAIM_GANDA_RIWAYAT",
+   "s:KLAIM_BERULANG_MIRIP",
+   "s:PEMECAHAN_EPISODE",
+   "s:EPISODE_HARI_SAMA",
+   "s:READMISI_DX_SAMA",
+   "s:MENINGGAL_TERCATAT",
+   "s:OBAT_DIKURANGI",
+   "s:OBAT_TIDAK_DISERAHKAN",
+   "s:HASIL_PEMERIKSAAN_TIDAK_COCOK",
+   "s:RUJUKAN_NON_SPESIALISTIK",
+   "s:RUJUKAN_LONCAT_JENJANG",
+   "s:RRNS_FKTP_NAIK",
+   "s:RRNS_PUSKESMAS_NAIK",
+   "s:KONSENTRASI_RUJUKAN",
+   "s:KONTAK_SEMU",
+   "s:KONTAK_RENDAH",
+   "s:KUNJUNGAN_SETELAH_MENINGGAL",
+   "s:NONKAP_GANDA",
+   "s:NONKAP_FREKUENSI",
+   "s:NONKAP_TIDAK_SESUAI_PESERTA",
+   "s:NONKAP_TARIF",
+   "s:NONKAP_TANGGAL",
+   "s:NONKAP_LONJAKAN"
+  ],
+  "rule_jaringan": {
+   "kolom": 0,
+   "hari": 3,
+   "ambang": 2,
+   "laju_normal_latih": 0.00126
+  },
+  "fitur_klaim": 124,
+  "fitur_model1": 624,
+  "penskala": "ssl-fkrtl-20261110093004"
+ },
+ "cara_skor": "testing/arsitektur_v2.py: skor(bundle, X1, X2, XR); X1 dari testing/fitur.py (Stream.agg_row), XR dari Stream.r2_row",
+ "versi": {
+  "python": "3.12.15",
+  "lightgbm": "4.7.0",
+  "scikit-learn": "1.9.1",
+  "numpy": "2.4.4"
+ },
+ "peringatan": "pickle menjalankan kode saat dibuka: buka hanya file dari sumber tepercaya.",
+ "data": "sintetis"
+}

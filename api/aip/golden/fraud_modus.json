@@ -1,0 +1,96 @@
+{
+  "name": "Fraud modus JKN, golden set v1",
+  "notes": "Questions an auditor asks the JKN copilot about fraud modus (Bahasa Indonesia). Each question targets one fraud modus from the platform taxonomy (konsultan MODUS + indikasi tags): six ask live modus counts from the fraud engine, three probe the pre-payment screening rules with crafted claim scenarios, and three read pre-payment lanes, severity tiers, and the loss estimate. Numbers are checked against live truth read from the same platform API as the signed-in user at run time, so the set stays right when the demo data changes. must_call: at least one of these tools must be called successfully. truth: every value must appear in the answer. must_say_any: at least one phrase must appear. Wording of the questions and expected phrases is to be reviewed by a BPJS auditor.",
+  "questions": [
+    {
+      "id": "modus-phantom",
+      "q": "Berapa temuan phantom billing (penagihan fiktif) yang tercatat di mesin fraud?",
+      "must_call": ["fraud_summary"],
+      "must_say_any": ["phantom", "fiktif"],
+      "truth": [{"get": "/api/demo/jkn/fraud/overview", "pick": "charts.distribusi_temuan.phantom_billing"}]
+    },
+    {
+      "id": "modus-repeat",
+      "q": "Berapa temuan repeat billing (penagihan berulang untuk layanan yang sama) yang tercatat di mesin fraud?",
+      "must_call": ["fraud_summary"],
+      "must_say_any": ["ganda", "berulang", "duplikat"],
+      "truth": [{"get": "/api/demo/jkn/fraud/overview", "pick": "charts.distribusi_temuan.duplicate_billing"}]
+    },
+    {
+      "id": "modus-upcoding",
+      "q": "Berapa temuan upcoding (peningkatan kode layanan ke tier lebih mahal) yang tercatat di mesin fraud?",
+      "must_call": ["fraud_summary"],
+      "must_say_any": ["upcoding", "keparahan", "kode"],
+      "truth": [{"get": "/api/demo/jkn/fraud/overview", "pick": "charts.distribusi_temuan.upcoding"}]
+    },
+    {
+      "id": "modus-inflated",
+      "q": "Berapa temuan inflated bills (penggelembungan tagihan di atas tarif) yang tercatat di mesin fraud?",
+      "must_call": ["fraud_summary"],
+      "must_say_any": ["tarif", "gelembung", "kontrak"],
+      "truth": [{"get": "/api/demo/jkn/fraud/overview", "pick": "charts.distribusi_temuan.over_tariff"}]
+    },
+    {
+      "id": "modus-tanpa-indikasi",
+      "q": "Berapa temuan tindakan tanpa indikasi medis (unnecessary service) yang tercatat di mesin fraud?",
+      "must_call": ["fraud_summary"],
+      "must_say_any": ["indikasi"],
+      "truth": [{"get": "/api/demo/jkn/fraud/overview", "pick": "charts.distribusi_temuan.unnecessary_service"}]
+    },
+    {
+      "id": "modus-tak-berdokumen",
+      "q": "Berapa temuan tindakan tanpa dokumen pendukung (unsupported documentation) yang tercatat di mesin fraud?",
+      "must_call": ["fraud_summary"],
+      "must_say_any": ["dokumen", "pendukung"],
+      "truth": [{"get": "/api/demo/jkn/fraud/overview", "pick": "charts.distribusi_temuan.unsupported_documentation"}]
+    },
+    {
+      "id": "skrining-upcoding",
+      "q": "Periksa klaim di RS-01 dengan prosedur 87.44, diagnosa J18.9, tarif Rp 3.000.000, severity diklaim 3 tetapi dokumen hanya mendukung severity 1, dokumen lengkap. Klaim dengan pola upcoding ini masuk jalur apa?",
+      "must_call": ["check_claim"],
+      "must_say_any": ["upcoding", "severity", "keparahan"],
+      "truth": [{"post": "/api/demo/jkn/mobile/rs/RS-01/cek", "pick": "jalur",
+                 "body": {"prosedur": "87.44", "diagnosa": "J18.9", "tarif_klaim": 3000000, "severity_diklaim": 3, "severity_didukung": 1,
+                          "dokumen": {"resume_medis": true, "hasil_lab": true, "log_tindakan": true, "kehadiran": true}}}]
+    },
+    {
+      "id": "skrining-inflated",
+      "q": "Periksa klaim di RS-01 dengan prosedur 87.44, diagnosa J18.9, tarif Rp 15.000.000, severity 1, dokumen lengkap. Klaim dengan tagihan jauh di atas tarif kontrak ini masuk jalur apa?",
+      "must_call": ["check_claim"],
+      "must_say_any": ["tarif", "kontrak", "tahan"],
+      "truth": [{"post": "/api/demo/jkn/mobile/rs/RS-01/cek", "pick": "jalur",
+                 "body": {"prosedur": "87.44", "diagnosa": "J18.9", "tarif_klaim": 15000000, "severity_diklaim": 1, "severity_didukung": 1,
+                          "dokumen": {"resume_medis": true, "hasil_lab": true, "log_tindakan": true, "kehadiran": true}}}]
+    },
+    {
+      "id": "skrining-tanpa-dokumen",
+      "q": "Periksa klaim di RS-01 dengan prosedur 87.44, diagnosa J18.9, tarif Rp 3.000.000, severity 1, tetapi tidak ada satu pun dokumen pendukung (tanpa resume medis, hasil lab, log tindakan, dan catatan kehadiran). Klaim tanpa dokumen ini masuk jalur apa?",
+      "must_call": ["check_claim"],
+      "must_say_any": ["phantom", "dokumen", "kehadiran"],
+      "truth": [{"post": "/api/demo/jkn/mobile/rs/RS-01/cek", "pick": "jalur",
+                 "body": {"prosedur": "87.44", "diagnosa": "J18.9", "tarif_klaim": 3000000, "severity_diklaim": 1, "severity_didukung": 1,
+                          "dokumen": {"resume_medis": false, "hasil_lab": false, "log_tindakan": false, "kehadiran": false}}}]
+    },
+    {
+      "id": "prepayment-hold",
+      "q": "Berapa klaim yang saat ini ditahan (jalur hold) di antrean skrining pre-payment?",
+      "must_call": ["fraud_summary"],
+      "must_say_any": ["hold", "tahan"],
+      "truth": [{"get": "/api/demo/jkn/fraud/prepayment/queue", "pick": "ringkasan.hold"}]
+    },
+    {
+      "id": "tier-kritis",
+      "q": "Berapa klaim tier Kritis (risiko tertinggi) yang tercatat di mesin fraud?",
+      "must_call": ["fraud_summary"],
+      "must_say_any": ["kritis", "tier"],
+      "truth": [{"get": "/api/demo/jkn/fraud/overview", "pick": "charts.distribusi_tier.Kritis"}]
+    },
+    {
+      "id": "estimasi-kerugian",
+      "q": "Tepatnya berapa rupiah estimasi kerugian fraud JKN saat ini menurut mesin fraud? Tulis angka rupiah lengkapnya.",
+      "must_call": ["fraud_summary"],
+      "must_say_any": ["rugi", "kerugian", "estimasi"],
+      "truth": [{"get": "/api/demo/jkn/fraud/overview", "pick": "kpi.estimasi_kerugian_rp"}]
+    }
+  ]
+}

@@ -1,0 +1,1261 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://bluesandai.local/schema/rme-satusehat-bundle.json",
+ "title": "Rekam medis elektronik per klaim (FHIR R4 Bundle, SATUSEHAT ID Core)",
+ "description": "Kontrak rme-1: satu Bundle per klaim, dikirim di field `rekam_medis` pada POST /api/aip/realtime/v1/faskes/klaim. Kemenkes ID Core FHIR IG 0.3.16 (SATUSEHAT), FHIR R4 4.0.1. Resource lain boleh ada dan diabaikan. Batas 3000 entri.",
+ "type": "object",
+ "properties": {
+  "resourceType": {
+   "const": "Bundle"
+  },
+  "type": {
+   "enum": [
+    "collection",
+    "document",
+    "transaction",
+    "searchset",
+    "batch"
+   ]
+  },
+  "entry": {
+   "type": "array",
+   "maxItems": 3000,
+   "contains": {
+    "type": "object",
+    "properties": {
+     "resource": {
+      "$ref": "#/$defs/Encounter"
+     }
+    }
+   },
+   "items": {
+    "type": "object",
+    "properties": {
+     "fullUrl": {
+      "type": "string"
+     },
+     "resource": {
+      "type": "object",
+      "properties": {
+       "resourceType": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "resourceType"
+      ],
+      "allOf": [
+       {
+        "if": {
+         "properties": {
+          "resourceType": {
+           "const": "Patient"
+          }
+         }
+        },
+        "then": {
+         "$ref": "#/$defs/Patient"
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "resourceType": {
+           "const": "Encounter"
+          }
+         }
+        },
+        "then": {
+         "$ref": "#/$defs/Encounter"
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "resourceType": {
+           "const": "Condition"
+          }
+         }
+        },
+        "then": {
+         "$ref": "#/$defs/Condition"
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "resourceType": {
+           "const": "Procedure"
+          }
+         }
+        },
+        "then": {
+         "$ref": "#/$defs/Procedure"
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "resourceType": {
+           "const": "Observation"
+          }
+         }
+        },
+        "then": {
+         "$ref": "#/$defs/Observation"
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "resourceType": {
+           "const": "ServiceRequest"
+          }
+         }
+        },
+        "then": {
+         "$ref": "#/$defs/ServiceRequest"
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "resourceType": {
+           "const": "DiagnosticReport"
+          }
+         }
+        },
+        "then": {
+         "$ref": "#/$defs/DiagnosticReport"
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "resourceType": {
+           "const": "MedicationRequest"
+          }
+         }
+        },
+        "then": {
+         "$ref": "#/$defs/MedicationRequest"
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "resourceType": {
+           "const": "MedicationDispense"
+          }
+         }
+        },
+        "then": {
+         "$ref": "#/$defs/MedicationDispense"
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "resourceType": {
+           "const": "MedicationAdministration"
+          }
+         }
+        },
+        "then": {
+         "$ref": "#/$defs/MedicationAdministration"
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "resourceType": {
+           "const": "Medication"
+          }
+         }
+        },
+        "then": {
+         "$ref": "#/$defs/Medication"
+        }
+       },
+       {
+        "if": {
+         "properties": {
+          "resourceType": {
+           "const": "Device"
+          }
+         }
+        },
+        "then": {
+         "$ref": "#/$defs/Device"
+        }
+       }
+      ]
+     }
+    },
+    "required": [
+     "resource"
+    ]
+   }
+  }
+ },
+ "required": [
+  "resourceType",
+  "entry"
+ ],
+ "$defs": {
+  "Coding": {
+   "type": "object",
+   "properties": {
+    "system": {
+     "type": "string"
+    },
+    "code": {
+     "type": "string"
+    },
+    "display": {
+     "type": "string"
+    }
+   },
+   "required": [
+    "code"
+   ]
+  },
+  "CodeableConcept": {
+   "type": "object",
+   "properties": {
+    "coding": {
+     "type": "array",
+     "items": {
+      "$ref": "#/$defs/Coding"
+     }
+    },
+    "text": {
+     "type": "string"
+    }
+   }
+  },
+  "Patient": {
+   "type": "object",
+   "description": "Pasien. Dibaca: gender dan birthDate (cek identitas terhadap kepesertaan). NIK dan nama tidak disimpan. Profil: https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-patient",
+   "properties": {
+    "resourceType": {
+     "const": "Patient"
+    },
+    "id": {
+     "type": "string"
+    },
+    "identifier": {
+     "type": "array",
+     "contains": {
+      "type": "object",
+      "properties": {
+       "system": {
+        "const": "https://fhir.kemkes.go.id/id/patient-ihs-number"
+       }
+      }
+     }
+    },
+    "gender": {
+     "enum": [
+      "male",
+      "female",
+      "other",
+      "unknown"
+     ]
+    },
+    "birthDate": {
+     "type": "string",
+     "pattern": "^\\d{4}-\\d{2}-\\d{2}"
+    }
+   },
+   "required": [
+    "resourceType",
+    "identifier"
+   ]
+  },
+  "Encounter": {
+   "type": "object",
+   "description": "Kunjungan yang ditagih. period.start/end = tanggal masuk/pulang; class IMP = rawat inap. Profil: https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-encounter",
+   "properties": {
+    "resourceType": {
+     "const": "Encounter"
+    },
+    "id": {
+     "type": "string"
+    },
+    "status": {
+     "type": "string"
+    },
+    "class": {
+     "type": "object",
+     "properties": {
+      "system": {
+       "const": "http://terminology.hl7.org/CodeSystem/v3-ActCode"
+      },
+      "code": {
+       "enum": [
+        "IMP",
+        "AMB",
+        "EMER",
+        "HH",
+        "VR",
+        "ACUTE",
+        "NONAC",
+        "SS"
+       ]
+      }
+     },
+     "required": [
+      "code"
+     ]
+    },
+    "period": {
+     "type": "object",
+     "properties": {
+      "start": {
+       "type": "string",
+       "pattern": "^\\d{4}-\\d{2}-\\d{2}"
+      },
+      "end": {
+       "type": "string",
+       "pattern": "^\\d{4}-\\d{2}-\\d{2}"
+      }
+     },
+     "required": [
+      "start"
+     ]
+    },
+    "subject": {
+     "type": "object",
+     "properties": {
+      "reference": {
+       "type": "string"
+      },
+      "identifier": {
+       "type": "object"
+      },
+      "display": {
+       "type": "string"
+      }
+     }
+    },
+    "diagnosis": {
+     "type": "array"
+    },
+    "classHistory": {
+     "type": "array"
+    },
+    "statusHistory": {
+     "type": "array"
+    },
+    "location": {
+     "type": "array"
+    }
+   },
+   "required": [
+    "resourceType",
+    "status",
+    "class",
+    "period"
+   ]
+  },
+  "Condition": {
+   "type": "object",
+   "description": "Diagnosis, kode ICD-10 (http://hl7.org/fhir/sid/icd-10). Condition dengan verificationStatus refuted/entered-in-error diabaikan. Profil: https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-condition",
+   "properties": {
+    "resourceType": {
+     "const": "Condition"
+    },
+    "id": {
+     "type": "string"
+    },
+    "code": {
+     "type": "object",
+     "properties": {
+      "coding": {
+       "type": "array",
+       "contains": {
+        "type": "object",
+        "properties": {
+         "system": {
+          "const": "http://hl7.org/fhir/sid/icd-10"
+         }
+        },
+        "required": [
+         "system",
+         "code"
+        ]
+       }
+      }
+     },
+     "required": [
+      "coding"
+     ]
+    },
+    "encounter": {
+     "type": "object",
+     "properties": {
+      "reference": {
+       "type": "string"
+      },
+      "identifier": {
+       "type": "object"
+      },
+      "display": {
+       "type": "string"
+      }
+     }
+    },
+    "category": {
+     "type": "array"
+    },
+    "verificationStatus": {
+     "type": "object",
+     "properties": {
+      "coding": {
+       "type": "array",
+       "items": {
+        "$ref": "#/$defs/Coding"
+       }
+      },
+      "text": {
+       "type": "string"
+      }
+     }
+    }
+   },
+   "required": [
+    "resourceType",
+    "code"
+   ]
+  },
+  "Procedure": {
+   "type": "object",
+   "description": "Tindakan, kode ICD-9-CM (http://hl7.org/fhir/sid/icd-9-cm). status not-done = tidak jadi dilakukan. Profil: https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-procedure",
+   "properties": {
+    "resourceType": {
+     "const": "Procedure"
+    },
+    "id": {
+     "type": "string"
+    },
+    "code": {
+     "type": "object",
+     "properties": {
+      "coding": {
+       "type": "array",
+       "contains": {
+        "type": "object",
+        "properties": {
+         "system": {
+          "const": "http://hl7.org/fhir/sid/icd-9-cm"
+         }
+        },
+        "required": [
+         "system",
+         "code"
+        ]
+       }
+      }
+     },
+     "required": [
+      "coding"
+     ]
+    },
+    "status": {
+     "type": "string"
+    },
+    "encounter": {
+     "type": "object",
+     "properties": {
+      "reference": {
+       "type": "string"
+      },
+      "identifier": {
+       "type": "object"
+      },
+      "display": {
+       "type": "string"
+      }
+     }
+    },
+    "performedDateTime": {
+     "type": "string",
+     "pattern": "^\\d{4}-\\d{2}-\\d{2}"
+    },
+    "performedPeriod": {
+     "type": "object",
+     "properties": {
+      "start": {
+       "type": "string",
+       "pattern": "^\\d{4}-\\d{2}-\\d{2}"
+      },
+      "end": {
+       "type": "string",
+       "pattern": "^\\d{4}-\\d{2}-\\d{2}"
+      }
+     }
+    },
+    "focalDevice": {
+     "type": "array"
+    }
+   },
+   "required": [
+    "resourceType",
+    "code",
+    "status"
+   ]
+  },
+  "Observation": {
+   "type": "object",
+   "description": "Tanda vital dan laboratorium, kode LOINC (lihat x-loinc). Tekanan darah boleh panel 85354-9 dengan komponen 8480-6/8462-4. Profil: https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation",
+   "properties": {
+    "resourceType": {
+     "const": "Observation"
+    },
+    "id": {
+     "type": "string"
+    },
+    "code": {
+     "type": "object",
+     "properties": {
+      "coding": {
+       "type": "array",
+       "contains": {
+        "type": "object",
+        "properties": {
+         "system": {
+          "const": "http://loinc.org"
+         }
+        },
+        "required": [
+         "system",
+         "code"
+        ]
+       }
+      }
+     },
+     "required": [
+      "coding"
+     ]
+    },
+    "status": {
+     "type": "string"
+    },
+    "encounter": {
+     "type": "object",
+     "properties": {
+      "reference": {
+       "type": "string"
+      },
+      "identifier": {
+       "type": "object"
+      },
+      "display": {
+       "type": "string"
+      }
+     }
+    },
+    "effectiveDateTime": {
+     "type": "string",
+     "pattern": "^\\d{4}-\\d{2}-\\d{2}"
+    },
+    "effectivePeriod": {
+     "type": "object",
+     "properties": {
+      "start": {
+       "type": "string",
+       "pattern": "^\\d{4}-\\d{2}-\\d{2}"
+      },
+      "end": {
+       "type": "string",
+       "pattern": "^\\d{4}-\\d{2}-\\d{2}"
+      }
+     }
+    },
+    "valueQuantity": {
+     "type": "object",
+     "properties": {
+      "value": {
+       "type": "number"
+      },
+      "unit": {
+       "type": "string"
+      },
+      "system": {
+       "type": "string"
+      },
+      "code": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "value"
+     ]
+    },
+    "valueCodeableConcept": {
+     "type": "object",
+     "properties": {
+      "coding": {
+       "type": "array",
+       "items": {
+        "$ref": "#/$defs/Coding"
+       }
+      },
+      "text": {
+       "type": "string"
+      }
+     }
+    },
+    "valueBoolean": {
+     "type": "boolean"
+    },
+    "interpretation": {
+     "type": "array"
+    },
+    "referenceRange": {
+     "type": "array"
+    },
+    "component": {
+     "type": "array"
+    }
+   },
+   "required": [
+    "resourceType",
+    "code"
+   ]
+  },
+  "ServiceRequest": {
+   "type": "object",
+   "description": "Permintaan tindakan (ICD-9-CM) atau pemeriksaan. Profil: https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-service-request",
+   "properties": {
+    "resourceType": {
+     "const": "ServiceRequest"
+    },
+    "id": {
+     "type": "string"
+    },
+    "code": {
+     "type": "object",
+     "properties": {
+      "coding": {
+       "type": "array",
+       "items": {
+        "$ref": "#/$defs/Coding"
+       }
+      },
+      "text": {
+       "type": "string"
+      }
+     }
+    },
+    "encounter": {
+     "type": "object",
+     "properties": {
+      "reference": {
+       "type": "string"
+      },
+      "identifier": {
+       "type": "object"
+      },
+      "display": {
+       "type": "string"
+      }
+     }
+    }
+   },
+   "required": [
+    "resourceType",
+    "code"
+   ]
+  },
+  "DiagnosticReport": {
+   "type": "object",
+   "description": "Hasil pemeriksaan penunjang (EKG 11524-6, ekokardiografi 34552-0, angiografi) dengan kesimpulan. Profil: https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-diagnostic-report",
+   "properties": {
+    "resourceType": {
+     "const": "DiagnosticReport"
+    },
+    "id": {
+     "type": "string"
+    },
+    "code": {
+     "type": "object",
+     "properties": {
+      "coding": {
+       "type": "array",
+       "items": {
+        "$ref": "#/$defs/Coding"
+       }
+      },
+      "text": {
+       "type": "string"
+      }
+     }
+    },
+    "encounter": {
+     "type": "object",
+     "properties": {
+      "reference": {
+       "type": "string"
+      },
+      "identifier": {
+       "type": "object"
+      },
+      "display": {
+       "type": "string"
+      }
+     }
+    },
+    "conclusion": {
+     "type": "string"
+    },
+    "conclusionCode": {
+     "type": "array"
+    }
+   },
+   "required": [
+    "resourceType",
+    "code"
+   ]
+  },
+  "MedicationRequest": {
+   "type": "object",
+   "description": "Resep. Kode obat KFA (http://sys-ids.kemkes.go.id/kfa). Profil: https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-medication-request",
+   "properties": {
+    "resourceType": {
+     "const": "MedicationRequest"
+    },
+    "id": {
+     "type": "string"
+    },
+    "medicationCodeableConcept": {
+     "type": "object",
+     "properties": {
+      "coding": {
+       "type": "array",
+       "items": {
+        "$ref": "#/$defs/Coding"
+       }
+      },
+      "text": {
+       "type": "string"
+      }
+     }
+    },
+    "medicationReference": {
+     "type": "object",
+     "properties": {
+      "reference": {
+       "type": "string"
+      },
+      "identifier": {
+       "type": "object"
+      },
+      "display": {
+       "type": "string"
+      }
+     }
+    },
+    "encounter": {
+     "type": "object",
+     "properties": {
+      "reference": {
+       "type": "string"
+      },
+      "identifier": {
+       "type": "object"
+      },
+      "display": {
+       "type": "string"
+      }
+     }
+    }
+   },
+   "required": [
+    "resourceType"
+   ]
+  },
+  "MedicationDispense": {
+   "type": "object",
+   "description": "Penyerahan obat. Profil: https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-medication-dispense",
+   "properties": {
+    "resourceType": {
+     "const": "MedicationDispense"
+    },
+    "id": {
+     "type": "string"
+    },
+    "medicationCodeableConcept": {
+     "type": "object",
+     "properties": {
+      "coding": {
+       "type": "array",
+       "items": {
+        "$ref": "#/$defs/Coding"
+       }
+      },
+      "text": {
+       "type": "string"
+      }
+     }
+    },
+    "medicationReference": {
+     "type": "object",
+     "properties": {
+      "reference": {
+       "type": "string"
+      },
+      "identifier": {
+       "type": "object"
+      },
+      "display": {
+       "type": "string"
+      }
+     }
+    },
+    "context": {
+     "type": "object",
+     "properties": {
+      "reference": {
+       "type": "string"
+      },
+      "identifier": {
+       "type": "object"
+      },
+      "display": {
+       "type": "string"
+      }
+     }
+    }
+   },
+   "required": [
+    "resourceType"
+   ]
+  },
+  "MedicationAdministration": {
+   "type": "object",
+   "description": "Pemberian obat. Profil: https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-medication-administration",
+   "properties": {
+    "resourceType": {
+     "const": "MedicationAdministration"
+    },
+    "id": {
+     "type": "string"
+    },
+    "medicationCodeableConcept": {
+     "type": "object",
+     "properties": {
+      "coding": {
+       "type": "array",
+       "items": {
+        "$ref": "#/$defs/Coding"
+       }
+      },
+      "text": {
+       "type": "string"
+      }
+     }
+    },
+    "medicationReference": {
+     "type": "object",
+     "properties": {
+      "reference": {
+       "type": "string"
+      },
+      "identifier": {
+       "type": "object"
+      },
+      "display": {
+       "type": "string"
+      }
+     }
+    },
+    "context": {
+     "type": "object",
+     "properties": {
+      "reference": {
+       "type": "string"
+      },
+      "identifier": {
+       "type": "object"
+      },
+      "display": {
+       "type": "string"
+      }
+     }
+    }
+   },
+   "required": [
+    "resourceType"
+   ]
+  },
+  "Medication": {
+   "type": "object",
+   "description": "Obat yang dirujuk medicationReference; code KFA (http://sys-ids.kemkes.go.id/kfa). Profil: https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-medication",
+   "properties": {
+    "resourceType": {
+     "const": "Medication"
+    },
+    "id": {
+     "type": "string"
+    },
+    "code": {
+     "type": "object",
+     "properties": {
+      "coding": {
+       "type": "array",
+       "items": {
+        "$ref": "#/$defs/Coding"
+       }
+      },
+      "text": {
+       "type": "string"
+      }
+     }
+    }
+   },
+   "required": [
+    "resourceType"
+   ]
+  },
+  "Device": {
+   "type": "object",
+   "description": "Alat/implan (stent, pacu jantung, ventilator). Profil: https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-device",
+   "properties": {
+    "resourceType": {
+     "const": "Device"
+    },
+    "id": {
+     "type": "string"
+    },
+    "deviceName": {
+     "type": "array"
+    },
+    "type": {
+     "type": "object",
+     "properties": {
+      "coding": {
+       "type": "array",
+       "items": {
+        "$ref": "#/$defs/Coding"
+       }
+      },
+      "text": {
+       "type": "string"
+      }
+     }
+    }
+   },
+   "required": [
+    "resourceType"
+   ]
+  }
+ },
+ "x-loinc": {
+  "sistolik": {
+   "label": "tekanan darah sistolik",
+   "satuan": "mmHg",
+   "normal": [
+    90,
+    139
+   ],
+   "loinc": [
+    "8459-0",
+    "8460-8",
+    "8480-6"
+   ]
+  },
+  "diastolik": {
+   "label": "tekanan darah diastolik",
+   "satuan": "mmHg",
+   "normal": [
+    60,
+    89
+   ],
+   "loinc": [
+    "8453-3",
+    "8454-1",
+    "8462-4"
+   ]
+  },
+  "nadi": {
+   "label": "denyut nadi",
+   "satuan": "x/menit",
+   "normal": [
+    60,
+    100
+   ],
+   "loinc": [
+    "76282-3",
+    "8867-4",
+    "8889-8"
+   ]
+  },
+  "napas": {
+   "label": "frekuensi napas",
+   "satuan": "x/menit",
+   "normal": [
+    12,
+    20
+   ],
+   "loinc": [
+    "9279-1"
+   ]
+  },
+  "suhu": {
+   "label": "suhu tubuh",
+   "satuan": "°C",
+   "normal": [
+    36.0,
+    37.5
+   ],
+   "loinc": [
+    "8310-5",
+    "8328-7",
+    "8331-1",
+    "8332-9"
+   ]
+  },
+  "spo2": {
+   "label": "saturasi oksigen",
+   "satuan": "%",
+   "normal": [
+    95,
+    100
+   ],
+   "loinc": [
+    "20564-1",
+    "2708-6",
+    "59408-5",
+    "59417-6"
+   ]
+  },
+  "gcs": {
+   "label": "GCS",
+   "satuan": "",
+   "normal": [
+    15,
+    15
+   ],
+   "loinc": [
+    "9269-2"
+   ]
+  },
+  "troponin": {
+   "label": "troponin",
+   "satuan": "",
+   "normal": [
+    null,
+    null
+   ],
+   "loinc": [
+    "10839-9",
+    "16255-2",
+    "42757-5",
+    "48425-3",
+    "49563-0",
+    "6598-7",
+    "67151-1",
+    "89579-7"
+   ]
+  },
+  "hb": {
+   "label": "hemoglobin",
+   "satuan": "g/dL",
+   "normal": [
+    12.0,
+    17.5
+   ],
+   "loinc": [
+    "20509-6",
+    "30313-1",
+    "718-7"
+   ]
+  },
+  "trombosit": {
+   "label": "trombosit",
+   "satuan": "rb/µL",
+   "normal": [
+    150,
+    450
+   ],
+   "loinc": [
+    "26515-7",
+    "777-3",
+    "778-1"
+   ]
+  },
+  "leukosit": {
+   "label": "leukosit",
+   "satuan": "rb/µL",
+   "normal": [
+    4.0,
+    11.0
+   ],
+   "loinc": [
+    "26464-8",
+    "6690-2",
+    "804-5"
+   ]
+  },
+  "kreatinin": {
+   "label": "kreatinin",
+   "satuan": "mg/dL",
+   "normal": [
+    0.5,
+    1.3
+   ],
+   "loinc": [
+    "2160-0",
+    "38483-4"
+   ]
+  },
+  "ureum": {
+   "label": "ureum/BUN",
+   "satuan": "mg/dL",
+   "normal": [
+    7,
+    20
+   ],
+   "loinc": [
+    "3094-0",
+    "6299-2"
+   ]
+  },
+  "natrium": {
+   "label": "natrium",
+   "satuan": "mmol/L",
+   "normal": [
+    135,
+    145
+   ],
+   "loinc": [
+    "2947-0",
+    "2951-2"
+   ]
+  },
+  "kalium": {
+   "label": "kalium",
+   "satuan": "mmol/L",
+   "normal": [
+    3.5,
+    5.0
+   ],
+   "loinc": [
+    "2823-3",
+    "6298-4"
+   ]
+  },
+  "po2": {
+   "label": "pO2 arteri",
+   "satuan": "mmHg",
+   "normal": [
+    80,
+    100
+   ],
+   "loinc": [
+    "2703-7"
+   ]
+  },
+  "pco2": {
+   "label": "pCO2 arteri",
+   "satuan": "mmHg",
+   "normal": [
+    35,
+    45
+   ],
+   "loinc": [
+    "2019-8"
+   ]
+  },
+  "laktat": {
+   "label": "laktat",
+   "satuan": "mmol/L",
+   "normal": [
+    0.5,
+    2.0
+   ],
+   "loinc": [
+    "2524-7",
+    "32693-4"
+   ]
+  },
+  "glukosa": {
+   "label": "glukosa darah",
+   "satuan": "mg/dL",
+   "normal": [
+    70,
+    200
+   ],
+   "loinc": [
+    "2339-0",
+    "2345-7",
+    "41653-7"
+   ]
+  },
+  "prokalsitonin": {
+   "label": "prokalsitonin",
+   "satuan": "ng/mL",
+   "normal": [
+    0,
+    0.5
+   ],
+   "loinc": [
+    "33959-8",
+    "75241-0"
+   ]
+  },
+  "ekg": {
+   "label": "EKG",
+   "satuan": "",
+   "normal": [
+    null,
+    null
+   ],
+   "loinc": [
+    "11524-6",
+    "18844-1",
+    "28010-7",
+    "34534-8",
+    "8601-7"
+   ]
+  },
+  "ekokardiografi": {
+   "label": "ekokardiografi",
+   "satuan": "",
+   "normal": [
+    null,
+    null
+   ],
+   "loinc": [
+    "18106-5",
+    "34552-0",
+    "42148-7",
+    "59282-4"
+   ]
+  },
+  "fio2": {
+   "label": "oksigen tambahan (FiO2/aliran)",
+   "satuan": "",
+   "normal": [
+    null,
+    null
+   ],
+   "loinc": [
+    "19994-3",
+    "3150-0",
+    "3151-8"
+   ]
+  }
+ },
+ "x-sistem-kode": {
+  "icd10": "http://hl7.org/fhir/sid/icd-10",
+  "icd9cm": "http://hl7.org/fhir/sid/icd-9-cm",
+  "loinc": "http://loinc.org",
+  "kfa": "http://sys-ids.kemkes.go.id/kfa",
+  "ihs": "https://fhir.kemkes.go.id/id/patient-ihs-number",
+  "nik": "https://fhir.kemkes.go.id/id/nik",
+  "kelas_kunjungan": "http://terminology.hl7.org/CodeSystem/v3-ActCode"
+ }
+}

@@ -1,0 +1,583 @@
+{
+ "klaim": 86866,
+ "keputusan": {
+  "LOLOS": 83308,
+  "PERIKSA": 2376,
+  "TAHAN": 1182
+ },
+ "temuan": {
+  "RME_DIAGNOSIS_TIDAK_TERCATAT": 2154,
+  "RME_KLINIS_TIDAK_MENDUKUNG": 1905,
+  "RME_EPISODE_DIPECAH": 1411,
+  "RME_READMISI_TERENCANA": 471,
+  "RME_KUNJUNGAN_TIDAK_ADA": 334,
+  "RME_DIAGNOSIS_TIDAK_DIDUKUNG": 329,
+  "RME_KUNJUNGAN_DIPAKAI_ULANG": 319,
+  "RME_TINDAKAN_TIDAK_TERCATAT": 290,
+  "RME_RAWAT_INAP_TANPA_INDIKASI": 256,
+  "RME_OBAT_ALKES_TIDAK_TERCATAT": 214,
+  "RME_LOS_TIDAK_SESUAI": 138,
+  "RME_KELAS_BERBEDA": 124,
+  "RME_RUJUKAN_TANPA_INDIKASI": 106,
+  "RME_READMISI_PULANG_DINI": 102,
+  "RME_DOKTER_PASIEN_DIPUTAR": 45,
+  "RME_JENIS_RAWAT_BERBEDA": 12,
+  "RME_PASIEN_BERBEDA": 11
+ },
+ "per_skenario": {
+  "diagnosis_utama_diganti": {
+   "n": 88,
+   "ditandai": 78,
+   "ditahan": 1,
+   "porsi_ditandai": 0.8864
+  },
+  "dokter_tiga_rs": {
+   "n": 99,
+   "ditandai": 45,
+   "ditahan": 0,
+   "porsi_ditandai": 0.4545
+  },
+  "geser_bertahap": {
+   "n": 345,
+   "ditandai": 224,
+   "ditahan": 51,
+   "porsi_ditandai": 0.6493
+  },
+  "kartu_dipinjam": {
+   "n": 11,
+   "ditandai": 11,
+   "ditahan": 2,
+   "porsi_ditandai": 1.0
+  },
+  "klaim_berulang": {
+   "n": 138,
+   "ditandai": 134,
+   "ditahan": 54,
+   "porsi_ditandai": 0.971
+  },
+  "klaim_fiktif": {
+   "n": 58,
+   "ditandai": 58,
+   "ditahan": 58,
+   "porsi_ditandai": 1.0
+  },
+  "kloning": {
+   "n": 678,
+   "ditandai": 667,
+   "ditahan": 455,
+   "porsi_ditandai": 0.9838
+  },
+  "los_diperpanjang": {
+   "n": 18,
+   "ditandai": 18,
+   "ditahan": 0,
+   "porsi_ditandai": 1.0
+  },
+  "naik_kelas": {
+   "n": 107,
+   "ditandai": 107,
+   "ditahan": 2,
+   "porsi_ditandai": 1.0
+  },
+  "normal": {
+   "n": 81958,
+   "ditandai": 150,
+   "ditahan": 0,
+   "porsi_ditandai": 0.0018
+  },
+  "obat_alkes_fiktif": {
+   "n": 212,
+   "ditandai": 212,
+   "ditahan": 0,
+   "porsi_ditandai": 1.0
+  },
+  "operasi_batal_ditagih": {
+   "n": 87,
+   "ditandai": 41,
+   "ditahan": 1,
+   "porsi_ditandai": 0.4713
+  },
+  "pemecahan_episode": {
+   "n": 653,
+   "ditandai": 580,
+   "ditahan": 319,
+   "porsi_ditandai": 0.8882
+  },
+  "pulang_dini": {
+   "n": 475,
+   "ditandai": 214,
+   "ditahan": 4,
+   "porsi_ditandai": 0.4505
+  },
+  "pulang_dini_readmisi": {
+   "n": 223,
+   "ditandai": 106,
+   "ditahan": 0,
+   "porsi_ditandai": 0.4753
+  },
+  "rawat_inap_tanpa_indikasi": {
+   "n": 10,
+   "ditandai": 10,
+   "ditahan": 0,
+   "porsi_ditandai": 1.0
+  },
+  "readmisi_direncanakan": {
+   "n": 613,
+   "ditandai": 482,
+   "ditahan": 66,
+   "porsi_ditandai": 0.7863
+  },
+  "rujukan_semu": {
+   "n": 143,
+   "ditandai": 106,
+   "ditahan": 1,
+   "porsi_ditandai": 0.7413
+  },
+  "sesi_rutin_fiktif": {
+   "n": 47,
+   "ditandai": 41,
+   "ditahan": 39,
+   "porsi_ditandai": 0.8723
+  },
+  "tagihan_gelembung": {
+   "n": 124,
+   "ditandai": 1,
+   "ditahan": 0,
+   "porsi_ditandai": 0.0081
+  },
+  "tidak_sesuai_indikasi": {
+   "n": 171,
+   "ditandai": 9,
+   "ditahan": 0,
+   "porsi_ditandai": 0.0526
+  },
+  "tindakan_fiktif": {
+   "n": 201,
+   "ditandai": 90,
+   "ditahan": 77,
+   "porsi_ditandai": 0.4478
+  },
+  "topup_gelembung": {
+   "n": 188,
+   "ditandai": 1,
+   "ditahan": 0,
+   "porsi_ditandai": 0.0053
+  },
+  "upcoding_keparahan": {
+   "n": 219,
+   "ditandai": 173,
+   "ditahan": 52,
+   "porsi_ditandai": 0.79
+  }
+ },
+ "fraud": {
+  "n": 4908,
+  "ditandai": 3408,
+  "recall": 0.6944
+ },
+ "normal": {
+  "n": 81958,
+  "ditandai": 150,
+  "false_alert_rate": 0.0018,
+  "temuan_pada_false_alert": {
+   "RME_RAWAT_INAP_TANPA_INDIKASI": 80,
+   "RME_DIAGNOSIS_TIDAK_TERCATAT": 33,
+   "RME_KLINIS_TIDAK_MENDUKUNG": 21,
+   "RME_KELAS_BERBEDA": 16,
+   "RME_READMISI_PULANG_DINI": 13,
+   "RME_KUNJUNGAN_DIPAKAI_ULANG": 10,
+   "RME_DIAGNOSIS_TIDAK_DIDUKUNG": 5,
+   "RME_LOS_TIDAK_SESUAI": 1
+  },
+  "contoh": [
+   {
+    "id": "SYNJ09941HZETD4M",
+    "skor": 50.3,
+    "temuan": [
+     "Rawat inap 21 hari tanpa tindakan bermakna, dan seluruh hasil ukur di rekam medis normal sejak masuk: tekanan darah sistolik 128–132 mmHg (2 pengukuran, semua normal); tekanan darah diastolik 69–85 mmHg (2 pengukuran, semua normal); denyut nadi 75–83 x/menit (2 pengukuran, semua normal); frekuensi n"
+    ]
+   },
+   {
+    "id": "SYNJ099M0IQ60SJJ",
+    "skor": 50.3,
+    "temuan": [
+     "Rawat inap 7 hari tanpa tindakan bermakna, dan seluruh hasil ukur di rekam medis normal sejak masuk: tekanan darah sistolik 121–122 mmHg (2 pengukuran, semua normal); tekanan darah diastolik 76–79 mmHg (2 pengukuran, semua normal); denyut nadi 78–95 x/menit (2 pengukuran, semua normal); frekuensi na"
+    ]
+   },
+   {
+    "id": "SYNJ097HAQ1PVLLL",
+    "skor": 69.9,
+    "temuan": [
+     "Kunjungan rekam medis AMB 2025-05-12 s.d. 2025-05-12 sudah menjadi dasar klaim lain (SYNJ093UJYGYU73L): satu kunjungan ditagih dua kali."
+    ]
+   },
+   {
+    "id": "SYNJ09G6IBWTX73D",
+    "skor": 50.3,
+    "temuan": [
+     "Pasien masuk rawat inap lagi 2 hari setelah dipulangkan dari rawat inap 2025-09-10 s.d. 2025-09-21 dalam keadaan belum stabil (tekanan darah sistolik 182 mmHg; resume medis menyebut kondisi belum stabil saat pulang): satu episode yang dipotong lalu ditagih sebagai dua rawat inap."
+    ]
+   },
+   {
+    "id": "SYNJ11QOVDGLTUVM",
+    "skor": 63.2,
+    "temuan": [
+     "Klaim menagih rawat inap Kelas 2, tetapi kelas layanan di rekam medis (Encounter.location) Kelas 3."
+    ]
+   },
+   {
+    "id": "SYNJ11DB8PKEI2XN",
+    "skor": 74.1,
+    "temuan": [
+     "Klaim menagih rawat inap Kelas 2, tetapi kelas layanan di rekam medis (Encounter.location) Kelas 3.",
+     "Pasien masuk rawat inap lagi 1 hari setelah dipulangkan dari rawat inap 2025-04-25 s.d. 2025-04-28 dalam keadaan belum stabil (denyut nadi 115 x/menit; resume medis menyebut kondisi belum stabil saat pulang): satu episode yang dipotong lalu ditagih sebagai dua rawat inap."
+    ]
+   },
+   {
+    "id": "SYNJ11HHMFTXSQDC",
+    "skor": 50.3,
+    "temuan": [
+     "Rawat inap 2 hari tanpa tindakan bermakna, dan seluruh hasil ukur di rekam medis normal sejak masuk: tekanan darah sistolik 115–123 mmHg (2 pengukuran, semua normal); tekanan darah diastolik 83 mmHg (2 pengukuran, semua normal); denyut nadi 67–73 x/menit (2 pengukuran, semua normal); frekuensi napas"
+    ]
+   },
+   {
+    "id": "SYNJ127FYZAC661T",
+    "skor": 63.2,
+    "temuan": [
+     "Klaim menagih rawat inap Kelas 1, tetapi kelas layanan di rekam medis (Encounter.location) Kelas 3."
+    ]
+   },
+   {
+    "id": "SYNJ12SSD7SZ4ND0",
+    "skor": 50.3,
+    "temuan": [
+     "Rawat inap 3 hari tanpa tindakan bermakna, dan seluruh hasil ukur di rekam medis normal sejak masuk: tekanan darah sistolik 124 mmHg (1 pengukuran, semua normal); tekanan darah diastolik 80 mmHg (1 pengukuran, semua normal); denyut nadi 66 x/menit (1 pengukuran, semua normal); frekuensi napas 19 x/m"
+    ]
+   },
+   {
+    "id": "SYNJ12XYWTNTK4BQ",
+    "skor": 50.3,
+    "temuan": [
+     "Rawat inap 2 hari tanpa tindakan bermakna, dan seluruh hasil ukur di rekam medis normal sejak masuk: tekanan darah sistolik 127–128 mmHg (2 pengukuran, semua normal); tekanan darah diastolik 82–83 mmHg (2 pengukuran, semua normal); denyut nadi 63–89 x/menit (2 pengukuran, semua normal); frekuensi na"
+    ]
+   }
+  ]
+ },
+ "fraud_terlihat_di_rm": {
+  "n": 4398,
+  "ditandai": 3290,
+  "recall": 0.7481
+ },
+ "fraud_tak_terlihat_di_rm": {
+  "n": 510,
+  "ditandai": 118
+ },
+ "per_ketidaksesuaian": {
+  "tanpa_indikasi_klinis": {
+   "n": 957,
+   "ditandai": 678,
+   "temuan_tepat": 75,
+   "diharapkan": [
+    "RME_KLINIS_TIDAK_MENDUKUNG",
+    "RME_RAWAT_INAP_TANPA_INDIKASI"
+   ]
+  },
+  "keparahan_tidak_didukung": {
+   "n": 747,
+   "ditandai": 578,
+   "temuan_tepat": 664,
+   "diharapkan": [
+    "RME_DIAGNOSIS_TIDAK_DIDUKUNG",
+    "RME_DIAGNOSIS_TIDAK_TERCATAT"
+   ]
+  },
+  "dx_sekunder_kurang": {
+   "n": 745,
+   "ditandai": 578,
+   "temuan_tepat": 663,
+   "diharapkan": [
+    "RME_DIAGNOSIS_TIDAK_TERCATAT"
+   ]
+  },
+  "pulang_belum_stabil": {
+   "n": 698,
+   "ditandai": 320,
+   "temuan_tepat": 85,
+   "diharapkan": [
+    "RME_READMISI_PULANG_DINI"
+   ]
+  },
+  "rm_salinan": {
+   "n": 675,
+   "ditandai": 664,
+   "temuan_tepat": 0,
+   "diharapkan": [
+    "(tidak ada aturan untuk ini)"
+   ]
+  },
+  "readmisi_terencana": {
+   "n": 613,
+   "ditandai": 482,
+   "temuan_tepat": 471,
+   "diharapkan": [
+    "RME_READMISI_TERENCANA"
+   ]
+  },
+  "episode_menyatu": {
+   "n": 468,
+   "ditandai": 467,
+   "temuan_tepat": 467,
+   "diharapkan": [
+    "RME_EPISODE_DIPECAH",
+    "RME_KUNJUNGAN_DIPAKAI_ULANG"
+   ]
+  },
+  "tidak_terlihat_di_rm": {
+   "n": 312,
+   "ditandai": 2,
+   "temuan_tepat": 0,
+   "diharapkan": [
+    "(tidak ada aturan untuk ini)"
+   ]
+  },
+  "obat_alkes_tidak_ada_di_rm": {
+   "n": 212,
+   "ditandai": 212,
+   "temuan_tepat": 212,
+   "diharapkan": [
+    "RME_OBAT_ALKES_TIDAK_TERCATAT"
+   ]
+  },
+  "prosedur_tidak_ada_di_rm": {
+   "n": 201,
+   "ditandai": 90,
+   "temuan_tepat": 149,
+   "diharapkan": [
+    "RME_TINDAKAN_TIDAK_TERCATAT"
+   ]
+  },
+  "prosedur_tanpa_indikasi": {
+   "n": 171,
+   "ditandai": 9,
+   "temuan_tepat": 13,
+   "diharapkan": [
+    "RME_KLINIS_TIDAK_MENDUKUNG"
+   ]
+  },
+  "rujukan_tanpa_indikasi": {
+   "n": 143,
+   "ditandai": 106,
+   "temuan_tepat": 106,
+   "diharapkan": [
+    "RME_RUJUKAN_TANPA_INDIKASI"
+   ]
+  },
+  "kunjungan_ganda": {
+   "n": 138,
+   "ditandai": 134,
+   "temuan_tepat": 134,
+   "diharapkan": [
+    "RME_KUNJUNGAN_DIPAKAI_ULANG",
+    "RME_KUNJUNGAN_TIDAK_ADA"
+   ]
+  },
+  "kelas_rawat_berbeda": {
+   "n": 107,
+   "ditandai": 107,
+   "temuan_tepat": 107,
+   "diharapkan": [
+    "RME_KELAS_BERBEDA"
+   ]
+  },
+  "rm_tidak_ada": {
+   "n": 105,
+   "ditandai": 99,
+   "temuan_tepat": 97,
+   "diharapkan": [
+    "RME_KUNJUNGAN_TIDAK_ADA"
+   ]
+  },
+  "dokter_banyak_rs": {
+   "n": 99,
+   "ditandai": 45,
+   "temuan_tepat": 45,
+   "diharapkan": [
+    "RME_DOKTER_PASIEN_DIPUTAR"
+   ]
+  },
+  "prosedur_batal": {
+   "n": 87,
+   "ditandai": 41,
+   "temuan_tepat": 0,
+   "diharapkan": [
+    "RME_TINDAKAN_TIDAK_TERCATAT"
+   ]
+  },
+  "dx_utama_berbeda": {
+   "n": 78,
+   "ditandai": 78,
+   "temuan_tepat": 78,
+   "diharapkan": [
+    "RME_DIAGNOSIS_TIDAK_TERCATAT"
+   ]
+  },
+  "boleh_pulang_lebih_awal": {
+   "n": 18,
+   "ditandai": 18,
+   "temuan_tepat": 18,
+   "diharapkan": [
+    "RME_LOS_TIDAK_SESUAI"
+   ]
+  },
+  "identitas_tidak_cocok": {
+   "n": 11,
+   "ditandai": 11,
+   "temuan_tepat": 11,
+   "diharapkan": [
+    "RME_PASIEN_BERBEDA"
+   ]
+  },
+  "rawat_inap_tanpa_indikasi": {
+   "n": 10,
+   "ditandai": 10,
+   "temuan_tepat": 0,
+   "diharapkan": [
+    "RME_RAWAT_INAP_TANPA_INDIKASI"
+   ]
+  }
+ },
+ "normal_per_noise": {
+  "obat_tidak_tercatat": {
+   "n": 4082,
+   "ditandai": 4,
+   "porsi": 0.001
+  },
+  "resume_tidak_ada": {
+   "n": 1454,
+   "ditandai": 4,
+   "porsi": 0.0028
+  },
+  "tanda_vital_tidak_lengkap": {
+   "n": 2450,
+   "ditandai": 10,
+   "porsi": 0.0041
+  },
+  "tanpa_noise": {
+   "n": 74218,
+   "ditandai": 133,
+   "porsi": 0.0018
+  }
+ },
+ "replika": [
+  "9",
+  "10",
+  "11",
+  "12",
+  "13",
+  "14",
+  "15",
+  "16",
+  "17",
+  "18",
+  "19",
+  "20",
+  "21",
+  "22",
+  "23",
+  "24",
+  "25",
+  "26",
+  "27",
+  "28",
+  "29",
+  "30",
+  "31",
+  "32",
+  "33",
+  "34",
+  "35",
+  "36",
+  "37",
+  "38",
+  "39",
+  "40",
+  "41",
+  "42",
+  "43",
+  "44",
+  "45",
+  "46",
+  "47",
+  "48",
+  "49",
+  "50",
+  "51",
+  "52",
+  "53",
+  "54",
+  "55",
+  "56",
+  "57",
+  "58",
+  "59",
+  "60",
+  "61"
+ ],
+ "ambang": {
+  "periksa": 45.0,
+  "tahan": 75.0
+ },
+ "versi_aturan": "rme-1",
+ "bobot": {
+  "RME_KUNJUNGAN_TIDAK_ADA": 1.6,
+  "RME_JENIS_RAWAT_BERBEDA": 1.2,
+  "RME_LOS_TIDAK_SESUAI": 1.0,
+  "RME_PASIEN_BERBEDA": 1.2,
+  "RME_TINDAKAN_TIDAK_TERCATAT": 1.4,
+  "RME_KLINIS_TIDAK_MENDUKUNG": 1.0,
+  "RME_DIAGNOSIS_TIDAK_TERCATAT": 0.8,
+  "RME_DIAGNOSIS_TIDAK_DIDUKUNG": 1.0,
+  "RME_OBAT_ALKES_TIDAK_TERCATAT": 1.0,
+  "RME_KELAS_BERBEDA": 1.0,
+  "RME_EPISODE_DIPECAH": 0.9,
+  "RME_KUNJUNGAN_DIPAKAI_ULANG": 1.2,
+  "RME_RAWAT_INAP_TANPA_INDIKASI": 0.7,
+  "RME_VENTILASI_TIDAK_SESUAI": 1.2,
+  "RME_HARI_ICU_LEBIH": 1.0,
+  "RME_OBAT_JUMLAH_KURANG": 1.0,
+  "RME_READMISI_TERENCANA": 0.9,
+  "RME_READMISI_PULANG_DINI": 1.0,
+  "RME_RUJUKAN_TANPA_INDIKASI": 0.9,
+  "RME_DOKTER_PASIEN_DIPUTAR": 0.9
+ },
+ "mode": "sesudah",
+ "detik": 152.3,
+ "masukan": "Data Sintetis/tema_jantung_kc_sul-7371",
+ "catatan": "Data sintetis. Replika 9-61 (tidak dipakai saat memperbaiki aturan; replika 0-8 untuk tuning). Versi 2026-11-15: pembaca teks temuan sadar negasi, koreksi basis pengetahuan (I20.0, I48, I44), aturan baru RME_READMISI_TERENCANA, RME_READMISI_PULANG_DINI, RME_RUJUKAN_TANPA_INDIKASI, RME_DOKTER_PASIEN_DIPUTAR, RME_VENTILASI_TIDAK_SESUAI, RME_HARI_ICU_LEBIH, RME_OBAT_JUMLAH_KURANG. Basis pengetahuan klinis rme.py adalah subset kerja untuk demonstrasi; perlu ditinjau TKMKB/tim medis BPJS.",
+ "sebelum": {
+  "fraud_terlihat_di_rm": {
+   "n": 4398,
+   "ditandai": 2498,
+   "recall": 0.568
+  },
+  "fraud": {
+   "n": 4908,
+   "ditandai": 2615,
+   "recall": 0.5328
+  },
+  "normal": {
+   "n": 81958,
+   "ditandai": 133,
+   "false_alert_rate": 0.0016,
+   "temuan_pada_false_alert": {
+    "RME_RAWAT_INAP_TANPA_INDIKASI": 80,
+    "RME_DIAGNOSIS_TIDAK_TERCATAT": 25,
+    "RME_KLINIS_TIDAK_MENDUKUNG": 21,
+    "RME_KELAS_BERBEDA": 16,
+    "RME_KUNJUNGAN_DIPAKAI_ULANG": 10,
+    "RME_LOS_TIDAK_SESUAI": 1
+   }
+  },
+  "sumber": "perilaku sebelum 2026-11-15 diemulasikan (sama persis dengan laporan_rme_jantung_2026-11-14.json)"
+ }
+}

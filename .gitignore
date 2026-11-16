@@ -1,0 +1,62 @@
+secrets/
+data/
+# AI JKN Audit: its own PostgreSQL server (setup-database.ps1) and the raw Data Sampel source
+.pgdata/
+Data BPJS/
+*.log
+fast-worker/unstructured/
+fast-worker/chunking.py
+fast-worker/semantic.py
+.env.local
+.venv/
+.venv-adk/
+__pycache__/
+
+node_modules/
+.next/
+.next-build/
+dist/
+build/
+.env
+.env.*
+!.env.example
+*.err
+*.out
+
+# portable JDK, JUnit console and other Java tooling (Code Repositories Java transforms)
+.java/
+# portable R for R transforms (installed per user with R's Windows installer, see README)
+.r/
+
+# the Java API layer has a package named "data" (com.palantir.spark.binarystream.data)
+!api/java_api/**/data/
+
+# encrypted platform backups (api/backups.py; the default folder)
+backups/
+
+# real BPJS Kesehatan sample data (Data Sampel BPJS): never in git
+/Data BPJS/
+# ... nor what is derived from it: the work area's extracts, the indication ledgers, run event dumps
+.work/bpjs/
+*.parquet
+*.sqlite
+*.sqlite3
+*.duckdb
+*.db
+api/redaksi_events.json
+api/berkas_sample.json
+# model training output (CatBoost writes it beside the API)
+catboost_info/
+# working patches and lint dumps of the work area
+.work/*.patch
+.work/eslint_*.json
+# the production UI build (build-web.ps1)
+.next-prod/
+
+# public repo (AI-Insurance-Fraud-Audit): generated data, scratch and local tooling stay local
+/Data Sintetis/
+/synthetic-gen/kerja/
+/.tmp/
+/.work/
+/.venv-laya/
+/.claude/

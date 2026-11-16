@@ -1,0 +1,282 @@
+{
+  "routes": [
+    {
+      "path": "/accept-invite"
+    },
+    {
+      "path": "/account"
+    },
+    {
+      "path": "/agents/:id"
+    },
+    {
+      "path": "/agents"
+    },
+    {
+      "path": "/apps"
+    },
+    {
+      "path": "/artifacts"
+    },
+    {
+      "path": "/automate/:id"
+    },
+    {
+      "path": "/automate"
+    },
+    {
+      "path": "/builds"
+    },
+    {
+      "path": "/code-repositories/:id"
+    },
+    {
+      "path": "/code-repositories"
+    },
+    {
+      "path": "/containers",
+      "title": "Containers"
+    },
+    {
+      "path": "/control-panel"
+    },
+    {
+      "path": "/data-health"
+    },
+    {
+      "path": "/data-health/views/:viewId"
+    },
+    {
+      "path": "/datasets/:id"
+    },
+    {
+      "path": "/datasets"
+    },
+    {
+      "path": "/extraction/:id"
+    },
+    {
+      "path": "/extraction"
+    },
+    {
+      "path": "/files/:folderId"
+    },
+    {
+      "path": "/files"
+    },
+    {
+      "path": "/files/recent"
+    },
+    {
+      "path": "/files/shared"
+    },
+    {
+      "path": "/files/starred"
+    },
+    {
+      "path": "/files/trash"
+    },
+    {
+      "path": "/forgot-password"
+    },
+    {
+      "path": "/functions/:id"
+    },
+    {
+      "path": "/functions"
+    },
+    {
+      "path": "/history"
+    },
+    {
+      "path": "/iceberg"
+    },
+    {
+      "path": "/knowledge-graph/:id"
+    },
+    {
+      "path": "/knowledge-graph"
+    },
+    {
+      "path": "/lineage"
+    },
+    {
+      "path": "/linter",
+      "title": "Linter"
+    },
+    {
+      "path": "/logic/:id"
+    },
+    {
+      "path": "/logic"
+    },
+    {
+      "path": "/login"
+    },
+    {
+      "path": "/map/:mapId"
+    },
+    {
+      "path": "/map/admin"
+    },
+    {
+      "path": "/map"
+    },
+    {
+      "path": "/media-sets/:id"
+    },
+    {
+      "path": "/media-sets"
+    },
+    {
+      "path": "/modeling-objectives"
+    },
+    {
+      "path": "/models"
+    },
+    {
+      "path": "/notifications"
+    },
+    {
+      "path": "/object-explorer"
+    },
+    {
+      "path": "/ontology/:id"
+    },
+    {
+      "path": "/ontology/action-types/:id"
+    },
+    {
+      "path": "/ontology/branches/:id"
+    },
+    {
+      "path": "/ontology/design/drills/:id"
+    },
+    {
+      "path": "/ontology/design"
+    },
+    {
+      "path": "/ontology/interfaces/:id"
+    },
+    {
+      "path": "/ontology/objects/:typeId/:pk"
+    },
+    {
+      "path": "/ontology"
+    },
+    {
+      "path": "/ontology/proposals"
+    },
+    {
+      "path": "/"
+    },
+    {
+      "path": "/parse/:jobId"
+    },
+    {
+      "path": "/parse/:jobId/result"
+    },
+    {
+      "path": "/parse/batch/:batchId"
+    },
+    {
+      "path": "/parse"
+    },
+    {
+      "path": "/peer-manager",
+      "title": "Peer Manager"
+    },
+    {
+      "path": "/pipeline/:id/builds/:buildId"
+    },
+    {
+      "path": "/pipeline/:id"
+    },
+    {
+      "path": "/pipeline"
+    },
+    {
+      "path": "/pipeline/streams/:streamId"
+    },
+    {
+      "path": "/preparation",
+      "title": "Preparation"
+    },
+    {
+      "path": "/quiver/:id"
+    },
+    {
+      "path": "/quiver"
+    },
+    {
+      "path": "/r",
+      "title": "R"
+    },
+    {
+      "path": "/recipes",
+      "title": "Recipes"
+    },
+    {
+      "path": "/reset-password"
+    },
+    {
+      "path": "/resource-management"
+    },
+    {
+      "path": "/s/:token"
+    },
+    {
+      "path": "/schedules"
+    },
+    {
+      "path": "/sources"
+    },
+    {
+      "path": "/sql-studio",
+      "title": "Sql Studio"
+    },
+    {
+      "path": "/streaming"
+    },
+    {
+      "path": "/streaming/streams/:streamId"
+    },
+    {
+      "path": "/streaming/syncs/:syncId"
+    },
+    {
+      "path": "/time-series/:syncId"
+    },
+    {
+      "path": "/time-series/derived/:id"
+    },
+    {
+      "path": "/time-series/derived/new"
+    },
+    {
+      "path": "/time-series/object-types/:id"
+    },
+    {
+      "path": "/time-series"
+    },
+    {
+      "path": "/time-series/setup"
+    },
+    {
+      "path": "/transforms-common",
+      "title": "Transforms Common"
+    },
+    {
+      "path": "/value-types"
+    },
+    {
+      "path": "/vector-storage"
+    },
+    {
+      "path": "/workshop/:id"
+    },
+    {
+      "path": "/workshop"
+    }
+  ]
+}

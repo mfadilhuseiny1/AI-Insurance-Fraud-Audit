@@ -1,0 +1,7869 @@
+{
+ "edisi": [
+  "reguler",
+  "covid",
+  "dm",
+  "kesehatan_mental",
+  "kia_ibu",
+  "kia_anak",
+  "tb"
+ ],
+ "per_edisi": {
+  "tb": {
+   "univariat": {
+    "kepesertaan": [
+     {
+      "kolom": "PSTV03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9866,
+      "holdout_riil": 0.9866
+     },
+     {
+      "kolom": "PSTV04",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9978,
+      "holdout_riil": 0.9946,
+      "kategori": 6
+     },
+     {
+      "kolom": "PSTV05",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9994,
+      "holdout_riil": 0.9923,
+      "kategori": 2
+     },
+     {
+      "kolom": "PSTV06",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9967,
+      "holdout_riil": 0.9959,
+      "kategori": 3
+     },
+     {
+      "kolom": "PSTV07",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9982,
+      "holdout_riil": 0.9963,
+      "kategori": 4
+     },
+     {
+      "kolom": "PSTV08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9981,
+      "holdout_riil": 0.9948,
+      "kategori": 5
+     },
+     {
+      "kolom": "PSTV09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9912,
+      "holdout_riil": 0.9874,
+      "kategori": 36
+     },
+     {
+      "kolom": "PSTV09_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9908,
+      "holdout_riil": 0.9871,
+      "kategori": 40
+     },
+     {
+      "kolom": "PSTV10",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9896,
+      "holdout_riil": 0.9919
+     },
+     {
+      "kolom": "PSTV11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9813,
+      "holdout_riil": 0.9973,
+      "kategori": 10
+     },
+     {
+      "kolom": "PSTV12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9809,
+      "holdout_riil": 0.997,
+      "kategori": 3
+     },
+     {
+      "kolom": "PSTV13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9886,
+      "holdout_riil": 0.9859,
+      "kategori": 36
+     },
+     {
+      "kolom": "PSTV13_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9882,
+      "holdout_riil": 0.9856,
+      "kategori": 40
+     },
+     {
+      "kolom": "PSTV14",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9905,
+      "holdout_riil": 0.991
+     },
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9838,
+      "holdout_riil": 0.9875
+     },
+     {
+      "kolom": "PSTV16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9996,
+      "holdout_riil": 0.9961,
+      "kategori": 3
+     },
+     {
+      "kolom": "PSTV17",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9969,
+      "holdout_riil": 0.9944,
+      "kategori": 18
+     },
+     {
+      "kolom": "PSTV18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9974,
+      "holdout_riil": 0.9973,
+      "kategori": 6
+     }
+    ],
+    "fktpkapitasi": [
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9705,
+      "holdout_riil": 0.9889
+     },
+     {
+      "kolom": "FKP03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9844,
+      "holdout_riil": 0.9901
+     },
+     {
+      "kolom": "FKP04",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9844,
+      "holdout_riil": 0.9902
+     },
+     {
+      "kolom": "FKP05",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9794,
+      "holdout_riil": 0.9654,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKP05_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9788,
+      "holdout_riil": 0.965,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKP06",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9869,
+      "holdout_riil": 0.9777
+     },
+     {
+      "kolom": "FKP07",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9791,
+      "holdout_riil": 0.9932,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKP08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9766,
+      "holdout_riil": 0.9949,
+      "kategori": 6
+     },
+     {
+      "kolom": "FKP09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9766,
+      "holdout_riil": 0.9856,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKP10",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9969,
+      "holdout_riil": 0.9996,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKP11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9935,
+      "holdout_riil": 0.9904,
+      "kategori": 23
+     },
+     {
+      "kolom": "FKP12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9958,
+      "holdout_riil": 0.9916,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKP13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9937,
+      "holdout_riil": 0.9943,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKP14",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9921,
+      "holdout_riil": 0.9898
+     },
+     {
+      "kolom": "FKP14A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9684,
+      "holdout_riil": 0.9596,
+      "kategori": 1292
+     },
+     {
+      "kolom": "FKP15",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9684,
+      "holdout_riil": 0.9596,
+      "kategori": 1492
+     },
+     {
+      "kolom": "FKP15A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9576,
+      "holdout_riil": 0.937,
+      "kategori": 3959
+     },
+     {
+      "kolom": "FKP16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.99,
+      "holdout_riil": 0.9928,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKP16_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9898,
+      "holdout_riil": 0.9928,
+      "kategori": 37
+     },
+     {
+      "kolom": "FKP17",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9935,
+      "holdout_riil": 0.9947
+     },
+     {
+      "kolom": "FKP18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9904,
+      "holdout_riil": 0.9966,
+      "kategori": 11
+     },
+     {
+      "kolom": "FKP19",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9926,
+      "holdout_riil": 0.9974,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKP20",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9851,
+      "holdout_riil": 0.995,
+      "kategori": 24
+     },
+     {
+      "kolom": "FKP21",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.986,
+      "holdout_riil": 0.9906
+     },
+     {
+      "kolom": "FKP22",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9996,
+      "holdout_riil": 0.9943,
+      "kategori": 2
+     }
+    ],
+    "fkrtl": [
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9816,
+      "holdout_riil": 0.9739
+     },
+     {
+      "kolom": "FKL03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9839,
+      "holdout_riil": 0.986
+     },
+     {
+      "kolom": "FKL04",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9837,
+      "holdout_riil": 0.986
+     },
+     {
+      "kolom": "FKL05",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9666,
+      "holdout_riil": 0.9573,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKL05_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9663,
+      "holdout_riil": 0.9569,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKL06",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9919,
+      "holdout_riil": 0.9821
+     },
+     {
+      "kolom": "FKL07",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9598,
+      "holdout_riil": 0.9709,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKL08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9922,
+      "holdout_riil": 0.9992,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9601,
+      "holdout_riil": 0.9677,
+      "kategori": 25
+     },
+     {
+      "kolom": "FKL10",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9998,
+      "holdout_riil": 0.9974,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9812,
+      "holdout_riil": 0.9723,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKL12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9836,
+      "holdout_riil": 0.9815,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9998,
+      "holdout_riil": 0.9972,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKL14",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9929,
+      "holdout_riil": 0.9991,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9768,
+      "holdout_riil": 0.9857
+     },
+     {
+      "kolom": "FKL15A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9432,
+      "holdout_riil": 0.8899,
+      "kategori": 1260
+     },
+     {
+      "kolom": "FKL16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9165,
+      "holdout_riil": 0.8145,
+      "kategori": 3558
+     },
+     {
+      "kolom": "FKL16A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9165,
+      "holdout_riil": 0.8146,
+      "kategori": 3725
+     },
+     {
+      "kolom": "FKL17",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9855,
+      "holdout_riil": 0.9878
+     },
+     {
+      "kolom": "FKL17A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9645,
+      "holdout_riil": 0.959,
+      "kategori": 826
+     },
+     {
+      "kolom": "FKL18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9506,
+      "holdout_riil": 0.933,
+      "kategori": 2897
+     },
+     {
+      "kolom": "FKL18A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9506,
+      "holdout_riil": 0.933,
+      "kategori": 2812
+     },
+     {
+      "kolom": "FKL19",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9766,
+      "holdout_riil": 0.9618,
+      "kategori": 659
+     },
+     {
+      "kolom": "FKL19A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9766,
+      "holdout_riil": 0.9618,
+      "kategori": 706
+     },
+     {
+      "kolom": "FKL20",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9889,
+      "holdout_riil": 0.9779,
+      "kategori": 22
+     },
+     {
+      "kolom": "FKL21",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9937,
+      "holdout_riil": 0.9922,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKL22",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9884,
+      "holdout_riil": 0.9829,
+      "kategori": 47
+     },
+     {
+      "kolom": "FKL23",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9985,
+      "holdout_riil": 0.9974,
+      "kategori": 4
+     },
+     {
+      "kolom": "FKL25",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9662,
+      "holdout_riil": 0.955,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKL25_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9657,
+      "holdout_riil": 0.9545,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKL26",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9896,
+      "holdout_riil": 0.9801
+     },
+     {
+      "kolom": "FKL27",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9721,
+      "holdout_riil": 0.9908,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKL28",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9786,
+      "holdout_riil": 0.9876,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKL29",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9681,
+      "holdout_riil": 0.9717,
+      "kategori": 30
+     },
+     {
+      "kolom": "FKL30",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9131,
+      "holdout_riil": 0.8677,
+      "kategori": 10345
+     },
+     {
+      "kolom": "FKL31",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9878,
+      "holdout_riil": 0.9899,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL32",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9861,
+      "holdout_riil": 0.9846
+     },
+     {
+      "kolom": "FKL33",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 4
+     },
+     {
+      "kolom": "FKL34",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL35",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9999,
+      "holdout_riil": 0.9997,
+      "kategori": 12
+     },
+     {
+      "kolom": "FKL36",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9999,
+      "holdout_riil": 0.9997,
+      "kategori": 12
+     },
+     {
+      "kolom": "FKL37",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9989,
+      "holdout_riil": 0.9997
+     },
+     {
+      "kolom": "FKL38",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 4
+     },
+     {
+      "kolom": "FKL39",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKL40",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 0.9999,
+      "kategori": 9
+     },
+     {
+      "kolom": "FKL41",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 0.9998,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL42",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 0.9998,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL43",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9996,
+      "holdout_riil": 0.9996,
+      "kategori": 23
+     },
+     {
+      "kolom": "FKL44",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 0.9987,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKL45",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 0.9987,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKL46",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9998,
+      "holdout_riil": 0.9985,
+      "kategori": 13
+     },
+     {
+      "kolom": "FKL47",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9833,
+      "holdout_riil": 0.9849
+     },
+     {
+      "kolom": "FKL48",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9833,
+      "holdout_riil": 0.9849
+     }
+    ],
+    "nonkapitasi": [
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9228,
+      "holdout_riil": 0.9464
+     },
+     {
+      "kolom": "PNK03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.971,
+      "holdout_riil": 0.9739
+     },
+     {
+      "kolom": "PNK04",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.971,
+      "holdout_riil": 0.9738
+     },
+     {
+      "kolom": "PNK05",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9713,
+      "holdout_riil": 0.9733
+     },
+     {
+      "kolom": "PNK06",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8639,
+      "holdout_riil": 0.8337,
+      "kategori": 36
+     },
+     {
+      "kolom": "PNK06_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8632,
+      "holdout_riil": 0.8337,
+      "kategori": 40
+     },
+     {
+      "kolom": "PNK07",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.949,
+      "holdout_riil": 0.9321
+     },
+     {
+      "kolom": "PNK08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9794,
+      "holdout_riil": 0.9897,
+      "kategori": 7
+     },
+     {
+      "kolom": "PNK09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.968,
+      "holdout_riil": 0.9821,
+      "kategori": 6
+     },
+     {
+      "kolom": "PNK10",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9667,
+      "holdout_riil": 0.9788,
+      "kategori": 10
+     },
+     {
+      "kolom": "PNK11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9752,
+      "holdout_riil": 0.9951,
+      "kategori": 3
+     },
+     {
+      "kolom": "PNK12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9649,
+      "holdout_riil": 0.964,
+      "kategori": 5
+     },
+     {
+      "kolom": "PNK13",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9734,
+      "holdout_riil": 0.9598
+     },
+     {
+      "kolom": "PNK13A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9477,
+      "holdout_riil": 0.9118,
+      "kategori": 238
+     },
+     {
+      "kolom": "PNK14",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9298,
+      "holdout_riil": 0.8765,
+      "kategori": 509
+     },
+     {
+      "kolom": "PNK15",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9298,
+      "holdout_riil": 0.8765,
+      "kategori": 423
+     },
+     {
+      "kolom": "PNK16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9517,
+      "holdout_riil": 0.9629,
+      "kategori": 50
+     },
+     {
+      "kolom": "PNK17",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9831,
+      "holdout_riil": 0.9816
+     },
+     {
+      "kolom": "PNK18",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9831,
+      "holdout_riil": 0.9816
+     },
+     {
+      "kolom": "PNK19",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9801,
+      "holdout_riil": 0.9765
+     },
+     {
+      "kolom": "PNK20",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9845,
+      "holdout_riil": 0.9918,
+      "kategori": 1
+     }
+    ],
+    "diagnosissekunder": [
+     {
+      "kolom": "FKL24",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9301,
+      "holdout_riil": 0.8494,
+      "kategori": 4387
+     },
+     {
+      "kolom": "FKL24A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9486,
+      "holdout_riil": 0.8974,
+      "kategori": 1361
+     },
+     {
+      "kolom": "FKL24B",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9301,
+      "holdout_riil": 0.8494,
+      "kategori": 5285
+     }
+    ]
+   },
+   "multivariat": {
+    "fkrtl": {
+     "pmse": 0.02022,
+     "pmse_ratio": 3.49,
+     "auc_diskriminator": 0.674,
+     "n_per_sisi": 60000
+    },
+    "kepesertaan": {
+     "pmse": 0.02641,
+     "pmse_ratio": 1.0,
+     "auc_diskriminator": 0.494,
+     "n_per_sisi": 2548
+    }
+   },
+   "bivariat": {
+    "fkrtl": {
+     "rata2_selisih_cramers_v": 0.01377127578099346,
+     "pasangan_terjauh": [
+      {
+       "pair": "jenisÃƒÆ’Ã¢â‚¬â€cmg",
+       "riil": 0.136,
+       "sintetis": 0.077
+      },
+      {
+       "pair": "jenisÃƒÆ’Ã¢â‚¬â€poli",
+       "riil": 0.13,
+       "sintetis": 0.075
+      },
+      {
+       "pair": "tipeÃƒÆ’Ã¢â‚¬â€cmg",
+       "riil": 0.088,
+       "sintetis": 0.048
+      },
+      {
+       "pair": "jenisÃƒÆ’Ã¢â‚¬â€usia",
+       "riil": 0.056,
+       "sintetis": 0.02
+      },
+      {
+       "pair": "tipeÃƒÆ’Ã¢â‚¬â€poli",
+       "riil": 0.072,
+       "sintetis": 0.036
+      }
+     ]
+    }
+   },
+   "relasional": {
+    "riil_training": {
+     "klaim_fkrtl_per_peserta": {
+      "rata2": 1.982,
+      "p90": 6.0,
+      "p99": 28.0,
+      "pct_ada": 26.68
+     },
+     "kunjungan_fktp_per_peserta": {
+      "rata2": 3.191,
+      "p90": 10.0,
+      "p99": 29.0,
+      "pct_ada": 50.24
+     },
+     "dx_sekunder_per_klaim": {
+      "rata2": 1.253,
+      "pct_ada": 84.56
+     },
+     "pct_klaim_dengan_rujukan": 61.8,
+     "median_hari_rujukan_ke_rs": 24.0,
+     "pct_rujukan_peserta_sama": 100.0,
+     "pct_readmisi_30h": 18.34,
+     "pct_readmisi_30h_rs_sama": 10.5,
+     "klaim_ganda_per_100rb": 7.5,
+     "pct_koreksi_verifikasi": 0.086,
+     "rata2_biaya_tagih": 818787,
+     "median_los_inap": 3.0,
+     "pct_rujukan_kab_sama": 84.7,
+     "pct_rujukan_provinsi_sama": 99.5,
+     "pct_rs_di_kab_fktp_terdaftar": 75.8,
+     "pct_fktp_di_kab_terdaftar": 97.7
+    },
+    "sintetis": {
+     "klaim_fkrtl_per_peserta": {
+      "rata2": 1.934,
+      "p90": 6.0,
+      "p99": 27.0,
+      "pct_ada": 26.24
+     },
+     "kunjungan_fktp_per_peserta": {
+      "rata2": 3.266,
+      "p90": 10.0,
+      "p99": 29.0,
+      "pct_ada": 50.45
+     },
+     "dx_sekunder_per_klaim": {
+      "rata2": 1.225,
+      "pct_ada": 84.33
+     },
+     "pct_klaim_dengan_rujukan": 61.8,
+     "median_hari_rujukan_ke_rs": 17.0,
+     "pct_rujukan_peserta_sama": 100.0,
+     "pct_readmisi_30h": 17.48,
+     "pct_readmisi_30h_rs_sama": 11.43,
+     "klaim_ganda_per_100rb": 46.6,
+     "pct_koreksi_verifikasi": 0.095,
+     "rata2_biaya_tagih": 786811,
+     "median_los_inap": 3.0,
+     "pct_rujukan_kab_sama": 75.3,
+     "pct_rujukan_provinsi_sama": 96.2,
+     "pct_rs_di_kab_fktp_terdaftar": 72.3,
+     "pct_fktp_di_kab_terdaftar": 96.4
+    },
+    "riil_holdout": {
+     "klaim_fkrtl_per_peserta": {
+      "rata2": 1.997,
+      "p90": 6.0,
+      "p99": 29.0,
+      "pct_ada": 26.57
+     },
+     "kunjungan_fktp_per_peserta": {
+      "rata2": 3.255,
+      "p90": 10.0,
+      "p99": 30.0,
+      "pct_ada": 49.96
+     },
+     "dx_sekunder_per_klaim": {
+      "rata2": 1.24,
+      "pct_ada": 84.66
+     },
+     "pct_klaim_dengan_rujukan": 62.03,
+     "median_hari_rujukan_ke_rs": 25.0,
+     "pct_rujukan_peserta_sama": 100.0,
+     "pct_readmisi_30h": 17.31,
+     "pct_readmisi_30h_rs_sama": 9.5,
+     "klaim_ganda_per_100rb": 12.5,
+     "pct_koreksi_verifikasi": 0.077,
+     "rata2_biaya_tagih": 818644,
+     "median_los_inap": 3.0,
+     "pct_rujukan_kab_sama": 85.3,
+     "pct_rujukan_provinsi_sama": 99.4,
+     "pct_rs_di_kab_fktp_terdaftar": 76.9,
+     "pct_fktp_di_kab_terdaftar": 97.8
+    },
+    "1-KS": {
+     "klaim_fkrtl_per_peserta": {
+      "sintetis": 0.9956,
+      "holdout_riil": 0.9974
+     },
+     "kunjungan_fktp_per_peserta": {
+      "sintetis": 0.9927,
+      "holdout_riil": 0.9972
+     },
+     "dx_sekunder_per_klaim": {
+      "sintetis": 0.99,
+      "holdout_riil": 0.9959
+     }
+    }
+   },
+   "privasi": {
+    "exact_match_pct": {
+     "kepesertaan": {
+      "sintetis": 0.306,
+      "holdout_riil": 0.389
+     },
+     "fkrtl": {
+      "sintetis": 2.655,
+      "holdout_riil": 7.151
+     }
+    },
+    "repU": {
+     "pct_unik_di_riil": 99.14,
+     "repU_sintetis_pct": 0.0,
+     "repU_holdout_pct_disesuaikan_ukuran": 0.898,
+     "catatan": "tanggal lahir sintetis digeser acak Ãƒâ€šÃ‚Â±30 hari"
+    },
+    "dcr_mia": {
+     "median_dcr_sintetis": 0.0358,
+     "median_dcr_holdout_riil": 0.0358,
+     "pct_sintetis_lebih_dekat_dari_p5_holdout": 0.0,
+     "acuan_p5": 5.0,
+     "pct_dcr_nol_sintetis": 12.99,
+     "pct_dcr_nol_holdout_riil": 11.81,
+     "mia_auc": 0.503
+    },
+    "disco_pct": {
+     "holdout_riil": 4.621,
+     "sintetis": 6.845
+    }
+   }
+  },
+  "reguler": {
+   "univariat": {
+    "kepesertaan": [
+     {
+      "kolom": "PSTV03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9966,
+      "holdout_riil": 0.9966
+     },
+     {
+      "kolom": "PSTV04",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9989,
+      "holdout_riil": 0.998,
+      "kategori": 5
+     },
+     {
+      "kolom": "PSTV05",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.999,
+      "holdout_riil": 1.0,
+      "kategori": 2
+     },
+     {
+      "kolom": "PSTV06",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9982,
+      "holdout_riil": 0.9986,
+      "kategori": 4
+     },
+     {
+      "kolom": "PSTV07",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9992,
+      "holdout_riil": 0.9992,
+      "kategori": 4
+     },
+     {
+      "kolom": "PSTV08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9993,
+      "holdout_riil": 0.9979,
+      "kategori": 6
+     },
+     {
+      "kolom": "PSTV09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9901,
+      "holdout_riil": 0.9967,
+      "kategori": 36
+     },
+     {
+      "kolom": "PSTV09_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9899,
+      "holdout_riil": 0.9965,
+      "kategori": 40
+     },
+     {
+      "kolom": "PSTV10",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9939,
+      "holdout_riil": 0.9971
+     },
+     {
+      "kolom": "PSTV11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9896,
+      "holdout_riil": 0.9995,
+      "kategori": 11
+     },
+     {
+      "kolom": "PSTV12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.991,
+      "holdout_riil": 0.9996,
+      "kategori": 4
+     },
+     {
+      "kolom": "PSTV13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9877,
+      "holdout_riil": 0.9964,
+      "kategori": 36
+     },
+     {
+      "kolom": "PSTV13_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9875,
+      "holdout_riil": 0.9963,
+      "kategori": 40
+     },
+     {
+      "kolom": "PSTV14",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9932,
+      "holdout_riil": 0.9973
+     },
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9954,
+      "holdout_riil": 0.9977
+     },
+     {
+      "kolom": "PSTV16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.997,
+      "holdout_riil": 0.9989,
+      "kategori": 10
+     },
+     {
+      "kolom": "PSTV17",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9982,
+      "holdout_riil": 0.9987,
+      "kategori": 22
+     },
+     {
+      "kolom": "PSTV18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9996,
+      "holdout_riil": 0.9993,
+      "kategori": 11
+     }
+    ],
+    "fktpkapitasi": [
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9842,
+      "holdout_riil": 0.9964
+     },
+     {
+      "kolom": "FKP03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9872,
+      "holdout_riil": 0.9971
+     },
+     {
+      "kolom": "FKP04",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9871,
+      "holdout_riil": 0.9971
+     },
+     {
+      "kolom": "FKP05",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9781,
+      "holdout_riil": 0.9916,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKP05_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9781,
+      "holdout_riil": 0.9916,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKP06",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9909,
+      "holdout_riil": 0.9972
+     },
+     {
+      "kolom": "FKP07",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9906,
+      "holdout_riil": 0.9966,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKP08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9815,
+      "holdout_riil": 0.9968,
+      "kategori": 6
+     },
+     {
+      "kolom": "FKP09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9807,
+      "holdout_riil": 0.9968,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKP10",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9944,
+      "holdout_riil": 0.9994,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKP11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9809,
+      "holdout_riil": 0.9962,
+      "kategori": 23
+     },
+     {
+      "kolom": "FKP12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9951,
+      "holdout_riil": 0.9964,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKP13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9953,
+      "holdout_riil": 0.9994,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKP14",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9953,
+      "holdout_riil": 0.9975
+     },
+     {
+      "kolom": "FKP14A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9714,
+      "holdout_riil": 0.99,
+      "kategori": 1968
+     },
+     {
+      "kolom": "FKP15",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9714,
+      "holdout_riil": 0.99,
+      "kategori": 1793
+     },
+     {
+      "kolom": "FKP15A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9624,
+      "holdout_riil": 0.9807,
+      "kategori": 9050
+     },
+     {
+      "kolom": "FKP16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9922,
+      "holdout_riil": 0.9986,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKP16_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9922,
+      "holdout_riil": 0.9985,
+      "kategori": 37
+     },
+     {
+      "kolom": "FKP17",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9962,
+      "holdout_riil": 0.9985
+     },
+     {
+      "kolom": "FKP18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9947,
+      "holdout_riil": 0.9995,
+      "kategori": 11
+     },
+     {
+      "kolom": "FKP19",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9954,
+      "holdout_riil": 0.9997,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKP20",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9926,
+      "holdout_riil": 0.9991,
+      "kategori": 27
+     },
+     {
+      "kolom": "FKP21",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.995,
+      "holdout_riil": 0.9993
+     },
+     {
+      "kolom": "FKP22",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9968,
+      "holdout_riil": 0.9994,
+      "kategori": 2
+     }
+    ],
+    "fkrtl": [
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9778,
+      "holdout_riil": 0.9944
+     },
+     {
+      "kolom": "FKL03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9791,
+      "holdout_riil": 0.9948
+     },
+     {
+      "kolom": "FKL04",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9792,
+      "holdout_riil": 0.9947
+     },
+     {
+      "kolom": "FKL05",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9606,
+      "holdout_riil": 0.9793,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKL05_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9595,
+      "holdout_riil": 0.9792,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKL06",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9901,
+      "holdout_riil": 0.9932
+     },
+     {
+      "kolom": "FKL07",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9692,
+      "holdout_riil": 0.9932,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKL08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9968,
+      "holdout_riil": 0.9991,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9641,
+      "holdout_riil": 0.9921,
+      "kategori": 25
+     },
+     {
+      "kolom": "FKL10",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9995,
+      "holdout_riil": 0.9998,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9788,
+      "holdout_riil": 0.9901,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKL12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9941,
+      "holdout_riil": 0.9917,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9989,
+      "holdout_riil": 0.9997,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKL14",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9956,
+      "holdout_riil": 0.9989,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.989,
+      "holdout_riil": 0.9951
+     },
+     {
+      "kolom": "FKL15A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9407,
+      "holdout_riil": 0.9531,
+      "kategori": 1704
+     },
+     {
+      "kolom": "FKL16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9074,
+      "holdout_riil": 0.9071,
+      "kategori": 8693
+     },
+     {
+      "kolom": "FKL16A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9074,
+      "holdout_riil": 0.9071,
+      "kategori": 8082
+     },
+     {
+      "kolom": "FKL17",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9871,
+      "holdout_riil": 0.997
+     },
+     {
+      "kolom": "FKL17A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9607,
+      "holdout_riil": 0.9853,
+      "kategori": 1381
+     },
+     {
+      "kolom": "FKL18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9455,
+      "holdout_riil": 0.9721,
+      "kategori": 7408
+     },
+     {
+      "kolom": "FKL18A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9455,
+      "holdout_riil": 0.9721,
+      "kategori": 5633
+     },
+     {
+      "kolom": "FKL19",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9645,
+      "holdout_riil": 0.9871,
+      "kategori": 944
+     },
+     {
+      "kolom": "FKL19A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9646,
+      "holdout_riil": 0.9871,
+      "kategori": 891
+     },
+     {
+      "kolom": "FKL20",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9785,
+      "holdout_riil": 0.9955,
+      "kategori": 23
+     },
+     {
+      "kolom": "FKL21",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9935,
+      "holdout_riil": 0.9979,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKL22",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9778,
+      "holdout_riil": 0.9943,
+      "kategori": 56
+     },
+     {
+      "kolom": "FKL23",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9987,
+      "holdout_riil": 0.9992,
+      "kategori": 4
+     },
+     {
+      "kolom": "FKL25",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9617,
+      "holdout_riil": 0.9792,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKL25_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9606,
+      "holdout_riil": 0.9791,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKL26",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9898,
+      "holdout_riil": 0.994
+     },
+     {
+      "kolom": "FKL27",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9803,
+      "holdout_riil": 0.9953,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKL28",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9856,
+      "holdout_riil": 0.9955,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKL29",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9778,
+      "holdout_riil": 0.9902,
+      "kategori": 30
+     },
+     {
+      "kolom": "FKL30",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9087,
+      "holdout_riil": 0.9209,
+      "kategori": 46803
+     },
+     {
+      "kolom": "FKL31",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9873,
+      "holdout_riil": 0.9921,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL32",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9815,
+      "holdout_riil": 0.9948
+     },
+     {
+      "kolom": "FKL33",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 9
+     },
+     {
+      "kolom": "FKL34",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 35
+     },
+     {
+      "kolom": "FKL35",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9994,
+      "holdout_riil": 0.9998,
+      "kategori": 15
+     },
+     {
+      "kolom": "FKL36",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9995,
+      "holdout_riil": 0.9998,
+      "kategori": 15
+     },
+     {
+      "kolom": "FKL37",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9992,
+      "holdout_riil": 0.9998
+     },
+     {
+      "kolom": "FKL38",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL39",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 4
+     },
+     {
+      "kolom": "FKL40",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9999,
+      "holdout_riil": 1.0,
+      "kategori": 13
+     },
+     {
+      "kolom": "FKL41",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKL42",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 4
+     },
+     {
+      "kolom": "FKL43",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9995,
+      "holdout_riil": 0.9999,
+      "kategori": 37
+     },
+     {
+      "kolom": "FKL44",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9998,
+      "holdout_riil": 0.9996,
+      "kategori": 12
+     },
+     {
+      "kolom": "FKL45",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9998,
+      "holdout_riil": 0.9996,
+      "kategori": 11
+     },
+     {
+      "kolom": "FKL46",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9997,
+      "holdout_riil": 0.9994,
+      "kategori": 24
+     },
+     {
+      "kolom": "FKL47",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9833,
+      "holdout_riil": 0.9955
+     },
+     {
+      "kolom": "FKL48",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9833,
+      "holdout_riil": 0.9955
+     }
+    ],
+    "nonkapitasi": [
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9742,
+      "holdout_riil": 0.9784
+     },
+     {
+      "kolom": "PNK03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.972,
+      "holdout_riil": 0.9924
+     },
+     {
+      "kolom": "PNK04",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.972,
+      "holdout_riil": 0.9924
+     },
+     {
+      "kolom": "PNK05",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9719,
+      "holdout_riil": 0.9925
+     },
+     {
+      "kolom": "PNK06",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8996,
+      "holdout_riil": 0.9797,
+      "kategori": 36
+     },
+     {
+      "kolom": "PNK06_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8996,
+      "holdout_riil": 0.9791,
+      "kategori": 40
+     },
+     {
+      "kolom": "PNK07",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9678,
+      "holdout_riil": 0.9917
+     },
+     {
+      "kolom": "PNK08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9815,
+      "holdout_riil": 0.9942,
+      "kategori": 10
+     },
+     {
+      "kolom": "PNK09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9848,
+      "holdout_riil": 0.9912,
+      "kategori": 6
+     },
+     {
+      "kolom": "PNK10",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9835,
+      "holdout_riil": 0.9911,
+      "kategori": 10
+     },
+     {
+      "kolom": "PNK11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9831,
+      "holdout_riil": 0.9973,
+      "kategori": 3
+     },
+     {
+      "kolom": "PNK12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9859,
+      "holdout_riil": 0.9829,
+      "kategori": 5
+     },
+     {
+      "kolom": "PNK13",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9697,
+      "holdout_riil": 0.9951
+     },
+     {
+      "kolom": "PNK13A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9622,
+      "holdout_riil": 0.9813,
+      "kategori": 542
+     },
+     {
+      "kolom": "PNK14",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9587,
+      "holdout_riil": 0.9679,
+      "kategori": 1260
+     },
+     {
+      "kolom": "PNK15",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9587,
+      "holdout_riil": 0.9679,
+      "kategori": 1477
+     },
+     {
+      "kolom": "PNK16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9669,
+      "holdout_riil": 0.9917,
+      "kategori": 52
+     },
+     {
+      "kolom": "PNK17",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.986,
+      "holdout_riil": 0.9951
+     },
+     {
+      "kolom": "PNK18",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.986,
+      "holdout_riil": 0.9951
+     }
+    ],
+    "diagnosissekunder": [
+     {
+      "kolom": "FKL24",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9291,
+      "holdout_riil": 0.9293,
+      "kategori": 9221
+     },
+     {
+      "kolom": "FKL24A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9472,
+      "holdout_riil": 0.9572,
+      "kategori": 1839
+     },
+     {
+      "kolom": "FKL24B",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9472,
+      "holdout_riil": 0.9572,
+      "kategori": 1674
+     }
+    ]
+   },
+   "multivariat": {
+    "fkrtl": {
+     "pmse": 0.0141,
+     "pmse_ratio": 2.35,
+     "auc_diskriminator": 0.635,
+     "n_per_sisi": 60000
+    },
+    "kepesertaan": {
+     "pmse": 0.00537,
+     "pmse_ratio": 1.19,
+     "auc_diskriminator": 0.508,
+     "n_per_sisi": 56649
+    }
+   },
+   "bivariat": {
+    "fkrtl": {
+     "rata2_selisih_cramers_v": 0.015347122349170758,
+     "pasangan_terjauh": [
+      {
+       "pair": "jenisÃƒÆ’Ã¢â‚¬â€poli",
+       "riil": 0.162,
+       "sintetis": 0.074
+      },
+      {
+       "pair": "pulangÃƒÆ’Ã¢â‚¬â€keparahan",
+       "riil": 0.168,
+       "sintetis": 0.097
+      },
+      {
+       "pair": "jenisÃƒÆ’Ã¢â‚¬â€cmg",
+       "riil": 0.142,
+       "sintetis": 0.088
+      },
+      {
+       "pair": "tipeÃƒÆ’Ã¢â‚¬â€cmg",
+       "riil": 0.1,
+       "sintetis": 0.051
+      },
+      {
+       "pair": "milikÃƒÆ’Ã¢â‚¬â€cmg",
+       "riil": 0.081,
+       "sintetis": 0.035
+      }
+     ]
+    }
+   },
+   "relasional": {
+    "riil_training": {
+     "klaim_fkrtl_per_peserta": {
+      "rata2": 0.657,
+      "p90": 1.0,
+      "p99": 14.0,
+      "pct_ada": 11.86
+     },
+     "kunjungan_fktp_per_peserta": {
+      "rata2": 1.574,
+      "p90": 5.0,
+      "p99": 18.0,
+      "pct_ada": 32.81
+     },
+     "dx_sekunder_per_klaim": {
+      "rata2": 1.159,
+      "pct_ada": 80.48
+     },
+     "pct_klaim_dengan_rujukan": 58.92,
+     "median_hari_rujukan_ke_rs": 22.0,
+     "pct_rujukan_peserta_sama": 100.0,
+     "pct_readmisi_30h": 12.7,
+     "pct_readmisi_30h_rs_sama": 7.54,
+     "klaim_ganda_per_100rb": 6.6,
+     "pct_koreksi_verifikasi": 0.097,
+     "rata2_biaya_tagih": 905356,
+     "median_los_inap": 3.0,
+     "pct_rujukan_kab_sama": 85.5,
+     "pct_rujukan_provinsi_sama": 99.4,
+     "pct_rs_di_kab_fktp_terdaftar": 77.0,
+     "pct_fktp_di_kab_terdaftar": 97.3
+    },
+    "sintetis": {
+     "klaim_fkrtl_per_peserta": {
+      "rata2": 0.651,
+      "p90": 1.0,
+      "p99": 14.0,
+      "pct_ada": 11.92
+     },
+     "kunjungan_fktp_per_peserta": {
+      "rata2": 1.596,
+      "p90": 5.0,
+      "p99": 18.0,
+      "pct_ada": 33.27
+     },
+     "dx_sekunder_per_klaim": {
+      "rata2": 1.14,
+      "pct_ada": 80.52
+     },
+     "pct_klaim_dengan_rujukan": 60.06,
+     "median_hari_rujukan_ke_rs": 17.0,
+     "pct_rujukan_peserta_sama": 100.0,
+     "pct_readmisi_30h": 13.06,
+     "pct_readmisi_30h_rs_sama": 8.1,
+     "klaim_ganda_per_100rb": 37.2,
+     "pct_koreksi_verifikasi": 0.233,
+     "rata2_biaya_tagih": 861783,
+     "median_los_inap": 3.0,
+     "pct_rujukan_kab_sama": 77.6,
+     "pct_rujukan_provinsi_sama": 98.2,
+     "pct_rs_di_kab_fktp_terdaftar": 74.6,
+     "pct_fktp_di_kab_terdaftar": 96.6
+    },
+    "riil_holdout": {
+     "klaim_fkrtl_per_peserta": {
+      "rata2": 0.652,
+      "p90": 1.0,
+      "p99": 14.0,
+      "pct_ada": 11.76
+     },
+     "kunjungan_fktp_per_peserta": {
+      "rata2": 1.566,
+      "p90": 5.0,
+      "p99": 18.0,
+      "pct_ada": 32.77
+     },
+     "dx_sekunder_per_klaim": {
+      "rata2": 1.153,
+      "pct_ada": 80.41
+     },
+     "pct_klaim_dengan_rujukan": 59.15,
+     "median_hari_rujukan_ke_rs": 23.0,
+     "pct_rujukan_peserta_sama": 100.0,
+     "pct_readmisi_30h": 12.08,
+     "pct_readmisi_30h_rs_sama": 7.13,
+     "klaim_ganda_per_100rb": 8.6,
+     "pct_koreksi_verifikasi": 0.093,
+     "rata2_biaya_tagih": 898202,
+     "median_los_inap": 3.0,
+     "pct_rujukan_kab_sama": 84.7,
+     "pct_rujukan_provinsi_sama": 99.3,
+     "pct_rs_di_kab_fktp_terdaftar": 76.3,
+     "pct_fktp_di_kab_terdaftar": 97.3
+    },
+    "1-KS": {
+     "klaim_fkrtl_per_peserta": {
+      "sintetis": 0.9994,
+      "holdout_riil": 0.999
+     },
+     "kunjungan_fktp_per_peserta": {
+      "sintetis": 0.9953,
+      "holdout_riil": 0.999
+     },
+     "dx_sekunder_per_klaim": {
+      "sintetis": 0.9914,
+      "holdout_riil": 0.9983
+     }
+    }
+   },
+   "privasi": {
+    "exact_match_pct": {
+     "kepesertaan": {
+      "sintetis": 6.251,
+      "holdout_riil": 6.133
+     },
+     "fkrtl": {
+      "sintetis": 10.317,
+      "holdout_riil": 24.565
+     }
+    },
+    "repU": {
+     "pct_unik_di_riil": 85.21,
+     "repU_sintetis_pct": 0.0,
+     "repU_holdout_pct_disesuaikan_ukuran": 9.941,
+     "catatan": "tanggal lahir sintetis digeser acak Ãƒâ€šÃ‚Â±30 hari"
+    },
+    "dcr_mia": {
+     "median_dcr_sintetis": 0.0583,
+     "median_dcr_holdout_riil": 0.0412,
+     "pct_sintetis_lebih_dekat_dari_p5_holdout": 0.0,
+     "acuan_p5": 5.0,
+     "pct_dcr_nol_sintetis": 13.59,
+     "pct_dcr_nol_holdout_riil": 13.79,
+     "mia_auc": 0.506
+    },
+    "disco_pct": {
+     "holdout_riil": 8.482,
+     "sintetis": 6.692
+    }
+   },
+   "ci_overlap": {
+    "rawat_inap": {
+     "koefisien": 33,
+     "rata2_overlap_ci": 0.359,
+     "median_overlap_ci": 0.058,
+     "pct_tanda_sama": 75.8,
+     "korelasi_koefisien": 0.627,
+     "rata2_lebar_ci_riil": 0.534,
+     "n_per_sisi": 150000
+    },
+    "log_biaya_tagih": {
+     "koefisien": 40,
+     "rata2_overlap_ci": 0.383,
+     "median_overlap_ci": 0.377,
+     "pct_tanda_sama": 80.0,
+     "korelasi_koefisien": 0.811,
+     "rata2_lebar_ci_riil": 0.0821,
+     "n_per_sisi": 150000
+    }
+   }
+  },
+  "covid": {
+   "univariat": {
+    "kepesertaan": [
+     {
+      "kolom": "PSTV03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9709,
+      "holdout_riil": 0.9717
+     },
+     {
+      "kolom": "PSTV04",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9983,
+      "holdout_riil": 0.995,
+      "kategori": 5
+     },
+     {
+      "kolom": "PSTV05",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9999,
+      "holdout_riil": 0.9836,
+      "kategori": 2
+     },
+     {
+      "kolom": "PSTV06",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9945,
+      "holdout_riil": 0.9885,
+      "kategori": 3
+     },
+     {
+      "kolom": "PSTV07",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9985,
+      "holdout_riil": 0.9918,
+      "kategori": 3
+     },
+     {
+      "kolom": "PSTV08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9939,
+      "holdout_riil": 0.9933,
+      "kategori": 5
+     },
+     {
+      "kolom": "PSTV09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9785,
+      "holdout_riil": 0.9772,
+      "kategori": 36
+     },
+     {
+      "kolom": "PSTV09_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9782,
+      "holdout_riil": 0.9754,
+      "kategori": 40
+     },
+     {
+      "kolom": "PSTV10",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9791,
+      "holdout_riil": 0.9854
+     },
+     {
+      "kolom": "PSTV11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9627,
+      "holdout_riil": 0.9906,
+      "kategori": 10
+     },
+     {
+      "kolom": "PSTV12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.962,
+      "holdout_riil": 0.9879,
+      "kategori": 3
+     },
+     {
+      "kolom": "PSTV13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9787,
+      "holdout_riil": 0.978,
+      "kategori": 36
+     },
+     {
+      "kolom": "PSTV13_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9777,
+      "holdout_riil": 0.9765,
+      "kategori": 40
+     },
+     {
+      "kolom": "PSTV14",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9862,
+      "holdout_riil": 0.9824
+     },
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9748,
+      "holdout_riil": 0.9843
+     },
+     {
+      "kolom": "PSTV16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 1
+     },
+     {
+      "kolom": "PSTV17",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9959,
+      "holdout_riil": 0.9871,
+      "kategori": 20
+     },
+     {
+      "kolom": "PSTV18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9969,
+      "holdout_riil": 0.9897,
+      "kategori": 9
+     },
+     {
+      "kolom": "PSTV21",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9978,
+      "holdout_riil": 0.992,
+      "kategori": 2
+     },
+     {
+      "kolom": "PSTV22",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9993,
+      "holdout_riil": 0.9988,
+      "kategori": 2
+     }
+    ],
+    "fktpkapitasi": [
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9926,
+      "holdout_riil": 0.9781
+     },
+     {
+      "kolom": "FKP03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9787,
+      "holdout_riil": 0.99
+     },
+     {
+      "kolom": "FKP04",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9787,
+      "holdout_riil": 0.99
+     },
+     {
+      "kolom": "FKP05",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9631,
+      "holdout_riil": 0.9549,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKP05_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9619,
+      "holdout_riil": 0.9538,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKP06",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9873,
+      "holdout_riil": 0.9767
+     },
+     {
+      "kolom": "FKP07",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9657,
+      "holdout_riil": 0.9944,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKP08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9665,
+      "holdout_riil": 0.9948,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKP09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9652,
+      "holdout_riil": 0.9818,
+      "kategori": 11
+     },
+     {
+      "kolom": "FKP10",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9983,
+      "holdout_riil": 0.998,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKP11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9873,
+      "holdout_riil": 0.9866,
+      "kategori": 29
+     },
+     {
+      "kolom": "FKP12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9909,
+      "holdout_riil": 0.9828,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKP13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9878,
+      "holdout_riil": 0.99,
+      "kategori": 9
+     },
+     {
+      "kolom": "FKP14",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9899,
+      "holdout_riil": 0.9912
+     },
+     {
+      "kolom": "FKP14A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9598,
+      "holdout_riil": 0.953,
+      "kategori": 1414
+     },
+     {
+      "kolom": "FKP15",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9598,
+      "holdout_riil": 0.953,
+      "kategori": 1541
+     },
+     {
+      "kolom": "FKP15A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9395,
+      "holdout_riil": 0.9262,
+      "kategori": 5839
+     },
+     {
+      "kolom": "FKP16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9834,
+      "holdout_riil": 0.9902,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKP16_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9833,
+      "holdout_riil": 0.99,
+      "kategori": 37
+     },
+     {
+      "kolom": "FKP17",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9916,
+      "holdout_riil": 0.9941
+     },
+     {
+      "kolom": "FKP18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9871,
+      "holdout_riil": 0.9973,
+      "kategori": 11
+     },
+     {
+      "kolom": "FKP19",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9879,
+      "holdout_riil": 0.9983,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKP20",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9853,
+      "holdout_riil": 0.995,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKP21",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.99,
+      "holdout_riil": 0.992
+     },
+     {
+      "kolom": "FKP22",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9977,
+      "holdout_riil": 0.9907,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKP23",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 1
+     }
+    ],
+    "fkrtl": [
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9685,
+      "holdout_riil": 0.9785
+     },
+     {
+      "kolom": "FKL03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9735,
+      "holdout_riil": 0.9946
+     },
+     {
+      "kolom": "FKL04",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9735,
+      "holdout_riil": 0.9946
+     },
+     {
+      "kolom": "FKL05",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9508,
+      "holdout_riil": 0.9312,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKL05_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9507,
+      "holdout_riil": 0.9312,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKL06",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.983,
+      "holdout_riil": 0.9809
+     },
+     {
+      "kolom": "FKL07",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9748,
+      "holdout_riil": 0.9707,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKL08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9888,
+      "holdout_riil": 0.9958,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9545,
+      "holdout_riil": 0.9613,
+      "kategori": 27
+     },
+     {
+      "kolom": "FKL10",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9867,
+      "holdout_riil": 0.9958,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL11",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9836,
+      "holdout_riil": 0.9768
+     },
+     {
+      "kolom": "FKL12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9805,
+      "holdout_riil": 0.978,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9909,
+      "holdout_riil": 0.9978,
+      "kategori": 4
+     },
+     {
+      "kolom": "FKL14",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9917,
+      "holdout_riil": 0.9977,
+      "kategori": 6
+     },
+     {
+      "kolom": "FKL15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9759,
+      "holdout_riil": 0.9931
+     },
+     {
+      "kolom": "FKL15A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9277,
+      "holdout_riil": 0.9116,
+      "kategori": 1461
+     },
+     {
+      "kolom": "FKL16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8919,
+      "holdout_riil": 0.854,
+      "kategori": 6227
+     },
+     {
+      "kolom": "FKL16A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8896,
+      "holdout_riil": 0.8537,
+      "kategori": 6572
+     },
+     {
+      "kolom": "FKL17",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9699,
+      "holdout_riil": 0.9828
+     },
+     {
+      "kolom": "FKL17A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9547,
+      "holdout_riil": 0.9588,
+      "kategori": 1113
+     },
+     {
+      "kolom": "FKL18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9427,
+      "holdout_riil": 0.9339,
+      "kategori": 4761
+     },
+     {
+      "kolom": "FKL18A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9414,
+      "holdout_riil": 0.9325,
+      "kategori": 5694
+     },
+     {
+      "kolom": "FKL19",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9611,
+      "holdout_riil": 0.9735,
+      "kategori": 930
+     },
+     {
+      "kolom": "FKL19A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9378,
+      "holdout_riil": 0.9724,
+      "kategori": 1088
+     },
+     {
+      "kolom": "FKL20",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9743,
+      "holdout_riil": 0.9889,
+      "kategori": 22
+     },
+     {
+      "kolom": "FKL21",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9754,
+      "holdout_riil": 0.9957,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKL22",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9786,
+      "holdout_riil": 0.987,
+      "kategori": 55
+     },
+     {
+      "kolom": "FKL23",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9865,
+      "holdout_riil": 0.9958,
+      "kategori": 4
+     },
+     {
+      "kolom": "FKL25",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9466,
+      "holdout_riil": 0.9335,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKL25_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9465,
+      "holdout_riil": 0.9335,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKL26",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9868,
+      "holdout_riil": 0.9819
+     },
+     {
+      "kolom": "FKL27",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.99,
+      "holdout_riil": 0.9786,
+      "kategori": 11
+     },
+     {
+      "kolom": "FKL28",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9844,
+      "holdout_riil": 0.9734,
+      "kategori": 14
+     },
+     {
+      "kolom": "FKL29",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9715,
+      "holdout_riil": 0.9633,
+      "kategori": 45
+     },
+     {
+      "kolom": "FKL30",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8961,
+      "holdout_riil": 0.8901,
+      "kategori": 32175
+     },
+     {
+      "kolom": "FKL31",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9776,
+      "holdout_riil": 0.9722,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL32",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9816,
+      "holdout_riil": 0.9872
+     },
+     {
+      "kolom": "FKL33",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9931,
+      "holdout_riil": 0.9951,
+      "kategori": 9
+     },
+     {
+      "kolom": "FKL34",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9644,
+      "holdout_riil": 0.9995,
+      "kategori": 60
+     },
+     {
+      "kolom": "FKL35",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9927,
+      "holdout_riil": 0.9951,
+      "kategori": 16
+     },
+     {
+      "kolom": "FKL36",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9996,
+      "holdout_riil": 0.9997,
+      "kategori": 21
+     },
+     {
+      "kolom": "FKL37",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9995,
+      "holdout_riil": 0.9997
+     },
+     {
+      "kolom": "FKL38",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9931,
+      "holdout_riil": 0.9952,
+      "kategori": 9
+     },
+     {
+      "kolom": "FKL39",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL40",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9644,
+      "holdout_riil": 0.9995,
+      "kategori": 33
+     },
+     {
+      "kolom": "FKL41",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9931,
+      "holdout_riil": 0.9951,
+      "kategori": 4
+     },
+     {
+      "kolom": "FKL42",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 0.9998,
+      "kategori": 4
+     },
+     {
+      "kolom": "FKL43",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9642,
+      "holdout_riil": 0.9994,
+      "kategori": 51
+     },
+     {
+      "kolom": "FKL44",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9926,
+      "holdout_riil": 0.994,
+      "kategori": 13
+     },
+     {
+      "kolom": "FKL45",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9986,
+      "holdout_riil": 0.9992,
+      "kategori": 17
+     },
+     {
+      "kolom": "FKL46",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9981,
+      "holdout_riil": 0.9992
+     },
+     {
+      "kolom": "FKL47",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9811,
+      "holdout_riil": 0.99
+     },
+     {
+      "kolom": "FKL48",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9811,
+      "holdout_riil": 0.99
+     },
+     {
+      "kolom": "FKL49",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 0.9999,
+      "kategori": 2
+     }
+    ],
+    "nonkapitasi": [
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.8854,
+      "holdout_riil": 0.7991
+     },
+     {
+      "kolom": "PNK03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.8856,
+      "holdout_riil": 0.8361
+     },
+     {
+      "kolom": "PNK04",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.8856,
+      "holdout_riil": 0.8361
+     },
+     {
+      "kolom": "PNK05",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.8856,
+      "holdout_riil": 0.8361
+     },
+     {
+      "kolom": "PNK06",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8716,
+      "holdout_riil": 0.6412,
+      "kategori": 31
+     },
+     {
+      "kolom": "PNK06_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8716,
+      "holdout_riil": 0.6412,
+      "kategori": 31
+     },
+     {
+      "kolom": "PNK07",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9159,
+      "holdout_riil": 0.8524
+     },
+     {
+      "kolom": "PNK08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8905,
+      "holdout_riil": 0.7461,
+      "kategori": 3
+     },
+     {
+      "kolom": "PNK09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8738,
+      "holdout_riil": 0.7907,
+      "kategori": 7
+     },
+     {
+      "kolom": "PNK10",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8618,
+      "holdout_riil": 0.7907,
+      "kategori": 10
+     },
+     {
+      "kolom": "PNK11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9357,
+      "holdout_riil": 0.9908,
+      "kategori": 3
+     },
+     {
+      "kolom": "PNK12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8748,
+      "holdout_riil": 0.8005,
+      "kategori": 5
+     },
+     {
+      "kolom": "PNK13",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.8777,
+      "holdout_riil": 0.9146
+     },
+     {
+      "kolom": "PNK13A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8012,
+      "holdout_riil": 0.7444,
+      "kategori": 87
+     },
+     {
+      "kolom": "PNK14",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.7751,
+      "holdout_riil": 0.6872,
+      "kategori": 118
+     },
+     {
+      "kolom": "PNK15",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.7751,
+      "holdout_riil": 0.6872,
+      "kategori": 131
+     },
+     {
+      "kolom": "PNK16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9074,
+      "holdout_riil": 0.8679,
+      "kategori": 54
+     },
+     {
+      "kolom": "PNK17",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9543,
+      "holdout_riil": 0.9377
+     },
+     {
+      "kolom": "PNK18",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9543,
+      "holdout_riil": 0.9377
+     },
+     {
+      "kolom": "PNK19",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.931,
+      "holdout_riil": 0.8988
+     },
+     {
+      "kolom": "PNK20",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9291,
+      "holdout_riil": 0.9369,
+      "kategori": 23
+     },
+     {
+      "kolom": "PNK21",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 1
+     }
+    ],
+    "diagnosissekunder": [
+     {
+      "kolom": "FKL24",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9217,
+      "holdout_riil": 0.8759,
+      "kategori": 6789
+     },
+     {
+      "kolom": "FKL24A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.941,
+      "holdout_riil": 0.9189,
+      "kategori": 1752
+     },
+     {
+      "kolom": "FKL24B",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9217,
+      "holdout_riil": 0.8759,
+      "kategori": 6300
+     },
+     {
+      "kolom": "FKL49",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9999,
+      "holdout_riil": 0.9999,
+      "kategori": 2
+     }
+    ]
+   },
+   "multivariat": {
+    "fkrtl": {
+     "pmse": 0.02913,
+     "pmse_ratio": 4.88,
+     "auc_diskriminator": 0.729,
+     "n_per_sisi": 60000
+    },
+    "kepesertaan": {
+     "pmse": 0.02752,
+     "pmse_ratio": 1.01,
+     "auc_diskriminator": 0.498,
+     "n_per_sisi": 785
+    }
+   },
+   "bivariat": {
+    "fkrtl": {
+     "rata2_selisih_cramers_v": 0.02502688868776022,
+     "pasangan_terjauh": [
+      {
+       "pair": "kelasÃƒÆ’Ã¢â‚¬â€pulang",
+       "riil": 0.567,
+       "sintetis": 0.155
+      },
+      {
+       "pair": "kelasÃƒÆ’Ã¢â‚¬â€regional",
+       "riil": 0.137,
+       "sintetis": 0.048
+      },
+      {
+       "pair": "jenisÃƒÆ’Ã¢â‚¬â€tagih",
+       "riil": 0.118,
+       "sintetis": 0.039
+      },
+      {
+       "pair": "pulangÃƒÆ’Ã¢â‚¬â€regional",
+       "riil": 0.103,
+       "sintetis": 0.024
+      },
+      {
+       "pair": "jenisÃƒÆ’Ã¢â‚¬â€tipe",
+       "riil": 0.456,
+       "sintetis": 0.382
+      }
+     ]
+    }
+   },
+   "relasional": {
+    "riil_training": {
+     "klaim_fkrtl_per_peserta": {
+      "rata2": 25.014,
+      "p90": 63.0,
+      "p99": 294.0,
+      "pct_ada": 78.21
+     },
+     "kunjungan_fktp_per_peserta": {
+      "rata2": 23.248,
+      "p90": 61.0,
+      "p99": 169.0,
+      "pct_ada": 84.77
+     },
+     "dx_sekunder_per_klaim": {
+      "rata2": 1.08,
+      "pct_ada": 76.06
+     },
+     "pct_klaim_dengan_rujukan": 0.22,
+     "median_hari_rujukan_ke_rs": 32.0,
+     "pct_rujukan_peserta_sama": 100.0,
+     "pct_readmisi_30h": 23.18,
+     "pct_readmisi_30h_rs_sama": 15.98,
+     "klaim_ganda_per_100rb": 14.6,
+     "pct_koreksi_verifikasi": 0.027,
+     "rata2_biaya_tagih": 982201,
+     "median_los_inap": 3.0,
+     "pct_rujukan_kab_sama": 93.5,
+     "pct_rujukan_provinsi_sama": 99.7,
+     "pct_rs_di_kab_fktp_terdaftar": 77.2,
+     "pct_fktp_di_kab_terdaftar": 93.5
+    },
+    "sintetis": {
+     "klaim_fkrtl_per_peserta": {
+      "rata2": 23.884,
+      "p90": 62.0,
+      "p99": 268.0,
+      "pct_ada": 77.81
+     },
+     "kunjungan_fktp_per_peserta": {
+      "rata2": 22.977,
+      "p90": 60.0,
+      "p99": 164.0,
+      "pct_ada": 84.98
+     },
+     "dx_sekunder_per_klaim": {
+      "rata2": 1.056,
+      "pct_ada": 75.85
+     },
+     "pct_klaim_dengan_rujukan": 0.1,
+     "median_hari_rujukan_ke_rs": 8.0,
+     "pct_rujukan_peserta_sama": 100.0,
+     "pct_readmisi_30h": 20.11,
+     "pct_readmisi_30h_rs_sama": 13.12,
+     "klaim_ganda_per_100rb": 37.6,
+     "pct_koreksi_verifikasi": 0.049,
+     "rata2_biaya_tagih": 1027617,
+     "median_los_inap": 3.0,
+     "pct_rujukan_kab_sama": 29.9,
+     "pct_rujukan_provinsi_sama": 30.3,
+     "pct_rs_di_kab_fktp_terdaftar": 75.1,
+     "pct_fktp_di_kab_terdaftar": 89.9
+    },
+    "riil_holdout": {
+     "klaim_fkrtl_per_peserta": {
+      "rata2": 24.838,
+      "p90": 63.0,
+      "p99": 297.5799999999999,
+      "pct_ada": 78.82
+     },
+     "kunjungan_fktp_per_peserta": {
+      "rata2": 22.888,
+      "p90": 59.0,
+      "p99": 164.28999999999996,
+      "pct_ada": 84.83
+     },
+     "dx_sekunder_per_klaim": {
+      "rata2": 1.065,
+      "pct_ada": 76.15
+     },
+     "pct_klaim_dengan_rujukan": 0.16,
+     "median_hari_rujukan_ke_rs": 18.5,
+     "pct_rujukan_peserta_sama": 100.0,
+     "pct_readmisi_30h": 24.81,
+     "pct_readmisi_30h_rs_sama": 17.43,
+     "klaim_ganda_per_100rb": 10.0,
+     "pct_koreksi_verifikasi": 0.026,
+     "rata2_biaya_tagih": 1024238,
+     "median_los_inap": 3.0,
+     "pct_rujukan_kab_sama": 93.8,
+     "pct_rujukan_provinsi_sama": 100.0,
+     "pct_rs_di_kab_fktp_terdaftar": 74.4,
+     "pct_fktp_di_kab_terdaftar": 93.4
+    },
+    "1-KS": {
+     "klaim_fkrtl_per_peserta": {
+      "sintetis": 0.996,
+      "holdout_riil": 0.9939
+     },
+     "kunjungan_fktp_per_peserta": {
+      "sintetis": 0.9968,
+      "holdout_riil": 0.9935
+     },
+     "dx_sekunder_per_klaim": {
+      "sintetis": 0.9904,
+      "holdout_riil": 0.9889
+     }
+    }
+   },
+   "privasi": {
+    "exact_match_pct": {
+     "kepesertaan": {
+      "sintetis": 0.0,
+      "holdout_riil": 0.224
+     },
+     "fkrtl": {
+      "sintetis": 1.734,
+      "holdout_riil": 5.65
+     }
+    },
+    "repU": {
+     "pct_unik_di_riil": 99.75,
+     "repU_sintetis_pct": 0.0,
+     "repU_holdout_pct_disesuaikan_ukuran": 0.379,
+     "catatan": "tanggal lahir sintetis digeser acak Ãƒâ€šÃ‚Â±30 hari"
+    },
+    "dcr_mia": {
+     "median_dcr_sintetis": 0.0543,
+     "median_dcr_holdout_riil": 0.0514,
+     "pct_sintetis_lebih_dekat_dari_p5_holdout": 0.0,
+     "acuan_p5": 5.0,
+     "pct_dcr_nol_sintetis": 6.94,
+     "pct_dcr_nol_holdout_riil": 6.76,
+     "mia_auc": 0.509
+    },
+    "disco_pct": {
+     "holdout_riil": 2.967,
+     "sintetis": 4.434
+    }
+   }
+  },
+  "dm": {
+   "univariat": {
+    "kepesertaan": [
+     {
+      "kolom": "PSTV03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9926,
+      "holdout_riil": 0.9922
+     },
+     {
+      "kolom": "PSTV04",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9976,
+      "holdout_riil": 0.9941,
+      "kategori": 5
+     },
+     {
+      "kolom": "PSTV05",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 0.9948,
+      "kategori": 2
+     },
+     {
+      "kolom": "PSTV06",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9982,
+      "holdout_riil": 0.9972,
+      "kategori": 3
+     },
+     {
+      "kolom": "PSTV07",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9994,
+      "holdout_riil": 0.9954,
+      "kategori": 4
+     },
+     {
+      "kolom": "PSTV08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9976,
+      "holdout_riil": 0.9944,
+      "kategori": 5
+     },
+     {
+      "kolom": "PSTV09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.991,
+      "holdout_riil": 0.988,
+      "kategori": 36
+     },
+     {
+      "kolom": "PSTV09_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.991,
+      "holdout_riil": 0.9878,
+      "kategori": 40
+     },
+     {
+      "kolom": "PSTV10",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9891,
+      "holdout_riil": 0.9956
+     },
+     {
+      "kolom": "PSTV11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9908,
+      "holdout_riil": 0.9968,
+      "kategori": 10
+     },
+     {
+      "kolom": "PSTV12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9892,
+      "holdout_riil": 0.9984,
+      "kategori": 3
+     },
+     {
+      "kolom": "PSTV13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9911,
+      "holdout_riil": 0.9891,
+      "kategori": 36
+     },
+     {
+      "kolom": "PSTV13_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.991,
+      "holdout_riil": 0.9891,
+      "kategori": 40
+     },
+     {
+      "kolom": "PSTV14",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9899,
+      "holdout_riil": 0.9954
+     },
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.987,
+      "holdout_riil": 0.9942
+     },
+     {
+      "kolom": "PSTV16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9998,
+      "holdout_riil": 0.9994,
+      "kategori": 3
+     },
+     {
+      "kolom": "PSTV17",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9984,
+      "holdout_riil": 0.9971,
+      "kategori": 20
+     },
+     {
+      "kolom": "PSTV18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9976,
+      "holdout_riil": 0.9974,
+      "kategori": 6
+     }
+    ],
+    "fktpkapitasi": [
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9666,
+      "holdout_riil": 0.9915
+     },
+     {
+      "kolom": "FKP03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.977,
+      "holdout_riil": 0.9973
+     },
+     {
+      "kolom": "FKP04",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9769,
+      "holdout_riil": 0.9973
+     },
+     {
+      "kolom": "FKP05",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9865,
+      "holdout_riil": 0.9813,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKP05_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9862,
+      "holdout_riil": 0.981,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKP06",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9896,
+      "holdout_riil": 0.9922
+     },
+     {
+      "kolom": "FKP07",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.986,
+      "holdout_riil": 0.9954,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKP08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9749,
+      "holdout_riil": 0.9965,
+      "kategori": 6
+     },
+     {
+      "kolom": "FKP09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9731,
+      "holdout_riil": 0.9907,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKP10",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9829,
+      "holdout_riil": 0.9994,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKP11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.977,
+      "holdout_riil": 0.9957,
+      "kategori": 23
+     },
+     {
+      "kolom": "FKP12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9953,
+      "holdout_riil": 0.9908,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKP13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9755,
+      "holdout_riil": 0.9985,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKP14",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9733,
+      "holdout_riil": 0.993
+     },
+     {
+      "kolom": "FKP14A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9645,
+      "holdout_riil": 0.9839,
+      "kategori": 1282
+     },
+     {
+      "kolom": "FKP15",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9645,
+      "holdout_riil": 0.9839,
+      "kategori": 1316
+     },
+     {
+      "kolom": "FKP15A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9587,
+      "holdout_riil": 0.9721,
+      "kategori": 5328
+     },
+     {
+      "kolom": "FKP16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9895,
+      "holdout_riil": 0.9957,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKP16_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9895,
+      "holdout_riil": 0.9956,
+      "kategori": 37
+     },
+     {
+      "kolom": "FKP17",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9916,
+      "holdout_riil": 0.9953
+     },
+     {
+      "kolom": "FKP18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9903,
+      "holdout_riil": 0.9989,
+      "kategori": 11
+     },
+     {
+      "kolom": "FKP19",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.99,
+      "holdout_riil": 0.9992,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKP20",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9888,
+      "holdout_riil": 0.9981,
+      "kategori": 27
+     },
+     {
+      "kolom": "FKP21",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9902,
+      "holdout_riil": 0.9962
+     },
+     {
+      "kolom": "FKP22",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9836,
+      "holdout_riil": 0.9991,
+      "kategori": 2
+     }
+    ],
+    "fkrtl": [
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9704,
+      "holdout_riil": 0.9914
+     },
+     {
+      "kolom": "FKL03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9828,
+      "holdout_riil": 0.9956
+     },
+     {
+      "kolom": "FKL04",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9829,
+      "holdout_riil": 0.9956
+     },
+     {
+      "kolom": "FKL05",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9815,
+      "holdout_riil": 0.9743,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKL05_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9812,
+      "holdout_riil": 0.9743,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKL06",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9852,
+      "holdout_riil": 0.9899
+     },
+     {
+      "kolom": "FKL07",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9891,
+      "holdout_riil": 0.9887,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKL08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9921,
+      "holdout_riil": 0.9979,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9713,
+      "holdout_riil": 0.9888,
+      "kategori": 25
+     },
+     {
+      "kolom": "FKL10",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9984,
+      "holdout_riil": 0.9998,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9854,
+      "holdout_riil": 0.9914,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKL12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9933,
+      "holdout_riil": 0.9798,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9986,
+      "holdout_riil": 0.9997,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKL14",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.993,
+      "holdout_riil": 0.9981,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9894,
+      "holdout_riil": 0.9861
+     },
+     {
+      "kolom": "FKL15A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9619,
+      "holdout_riil": 0.9596,
+      "kategori": 1358
+     },
+     {
+      "kolom": "FKL16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9401,
+      "holdout_riil": 0.9143,
+      "kategori": 4352
+     },
+     {
+      "kolom": "FKL16A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9401,
+      "holdout_riil": 0.9143,
+      "kategori": 4764
+     },
+     {
+      "kolom": "FKL17",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9939,
+      "holdout_riil": 0.9965
+     },
+     {
+      "kolom": "FKL17A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9837,
+      "holdout_riil": 0.9835,
+      "kategori": 956
+     },
+     {
+      "kolom": "FKL18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9736,
+      "holdout_riil": 0.9729,
+      "kategori": 3329
+     },
+     {
+      "kolom": "FKL18A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9736,
+      "holdout_riil": 0.9729,
+      "kategori": 3601
+     },
+     {
+      "kolom": "FKL19",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9828,
+      "holdout_riil": 0.9909,
+      "kategori": 637
+     },
+     {
+      "kolom": "FKL19A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9828,
+      "holdout_riil": 0.9909,
+      "kategori": 721
+     },
+     {
+      "kolom": "FKL20",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9924,
+      "holdout_riil": 0.9967,
+      "kategori": 22
+     },
+     {
+      "kolom": "FKL21",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.998,
+      "holdout_riil": 0.9974,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKL22",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9887,
+      "holdout_riil": 0.9953,
+      "kategori": 51
+     },
+     {
+      "kolom": "FKL23",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9983,
+      "holdout_riil": 0.9995,
+      "kategori": 4
+     },
+     {
+      "kolom": "FKL25",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9801,
+      "holdout_riil": 0.9745,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKL25_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9796,
+      "holdout_riil": 0.9745,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKL26",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9851,
+      "holdout_riil": 0.99
+     },
+     {
+      "kolom": "FKL27",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.995,
+      "holdout_riil": 0.9917,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKL28",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9966,
+      "holdout_riil": 0.996,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKL29",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9824,
+      "holdout_riil": 0.9857,
+      "kategori": 29
+     },
+     {
+      "kolom": "FKL30",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9373,
+      "holdout_riil": 0.9323,
+      "kategori": 21203
+     },
+     {
+      "kolom": "FKL31",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9858,
+      "holdout_riil": 0.9879,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL32",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9876,
+      "holdout_riil": 0.9954
+     },
+     {
+      "kolom": "FKL33",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 1
+     },
+     {
+      "kolom": "FKL34",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 1
+     },
+     {
+      "kolom": "FKL35",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9998,
+      "holdout_riil": 0.9998,
+      "kategori": 12
+     },
+     {
+      "kolom": "FKL36",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9998,
+      "holdout_riil": 0.9998,
+      "kategori": 12
+     },
+     {
+      "kolom": "FKL37",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9989,
+      "holdout_riil": 0.9998
+     },
+     {
+      "kolom": "FKL38",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKL39",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL40",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 0.9999,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKL41",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 0.9999,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKL42",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 0.9999,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKL43",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9996,
+      "holdout_riil": 0.9999,
+      "kategori": 24
+     },
+     {
+      "kolom": "FKL44",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9999,
+      "holdout_riil": 0.9999,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKL45",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9999,
+      "holdout_riil": 0.9999,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKL46",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9999,
+      "holdout_riil": 0.9999,
+      "kategori": 11
+     },
+     {
+      "kolom": "FKL47",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9886,
+      "holdout_riil": 0.9954
+     },
+     {
+      "kolom": "FKL48",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9886,
+      "holdout_riil": 0.9954
+     }
+    ],
+    "nonkapitasi": [
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9322,
+      "holdout_riil": 0.9181
+     },
+     {
+      "kolom": "PNK03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9382,
+      "holdout_riil": 0.9378
+     },
+     {
+      "kolom": "PNK04",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9382,
+      "holdout_riil": 0.9378
+     },
+     {
+      "kolom": "PNK05",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9382,
+      "holdout_riil": 0.9388
+     },
+     {
+      "kolom": "PNK06",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.769,
+      "holdout_riil": 0.7592,
+      "kategori": 36
+     },
+     {
+      "kolom": "PNK06_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.769,
+      "holdout_riil": 0.7577,
+      "kategori": 36
+     },
+     {
+      "kolom": "PNK07",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.8771,
+      "holdout_riil": 0.8352
+     },
+     {
+      "kolom": "PNK08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.968,
+      "holdout_riil": 0.9899,
+      "kategori": 5
+     },
+     {
+      "kolom": "PNK09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9403,
+      "holdout_riil": 0.8945,
+      "kategori": 6
+     },
+     {
+      "kolom": "PNK10",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.932,
+      "holdout_riil": 0.8857,
+      "kategori": 10
+     },
+     {
+      "kolom": "PNK11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9298,
+      "holdout_riil": 0.9445,
+      "kategori": 3
+     },
+     {
+      "kolom": "PNK12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9464,
+      "holdout_riil": 0.8999,
+      "kategori": 5
+     },
+     {
+      "kolom": "PNK13",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9411,
+      "holdout_riil": 0.919
+     },
+     {
+      "kolom": "PNK13A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9081,
+      "holdout_riil": 0.8754,
+      "kategori": 91
+     },
+     {
+      "kolom": "PNK14",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8991,
+      "holdout_riil": 0.8062,
+      "kategori": 140
+     },
+     {
+      "kolom": "PNK15",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8991,
+      "holdout_riil": 0.8062,
+      "kategori": 163
+     },
+     {
+      "kolom": "PNK16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9132,
+      "holdout_riil": 0.8849,
+      "kategori": 49
+     },
+     {
+      "kolom": "PNK17",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9535,
+      "holdout_riil": 0.9362
+     },
+     {
+      "kolom": "PNK18",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9535,
+      "holdout_riil": 0.9362
+     },
+     {
+      "kolom": "PNK19",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9465,
+      "holdout_riil": 0.9543
+     },
+     {
+      "kolom": "PNK20",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9379,
+      "holdout_riil": 0.9287,
+      "kategori": 1
+     }
+    ],
+    "diagnosissekunder": [
+     {
+      "kolom": "FKL24",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9626,
+      "holdout_riil": 0.9479,
+      "kategori": 4608
+     },
+     {
+      "kolom": "FKL24A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9626,
+      "holdout_riil": 0.9479,
+      "kategori": 7111
+     },
+     {
+      "kolom": "FKL24B",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9747,
+      "holdout_riil": 0.9687,
+      "kategori": 1516
+     }
+    ]
+   },
+   "multivariat": {
+    "fkrtl": {
+     "pmse": 0.01374,
+     "pmse_ratio": 2.51,
+     "auc_diskriminator": 0.611,
+     "n_per_sisi": 60000
+    },
+    "kepesertaan": {
+     "pmse": 0.02153,
+     "pmse_ratio": 0.96,
+     "auc_diskriminator": 0.506,
+     "n_per_sisi": 8863
+    }
+   },
+   "bivariat": {
+    "fkrtl": {
+     "rata2_selisih_cramers_v": 0.012157477189880968,
+     "pasangan_terjauh": [
+      {
+       "pair": "jenisÃƒÆ’Ã¢â‚¬â€poli",
+       "riil": 0.225,
+       "sintetis": 0.114
+      },
+      {
+       "pair": "jenisÃƒÆ’Ã¢â‚¬â€cmg",
+       "riil": 0.15,
+       "sintetis": 0.091
+      },
+      {
+       "pair": "tipeÃƒÆ’Ã¢â‚¬â€poli",
+       "riil": 0.105,
+       "sintetis": 0.05
+      },
+      {
+       "pair": "jenisÃƒÆ’Ã¢â‚¬â€tipe",
+       "riil": 0.488,
+       "sintetis": 0.441
+      },
+      {
+       "pair": "tipeÃƒÆ’Ã¢â‚¬â€cmg",
+       "riil": 0.097,
+       "sintetis": 0.051
+      }
+     ]
+    }
+   },
+   "relasional": {
+    "riil_training": {
+     "klaim_fkrtl_per_peserta": {
+      "rata2": 6.553,
+      "p90": 19.0,
+      "p99": 71.0,
+      "pct_ada": 45.0
+     },
+     "kunjungan_fktp_per_peserta": {
+      "rata2": 8.711,
+      "p90": 24.0,
+      "p99": 62.0,
+      "pct_ada": 62.89
+     },
+     "dx_sekunder_per_klaim": {
+      "rata2": 1.591,
+      "pct_ada": 91.45
+     },
+     "pct_klaim_dengan_rujukan": 68.94,
+     "median_hari_rujukan_ke_rs": 32.0,
+     "pct_rujukan_peserta_sama": 100.0,
+     "pct_readmisi_30h": 22.3,
+     "pct_readmisi_30h_rs_sama": 13.27,
+     "klaim_ganda_per_100rb": 4.5,
+     "pct_koreksi_verifikasi": 0.042,
+     "rata2_biaya_tagih": 706661,
+     "median_los_inap": 3.0,
+     "pct_rujukan_kab_sama": 88.0,
+     "pct_rujukan_provinsi_sama": 99.3,
+     "pct_rs_di_kab_fktp_terdaftar": 82.9,
+     "pct_fktp_di_kab_terdaftar": 98.2
+    },
+    "sintetis": {
+     "klaim_fkrtl_per_peserta": {
+      "rata2": 6.52,
+      "p90": 19.0,
+      "p99": 69.0,
+      "pct_ada": 45.12
+     },
+     "kunjungan_fktp_per_peserta": {
+      "rata2": 8.845,
+      "p90": 25.0,
+      "p99": 62.0,
+      "pct_ada": 63.55
+     },
+     "dx_sekunder_per_klaim": {
+      "rata2": 1.566,
+      "pct_ada": 91.16
+     },
+     "pct_klaim_dengan_rujukan": 69.81,
+     "median_hari_rujukan_ke_rs": 24.0,
+     "pct_rujukan_peserta_sama": 100.0,
+     "pct_readmisi_30h": 21.63,
+     "pct_readmisi_30h_rs_sama": 13.56,
+     "klaim_ganda_per_100rb": 36.0,
+     "pct_koreksi_verifikasi": 0.081,
+     "rata2_biaya_tagih": 694997,
+     "median_los_inap": 3.0,
+     "pct_rujukan_kab_sama": 82.5,
+     "pct_rujukan_provinsi_sama": 98.1,
+     "pct_rs_di_kab_fktp_terdaftar": 80.3,
+     "pct_fktp_di_kab_terdaftar": 97.6
+    },
+    "riil_holdout": {
+     "klaim_fkrtl_per_peserta": {
+      "rata2": 6.529,
+      "p90": 19.0,
+      "p99": 71.0,
+      "pct_ada": 44.74
+     },
+     "kunjungan_fktp_per_peserta": {
+      "rata2": 8.661,
+      "p90": 24.0,
+      "p99": 62.0,
+      "pct_ada": 62.77
+     },
+     "dx_sekunder_per_klaim": {
+      "rata2": 1.574,
+      "pct_ada": 91.14
+     },
+     "pct_klaim_dengan_rujukan": 69.11,
+     "median_hari_rujukan_ke_rs": 32.0,
+     "pct_rujukan_peserta_sama": 100.0,
+     "pct_readmisi_30h": 21.43,
+     "pct_readmisi_30h_rs_sama": 12.33,
+     "klaim_ganda_per_100rb": 5.6,
+     "pct_koreksi_verifikasi": 0.038,
+     "rata2_biaya_tagih": 708064,
+     "median_los_inap": 3.0,
+     "pct_rujukan_kab_sama": 87.6,
+     "pct_rujukan_provinsi_sama": 99.5,
+     "pct_rs_di_kab_fktp_terdaftar": 82.2,
+     "pct_fktp_di_kab_terdaftar": 98.1
+    },
+    "1-KS": {
+     "klaim_fkrtl_per_peserta": {
+      "sintetis": 0.9981,
+      "holdout_riil": 0.9965
+     },
+     "kunjungan_fktp_per_peserta": {
+      "sintetis": 0.9891,
+      "holdout_riil": 0.9974
+     },
+     "dx_sekunder_per_klaim": {
+      "sintetis": 0.9908,
+      "holdout_riil": 0.9934
+     }
+    }
+   },
+   "privasi": {
+    "exact_match_pct": {
+     "kepesertaan": {
+      "sintetis": 1.407,
+      "holdout_riil": 1.17
+     },
+     "fkrtl": {
+      "sintetis": 23.117,
+      "holdout_riil": 39.503
+     }
+    },
+    "repU": {
+     "pct_unik_di_riil": 96.76,
+     "repU_sintetis_pct": 0.0,
+     "repU_holdout_pct_disesuaikan_ukuran": 2.869,
+     "catatan": "tanggal lahir sintetis digeser acak Ãƒâ€šÃ‚Â±30 hari"
+    },
+    "dcr_mia": {
+     "median_dcr_sintetis": 0.0103,
+     "median_dcr_holdout_riil": 0.0107,
+     "pct_sintetis_lebih_dekat_dari_p5_holdout": 0.0,
+     "acuan_p5": 5.0,
+     "pct_dcr_nol_sintetis": 25.08,
+     "pct_dcr_nol_holdout_riil": 24.9,
+     "mia_auc": 0.502
+    },
+    "disco_pct": {
+     "holdout_riil": 15.841,
+     "sintetis": 11.529
+    }
+   }
+  },
+  "kesehatan_mental": {
+   "univariat": {
+    "kepesertaan": [
+     {
+      "kolom": "PSTV03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9882,
+      "holdout_riil": 0.9881
+     },
+     {
+      "kolom": "PSTV04",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9989,
+      "holdout_riil": 0.9956,
+      "kategori": 5
+     },
+     {
+      "kolom": "PSTV05",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9984,
+      "holdout_riil": 0.999,
+      "kategori": 2
+     },
+     {
+      "kolom": "PSTV06",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9988,
+      "holdout_riil": 0.9993,
+      "kategori": 3
+     },
+     {
+      "kolom": "PSTV07",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9994,
+      "holdout_riil": 0.9983,
+      "kategori": 4
+     },
+     {
+      "kolom": "PSTV08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9968,
+      "holdout_riil": 0.9965,
+      "kategori": 5
+     },
+     {
+      "kolom": "PSTV09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9865,
+      "holdout_riil": 0.9791,
+      "kategori": 36
+     },
+     {
+      "kolom": "PSTV09_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9862,
+      "holdout_riil": 0.9791,
+      "kategori": 40
+     },
+     {
+      "kolom": "PSTV10",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9892,
+      "holdout_riil": 0.9922
+     },
+     {
+      "kolom": "PSTV11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9787,
+      "holdout_riil": 0.9921,
+      "kategori": 10
+     },
+     {
+      "kolom": "PSTV12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.978,
+      "holdout_riil": 0.9941,
+      "kategori": 3
+     },
+     {
+      "kolom": "PSTV13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9863,
+      "holdout_riil": 0.9796,
+      "kategori": 36
+     },
+     {
+      "kolom": "PSTV13_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9858,
+      "holdout_riil": 0.9795,
+      "kategori": 40
+     },
+     {
+      "kolom": "PSTV14",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9947,
+      "holdout_riil": 0.9931
+     },
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.991,
+      "holdout_riil": 0.9926
+     },
+     {
+      "kolom": "PSTV16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9989,
+      "holdout_riil": 0.9995,
+      "kategori": 2
+     },
+     {
+      "kolom": "PSTV17",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.999,
+      "holdout_riil": 0.9948,
+      "kategori": 17
+     },
+     {
+      "kolom": "PSTV18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9997,
+      "holdout_riil": 0.9995,
+      "kategori": 2
+     }
+    ],
+    "fktpkapitasi": [
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9899,
+      "holdout_riil": 0.9875
+     },
+     {
+      "kolom": "FKP03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9845,
+      "holdout_riil": 0.9929
+     },
+     {
+      "kolom": "FKP04",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9845,
+      "holdout_riil": 0.9929
+     },
+     {
+      "kolom": "FKP05",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9831,
+      "holdout_riil": 0.9709,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKP05_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9817,
+      "holdout_riil": 0.9703,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKP06",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9936,
+      "holdout_riil": 0.9889
+     },
+     {
+      "kolom": "FKP07",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9882,
+      "holdout_riil": 0.9941,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKP08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9847,
+      "holdout_riil": 0.9939,
+      "kategori": 6
+     },
+     {
+      "kolom": "FKP09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9847,
+      "holdout_riil": 0.9926,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKP10",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9988,
+      "holdout_riil": 0.9993,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKP11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9922,
+      "holdout_riil": 0.9915,
+      "kategori": 23
+     },
+     {
+      "kolom": "FKP12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9963,
+      "holdout_riil": 0.9886,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKP13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9849,
+      "holdout_riil": 0.9947,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKP14",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9902,
+      "holdout_riil": 0.9924
+     },
+     {
+      "kolom": "FKP14A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9733,
+      "holdout_riil": 0.9657,
+      "kategori": 1507
+     },
+     {
+      "kolom": "FKP15",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9733,
+      "holdout_riil": 0.9657,
+      "kategori": 1417
+     },
+     {
+      "kolom": "FKP15A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9598,
+      "holdout_riil": 0.943,
+      "kategori": 4990
+     },
+     {
+      "kolom": "FKP16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9847,
+      "holdout_riil": 0.9908,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKP16_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9846,
+      "holdout_riil": 0.9908,
+      "kategori": 37
+     },
+     {
+      "kolom": "FKP17",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9849,
+      "holdout_riil": 0.9927
+     },
+     {
+      "kolom": "FKP18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9862,
+      "holdout_riil": 0.9954,
+      "kategori": 11
+     },
+     {
+      "kolom": "FKP19",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9883,
+      "holdout_riil": 0.9954,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKP20",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9845,
+      "holdout_riil": 0.9914,
+      "kategori": 27
+     },
+     {
+      "kolom": "FKP21",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9808,
+      "holdout_riil": 0.9923
+     },
+     {
+      "kolom": "FKP22",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9958,
+      "holdout_riil": 0.9948,
+      "kategori": 2
+     }
+    ],
+    "fkrtl": [
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9881,
+      "holdout_riil": 0.984
+     },
+     {
+      "kolom": "FKL03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9811,
+      "holdout_riil": 0.9953
+     },
+     {
+      "kolom": "FKL04",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9809,
+      "holdout_riil": 0.9953
+     },
+     {
+      "kolom": "FKL05",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.978,
+      "holdout_riil": 0.9637,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKL05_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9753,
+      "holdout_riil": 0.9634,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKL06",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9898,
+      "holdout_riil": 0.9882
+     },
+     {
+      "kolom": "FKL07",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9739,
+      "holdout_riil": 0.9862,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKL08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9933,
+      "holdout_riil": 0.9987,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9656,
+      "holdout_riil": 0.9727,
+      "kategori": 25
+     },
+     {
+      "kolom": "FKL10",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9988,
+      "holdout_riil": 0.9983,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9697,
+      "holdout_riil": 0.9893,
+      "kategori": 38
+     },
+     {
+      "kolom": "FKL12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9927,
+      "holdout_riil": 0.9873,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9995,
+      "holdout_riil": 0.9988,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKL14",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9937,
+      "holdout_riil": 0.9972,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9768,
+      "holdout_riil": 0.9929
+     },
+     {
+      "kolom": "FKL15A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9476,
+      "holdout_riil": 0.9355,
+      "kategori": 1423
+     },
+     {
+      "kolom": "FKL16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9228,
+      "holdout_riil": 0.8895,
+      "kategori": 5267
+     },
+     {
+      "kolom": "FKL16A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9228,
+      "holdout_riil": 0.8895,
+      "kategori": 5313
+     },
+     {
+      "kolom": "FKL17",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9896,
+      "holdout_riil": 0.9855
+     },
+     {
+      "kolom": "FKL17A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9784,
+      "holdout_riil": 0.9745,
+      "kategori": 1175
+     },
+     {
+      "kolom": "FKL18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.956,
+      "holdout_riil": 0.9639,
+      "kategori": 4153
+     },
+     {
+      "kolom": "FKL18A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.956,
+      "holdout_riil": 0.9639,
+      "kategori": 3721
+     },
+     {
+      "kolom": "FKL19",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9781,
+      "holdout_riil": 0.9843,
+      "kategori": 719
+     },
+     {
+      "kolom": "FKL19A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9781,
+      "holdout_riil": 0.9843,
+      "kategori": 768
+     },
+     {
+      "kolom": "FKL20",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9904,
+      "holdout_riil": 0.9925,
+      "kategori": 23
+     },
+     {
+      "kolom": "FKL21",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9953,
+      "holdout_riil": 0.9955,
+      "kategori": 9
+     },
+     {
+      "kolom": "FKL22",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9868,
+      "holdout_riil": 0.9908,
+      "kategori": 56
+     },
+     {
+      "kolom": "FKL23",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9988,
+      "holdout_riil": 0.9983,
+      "kategori": 4
+     },
+     {
+      "kolom": "FKL25",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9771,
+      "holdout_riil": 0.9618,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKL25_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.974,
+      "holdout_riil": 0.9615,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKL26",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9896,
+      "holdout_riil": 0.9876
+     },
+     {
+      "kolom": "FKL27",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9877,
+      "holdout_riil": 0.9909,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKL28",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9911,
+      "holdout_riil": 0.9914,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKL29",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9826,
+      "holdout_riil": 0.9835,
+      "kategori": 29
+     },
+     {
+      "kolom": "FKL30",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9315,
+      "holdout_riil": 0.9196,
+      "kategori": 17539
+     },
+     {
+      "kolom": "FKL31",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9939,
+      "holdout_riil": 0.9936,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL32",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9854,
+      "holdout_riil": 0.9843
+     },
+     {
+      "kolom": "FKL33",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9999,
+      "holdout_riil": 0.9999,
+      "kategori": 13
+     },
+     {
+      "kolom": "FKL34",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9999,
+      "holdout_riil": 0.9999
+     },
+     {
+      "kolom": "FKL35",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 0.9999,
+      "kategori": 11
+     },
+     {
+      "kolom": "FKL36",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 0.9999,
+      "kategori": 11
+     },
+     {
+      "kolom": "FKL37",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9998,
+      "holdout_riil": 0.9999
+     },
+     {
+      "kolom": "FKL38",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKL39",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL40",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 11
+     },
+     {
+      "kolom": "FKL41",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKL42",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKL43",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9997,
+      "holdout_riil": 0.9999,
+      "kategori": 24
+     },
+     {
+      "kolom": "FKL44",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9999,
+      "holdout_riil": 0.9998,
+      "kategori": 6
+     },
+     {
+      "kolom": "FKL45",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9999,
+      "holdout_riil": 0.9998,
+      "kategori": 6
+     },
+     {
+      "kolom": "FKL46",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9999,
+      "holdout_riil": 0.9998,
+      "kategori": 13
+     },
+     {
+      "kolom": "FKL47",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9837,
+      "holdout_riil": 0.9842
+     },
+     {
+      "kolom": "FKL48",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9837,
+      "holdout_riil": 0.9842
+     }
+    ],
+    "nonkapitasi": [
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.8527,
+      "holdout_riil": 0.8607
+     },
+     {
+      "kolom": "PNK03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.8877,
+      "holdout_riil": 0.8958
+     },
+     {
+      "kolom": "PNK04",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.8877,
+      "holdout_riil": 0.8958
+     },
+     {
+      "kolom": "PNK05",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.887,
+      "holdout_riil": 0.8958
+     },
+     {
+      "kolom": "PNK06",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.6291,
+      "holdout_riil": 0.5531,
+      "kategori": 27
+     },
+     {
+      "kolom": "PNK06_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.6291,
+      "holdout_riil": 0.5531,
+      "kategori": 27
+     },
+     {
+      "kolom": "PNK07",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.7534,
+      "holdout_riil": 0.7714
+     },
+     {
+      "kolom": "PNK08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9701,
+      "holdout_riil": 0.8867,
+      "kategori": 4
+     },
+     {
+      "kolom": "PNK09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9408,
+      "holdout_riil": 0.8617,
+      "kategori": 5
+     },
+     {
+      "kolom": "PNK10",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9215,
+      "holdout_riil": 0.8506,
+      "kategori": 9
+     },
+     {
+      "kolom": "PNK11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9632,
+      "holdout_riil": 0.854,
+      "kategori": 3
+     },
+     {
+      "kolom": "PNK12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8668,
+      "holdout_riil": 0.8929,
+      "kategori": 5
+     },
+     {
+      "kolom": "PNK13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8432,
+      "holdout_riil": 0.6948,
+      "kategori": 49
+     },
+     {
+      "kolom": "PNK13A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8432,
+      "holdout_riil": 0.6948,
+      "kategori": 52
+     },
+     {
+      "kolom": "PNK14",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.7884,
+      "holdout_riil": 0.6461,
+      "kategori": 72
+     },
+     {
+      "kolom": "PNK15",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.7884,
+      "holdout_riil": 0.6461,
+      "kategori": 88
+     },
+     {
+      "kolom": "PNK16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9015,
+      "holdout_riil": 0.7967,
+      "kategori": 49
+     },
+     {
+      "kolom": "PNK17",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9139,
+      "holdout_riil": 0.7998,
+      "kategori": 48
+     },
+     {
+      "kolom": "PNK18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9139,
+      "holdout_riil": 0.7998,
+      "kategori": 48
+     },
+     {
+      "kolom": "PNK19",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9255,
+      "holdout_riil": 0.8608
+     },
+     {
+      "kolom": "PNK20",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9668,
+      "holdout_riil": 0.8289,
+      "kategori": 1
+     }
+    ],
+    "diagnosissekunder": [
+     {
+      "kolom": "FKL24",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9431,
+      "holdout_riil": 0.914,
+      "kategori": 6313
+     },
+     {
+      "kolom": "FKL24A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9592,
+      "holdout_riil": 0.946,
+      "kategori": 1663
+     },
+     {
+      "kolom": "FKL24B",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9592,
+      "holdout_riil": 0.946,
+      "kategori": 1622
+     }
+    ]
+   },
+   "multivariat": {
+    "fkrtl": {
+     "pmse": 0.01909,
+     "pmse_ratio": 3.54,
+     "auc_diskriminator": 0.651,
+     "n_per_sisi": 60000
+    },
+    "kepesertaan": {
+     "pmse": 0.02493,
+     "pmse_ratio": 0.99,
+     "auc_diskriminator": 0.505,
+     "n_per_sisi": 4969
+    }
+   },
+   "bivariat": {
+    "fkrtl": {
+     "rata2_selisih_cramers_v": 0.014935312106388324,
+     "pasangan_terjauh": [
+      {
+       "pair": "pulangÃƒÆ’Ã¢â‚¬â€keparahan",
+       "riil": 0.173,
+       "sintetis": 0.086
+      },
+      {
+       "pair": "tipeÃƒÆ’Ã¢â‚¬â€poli",
+       "riil": 0.146,
+       "sintetis": 0.082
+      },
+      {
+       "pair": "milikÃƒÆ’Ã¢â‚¬â€poli",
+       "riil": 0.116,
+       "sintetis": 0.066
+      },
+      {
+       "pair": "jenisÃƒÆ’Ã¢â‚¬â€keparahan",
+       "riil": 0.076,
+       "sintetis": 0.027
+      },
+      {
+       "pair": "jenisÃƒÆ’Ã¢â‚¬â€poli",
+       "riil": 0.073,
+       "sintetis": 0.028
+      }
+     ]
+    }
+   },
+   "relasional": {
+    "riil_training": {
+     "klaim_fkrtl_per_peserta": {
+      "rata2": 9.959,
+      "p90": 24.0,
+      "p99": 72.0,
+      "pct_ada": 77.55
+     },
+     "kunjungan_fktp_per_peserta": {
+      "rata2": 7.536,
+      "p90": 17.0,
+      "p99": 42.0,
+      "pct_ada": 90.66
+     },
+     "dx_sekunder_per_klaim": {
+      "rata2": 1.23,
+      "pct_ada": 90.73
+     },
+     "pct_klaim_dengan_rujukan": null,
+     "median_hari_rujukan_ke_rs": null,
+     "pct_rujukan_peserta_sama": null,
+     "pct_readmisi_30h": 21.31,
+     "pct_readmisi_30h_rs_sama": 13.19,
+     "klaim_ganda_per_100rb": 8.3,
+     "pct_koreksi_verifikasi": 0.045,
+     "rata2_biaya_tagih": 518493,
+     "median_los_inap": 4.0,
+     "pct_rujukan_kab_sama": null,
+     "pct_rujukan_provinsi_sama": null,
+     "pct_rs_di_kab_fktp_terdaftar": 78.6,
+     "pct_fktp_di_kab_terdaftar": 97.6
+    },
+    "sintetis": {
+     "klaim_fkrtl_per_peserta": {
+      "rata2": 9.796,
+      "p90": 24.0,
+      "p99": 70.0,
+      "pct_ada": 77.27
+     },
+     "kunjungan_fktp_per_peserta": {
+      "rata2": 7.616,
+      "p90": 17.0,
+      "p99": 42.0,
+      "pct_ada": 91.33
+     },
+     "dx_sekunder_per_klaim": {
+      "rata2": 1.212,
+      "pct_ada": 90.24
+     },
+     "pct_klaim_dengan_rujukan": null,
+     "median_hari_rujukan_ke_rs": null,
+     "pct_rujukan_peserta_sama": null,
+     "pct_readmisi_30h": 19.72,
+     "pct_readmisi_30h_rs_sama": 12.21,
+     "klaim_ganda_per_100rb": 36.2,
+     "pct_koreksi_verifikasi": 0.076,
+     "rata2_biaya_tagih": 493106,
+     "median_los_inap": 3.0,
+     "pct_rujukan_kab_sama": null,
+     "pct_rujukan_provinsi_sama": null,
+     "pct_rs_di_kab_fktp_terdaftar": 76.5,
+     "pct_fktp_di_kab_terdaftar": 95.8
+    },
+    "riil_holdout": {
+     "klaim_fkrtl_per_peserta": {
+      "rata2": 10.183,
+      "p90": 25.0,
+      "p99": 71.4900000000016,
+      "pct_ada": 78.7
+     },
+     "kunjungan_fktp_per_peserta": {
+      "rata2": 7.678,
+      "p90": 17.0,
+      "p99": 42.0,
+      "pct_ada": 91.09
+     },
+     "dx_sekunder_per_klaim": {
+      "rata2": 1.224,
+      "pct_ada": 90.5
+     },
+     "pct_klaim_dengan_rujukan": null,
+     "median_hari_rujukan_ke_rs": null,
+     "pct_rujukan_peserta_sama": null,
+     "pct_readmisi_30h": 23.24,
+     "pct_readmisi_30h_rs_sama": 14.5,
+     "klaim_ganda_per_100rb": 7.6,
+     "pct_koreksi_verifikasi": 0.049,
+     "rata2_biaya_tagih": 519897,
+     "median_los_inap": 3.0,
+     "pct_rujukan_kab_sama": null,
+     "pct_rujukan_provinsi_sama": null,
+     "pct_rs_di_kab_fktp_terdaftar": 78.5,
+     "pct_fktp_di_kab_terdaftar": 97.5
+    },
+    "1-KS": {
+     "klaim_fkrtl_per_peserta": {
+      "sintetis": 0.9964,
+      "holdout_riil": 0.9855
+     },
+     "kunjungan_fktp_per_peserta": {
+      "sintetis": 0.9933,
+      "holdout_riil": 0.9877
+     },
+     "dx_sekunder_per_klaim": {
+      "sintetis": 0.995,
+      "holdout_riil": 0.9977
+     }
+    }
+   },
+   "privasi": {
+    "exact_match_pct": {
+     "kepesertaan": {
+      "sintetis": 0.11,
+      "holdout_riil": 0.242
+     },
+     "fkrtl": {
+      "sintetis": 11.689,
+      "holdout_riil": 43.413
+     }
+    },
+    "repU": {
+     "pct_unik_di_riil": 99.32,
+     "repU_sintetis_pct": 0.0,
+     "repU_holdout_pct_disesuaikan_ukuran": 0.739,
+     "catatan": "tanggal lahir sintetis digeser acak Ãƒâ€šÃ‚Â±30 hari"
+    },
+    "dcr_mia": {
+     "median_dcr_sintetis": 0.0114,
+     "median_dcr_holdout_riil": 0.0097,
+     "pct_sintetis_lebih_dekat_dari_p5_holdout": 0.0,
+     "acuan_p5": 5.0,
+     "pct_dcr_nol_sintetis": 21.16,
+     "pct_dcr_nol_holdout_riil": 22.55,
+     "mia_auc": 0.499
+    },
+    "disco_pct": {
+     "holdout_riil": 15.959,
+     "sintetis": 13.973
+    }
+   }
+  },
+  "kia_ibu": {
+   "univariat": {
+    "kepesertaan": [
+     {
+      "kolom": "PSTV03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9957,
+      "holdout_riil": 0.9963
+     },
+     {
+      "kolom": "PSTV04",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9989,
+      "holdout_riil": 0.9987,
+      "kategori": 5
+     },
+     {
+      "kolom": "PSTV05",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 1
+     },
+     {
+      "kolom": "PSTV06",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9992,
+      "holdout_riil": 0.998,
+      "kategori": 3
+     },
+     {
+      "kolom": "PSTV07",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9988,
+      "holdout_riil": 0.9969,
+      "kategori": 4
+     },
+     {
+      "kolom": "PSTV08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9988,
+      "holdout_riil": 0.9969,
+      "kategori": 6
+     },
+     {
+      "kolom": "PSTV09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9918,
+      "holdout_riil": 0.9934,
+      "kategori": 36
+     },
+     {
+      "kolom": "PSTV09_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9918,
+      "holdout_riil": 0.9929,
+      "kategori": 40
+     },
+     {
+      "kolom": "PSTV10",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9945,
+      "holdout_riil": 0.9938
+     },
+     {
+      "kolom": "PSTV11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.99,
+      "holdout_riil": 0.9962,
+      "kategori": 10
+     },
+     {
+      "kolom": "PSTV12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.99,
+      "holdout_riil": 0.9975,
+      "kategori": 3
+     },
+     {
+      "kolom": "PSTV13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9922,
+      "holdout_riil": 0.9938,
+      "kategori": 36
+     },
+     {
+      "kolom": "PSTV13_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9921,
+      "holdout_riil": 0.9936,
+      "kategori": 40
+     },
+     {
+      "kolom": "PSTV14",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9949,
+      "holdout_riil": 0.9946
+     },
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9921,
+      "holdout_riil": 0.9955
+     },
+     {
+      "kolom": "PSTV16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9976,
+      "holdout_riil": 0.9951,
+      "kategori": 7
+     },
+     {
+      "kolom": "PSTV17",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9987,
+      "holdout_riil": 0.9984,
+      "kategori": 18
+     },
+     {
+      "kolom": "PSTV18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9998,
+      "holdout_riil": 0.9996,
+      "kategori": 6
+     }
+    ],
+    "fktpkapitasi": [
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.99,
+      "holdout_riil": 0.9942
+     },
+     {
+      "kolom": "FKP03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9905,
+      "holdout_riil": 0.9963
+     },
+     {
+      "kolom": "FKP04",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9905,
+      "holdout_riil": 0.9963
+     },
+     {
+      "kolom": "FKP05",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9867,
+      "holdout_riil": 0.9851,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKP05_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9867,
+      "holdout_riil": 0.9845,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKP06",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9957,
+      "holdout_riil": 0.9957
+     },
+     {
+      "kolom": "FKP07",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9809,
+      "holdout_riil": 0.9957,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKP08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9793,
+      "holdout_riil": 0.9971,
+      "kategori": 6
+     },
+     {
+      "kolom": "FKP09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9792,
+      "holdout_riil": 0.9888,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKP10",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9978,
+      "holdout_riil": 0.9992,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKP11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9861,
+      "holdout_riil": 0.9946,
+      "kategori": 23
+     },
+     {
+      "kolom": "FKP12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9959,
+      "holdout_riil": 0.9963,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKP13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9939,
+      "holdout_riil": 0.9986,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKP14",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9939,
+      "holdout_riil": 0.9966
+     },
+     {
+      "kolom": "FKP14A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9749,
+      "holdout_riil": 0.9864,
+      "kategori": 1555
+     },
+     {
+      "kolom": "FKP15",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9749,
+      "holdout_riil": 0.9864,
+      "kategori": 1652
+     },
+     {
+      "kolom": "FKP15A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9676,
+      "holdout_riil": 0.9765,
+      "kategori": 5387
+     },
+     {
+      "kolom": "FKP16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9949,
+      "holdout_riil": 0.9982,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKP16_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9949,
+      "holdout_riil": 0.9981,
+      "kategori": 37
+     },
+     {
+      "kolom": "FKP17",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.994,
+      "holdout_riil": 0.9991
+     },
+     {
+      "kolom": "FKP18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9939,
+      "holdout_riil": 0.999,
+      "kategori": 11
+     },
+     {
+      "kolom": "FKP19",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9947,
+      "holdout_riil": 0.9995,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKP20",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.992,
+      "holdout_riil": 0.999,
+      "kategori": 27
+     },
+     {
+      "kolom": "FKP21",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.991,
+      "holdout_riil": 0.9995
+     },
+     {
+      "kolom": "FKP22",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9978,
+      "holdout_riil": 0.999,
+      "kategori": 2
+     }
+    ],
+    "fkrtl": [
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9589,
+      "holdout_riil": 0.9857
+     },
+     {
+      "kolom": "FKL03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9884,
+      "holdout_riil": 0.9956
+     },
+     {
+      "kolom": "FKL04",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9884,
+      "holdout_riil": 0.9957
+     },
+     {
+      "kolom": "FKL05",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9803,
+      "holdout_riil": 0.9747,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKL05_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9794,
+      "holdout_riil": 0.9745,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKL06",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9882,
+      "holdout_riil": 0.9875
+     },
+     {
+      "kolom": "FKL07",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9853,
+      "holdout_riil": 0.9922,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKL08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9943,
+      "holdout_riil": 0.9957,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9792,
+      "holdout_riil": 0.9867,
+      "kategori": 25
+     },
+     {
+      "kolom": "FKL10",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9989,
+      "holdout_riil": 0.9973,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9821,
+      "holdout_riil": 0.9864,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKL12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9953,
+      "holdout_riil": 0.9941,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9991,
+      "holdout_riil": 0.9998,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKL14",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9957,
+      "holdout_riil": 0.9982,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9777,
+      "holdout_riil": 0.9886
+     },
+     {
+      "kolom": "FKL15A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9464,
+      "holdout_riil": 0.9351,
+      "kategori": 1168
+     },
+     {
+      "kolom": "FKL16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9292,
+      "holdout_riil": 0.8841,
+      "kategori": 3561
+     },
+     {
+      "kolom": "FKL16A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9292,
+      "holdout_riil": 0.8841,
+      "kategori": 4569
+     },
+     {
+      "kolom": "FKL17",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9643,
+      "holdout_riil": 0.995
+     },
+     {
+      "kolom": "FKL17A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9425,
+      "holdout_riil": 0.9734,
+      "kategori": 974
+     },
+     {
+      "kolom": "FKL18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9311,
+      "holdout_riil": 0.9504,
+      "kategori": 3298
+     },
+     {
+      "kolom": "FKL18A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9311,
+      "holdout_riil": 0.9504,
+      "kategori": 2854
+     },
+     {
+      "kolom": "FKL19",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9527,
+      "holdout_riil": 0.9796,
+      "kategori": 555
+     },
+     {
+      "kolom": "FKL19A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9527,
+      "holdout_riil": 0.9796,
+      "kategori": 641
+     },
+     {
+      "kolom": "FKL20",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9716,
+      "holdout_riil": 0.9916,
+      "kategori": 22
+     },
+     {
+      "kolom": "FKL21",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9738,
+      "holdout_riil": 0.9969,
+      "kategori": 9
+     },
+     {
+      "kolom": "FKL22",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9636,
+      "holdout_riil": 0.9906,
+      "kategori": 47
+     },
+     {
+      "kolom": "FKL23",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9968,
+      "holdout_riil": 0.9973,
+      "kategori": 4
+     },
+     {
+      "kolom": "FKL25",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9815,
+      "holdout_riil": 0.9736,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKL25_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9806,
+      "holdout_riil": 0.9734,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKL26",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9859,
+      "holdout_riil": 0.9879
+     },
+     {
+      "kolom": "FKL27",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9795,
+      "holdout_riil": 0.9886,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKL28",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9859,
+      "holdout_riil": 0.9935,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKL29",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9798,
+      "holdout_riil": 0.9811,
+      "kategori": 30
+     },
+     {
+      "kolom": "FKL30",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8984,
+      "holdout_riil": 0.8906,
+      "kategori": 18491
+     },
+     {
+      "kolom": "FKL31",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.996,
+      "holdout_riil": 0.9862,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL32",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9847,
+      "holdout_riil": 0.9917
+     },
+     {
+      "kolom": "FKL33",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKL34",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 6
+     },
+     {
+      "kolom": "FKL35",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9999,
+      "holdout_riil": 0.9998,
+      "kategori": 11
+     },
+     {
+      "kolom": "FKL36",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9999,
+      "holdout_riil": 0.9999,
+      "kategori": 11
+     },
+     {
+      "kolom": "FKL37",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9997,
+      "holdout_riil": 0.9996
+     },
+     {
+      "kolom": "FKL38",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKL39",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL40",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 4
+     },
+     {
+      "kolom": "FKL41",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 0.9999,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL42",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 0.9999,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL43",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9996,
+      "holdout_riil": 0.9997,
+      "kategori": 18
+     },
+     {
+      "kolom": "FKL44",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 0.9999,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL45",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 0.9999,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL46",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9999,
+      "holdout_riil": 0.9999,
+      "kategori": 9
+     },
+     {
+      "kolom": "FKL47",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.985,
+      "holdout_riil": 0.9916
+     },
+     {
+      "kolom": "FKL48",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9851,
+      "holdout_riil": 0.9916
+     }
+    ],
+    "nonkapitasi": [
+     {
+      "kolom": "PSTV15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9492,
+      "holdout_riil": 0.894
+     },
+     {
+      "kolom": "PNK03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9305,
+      "holdout_riil": 0.8864
+     },
+     {
+      "kolom": "PNK04",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9305,
+      "holdout_riil": 0.8864
+     },
+     {
+      "kolom": "PNK05",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9311,
+      "holdout_riil": 0.8864
+     },
+     {
+      "kolom": "PNK06",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.768,
+      "holdout_riil": 0.7059,
+      "kategori": 30
+     },
+     {
+      "kolom": "PNK06_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.768,
+      "holdout_riil": 0.7059,
+      "kategori": 32
+     },
+     {
+      "kolom": "PNK07",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.8814,
+      "holdout_riil": 0.9193
+     },
+     {
+      "kolom": "PNK08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9319,
+      "holdout_riil": 0.9505,
+      "kategori": 4
+     },
+     {
+      "kolom": "PNK09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8972,
+      "holdout_riil": 0.9694,
+      "kategori": 6
+     },
+     {
+      "kolom": "PNK10",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8911,
+      "holdout_riil": 0.9517,
+      "kategori": 10
+     },
+     {
+      "kolom": "PNK11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9789,
+      "holdout_riil": 0.9857,
+      "kategori": 3
+     },
+     {
+      "kolom": "PNK12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9257,
+      "holdout_riil": 0.8716,
+      "kategori": 5
+     },
+     {
+      "kolom": "PNK13",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9612,
+      "holdout_riil": 0.9187
+     },
+     {
+      "kolom": "PNK13A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8748,
+      "holdout_riil": 0.8119,
+      "kategori": 113
+     },
+     {
+      "kolom": "PNK14",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8306,
+      "holdout_riil": 0.7569,
+      "kategori": 179
+     },
+     {
+      "kolom": "PNK15",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.8306,
+      "holdout_riil": 0.7569,
+      "kategori": 186
+     },
+     {
+      "kolom": "PNK16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9228,
+      "holdout_riil": 0.9118,
+      "kategori": 49
+     },
+     {
+      "kolom": "PNK17",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9785,
+      "holdout_riil": 0.9454
+     },
+     {
+      "kolom": "PNK18",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9785,
+      "holdout_riil": 0.9454
+     },
+     {
+      "kolom": "PNK19",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9708,
+      "holdout_riil": 0.939
+     },
+     {
+      "kolom": "PNK20",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.988,
+      "holdout_riil": 0.9963,
+      "kategori": 1
+     }
+    ],
+    "diagnosissekunder": [
+     {
+      "kolom": "FKL24",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9237,
+      "holdout_riil": 0.9088,
+      "kategori": 4308
+     },
+     {
+      "kolom": "FKL24A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9237,
+      "holdout_riil": 0.9088,
+      "kategori": 4602
+     },
+     {
+      "kolom": "FKL24B",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9378,
+      "holdout_riil": 0.942,
+      "kategori": 1349
+     }
+    ]
+   },
+   "multivariat": {
+    "fkrtl": {
+     "pmse": 0.01811,
+     "pmse_ratio": 3.33,
+     "auc_diskriminator": 0.641,
+     "n_per_sisi": 60000
+    },
+    "kepesertaan": {
+     "pmse": 0.00821,
+     "pmse_ratio": 1.02,
+     "auc_diskriminator": 0.508,
+     "n_per_sisi": 28364
+    }
+   },
+   "bivariat": {
+    "fkrtl": {
+     "rata2_selisih_cramers_v": 0.01571895534776309,
+     "pasangan_terjauh": [
+      {
+       "pair": "milikÃƒÆ’Ã¢â‚¬â€cmg",
+       "riil": 0.094,
+       "sintetis": 0.035
+      },
+      {
+       "pair": "tingkatÃƒÆ’Ã¢â‚¬â€cmg",
+       "riil": 0.919,
+       "sintetis": 0.863
+      },
+      {
+       "pair": "jenisÃƒÆ’Ã¢â‚¬â€cmg",
+       "riil": 0.1,
+       "sintetis": 0.051
+      },
+      {
+       "pair": "tipeÃƒÆ’Ã¢â‚¬â€cmg",
+       "riil": 0.094,
+       "sintetis": 0.046
+      },
+      {
+       "pair": "pulangÃƒÆ’Ã¢â‚¬â€keparahan",
+       "riil": 0.117,
+       "sintetis": 0.069
+      }
+     ]
+    }
+   },
+   "relasional": {
+    "riil_training": {
+     "klaim_fkrtl_per_peserta": {
+      "rata2": 0.741,
+      "p90": 2.0,
+      "p99": 11.0,
+      "pct_ada": 22.1
+     },
+     "kunjungan_fktp_per_peserta": {
+      "rata2": 3.176,
+      "p90": 9.0,
+      "p99": 23.0,
+      "pct_ada": 57.65
+     },
+     "dx_sekunder_per_klaim": {
+      "rata2": 1.063,
+      "pct_ada": 71.42
+     },
+     "pct_klaim_dengan_rujukan": 47.81,
+     "median_hari_rujukan_ke_rs": 12.0,
+     "pct_rujukan_peserta_sama": 100.0,
+     "pct_readmisi_30h": 7.84,
+     "pct_readmisi_30h_rs_sama": 5.24,
+     "klaim_ganda_per_100rb": 9.7,
+     "pct_koreksi_verifikasi": 0.166,
+     "rata2_biaya_tagih": 1238293,
+     "median_los_inap": 2.0,
+     "pct_rujukan_kab_sama": 86.5,
+     "pct_rujukan_provinsi_sama": 99.5,
+     "pct_rs_di_kab_fktp_terdaftar": 79.1,
+     "pct_fktp_di_kab_terdaftar": 96.6
+    },
+    "sintetis": {
+     "klaim_fkrtl_per_peserta": {
+      "rata2": 0.743,
+      "p90": 2.0,
+      "p99": 11.0,
+      "pct_ada": 22.08
+     },
+     "kunjungan_fktp_per_peserta": {
+      "rata2": 3.229,
+      "p90": 9.0,
+      "p99": 23.0,
+      "pct_ada": 58.49
+     },
+     "dx_sekunder_per_klaim": {
+      "rata2": 1.024,
+      "pct_ada": 70.79
+     },
+     "pct_klaim_dengan_rujukan": 49.78,
+     "median_hari_rujukan_ke_rs": 10.0,
+     "pct_rujukan_peserta_sama": 100.0,
+     "pct_readmisi_30h": 8.87,
+     "pct_readmisi_30h_rs_sama": 6.53,
+     "klaim_ganda_per_100rb": 38.1,
+     "pct_koreksi_verifikasi": 0.148,
+     "rata2_biaya_tagih": 1170255,
+     "median_los_inap": 2.0,
+     "pct_rujukan_kab_sama": 78.7,
+     "pct_rujukan_provinsi_sama": 97.4,
+     "pct_rs_di_kab_fktp_terdaftar": 77.2,
+     "pct_fktp_di_kab_terdaftar": 95.1
+    },
+    "riil_holdout": {
+     "klaim_fkrtl_per_peserta": {
+      "rata2": 0.76,
+      "p90": 2.0,
+      "p99": 11.0,
+      "pct_ada": 22.48
+     },
+     "kunjungan_fktp_per_peserta": {
+      "rata2": 3.201,
+      "p90": 9.0,
+      "p99": 23.0,
+      "pct_ada": 57.73
+     },
+     "dx_sekunder_per_klaim": {
+      "rata2": 1.057,
+      "pct_ada": 71.41
+     },
+     "pct_klaim_dengan_rujukan": 48.09,
+     "median_hari_rujukan_ke_rs": 13.0,
+     "pct_rujukan_peserta_sama": 100.0,
+     "pct_readmisi_30h": 7.51,
+     "pct_readmisi_30h_rs_sama": 4.92,
+     "klaim_ganda_per_100rb": 5.0,
+     "pct_koreksi_verifikasi": 0.173,
+     "rata2_biaya_tagih": 1226776,
+     "median_los_inap": 2.0,
+     "pct_rujukan_kab_sama": 86.0,
+     "pct_rujukan_provinsi_sama": 99.6,
+     "pct_rs_di_kab_fktp_terdaftar": 78.4,
+     "pct_fktp_di_kab_terdaftar": 96.7
+    },
+    "1-KS": {
+     "klaim_fkrtl_per_peserta": {
+      "sintetis": 0.999,
+      "holdout_riil": 0.9955
+     },
+     "kunjungan_fktp_per_peserta": {
+      "sintetis": 0.9916,
+      "holdout_riil": 0.9987
+     },
+     "dx_sekunder_per_klaim": {
+      "sintetis": 0.9803,
+      "holdout_riil": 0.9969
+     }
+    }
+   },
+   "privasi": {
+    "exact_match_pct": {
+     "kepesertaan": {
+      "sintetis": 0.789,
+      "holdout_riil": 1.837
+     },
+     "fkrtl": {
+      "sintetis": 1.418,
+      "holdout_riil": 5.06
+     }
+    },
+    "repU": {
+     "pct_unik_di_riil": 93.85,
+     "repU_sintetis_pct": 0.0,
+     "repU_holdout_pct_disesuaikan_ukuran": 6.512,
+     "catatan": "tanggal lahir sintetis digeser acak Ãƒâ€šÃ‚Â±30 hari"
+    },
+    "dcr_mia": {
+     "median_dcr_sintetis": 0.0228,
+     "median_dcr_holdout_riil": 0.0155,
+     "pct_sintetis_lebih_dekat_dari_p5_holdout": 0.0,
+     "acuan_p5": 5.0,
+     "pct_dcr_nol_sintetis": 20.55,
+     "pct_dcr_nol_holdout_riil": 21.73,
+     "mia_auc": 0.501
+    },
+    "disco_pct": {
+     "holdout_riil": 2.68,
+     "sintetis": 2.309
+    }
+   }
+  },
+  "kia_anak": {
+   "univariat": {
+    "kepesertaan": [
+     {
+      "kolom": "PSTV03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9887,
+      "holdout_riil": 0.9936
+     },
+     {
+      "kolom": "PSTV04",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9992,
+      "holdout_riil": 0.9992,
+      "kategori": 5
+     },
+     {
+      "kolom": "PSTV05",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9998,
+      "holdout_riil": 0.9983,
+      "kategori": 2
+     },
+     {
+      "kolom": "PSTV06",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9998,
+      "holdout_riil": 1.0,
+      "kategori": 3
+     },
+     {
+      "kolom": "PSTV07",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9983,
+      "holdout_riil": 0.9991,
+      "kategori": 4
+     },
+     {
+      "kolom": "PSTV08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9977,
+      "holdout_riil": 0.9979,
+      "kategori": 5
+     },
+     {
+      "kolom": "PSTV09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9914,
+      "holdout_riil": 0.9928,
+      "kategori": 36
+     },
+     {
+      "kolom": "PSTV09_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9907,
+      "holdout_riil": 0.9926,
+      "kategori": 40
+     },
+     {
+      "kolom": "PSTV10",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9943,
+      "holdout_riil": 0.9971
+     },
+     {
+      "kolom": "PSTV11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9898,
+      "holdout_riil": 0.9974,
+      "kategori": 11
+     },
+     {
+      "kolom": "PSTV12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9928,
+      "holdout_riil": 0.9978,
+      "kategori": 4
+     },
+     {
+      "kolom": "PSTV13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9918,
+      "holdout_riil": 0.9915,
+      "kategori": 36
+     },
+     {
+      "kolom": "PSTV13_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9918,
+      "holdout_riil": 0.9914,
+      "kategori": 40
+     },
+     {
+      "kolom": "PSTV14",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9947,
+      "holdout_riil": 0.9976
+     },
+     {
+      "kolom": "PSTV16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9978,
+      "holdout_riil": 0.996,
+      "kategori": 7
+     },
+     {
+      "kolom": "PSTV17",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9987,
+      "holdout_riil": 0.9959,
+      "kategori": 17
+     },
+     {
+      "kolom": "PSTV18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9996,
+      "holdout_riil": 0.9986,
+      "kategori": 10
+     }
+    ],
+    "fktpkapitasi": [
+     {
+      "kolom": "FKP03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9887,
+      "holdout_riil": 0.9912
+     },
+     {
+      "kolom": "FKP04",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9886,
+      "holdout_riil": 0.9912
+     },
+     {
+      "kolom": "FKP05",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.987,
+      "holdout_riil": 0.9799,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKP05_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9868,
+      "holdout_riil": 0.9795,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKP06",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9946,
+      "holdout_riil": 0.995
+     },
+     {
+      "kolom": "FKP07",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9938,
+      "holdout_riil": 0.9889,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKP08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9976,
+      "holdout_riil": 0.991,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKP09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9957,
+      "holdout_riil": 0.991,
+      "kategori": 9
+     },
+     {
+      "kolom": "FKP10",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9992,
+      "holdout_riil": 0.9998,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKP11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9853,
+      "holdout_riil": 0.9949,
+      "kategori": 21
+     },
+     {
+      "kolom": "FKP12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9982,
+      "holdout_riil": 0.9959,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKP13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9876,
+      "holdout_riil": 0.9953,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKP14",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9922,
+      "holdout_riil": 0.9953
+     },
+     {
+      "kolom": "FKP14A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9739,
+      "holdout_riil": 0.9785,
+      "kategori": 1052
+     },
+     {
+      "kolom": "FKP15",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9739,
+      "holdout_riil": 0.9785,
+      "kategori": 1432
+     },
+     {
+      "kolom": "FKP15A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9672,
+      "holdout_riil": 0.9664,
+      "kategori": 3563
+     },
+     {
+      "kolom": "FKP16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.994,
+      "holdout_riil": 0.9962,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKP16_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.994,
+      "holdout_riil": 0.9961,
+      "kategori": 37
+     },
+     {
+      "kolom": "FKP17",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9961,
+      "holdout_riil": 0.9985
+     },
+     {
+      "kolom": "FKP18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9934,
+      "holdout_riil": 0.9978,
+      "kategori": 11
+     },
+     {
+      "kolom": "FKP19",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9955,
+      "holdout_riil": 0.9982,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKP20",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9923,
+      "holdout_riil": 0.9975,
+      "kategori": 23
+     },
+     {
+      "kolom": "FKP21",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9854,
+      "holdout_riil": 0.9977,
+      "kategori": 52
+     },
+     {
+      "kolom": "FKP22",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9885,
+      "holdout_riil": 0.9973,
+      "kategori": 2
+     }
+    ],
+    "fkrtl": [
+     {
+      "kolom": "FKL03",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.99,
+      "holdout_riil": 0.988
+     },
+     {
+      "kolom": "FKL04",
+      "jenis": "tanggal",
+      "metrik": "1-KS",
+      "sintetis": 0.9908,
+      "holdout_riil": 0.9889
+     },
+     {
+      "kolom": "FKL05",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9738,
+      "holdout_riil": 0.9608,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKL05_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9729,
+      "holdout_riil": 0.9606,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKL06",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9879,
+      "holdout_riil": 0.9789
+     },
+     {
+      "kolom": "FKL07",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9832,
+      "holdout_riil": 0.9898,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKL08",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9969,
+      "holdout_riil": 0.9979,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL09",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9694,
+      "holdout_riil": 0.9829,
+      "kategori": 25
+     },
+     {
+      "kolom": "FKL10",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9984,
+      "holdout_riil": 0.9977,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL11",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9839,
+      "holdout_riil": 0.9807,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKL12",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9931,
+      "holdout_riil": 0.9829,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL13",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9994,
+      "holdout_riil": 0.9975,
+      "kategori": 3
+     },
+     {
+      "kolom": "FKL14",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.991,
+      "holdout_riil": 0.9982,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL15",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9765,
+      "holdout_riil": 0.9693
+     },
+     {
+      "kolom": "FKL15A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9474,
+      "holdout_riil": 0.9025,
+      "kategori": 1048
+     },
+     {
+      "kolom": "FKL16",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9283,
+      "holdout_riil": 0.8538,
+      "kategori": 3004
+     },
+     {
+      "kolom": "FKL16A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9283,
+      "holdout_riil": 0.8538,
+      "kategori": 3164
+     },
+     {
+      "kolom": "FKL17",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9677,
+      "holdout_riil": 0.9848
+     },
+     {
+      "kolom": "FKL17A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9485,
+      "holdout_riil": 0.9538,
+      "kategori": 633
+     },
+     {
+      "kolom": "FKL18",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9407,
+      "holdout_riil": 0.9317,
+      "kategori": 2723
+     },
+     {
+      "kolom": "FKL18A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9407,
+      "holdout_riil": 0.9317,
+      "kategori": 1971
+     },
+     {
+      "kolom": "FKL19",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9564,
+      "holdout_riil": 0.9643,
+      "kategori": 377
+     },
+     {
+      "kolom": "FKL19A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9564,
+      "holdout_riil": 0.9644,
+      "kategori": 512
+     },
+     {
+      "kolom": "FKL20",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9818,
+      "holdout_riil": 0.9793,
+      "kategori": 22
+     },
+     {
+      "kolom": "FKL21",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9848,
+      "holdout_riil": 0.9929,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKL22",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9735,
+      "holdout_riil": 0.977,
+      "kategori": 49
+     },
+     {
+      "kolom": "FKL23",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9981,
+      "holdout_riil": 0.9977,
+      "kategori": 4
+     },
+     {
+      "kolom": "FKL25",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9713,
+      "holdout_riil": 0.9635,
+      "kategori": 36
+     },
+     {
+      "kolom": "FKL25_NEW",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9704,
+      "holdout_riil": 0.9634,
+      "kategori": 40
+     },
+     {
+      "kolom": "FKL26",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9868,
+      "holdout_riil": 0.9812
+     },
+     {
+      "kolom": "FKL27",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9829,
+      "holdout_riil": 0.9853,
+      "kategori": 10
+     },
+     {
+      "kolom": "FKL28",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9888,
+      "holdout_riil": 0.9887,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKL29",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.98,
+      "holdout_riil": 0.9813,
+      "kategori": 30
+     },
+     {
+      "kolom": "FKL30",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9251,
+      "holdout_riil": 0.8807,
+      "kategori": 8547
+     },
+     {
+      "kolom": "FKL31",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9847,
+      "holdout_riil": 0.9893,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL32",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9824,
+      "holdout_riil": 0.9886
+     },
+     {
+      "kolom": "FKL33",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 1
+     },
+     {
+      "kolom": "FKL34",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 1
+     },
+     {
+      "kolom": "FKL35",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 0.9999,
+      "kategori": 6
+     },
+     {
+      "kolom": "FKL36",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 0.9999,
+      "kategori": 5
+     },
+     {
+      "kolom": "FKL37",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9999,
+      "holdout_riil": 0.9999,
+      "kategori": 13
+     },
+     {
+      "kolom": "FKL38",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL39",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL40",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 1.0,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL41",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 0.9998,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL42",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 1.0,
+      "holdout_riil": 0.9998,
+      "kategori": 2
+     },
+     {
+      "kolom": "FKL43",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9999,
+      "holdout_riil": 0.9998,
+      "kategori": 4
+     },
+     {
+      "kolom": "FKL44",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9999,
+      "holdout_riil": 0.9975,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKL45",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9999,
+      "holdout_riil": 0.9975,
+      "kategori": 7
+     },
+     {
+      "kolom": "FKL46",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9996,
+      "holdout_riil": 0.9972,
+      "kategori": 15
+     },
+     {
+      "kolom": "FKL47",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9826,
+      "holdout_riil": 0.9886
+     },
+     {
+      "kolom": "FKL48",
+      "jenis": "numerik",
+      "metrik": "1-KS",
+      "sintetis": 0.9826,
+      "holdout_riil": 0.9886
+     }
+    ],
+    "nonkapitasi": [],
+    "diagnosissekunder": [
+     {
+      "kolom": "FKL24",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9267,
+      "holdout_riil": 0.8573,
+      "kategori": 2803
+     },
+     {
+      "kolom": "FKL24A",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9267,
+      "holdout_riil": 0.8573,
+      "kategori": 3162
+     },
+     {
+      "kolom": "FKL24B",
+      "jenis": "kategori",
+      "metrik": "1-TVD",
+      "sintetis": 0.9402,
+      "holdout_riil": 0.9015,
+      "kategori": 1091
+     }
+    ]
+   },
+   "multivariat": {
+    "fkrtl": {
+     "pmse": 0.01966,
+     "pmse_ratio": 3.89,
+     "auc_diskriminator": 0.662,
+     "n_per_sisi": 60000
+    },
+    "kepesertaan": {
+     "pmse": 0.00985,
+     "pmse_ratio": 1.01,
+     "auc_diskriminator": 0.498,
+     "n_per_sisi": 17678
+    }
+   },
+   "bivariat": {
+    "fkrtl": {
+     "rata2_selisih_cramers_v": 0.016624893919389393,
+     "pasangan_terjauh": [
+      {
+       "pair": "tingkatÃƒÆ’Ã¢â‚¬â€cmg",
+       "riil": 0.848,
+       "sintetis": 0.789
+      },
+      {
+       "pair": "tipeÃƒÆ’Ã¢â‚¬â€cmg",
+       "riil": 0.113,
+       "sintetis": 0.062
+      },
+      {
+       "pair": "milikÃƒÆ’Ã¢â‚¬â€cmg",
+       "riil": 0.092,
+       "sintetis": 0.044
+      },
+      {
+       "pair": "cmgÃƒÆ’Ã¢â‚¬â€los",
+       "riil": 0.502,
+       "sintetis": 0.454
+      },
+      {
+       "pair": "jenisÃƒÆ’Ã¢â‚¬â€poli",
+       "riil": 0.059,
+       "sintetis": 0.017
+      }
+     ]
+    }
+   },
+   "relasional": {
+    "riil_training": {
+     "klaim_fkrtl_per_peserta": {
+      "rata2": 0.688,
+      "p90": 2.0,
+      "p99": 12.0,
+      "pct_ada": 18.16
+     },
+     "kunjungan_fktp_per_peserta": {
+      "rata2": 1.864,
+      "p90": 6.0,
+      "p99": 17.0,
+      "pct_ada": 41.62
+     },
+     "dx_sekunder_per_klaim": {
+      "rata2": 0.893,
+      "pct_ada": 70.19
+     },
+     "pct_klaim_dengan_rujukan": 43.17,
+     "median_hari_rujukan_ke_rs": 19.0,
+     "pct_rujukan_peserta_sama": 100.0,
+     "pct_readmisi_30h": 6.87,
+     "pct_readmisi_30h_rs_sama": 3.99,
+     "klaim_ganda_per_100rb": 17.5,
+     "pct_koreksi_verifikasi": 0.115,
+     "rata2_biaya_tagih": 995328,
+     "median_los_inap": 3.0,
+     "pct_rujukan_kab_sama": 87.0,
+     "pct_rujukan_provinsi_sama": 99.5,
+     "pct_rs_di_kab_fktp_terdaftar": 80.4,
+     "pct_fktp_di_kab_terdaftar": 97.9
+    },
+    "sintetis": {
+     "klaim_fkrtl_per_peserta": {
+      "rata2": 0.671,
+      "p90": 2.0,
+      "p99": 11.0,
+      "pct_ada": 18.13
+     },
+     "kunjungan_fktp_per_peserta": {
+      "rata2": 1.881,
+      "p90": 6.0,
+      "p99": 17.0,
+      "pct_ada": 42.08
+     },
+     "dx_sekunder_per_klaim": {
+      "rata2": 0.876,
+      "pct_ada": 70.38
+     },
+     "pct_klaim_dengan_rujukan": 44.35,
+     "median_hari_rujukan_ke_rs": 15.0,
+     "pct_rujukan_peserta_sama": 100.0,
+     "pct_readmisi_30h": 7.88,
+     "pct_readmisi_30h_rs_sama": 5.04,
+     "klaim_ganda_per_100rb": 55.1,
+     "pct_koreksi_verifikasi": 0.113,
+     "rata2_biaya_tagih": 955735,
+     "median_los_inap": 3.0,
+     "pct_rujukan_kab_sama": 79.6,
+     "pct_rujukan_provinsi_sama": 94.3,
+     "pct_rs_di_kab_fktp_terdaftar": 79.1,
+     "pct_fktp_di_kab_terdaftar": 96.9
+    },
+    "riil_holdout": {
+     "klaim_fkrtl_per_peserta": {
+      "rata2": 0.676,
+      "p90": 2.0,
+      "p99": 11.0,
+      "pct_ada": 17.96
+     },
+     "kunjungan_fktp_per_peserta": {
+      "rata2": 1.894,
+      "p90": 6.0,
+      "p99": 17.0,
+      "pct_ada": 41.84
+     },
+     "dx_sekunder_per_klaim": {
+      "rata2": 0.897,
+      "pct_ada": 69.95
+     },
+     "pct_klaim_dengan_rujukan": 43.21,
+     "median_hari_rujukan_ke_rs": 20.0,
+     "pct_rujukan_peserta_sama": 100.0,
+     "pct_readmisi_30h": 7.3,
+     "pct_readmisi_30h_rs_sama": 4.02,
+     "klaim_ganda_per_100rb": 23.0,
+     "pct_koreksi_verifikasi": 0.138,
+     "rata2_biaya_tagih": 1054813,
+     "median_los_inap": 3.0,
+     "pct_rujukan_kab_sama": 87.5,
+     "pct_rujukan_provinsi_sama": 99.5,
+     "pct_rs_di_kab_fktp_terdaftar": 80.5,
+     "pct_fktp_di_kab_terdaftar": 97.8
+    },
+    "1-KS": {
+     "klaim_fkrtl_per_peserta": {
+      "sintetis": 0.9995,
+      "holdout_riil": 0.998
+     },
+     "kunjungan_fktp_per_peserta": {
+      "sintetis": 0.9953,
+      "holdout_riil": 0.9968
+     },
+     "dx_sekunder_per_klaim": {
+      "sintetis": 0.9874,
+      "holdout_riil": 0.9971
+     }
+    }
+   },
+   "privasi": {
+    "exact_match_pct": {
+     "kepesertaan": {
+      "sintetis": 0.527,
+      "holdout_riil": 6.075
+     },
+     "fkrtl": {
+      "sintetis": 5.272,
+      "holdout_riil": 14.375
+     }
+    },
+    "repU": {
+     "pct_unik_di_riil": 91.46,
+     "repU_sintetis_pct": 0.0,
+     "repU_holdout_pct_disesuaikan_ukuran": 9.44,
+     "catatan": "tanggal lahir sintetis digeser acak Ãƒâ€šÃ‚Â±30 hari"
+    },
+    "dcr_mia": {
+     "median_dcr_sintetis": 0.0556,
+     "median_dcr_holdout_riil": 0.0556,
+     "pct_sintetis_lebih_dekat_dari_p5_holdout": 0.0,
+     "acuan_p5": 5.0,
+     "pct_dcr_nol_sintetis": 33.21,
+     "pct_dcr_nol_holdout_riil": 33.76,
+     "mia_auc": 0.513
+    },
+    "disco_pct": {
+     "holdout_riil": 3.22,
+     "sintetis": 3.403
+    }
+   }
+  }
+ },
+ "tstr": {
+  "uji_holdout": {
+   "klaim": 1088141,
+   "terkoreksi": 768
+  },
+  "latih_riil": {
+   "auroc": 0.999,
+   "auroc_ci95": [
+    0.998,
+    1.0
+   ],
+   "auprc": 0.899,
+   "auprc_ci95": [
+    0.876,
+    0.92
+   ],
+   "tertangkap_di_1pct_teratas": 757,
+   "n_latih": 402781,
+   "positif_latih": 3075,
+   "fitur_teratas": {
+    "jenis": 0.209,
+    "tingkat": 0.177,
+    "poli": 0.12,
+    "tipe": 0.087,
+    "tarif": 0.079,
+    "tagih": 0.07
+   }
+  },
+  "latih_sintetis": {
+   "auroc": 0.998,
+   "auroc_ci95": [
+    0.996,
+    1.0
+   ],
+   "auprc": 0.854,
+   "auprc_ci95": [
+    0.822,
+    0.889
+   ],
+   "tertangkap_di_1pct_teratas": 756,
+   "n_latih": 406409,
+   "positif_latih": 6925,
+   "fitur_teratas": {
+    "jenis": 0.268,
+    "tingkat": 0.174,
+    "poli": 0.097,
+    "tipe": 0.082,
+    "tarif": 0.068,
+    "tagih": 0.064
+   }
+  },
+  "prevalensi_uji": 0.00071
+ },
+ "peringkat_aturan": {
+  "kelompok": 164,
+  "los_ekstrem": 0.401,
+  "koreksi": 0.622,
+  "topup": 0.329,
+  "inap": 0.875
+ },
+ "privasi_id_riil_ditemukan": {
+  "kepesertaan.PSTV01": 0,
+  "kepesertaan.PSTV02": 0,
+  "fkrtl.FKL02": 0,
+  "fkrtl.FKP02": 0,
+  "fktpkapitasi.FKP02": 0,
+  "nonkapitasi.PNK02": 0,
+  "diagnosissekunder.FKL02": 0
+ },
+ "detik": 813,
+ "utility_edisi": [
+  "covid",
+  "dm",
+  "kesehatan_mental",
+  "kia_anak",
+  "kia_ibu",
+  "reguler",
+  "tb"
+ ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "/jkn-mobile/petugas",
+  "name": "JKN Petugas",
+  "short_name": "Petugas",
+  "description": "Antrian verifikasi klaim, laporan peserta, kasus dan kunjungan audit (demo)",
+  "lang": "id",
+  "start_url": "/jkn-mobile/petugas",
+  "scope": "/jkn-mobile/petugas",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f4f6f8",
+  "theme_color": "#0f766e",
+  "icons": [
+    {
+      "src": "/jkn-mobile/petugas-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/jkn-mobile/petugas-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/jkn-mobile/petugas-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+ "ditulis": "2026-11-13, sebelum fitur X6 dihitung, sebelum kandidat dilatih, sebelum generator 3 seed gen3-ml6 dibuat",
+ "permintaan": "ML v6 = ML v5 + fitur jaringan ala Quantexa; tanpa biaya LLM; benchmark generator 1, 2, 3 vs v3, v4, ML v5; generator 3 tetap data asing",
+ "data_sintetis_saja": true,
+ "data": {
+  "latih": "sama dengan ML v5: stream + data_v4 chunk 0-7 + gen2_ml5_latih (peserta latih)",
+  "dev": "sama dengan ML v5: data_v4 chunk 8-9 + gen2_ml5_dev (peserta validasi)",
+  "benchmark": {
+   "generator1": "test C2 (dipakai ulang, bukan untuk memilih)",
+   "generator2": "gen2 seed 3 (dipakai ulang, bukan untuk memilih)",
+   "generator3": "generator 3 seed BARU GEN3_GARAM=gen3-ml6 (.tmp/gen3_ml6), dinilai SEKALI setelah ML v6 dibekukan"
+  }
+ },
+ "fitur_X6": "testing/fitur_v6.py, kausal per hari (hanya klaim hari-hari sebelumnya): graph RS-RS dari peserta bersama 30 hari (jumlah pasangan, Jaccard pasangan terkuat, PageRank), komunitas (komponen terhubung, sisi >= 2 peserta: ukuran, rata-rata skor rule), propagasi skor rule 1 langkah, rata-rata skor rule RS 30 hari, aliran timbal-balik antar-RS, porsi peserta baru RS 7 hari, peserta lintas komunitas 7 hari, motif bolak-balik A->B->A 14 hari. Tanpa label: hanya skor rule engine.",
+ "kandidat": {
+  "L1": "ML v5 (fitur v4, dilatih ulang identik) - pembanding",
+  "L2": "L1 + X6"
+ },
+ "pemilihan": {
+  "ukuran": "rata-rata recall pada FPR 1% di dua set dev (ambang di normal dev masing-masing)",
+  "aturan": "L2 dipilih hanya jika lebih tinggi >= 1 poin dari L1; selain itu ML v6 = ML v5 (seri -> yang lebih sederhana)",
+  "cek_overfit": "AUPRC latih vs CV per peserta vs dev, sebaran antar-seed, porsi gain per blok; peringatan dicatat sebelum benchmark"
+ },
+ "laporan_benchmark": "sama dengan ML v5, ditambah ML v5 sebagai pembanding; CI bootstrap per peserta untuk ML v6 - ML v5 dan ML v6 - v4"
+}

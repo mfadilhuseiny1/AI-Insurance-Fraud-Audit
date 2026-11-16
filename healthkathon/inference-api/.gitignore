@@ -1,0 +1,6 @@
+.env
+paket/
+layanan.jsonl
+__pycache__/
+.venv/
+*.log

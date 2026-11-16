@@ -1,0 +1,23 @@
+{
+ "dibuat": "2026-11-13 15:36",
+ "model": "ml_v7",
+ "pilihan": "A1",
+ "ambang": {
+  "tahan": 0.783152054641539,
+  "periksa": 0.29313208802000346,
+  "lebar": 0.12096456174354923
+ },
+ "dev": {
+  "klaim": 48136,
+  "normal": 46655,
+  "fraud": 1481
+ },
+ "cek": {
+  "fpr_tahan": 0.00101,
+  "fpr_periksa": 0.00999,
+  "fpr_lebar": 0.03001,
+  "recall_periksa": 0.6779,
+  "recall_lebar": 0.7833
+ },
+ "tau": "0,72 dari v5 (testing/model_v5/kartu.json), tidak dipilih ulang"
+}

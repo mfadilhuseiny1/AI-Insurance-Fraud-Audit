@@ -1,0 +1,1372 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Uji Deteksi Fraud</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Two views: "Uji klaim" (the claim on the left; the verdict with the network and the AI explanation side by side on the
+   right) and "Histori" (every tested claim). Fits one screen on a desktop. */
+:root {
+  --bg: #f3f5f9; --surface: #ffffff; --surface-2: #f7f9fc; --ink: #17202b; --ink-2: #3a4757; --muted: #687789; --line: #e2e7ee; --line-2: #d3dae4;
+  --accent: #2d5bd2; --accent-soft: #e8eefc; --accent-ink: #ffffff;
+  --ok: #17794a; --ok-soft: #e4f4ec; --bad: #c0264f; --bad-soft: #fbe7ed; --warn: #a35a00; --warn-soft: #fdf1dc;
+  --fill: #fff4cf; --shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 1px 3px rgba(16, 24, 40, .06); --pop: 0 10px 30px rgba(16, 24, 40, .16);
+  --n-peserta: #4c6b8f; --n-rs: #2d5bd2; --n-kode: #7a4fb0; --n-klaim: #97a3b1; --n-tahan: #c0264f; --n-periksa: #c97a0a;
+  --canvas: #fbfcfe; --dot: #dde3ec;
+  --f: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif; --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --top: 56px;
+}
+@media (prefers-color-scheme: dark) { :root {
+  --bg: #0b1017; --surface: #121922; --surface-2: #161f2a; --ink: #e6ecf2; --ink-2: #c3ccd7; --muted: #8e9cad; --line: #202b38; --line-2: #2b3847;
+  --accent: #7ea3ff; --accent-soft: #1b2741; --accent-ink: #0b1017;
+  --ok: #5cc98d; --ok-soft: #12291d; --bad: #ff7d9c; --bad-soft: #2e1620; --warn: #f2b35a; --warn-soft: #2d2213;
+  --fill: #3a3115; --shadow: none; --pop: 0 10px 30px rgba(0, 0, 0, .5);
+  --n-peserta: #8fb0d8; --n-rs: #7ea3ff; --n-kode: #b99be8; --n-klaim: #6f7d8d; --n-tahan: #ff7d9c; --n-periksa: #f2b35a;
+  --canvas: #0f151d; --dot: #1d2733; color-scheme: dark } }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.5 var(--f); -webkit-font-smoothing: antialiased; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---- top bar + menu */
+.top { height: var(--top); display: flex; align-items: center; gap: 18px; padding: 0 20px; background: var(--surface); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 20; }
+.brand { display: flex; align-items: center; gap: 10px; flex: none; }
+.logo { width: 30px; height: 30px; border-radius: 8px; background: var(--accent); display: grid; place-items: center; }
+.logo svg { width: 18px; height: 18px; }
+.brand b { font-size: 15px; font-weight: 600; white-space: nowrap; }
+.menu { display: flex; gap: 4px; height: 100%; }
+.menu button { background: none; border: 0; padding: 0 12px; font-weight: 500; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; display: inline-flex; align-items: center; gap: 7px; }
+.menu button:hover { color: var(--ink); }
+.menu button[aria-current="page"] { color: var(--accent); border-bottom-color: var(--accent); }
+.menu svg { width: 16px; height: 16px; }
+.count { font-size: 11px; font-weight: 600; background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; padding: 0 6px; color: var(--muted); }
+.top .sp { flex: 1; }
+.pill { display: inline-flex; align-items: center; gap: 7px; padding: 4px 10px; border-radius: 999px; font-size: 12.5px; color: var(--ink-2); background: var(--surface-2); border: 1px solid var(--line); white-space: nowrap; }
+.pill i { width: 7px; height: 7px; border-radius: 50%; background: var(--warn); flex: none; }
+.pill.siap i { background: var(--ok); } .pill.gagal i { background: var(--bad); }
+.pill.sintetis { background: var(--warn-soft); border-color: transparent; color: var(--warn); }
+
+/* ---- workspace */
+.ws { display: grid; grid-template-columns: 400px minmax(0, 1fr); gap: 16px; padding: 16px 20px; height: calc(100vh - var(--top)); }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); min-width: 0; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
+.tabs { display: flex; gap: 2px; padding: 6px 8px 0; border-bottom: 1px solid var(--line); flex: none; overflow-x: auto; scrollbar-width: none; }
+.tabs button { background: none; border: 0; padding: 10px 12px 11px; font-weight: 500; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; }
+.tabs button:hover { color: var(--ink); }
+.tabs button[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+.scroll { overflow-y: auto; min-height: 0; flex: 1; }
+.pad { padding: 16px 18px; }
+.foot { flex: none; border-top: 1px solid var(--line); padding: 12px 18px; display: flex; gap: 10px; align-items: center; justify-content: flex-end; background: var(--surface); }
+.foot .hint { margin-right: auto; }
+@media (max-width: 1100px) { .ws { grid-template-columns: 360px minmax(0, 1fr); } }
+@media (max-width: 900px) {
+  .ws { grid-template-columns: minmax(0, 1fr); height: auto; padding: 12px 16px; }
+  .panel { overflow: visible; } .scroll { overflow: visible; }
+  .top { gap: 8px; padding: 0 12px; overflow: hidden; } .pill.model, .pill.sintetis, .brand b { display: none; }
+  .menu button { padding: 0 8px; } #status { min-width: 0; flex: 0 1 auto; overflow: hidden; } #status span { overflow: hidden; text-overflow: ellipsis; }
+}
+
+/* ---- form */
+.sec { display: grid; gap: 10px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.sec:first-child { padding-top: 0; } .sec:last-child { border-bottom: 0; }
+.sec > h4, .lbl { margin: 0; font-size: 11.5px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.f { display: grid; gap: 5px; font-size: 12.5px; color: var(--ink-2); min-width: 0; }
+.f.full { grid-column: 1 / -1; }
+input, select, textarea { width: 100%; min-width: 0; background: var(--surface); border: 1px solid var(--line-2); border-radius: 8px; padding: 8px 10px; font-size: 14px; transition: border-color .12s, box-shadow .12s; }
+input::placeholder, textarea::placeholder { color: var(--muted); opacity: .75; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+textarea { resize: vertical; min-height: 66px; font-family: var(--mono); font-size: 12.5px; }
+input[type=checkbox] { width: auto; accent-color: var(--accent); }
+.filled { background: var(--fill) !important; }
+.err { border-color: var(--bad) !important; }
+.ferr { color: var(--bad); font-size: 12px; }
+.seg { display: inline-flex; padding: 3px; gap: 2px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 9px; max-width: 100%; flex-wrap: wrap; }
+.seg label, .seg button { border: 0; background: none; border-radius: 6px; padding: 5px 11px; font-size: 13px; color: var(--ink-2); cursor: pointer; white-space: nowrap; }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.seg label:has(input:checked), .seg button[aria-pressed="true"] { background: var(--surface); color: var(--accent); font-weight: 600; box-shadow: var(--shadow); }
+@media (prefers-color-scheme: dark) { .seg label:has(input:checked), .seg button[aria-pressed="true"] { background: var(--accent-soft); } }
+.hint { font-size: 12px; color: var(--muted); }
+.btn { display: inline-flex; align-items: center; gap: 7px; border-radius: 9px; padding: 9px 16px; font-weight: 600; font-size: 14px; cursor: pointer; border: 1px solid transparent; white-space: nowrap; }
+.btn.p { background: var(--accent); color: var(--accent-ink); }
+.btn.p:disabled { opacity: .5; cursor: not-allowed; }
+.btn.s { background: var(--surface); border-color: var(--line-2); color: var(--ink); font-weight: 500; padding: 7px 12px; font-size: 13px; }
+.btn.s:hover { border-color: var(--accent); }
+.btn.s:disabled { opacity: .45; cursor: not-allowed; }
+.btn svg { width: 15px; height: 15px; }
+.batch { background: var(--accent-soft); border-radius: 10px; padding: 10px 12px; font-size: 13px; display: grid; gap: 2px; margin-bottom: 12px; }
+.galat { background: var(--bad-soft); border-radius: 10px; padding: 10px 12px; font-size: 13px; margin-top: 12px; }
+
+/* ---- document + examples */
+.drop { border: 1.5px dashed var(--line-2); border-radius: 12px; padding: 28px 16px; text-align: center; display: grid; gap: 8px; justify-items: center; cursor: pointer; transition: border-color .15s, background .15s; }
+.drop:hover, .drop.over { border-color: var(--accent); background: var(--accent-soft); }
+.drop .ic { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-soft); display: grid; place-items: center; color: var(--accent); }
+.drop .ic svg { width: 22px; height: 22px; }
+.drop b { font-weight: 600; }
+.status-dok { margin-top: 14px; font-size: 13px; display: grid; gap: 6px; }
+.ok-box { background: var(--ok-soft); border-radius: 10px; padding: 10px 12px; }
+.contoh { display: grid; gap: 8px; }
+.contoh .lbl { margin-top: 8px; }
+.ex { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 10px; align-items: center; text-align: left; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); cursor: pointer; }
+.ex:hover { border-color: var(--accent); background: var(--surface-2); }
+.ex:disabled { opacity: .55; cursor: progress; }
+.ex .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--bad); grid-row: span 2; }
+.ex.aman .dot { background: var(--ok); }
+.ex b { font-weight: 600; font-size: 13.5px; }
+.ex span { color: var(--muted); font-size: 12px; grid-column: 2; }
+
+/* ---- verdict */
+.res { display: flex; flex-direction: column; min-height: 0; }
+.vonis { flex: none; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 14px 20px; border-bottom: 1px solid var(--line); }
+.vonis .ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; }
+.vonis .ic svg { width: 24px; height: 24px; }
+.vonis.aman .ic { background: var(--ok-soft); color: var(--ok); } .vonis.fraud .ic { background: var(--bad-soft); color: var(--bad); }
+.vonis .t { font-size: 19px; font-weight: 600; line-height: 1.25; }
+.vonis.aman .t { color: var(--ok); } .vonis.fraud .t { color: var(--bad); }
+.vonis .m { color: var(--muted); font-size: 12.5px; display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 4px; }
+.vonis .m b { color: var(--ink-2); font-weight: 500; }
+.jenis-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
+.mchip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px 3px 4px; border-radius: 999px; background: var(--bad-soft); color: var(--bad); font-size: 12.5px; font-weight: 500; }
+.mchip b { background: var(--bad); color: var(--surface); border-radius: 999px; padding: 0 7px; font-size: 11px; font-weight: 600; }
+.mchip.lain { background: var(--surface-2); color: var(--ink-2); border: 1px solid var(--line); } .mchip.lain b { background: var(--muted); }
+.gauge { width: 180px; display: grid; gap: 6px; justify-items: end; }
+.gauge .v { font: 600 24px/1 var(--f); font-variant-numeric: tabular-nums; }
+.gauge .l { font-size: 11.5px; color: var(--muted); }
+.track { width: 100%; height: 6px; border-radius: 99px; background: var(--surface-2); border: 1px solid var(--line); position: relative; }
+.track i { position: absolute; left: 0; top: -1px; bottom: -1px; border-radius: 99px; background: var(--accent); }
+.track.f i { background: var(--bad); } .track.a i { background: var(--ok); }
+.track b { position: absolute; top: -4px; bottom: -4px; width: 2px; border-radius: 1px; background: var(--ink-2); opacity: .55; }
+@media (max-width: 700px) { .vonis { grid-template-columns: auto minmax(0, 1fr); } .gauge { grid-column: 1 / -1; width: 100%; justify-items: start; } }
+.strip { flex: none; display: flex; gap: 6px; align-items: center; padding: 8px 16px; border-bottom: 1px solid var(--line); overflow-x: auto; background: var(--surface-2); }
+.strip .lab { font-size: 12px; color: var(--muted); white-space: nowrap; margin-right: 4px; }
+.strip button.c { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 3px 10px 3px 8px; font-size: 12.5px; display: inline-flex; gap: 6px; align-items: center; cursor: pointer; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.strip button.c[aria-current="true"] { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+.strip button.c i { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); }
+.strip button.c.f i { background: var(--bad); }
+.strip .btn { margin-left: auto; flex: none; }
+
+/* ---- empty + progress */
+.kosong { display: grid; justify-items: center; text-align: center; gap: 14px; padding: 48px 24px; max-width: 640px; margin: auto; }
+.kosong .ic { width: 56px; height: 56px; border-radius: 16px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; }
+.kosong .ic svg { width: 28px; height: 28px; }
+.kosong h3 { margin: 0; font-size: 18px; font-weight: 600; }
+.kosong p { margin: 0; color: var(--muted); }
+.alur { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; width: 100%; margin-top: 6px; text-align: left; }
+.alur div { background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 12.5px; color: var(--ink-2); }
+.alur b { display: block; font-size: 11px; color: var(--accent); margin-bottom: 2px; }
+@media (max-width: 700px) { .alur { grid-template-columns: 1fr 1fr; } }
+.cepat { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.steps { display: grid; gap: 10px; padding: 28px; max-width: 420px; margin: auto; }
+.step { display: flex; gap: 10px; align-items: center; color: var(--muted); }
+.step i { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--line-2); flex: none; }
+.step.jalan { color: var(--ink); } .step.jalan i { border-color: var(--accent); border-top-color: transparent; animation: spin .8s linear infinite; }
+.step.selesai { color: var(--ink); } .step.selesai i { background: var(--ok); border-color: var(--ok); }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .step.jalan i { animation: none; } }
+.center { flex: 1; display: flex; min-height: 0; overflow-y: auto; }
+
+/* ---- result: network | AI explanation */
+.hasil { display: grid; grid-template-columns: minmax(0, 1fr) 420px; flex: 1; min-height: 0; }
+@media (max-width: 1280px) { .hasil { grid-template-columns: minmax(0, 1fr) 360px; } }
+@media (max-width: 1100px) { .hasil { grid-template-columns: minmax(0, 1fr); } .ai { border-left: 0 !important; border-top: 1px solid var(--line); } }
+.kanvas { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+.toolbar .seg button { padding: 4px 9px; font-size: 12.5px; }
+.toolbar label { font-size: 12.5px; color: var(--ink-2); display: inline-flex; gap: 6px; align-items: center; }
+.toolbar .sp { flex: 1; }
+.netjudul { padding: 8px 14px 0; font-size: 12.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.netjudul b { color: var(--ink); font-weight: 600; }
+.wadah { position: relative; flex: 1; min-height: 440px; background-color: var(--canvas); background-image: radial-gradient(var(--dot) 1px, transparent 1px); background-size: 18px 18px; margin: 8px 14px; border-radius: 10px; border: 1px solid var(--line); overflow: hidden; }
+#net { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
+#net text { font: 11px var(--f); fill: var(--ink-2); paint-order: stroke; stroke: var(--canvas); stroke-width: 3.5px; pointer-events: none; }
+#net .simpul { cursor: pointer; }
+#net .simpul .glyph { pointer-events: none; }
+#net .simpul:focus { outline: none; }
+#net .simpul:focus-visible .bentuk, #net .simpul.pilih .bentuk { stroke: var(--accent); stroke-width: 3px; }
+#net .redup { opacity: .1; }
+#net .simpul.redup text { display: none; }
+#net .simpul.formulir text { fill: var(--ink); }
+#net .simpul .halo { fill: none; stroke: var(--ink-2); stroke-width: 1.2px; stroke-dasharray: 3 3; stroke-opacity: .7; pointer-events: none; }
+#net .simpul.kasus text { fill: var(--muted); font-size: 10px; }
+.sorot-ket { padding: 3px 14px 0; font-size: 12px; color: var(--muted); }
+.sorot-ket b { color: var(--ink-2); font-weight: 600; }
+.alurk { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin: 2px 0 10px; font-size: 11.5px; }
+.alurk span.c { border: 1px solid var(--line); background: var(--surface-2); border-radius: 999px; padding: 3px 9px; color: var(--ink-2); white-space: nowrap; }
+.alurk span.c b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.alurk span.c.on { border-color: var(--bad); background: var(--bad-soft); }
+.alurk span.c.ok { border-color: var(--ok); background: var(--ok-soft); }
+.alurk i { color: var(--muted); font-style: normal; }
+#net line.edge { stroke: var(--line-2); stroke-width: 1.4px; }
+#net line.edge.e2e { stroke: var(--muted); opacity: .45; }
+#net line.edge.formulir { stroke: var(--muted); stroke-width: 1.8px; }
+#net line.edge.terang { stroke: var(--accent); opacity: 1; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 11.5px; color: var(--muted); padding: 0 14px 12px; }
+.legend span { display: inline-flex; align-items: center; gap: 5px; }
+.legend svg { width: 13px; height: 13px; }
+.tip { position: absolute; pointer-events: none; background: var(--surface); border: 1px solid var(--line-2); border-radius: 9px; padding: 8px 10px; font-size: 12px; max-width: 280px; z-index: 6; box-shadow: var(--pop); color: var(--ink-2); }
+.tip b { color: var(--ink); }
+.tip .tf { color: var(--ink); font-weight: 600; }
+/* data viewer: a card floating over the network */
+.dv { position: absolute; top: 10px; left: 10px; width: 300px; max-width: calc(100% - 20px); max-height: calc(100% - 20px); overflow-y: auto; background: var(--surface); border: 1px solid var(--line-2); border-radius: 12px; box-shadow: var(--pop); padding: 12px 14px; display: grid; gap: 10px; z-index: 5; }
+.dv-h { display: flex; gap: 10px; align-items: center; }
+.dv-h .ic { width: 30px; height: 30px; border-radius: 9px; flex: none; }
+.dv-h b { display: block; font-weight: 600; overflow-wrap: anywhere; }
+.dv-h span { color: var(--muted); font-size: 12px; }
+.dv-h .x { margin-left: auto; border: 0; background: none; cursor: pointer; color: var(--muted); font-size: 18px; line-height: 1; padding: 2px 6px; border-radius: 6px; }
+.dv-h .x:hover { background: var(--surface-2); color: var(--ink); }
+.dv .facts { grid-template-columns: 1fr 1fr; gap: 8px 12px; }
+.dv .facts dd { font-size: 13px; }
+.dv .aksi { display: flex; flex-wrap: wrap; gap: 6px; }
+.lini { max-height: 220px; overflow-y: auto; border: 1px solid var(--line); border-radius: 9px; }
+.lini table { font-size: 12px; }
+.lini th { position: sticky; top: 0; background: var(--surface); }
+.lini td, .lini th { padding: 5px 7px; }
+.lini tr.ini td { font-weight: 600; background: var(--accent-soft); }
+.lini tr[data-id] { cursor: pointer; }
+.lini tr[data-id]:hover td { background: var(--surface-2); }
+/* the AI explanation */
+.ai { border-left: 1px solid var(--line); overflow-y: auto; min-height: 0; }
+.ai section { padding: 16px 18px; border-bottom: 1px solid var(--line); display: grid; gap: 10px; }
+.ai section:last-child { border-bottom: 0; }
+.ai h4 { margin: 0; font-size: 11.5px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); display: flex; gap: 8px; align-items: center; }
+.ai h4 svg { width: 15px; height: 15px; }
+.awam { font-size: 14.5px; line-height: 1.65; color: var(--ink); margin: 0; }
+.modus { display: grid; gap: 8px; }
+.modus div { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 2px 10px; align-items: start; padding: 10px 12px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--line); }
+.modus .k { font: 600 12px var(--mono); color: var(--bad); background: var(--bad-soft); border-radius: 6px; padding: 2px 6px; grid-row: span 2; }
+.modus .n { font-weight: 600; }
+.modus .y { font-size: 11.5px; color: var(--muted); white-space: nowrap; }
+.modus .b { grid-column: 2 / -1; color: var(--ink-2); font-size: 13px; }
+ol.items, ul.items { margin: 0; padding: 0; list-style: none; display: grid; gap: 9px; counter-reset: n; }
+ol.items li, ul.items li { position: relative; padding-left: 28px; color: var(--ink-2); }
+ol.items li::before { counter-increment: n; content: counter(n); position: absolute; left: 0; top: 1px; width: 19px; height: 19px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-size: 11px; font-weight: 600; display: grid; place-items: center; }
+ul.items li::before { content: ""; position: absolute; left: 7px; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--bad); }
+ul.items.ok li::before { background: var(--ok); }
+.menunggu { display: flex; gap: 10px; align-items: center; background: var(--accent-soft); border-radius: 10px; padding: 9px 12px; font-size: 13px; color: var(--ink-2); }
+.menunggu i { width: 15px; height: 15px; border-radius: 50%; border: 2px solid var(--accent); border-top-color: transparent; animation: spin .8s linear infinite; flex: none; }
+.cat { font-size: 12.5px; color: var(--muted); }
+.skor { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 5px 10px; padding: 8px 10px; border-radius: 9px; cursor: pointer; border: 1px solid transparent; background: none; text-align: left; width: 100%; font-size: 12.5px; color: var(--ink-2); }
+.skor:hover { background: var(--surface-2); }
+.skor[aria-pressed="true"] { background: var(--accent-soft); color: var(--ink); }
+.skor b { font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ink); }
+.skor .track { grid-column: 1 / -1; height: 5px; }
+.skor .sub2 { grid-column: 1 / -1; color: var(--muted); font-size: 11.5px; }
+.dv-kosong { color: var(--muted); font-size: 12.5px; }
+
+/* ---- technical detail */
+.cards2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+.card { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 10px; align-content: start; min-width: 0; background: var(--surface); }
+.card > h4 { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px 16px; margin: 0; }
+.facts div { min-width: 0; }
+.facts dt { font-size: 11.5px; color: var(--muted); }
+.facts dd { margin: 2px 0 0; font-weight: 500; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.facts dd small { color: var(--muted); font-weight: 400; }
+.tg { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 2px 9px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); color: var(--ink-2); white-space: nowrap; }
+.tg i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); }
+.tg.f { background: var(--bad-soft); border-color: transparent; color: var(--bad); } .tg.f i { background: var(--bad); }
+.tg.a { background: var(--ok-soft); border-color: transparent; color: var(--ok); } .tg.a i { background: var(--ok); }
+.tg.w { background: var(--warn-soft); border-color: transparent; color: var(--warn); } .tg.w i { background: var(--warn); }
+.sig { display: grid; gap: 10px; }
+.sig div { display: grid; gap: 4px; padding-left: 12px; border-left: 3px solid var(--warn); }
+.sig b { font-weight: 600; font-size: 13px; }
+.chipline { display: flex; flex-wrap: wrap; gap: 5px; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+th { color: var(--muted); font-weight: 500; font-size: 12px; }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tblw { overflow-x: auto; }
+.shap { display: grid; grid-template-columns: minmax(0, 1fr) 60px 140px; gap: 6px 12px; align-items: center; font-size: 13px; }
+.shap .h { color: var(--muted); font-size: 12px; }
+.shap .n { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+.shap .bar { height: 8px; border-radius: 99px; background: var(--surface-2); position: relative; overflow: hidden; flex: 1; }
+.shap .bar i { position: absolute; inset: 0 auto 0 0; border-radius: 99px; background: var(--bad); opacity: .8; }
+.muted { color: var(--muted); }
+
+/* ---- the electronic medical record (SATUSEHAT) */
+.rme-aksi { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.rme-aksi select { width: auto; padding: 6px 8px; font-size: 13px; }
+#rekam_medis { min-height: 90px; max-height: 260px; font-size: 11.5px; }
+.rme-sum { font-size: 12px; color: var(--ink-2); background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; }
+.rme-sum b { font-weight: 600; }
+.rmet { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.rmet td { padding: 6px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.rmet td.a { color: var(--muted); white-space: nowrap; font-size: 12px; }
+.rmet td.s { white-space: nowrap; text-align: right; }
+.rmet tr.bad td { background: var(--bad-soft); }
+.rmet .k { color: var(--ink); } .rmet .r { color: var(--ink-2); }
+.rmet small { display: block; color: var(--muted); font-size: 11.5px; margin-top: 2px; }
+.rme-rute { display: flex; gap: 8px; align-items: center; font-size: 12.5px; padding: 8px 10px; border-radius: 9px; background: var(--bad-soft); color: var(--ink); }
+.rme-rute.ok { background: var(--ok-soft); }
+
+/* ---- history view */
+.hist { padding: 16px 20px; height: calc(100vh - var(--top)); display: flex; flex-direction: column; }
+.hist .panel { flex: 1; }
+.hbar { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--line); flex: none; }
+.hbar h2 { margin: 0; font-size: 16px; font-weight: 600; margin-right: 6px; }
+.hbar input[type=search] { width: 300px; max-width: 100%; }
+.hbar .sp { flex: 1; }
+.ringkas-h { display: flex; gap: 8px; flex-wrap: wrap; }
+.ringkas-h span { font-size: 12.5px; color: var(--muted); }
+.ringkas-h b { color: var(--ink); font-variant-numeric: tabular-nums; }
+#histori-tabel tbody tr { cursor: pointer; }
+#histori-tabel tbody tr:hover td { background: var(--surface-2); }
+#histori-tabel th { position: sticky; top: 0; background: var(--surface); z-index: 1; }
+#histori-tabel td, #histori-tabel th { padding: 9px 12px; }
+.mmini { display: inline-flex; gap: 5px; align-items: center; font-size: 12px; color: var(--bad); background: var(--bad-soft); border-radius: 999px; padding: 1px 8px 1px 3px; white-space: nowrap; }
+.mmini b { background: var(--bad); color: var(--surface); border-radius: 999px; padding: 0 5px; font-size: 10.5px; }
+@media (max-width: 900px) { .hist { height: auto; padding: 12px 16px; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
+    <b>Uji Deteksi Fraud</b>
+  </div>
+  <nav class="menu" aria-label="Menu">
+    <button type="button" data-view="uji" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 14l2 2 4-4"/></svg>Uji klaim</button>
+    <button type="button" data-view="histori"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/></svg>Histori <span class="count" id="n-riwayat">0</span></button>
+  </nav>
+  <div class="sp"></div>
+  <span class="pill sintetis" title="Klaim yang dinilai masuk ke salinan aliran sintetis. Jangan mengetik data pasien sungguhan.">Data sintetis</span>
+  <span class="pill model" id="kartu" hidden></span>
+  <span class="pill" id="status" role="status"><i></i><span>Memeriksa layanan…</span></span>
+</header>
+
+<!-- ================================ view: test a claim ================================ -->
+<main class="ws" id="v-uji">
+  <section class="panel" aria-label="Klaim">
+    <div class="tabs" role="tablist" data-tabgroup="masuk">
+      <button role="tab" data-tab="form" aria-selected="true">Formulir</button>
+      <button role="tab" data-tab="dokumen" aria-selected="false">Unggah dokumen</button>
+      <button role="tab" data-tab="contoh" aria-selected="false">Contoh klaim</button>
+    </div>
+
+    <form class="scroll" id="form" novalidate data-panel-group="masuk" data-panel="form">
+      <div class="pad">
+        <div class="batch" id="batch" hidden></div>
+        <div class="sec">
+          <h4>Pasien</h4>
+          <div class="seg" role="radiogroup" aria-label="Identitas pasien">
+            <label><input type="radio" name="pasien_mode" value="baru" checked>Pasien baru · entity resolution</label>
+            <label><input type="radio" name="pasien_mode" value="terdaftar">Peserta terdaftar</label>
+          </div>
+          <div class="g3" id="pasien-baru">
+            <label class="f">Nama pasien<input id="nama_pasien" autocomplete="off"></label>
+            <label class="f">No rekam medis<input id="no_rm" autocomplete="off"></label>
+            <label class="f">No SEP<input id="no_sep" autocomplete="off"></label>
+          </div>
+          <div class="g2" id="pasien-lama" hidden>
+            <label class="f">ID peserta<input id="peserta_id" inputmode="numeric" autocomplete="off"></label>
+          </div>
+          <div class="g2">
+            <label class="f">Segmen peserta
+              <select id="segmen"><option value="">tidak diisi</option><option>PBI APBN</option><option>PBI APBD</option><option>PPU</option><option>PBPU</option><option>BUKAN PEKERJA</option></select>
+            </label>
+            <label class="f">Hak kelas di SEP<select id="hak_kelas"><option value="">tidak diisi</option><option>1</option><option>2</option><option>3</option></select></label>
+          </div>
+        </div>
+        <div class="sec">
+          <h4>Rumah sakit</h4>
+          <label class="f">Cari RS (kelas · kepemilikan · kota)<input id="rs_cari" list="rs_list" autocomplete="off" placeholder="ketik kota, mis. SERANG"></label>
+          <datalist id="rs_list"></datalist>
+          <input type="hidden" id="rs_id">
+          <div class="hint" id="rs_pilih"></div>
+        </div>
+        <div class="sec">
+          <h4>Episode</h4>
+          <div class="seg" role="radiogroup" aria-label="Jenis episode">
+            <label><input type="radio" name="jenis_episode" value="ri" checked>Rawat inap</label>
+            <label><input type="radio" name="jenis_episode" value="rj">Rawat jalan</label>
+            <label><input type="radio" name="jenis_episode" value="igd">IGD</label>
+          </div>
+          <div class="g2">
+            <label class="f">Tanggal masuk<input type="date" id="tanggal_masuk"></label>
+            <label class="f">Tanggal pulang<input type="date" id="tanggal_pulang"></label>
+            <label class="f">Kelas rawat<select id="kelas_rawat"><option value="">-</option><option>1</option><option>2</option><option>3</option></select></label>
+            <label class="f">Status pulang<select id="status_pulang"><option value="">-</option><option>Sehat</option><option>Membaik</option><option>Pulang paksa</option><option>Dirujuk</option><option>Meninggal</option></select></label>
+          </div>
+        </div>
+        <div class="sec">
+          <h4>Klinis</h4>
+          <div class="g2">
+            <label class="f">Diagnosis utama (ICD-10)<input id="diagnosis_utama" placeholder="J18.9" autocomplete="off"></label>
+            <label class="f">Kode INA-CBG<input id="inacbg_kode" placeholder="J-4-16-I" autocomplete="off"></label>
+            <label class="f full">Diagnosis sekunder <span class="hint">pisahkan dengan koma</span><input id="diagnosis_sekunder" placeholder="I10, E11.9" autocomplete="off"></label>
+            <label class="f full">Tindakan ICD-9-CM <span class="hint">satu per baris</span><textarea id="tindakan" placeholder="96.04 Intubasi endotrakeal"></textarea></label>
+          </div>
+        </div>
+        <div class="sec">
+          <h4>Tarif dan tagihan</h4>
+          <div class="g2">
+            <label class="f">Tarif INA-CBG (Rp)<input id="tarif_inacbg_rp" inputmode="numeric" placeholder="kosong = tarif referensi"></label>
+            <label class="f">Total tagihan RS (Rp)<input id="biaya_tagih_rp" inputmode="numeric"></label>
+            <label class="f">Special CMG<select id="topup_jenis"><option value="">tidak ada</option><option value="sa">sa · subacute</option><option value="sp">sp · prosedur</option><option value="rr">rr · prostesis</option><option value="si">si · investigasi</option><option value="sd">sd · obat</option></select></label>
+            <label class="f">Nilai special CMG (Rp)<input id="topup_rp" inputmode="numeric" value="0"></label>
+          </div>
+        </div>
+        <div class="sec">
+          <h4>Rekam medis elektronik · SATUSEHAT</h4>
+          <span class="hint">Opsional. Satu Bundle FHIR R4 (profil ID Core SATUSEHAT) untuk episode ini: Encounter, Condition (ICD-10), Procedure (ICD-9-CM), Observation (LOINC), obat. Klaim dicocokkan dengan isinya.</span>
+          <div class="rme-aksi">
+            <select id="rme-varian" aria-label="Isi rekam medis yang dibuat">
+              <option value="sesuai">sesuai dengan klaim</option>
+              <option value="tindakan_fiktif">tindakan tidak tercatat</option>
+              <option value="dx_tidak_didukung">diagnosis tidak didukung</option>
+              <option value="los">lama rawat lebih pendek</option>
+              <option value="kunjungan_fiktif">tanpa kunjungan</option>
+              <option value="rawat_jalan">hanya rawat jalan</option>
+              <option value="pasien_berbeda">pasien berbeda</option>
+              <option value="kerangka">kunjungan saja</option>
+            </select>
+            <button class="btn s" type="button" id="rme-buat">Buat dari isian</button>
+            <label class="btn s" tabindex="0">Unggah .json<input type="file" id="rme-file" accept=".json,application/json,application/fhir+json" hidden></label>
+            <button class="btn s" type="button" id="rme-hapus">Hapus</button>
+          </div>
+          <div class="rme-sum" id="rme-ringkas">Tidak ada rekam medis: klaim dinilai tanpa pencocokan rekam medis.</div>
+          <textarea id="rekam_medis" spellcheck="false" placeholder='{"resourceType": "Bundle", "type": "collection", "entry": [...]}'></textarea>
+        </div>
+        <div id="form-galat" class="galat" hidden></div>
+      </div>
+    </form>
+
+    <div class="scroll" data-panel-group="masuk" data-panel="dokumen" hidden>
+      <div class="pad">
+        <label class="drop" id="drop" tabindex="0">
+          <input type="file" id="berkas" accept=".pdf,.docx,.txt,.png,.jpg,.jpeg,.webp" hidden>
+          <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 18v-6M9 15l3-3 3 3"/></svg></span>
+          <b>Unggah resume medis, SEP, atau rincian biaya</b>
+          <span class="hint">PDF, DOCX, TXT, JPG, atau PNG · seret ke sini atau klik · berkas tidak disimpan</span>
+        </label>
+        <div id="dok-status" class="status-dok" aria-live="polite"></div>
+        <p class="hint" style="margin-top:16px">AI membaca dokumen dan mengisi formulir. Isian yang terisi ditandai kuning untuk diperiksa sebelum dinilai.</p>
+      </div>
+    </div>
+
+    <div class="scroll" data-panel-group="masuk" data-panel="contoh" hidden>
+      <div class="pad contoh" id="contoh">
+        <div class="lbl">Wajar</div>
+        <button class="ex aman" type="button" data-j="normal"><i class="dot"></i><b>Klaim wajar</b><span>Rawat inap biasa, peserta dengan riwayat yang wajar</span></button>
+        <div class="lbl">Satu klaim</div>
+        <button class="ex" type="button" data-j="ganda"><i class="dot"></i><b>Klaim berulang</b><span>Salinan persis klaim yang sudah ada</span></button>
+        <button class="ex" type="button" data-j="kartu_dipinjam"><i class="dot"></i><b>Kartu dipinjam</b><span>Rawat inap tumpang tindih di provinsi lain</span></button>
+        <button class="ex" type="button" data-j="kelas_naik"><i class="dot"></i><b>Manipulasi kelas perawatan</b><span>Peserta PBI hak kelas 3 ditagih kelas 1</span></button>
+        <button class="ex" type="button" data-j="dx_sekunder"><i class="dot"></i><b>Upcoding diagnosis sekunder</b><span>Diagnosis tambahan jauh di atas kebiasaan</span></button>
+        <button class="ex" type="button" data-j="topup_fiktif"><i class="dot"></i><b>Klaim fiktif obat/alkes</b><span>Obat khusus yang hampir tak pernah ada untuk kasus ini</span></button>
+        <button class="ex" type="button" data-j="topup_inflasi"><i class="dot"></i><b>Penggelembungan tagihan</b><span>Obat/alat khusus 3 kali harga biasanya</span></button>
+        <button class="ex" type="button" data-j="prosedur_fiktif"><i class="dot"></i><b>Tindakan tidak dilakukan</b><span>Kode paket tindakan, tindakan kosong</span></button>
+        <button class="ex" type="button" data-j="kode_tidak_sesuai"><i class="dot"></i><b>Tidak sesuai indikasi</b><span>Kode paket yang langka untuk diagnosis ini</span></button>
+        <button class="ex" type="button" data-j="setelah_meninggal"><i class="dot"></i><b>Klaim setelah meninggal</b><span>2 klaim: rawat inap berakhir meninggal, lalu kunjungan baru</span></button>
+        <div class="lbl">Dengan rekam medis (SATUSEHAT)</div>
+        <button class="ex aman" type="button" data-j="rme_sesuai"><i class="dot"></i><b>Klaim + rekam medis sesuai</b><span>Kunjungan, diagnosis, tindakan dan tanda vital cocok</span></button>
+        <button class="ex" type="button" data-j="rme_kateter_fiktif"><i class="dot"></i><b>Kateterisasi jantung tanpa jejak</b><span>PCI ditagih; rekam medis tanpa tindakan, tanda vital dan troponin normal</span></button>
+        <button class="ex" type="button" data-j="rme_dx_tidak_didukung"><i class="dot"></i><b>Gagal napas, saturasi normal</b><span>Diagnosis sekunder dibantah hasil ukur rekam medis</span></button>
+        <button class="ex" type="button" data-j="rme_los"><i class="dot"></i><b>Lama rawat lebih panjang dari rekam medis</b><span>Encounter selesai lebih awal dari tanggal pulang klaim</span></button>
+        <button class="ex" type="button" data-j="rme_kunjungan_fiktif"><i class="dot"></i><b>Rawat inap tanpa kunjungan</b><span>Rekam medis tidak mencatat kunjungan pada tanggal klaim</span></button>
+        <div class="lbl">Beberapa klaim</div>
+        <button class="ex" type="button" data-j="kloning"><i class="dot"></i><b>Cloning klaim</b><span>4 klaim: satu klaim disalin ke empat peserta</span></button>
+        <button class="ex" type="button" data-j="upcoding"><i class="dot"></i><b>Upcoding di satu RS</b><span>10 klaim: keparahan dinaikkan ke III</span></button>
+        <button class="ex" type="button" data-j="los_bergeser"><i class="dot"></i><b>Prolonged length of stay</b><span>12 klaim di satu RS, lama rawat tiga kali lipat</span></button>
+        <button class="ex" type="button" data-j="ring"><i class="dot"></i><b>Rujukan semu / jaringan RS</b><span>15 klaim: 5 peserta yang sama di 3 RS dalam 6 hari</span></button>
+        <div id="contoh-ket" class="hint" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <span class="hint" id="kirim-ket"></span>
+      <button class="btn s" type="button" id="kosongkan">Kosongkan</button>
+      <button class="btn p" type="submit" form="form" id="kirim" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/></svg>
+        Nilai klaim</button>
+    </div>
+  </section>
+
+  <section class="panel res" aria-label="Hasil">
+    <div class="vonis" id="vonis" hidden></div>
+    <div class="strip" id="strip" hidden></div>
+
+    <div class="center" id="mulai">
+      <div class="kosong" id="kosong">
+        <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="7" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8.2 7.2l7.6.2M7.4 8.2l3.5 7.6M16.7 9.2l-3.5 6.6"/></svg></div>
+        <h3>Nilai satu klaim, lihat apakah lolos</h3>
+        <p>Isi formulir, unggah dokumen klaim, atau pilih contoh. Klaim yang lolos dijawab “Klaim aman”. Klaim yang terdeteksi dijelaskan: jenis fraud menurut Permenkes 16/2019, alasannya, dan graph-nya.</p>
+        <div class="alur">
+          <div><b>1</b>Entity resolution pasien</div>
+          <div><b>2</b>Pemeriksaan otomatis: rule + cocokkan rekam medis</div>
+          <div><b>3</b>ML v7: klaim + tetangga graph</div>
+          <div><b>4</b>Rule route rekam medis + network rule</div>
+          <div><b>5</b>Penjelasan AI</div>
+        </div>
+        <div class="cepat">
+          <button class="btn s" type="button" data-cepat="normal">Coba: klaim wajar</button>
+          <button class="btn s" type="button" data-cepat="ganda">Coba: klaim berulang</button>
+          <button class="btn s" type="button" data-cepat="ring">Coba: rujukan semu</button>
+        </div>
+      </div>
+      <div class="steps" id="langkah" hidden></div>
+    </div>
+
+    <div class="tabs" role="tablist" data-tabgroup="hasil" id="tab-hasil" hidden>
+      <button role="tab" data-tab="hasil" aria-selected="true">Graph dan penjelasan</button>
+      <button role="tab" data-tab="teknis" aria-selected="false">Detail teknis</button>
+    </div>
+
+    <div class="hasil" data-panel-group="hasil" data-panel="hasil" id="p-hasil" hidden>
+      <div class="kanvas">
+        <div class="toolbar" role="toolbar" aria-label="Kontrol network">
+          <div class="seg" id="mode" aria-label="Tampilan">
+            <button type="button" data-m="dok" aria-pressed="true">Dokumen + entitas</button>
+            <button type="button" data-m="e2e" aria-pressed="false">Entity-to-entity</button>
+          </div>
+          <div class="seg" id="sorot" aria-label="Sorot">
+            <button type="button" data-s="semua" aria-pressed="true">Semua</button>
+            <button type="button" data-s="fokus" aria-pressed="false" title="Klaim ini, pesertanya, RS-nya, dan kode INA-CBG-nya">Klaim ini</button>
+            <button type="button" data-s="model1" aria-pressed="false" title="Klaim pembanding (tetangga graph) yang dibaca model: peserta sama, RS sama, RS + kode, kode sama">Pembanding</button>
+            <button type="button" data-s="model2" aria-pressed="false" title="RS dan peserta yang berbagi peserta dengan klaim ini: dasar network rule dan modus M10">Jaringan RS</button>
+          </div>
+          <span class="sp"></span>
+          <label><input type="checkbox" id="label-klaim"> label klaim</label>
+          <button class="btn s" type="button" id="pas" title="Paskan graph ke layar">Fit to screen</button>
+          <button class="btn s" type="button" id="tata">Tata ulang</button>
+          <button class="btn s" type="button" id="ke-fokus" disabled>Kembali</button>
+        </div>
+        <div class="netjudul"><span id="inv-fokus"></span> · <span id="hitung"></span></div>
+        <div class="sorot-ket" id="sorot-ket" aria-live="polite"></div>
+        <div class="wadah">
+          <svg id="net" role="img" aria-label="Network klaim: dokumen klaim, peserta, rumah sakit, dan kode INA-CBG"></svg>
+          <div class="dv" id="dataviewer" hidden></div>
+          <div class="tip" hidden></div>
+        </div>
+        <div class="legend" id="legend"></div>
+      </div>
+      <aside class="ai" id="ai" aria-label="Penjelasan" aria-live="polite"></aside>
+    </div>
+
+    <div class="scroll" data-panel-group="hasil" data-panel="teknis" hidden>
+      <div class="pad" id="bukti"></div>
+    </div>
+  </section>
+</main>
+
+<!-- ================================ view: history ================================ -->
+<main class="hist" id="v-histori" hidden>
+  <section class="panel">
+    <div class="hbar">
+      <h2>Histori klaim uji</h2>
+      <div class="seg" id="h-filter" aria-label="Saring">
+        <button type="button" data-f="semua" aria-pressed="true">Semua</button>
+        <button type="button" data-f="terdeteksi" aria-pressed="false">Terdeteksi</button>
+        <button type="button" data-f="aman" aria-pressed="false">Aman</button>
+      </div>
+      <input type="search" id="h-cari" placeholder="Cari RS, kode, jenis fraud, atau nomor klaim" autocomplete="off">
+      <span class="sp"></span>
+      <div class="ringkas-h" id="h-ringkas"></div>
+    </div>
+    <div class="scroll">
+      <div class="tblw"><table id="histori-tabel"><thead><tr><th>Waktu</th><th>Hasil</th><th>Jenis fraud</th><th>Rumah sakit</th><th>Kode · tanggal</th><th>Pasien</th><th class="n">Peluang</th></tr></thead><tbody></tbody></table></div>
+      <div class="dv-kosong" id="h-kosong" style="padding:24px 18px">Belum ada klaim yang dinilai.</div>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+const $ = (s, el = document) => el.querySelector(s);
+const rp = (v) => v == null ? '–' : 'Rp' + Number(v).toLocaleString('id-ID');
+const pct = (v) => v == null ? '–' : (100 * v).toLocaleString('id-ID', {maximumFractionDigits: 1}) + '%';
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+const api = async (path, opt) => { const r = await fetch('/testing/api/' + path, opt); const d = await r.json().catch(() => ({})); if (!r.ok) throw Object.assign(new Error('http'), {status: r.status, detail: d.detail}); return d; };
+const KEP = {TAHAN: 'ditahan', PERIKSA: 'perlu diperiksa', LOLOS: 'lolos'};
+const IKON = {
+  aman: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>',
+  fraud: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L2 18a2 2 0 0 0 1.7 3h16.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>',
+  cari: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>',
+  cek: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>',
+  ai: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg>',
+  skor: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
+  rme: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v3h6V3M8 13h2l1.5-3 2 6 1.5-3h1"/></svg>',
+};
+// ---------------------------------------------------------------- the claim against the medical record (SATUSEHAT)
+const RME_ST = {cocok: ['a', 'sesuai'], tidak_ada: ['f', 'tidak ada'], dibantah: ['f', 'dibantah'], tanpa_indikasi: ['f', 'tanpa indikasi'],
+  info: ['', 'keterangan'], tidak_dicek: ['', 'tidak dicek']};
+const RME_BURUK = ['tidak_ada', 'dibantah', 'tanpa_indikasi'];
+function rmeSection(h) {
+  const r = h.rme || {};
+  if (!r.hasil) return '';
+  const ru = r.rute || {};
+  const buruk = r.hasil.filter((x) => RME_BURUK.includes(x.status)).length;
+  const head = ru.aktif
+    ? `<div class="rme-rute"><span>Rekam medis saja sudah cukup untuk <b>${esc(KEP[ru.tingkat] || ru.tingkat)}</b>: ${ru.temuan} temuan, skor ${ru.skor} (perlu diperiksa mulai ${ru.ambang_periksa}, ditahan mulai ${ru.ambang_tahan}).</span></div>`
+    : `<div class="rme-rute ok"><span>${buruk ? `${buruk} butir tidak cocok, belum cukup untuk menandai klaim (skor ${ru.skor}).` : 'Butir yang dicek cocok dengan rekam medis.'}</span></div>`;
+  const rows = r.hasil.map((x) => { const st = RME_ST[x.status] || ['', x.status];
+    return `<tr class="${RME_BURUK.includes(x.status) ? 'bad' : ''}"><td class="a">${esc(x.aspek)}</td><td><span class="k">${esc(x.klaim)}</span><small>rekam medis: ${esc(x.rme)}</small>${x.catatan ? `<small>${esc(x.catatan)}</small>` : ''}</td>`
+      + `<td class="s"><span class="tg ${st[0]}"><i></i>${st[1]}</span></td></tr>`; }).join('');
+  return `<section><h4>${IKON.rme} Cocokkan dengan rekam medis (SATUSEHAT)</h4>${head}<table class="rmet" id="rme-tabel"><tbody>${rows}</tbody></table></section>`;
+}
+let RS = [], RS_BY_LABEL = new Map(), BATCH = null, SIAP = false;
+
+// ---------------------------------------------------------------- views and tabs
+function lihat(v) {
+  document.querySelectorAll('.menu button').forEach((b) => b.setAttribute('aria-current', b.dataset.view === v ? 'page' : 'false'));
+  $('#v-uji').hidden = v !== 'uji'; $('#v-histori').hidden = v !== 'histori';
+  if (v === 'histori') riwayat(); else requestAnimationFrame(() => { if (NET.nodes.size) render(true); });
+}
+document.querySelectorAll('.menu button').forEach((b) => b.addEventListener('click', () => lihat(b.dataset.view)));
+function tab(group, name) {
+  document.querySelectorAll(`[data-tabgroup="${group}"] [role=tab]`).forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
+  document.querySelectorAll(`[data-panel-group="${group}"]`).forEach((p) => { p.hidden = p.dataset.panel !== name; });
+  if (group === 'hasil' && name === 'hasil') requestAnimationFrame(() => { if (NET.nodes.size) render(true); });
+}
+document.querySelectorAll('[role=tab]').forEach((b) => b.addEventListener('click', () => tab(b.closest('[data-tabgroup]').dataset.tabgroup, b.dataset.tab)));
+
+// ---------------------------------------------------------------- status
+async function status() {
+  try {
+    const s = await api('status');
+    const el = $('#status');
+    el.className = 'pill ' + (s.siap ? 'siap' : s.galat ? 'gagal' : '');
+    el.querySelector('span').textContent = s.siap ? `Siap · ${s.klaim_aliran.toLocaleString('id-ID')} klaim` : s.galat ? 'Gagal: ' + s.galat : `${s.tahap}… ${s.detik} dtk`;
+    const k = s.kartu_model || {};
+    if (k.arsitektur === 'ML v7' && k.uji) {  // ML v7: its benchmark per generator, each set scored once
+      const kp = $('#kartu'); kp.hidden = false;
+      const g1 = k.uji.generator1 || {};
+      kp.textContent = `Model ML v7 · recall ${pct(g1.recall)} · FPR ${pct(g1.fpr)} · Generator 1`;
+      kp.title = Object.values(k.uji).map((v) => `${v.label}: recall ${pct(v.recall)}, FPR ${pct(v.fpr)}, AUPRC ${v.auprc != null ? v.auprc.toFixed(2) : '–'}`).join('\n')
+        + '\nRecall dan FPR pada ambang PERIKSA. Data sintetis: distribusi yang mirip sampel BPJS (Generator 1) jauh lebih mudah daripada generator 3 dan 4.';
+    } else if (k.oof_auprc) {
+      const kp = $('#kartu'); kp.hidden = false;
+      kp.textContent = `${k.arsitektur ? 'Model ' + k.arsitektur + ' · ' : ''}AUPRC ${k.oof_auprc.toFixed(3)} · precision ${pct(k.oof_ditandai_precision)} · recall ${pct(k.oof_ditandai_recall)}`;
+      kp.title = `Out-of-fold pada aliran sintetis.${k.holdout_bersih_recall != null ? ` Plant bersih (holdout) tertangkap ${pct(k.holdout_bersih_recall)}; klaim normal buatan formulir ditandai ${pct(k.holdout_normal_bersih_fpr)}.` : ''}`;
+    }
+    if (s.rs && !RS.length) loadRS();
+    SIAP = !!s.siap;
+    $('#kirim').disabled = !SIAP;
+    $('#kirim-ket').textContent = SIAP ? '' : 'Menunggu layanan siap…';
+    if (!s.siap && !s.galat) setTimeout(status, 3000);
+    if (s.siap) riwayat();
+  } catch (e) { $('#status').querySelector('span').textContent = 'Layanan tidak terjangkau'; setTimeout(status, 5000); }
+}
+async function loadRS() {
+  RS = await api('rs');
+  const dl = $('#rs_list'); dl.replaceChildren();
+  for (const r of RS) { const o = document.createElement('option'); o.value = r.label; dl.appendChild(o); RS_BY_LABEL.set(r.label, r); }
+}
+$('#rs_cari').addEventListener('change', () => pilihRS(RS_BY_LABEL.get($('#rs_cari').value)));
+function pilihRS(r) {
+  $('#rs_id').value = r ? r.id : '';
+  $('#rs_pilih').textContent = r ? `${r.provinsi} · regional ${r.regional || '-'} · ${r.klaim.toLocaleString('id-ID')} klaim di aliran` : ($('#rs_cari').value ? 'Pilih RS dari daftar.' : '');
+  if (r) $('#rs_cari').value = r.label;
+}
+
+// ---------------------------------------------------------------- form
+function modePasien() {
+  const m = document.querySelector('input[name=pasien_mode]:checked').value;
+  $('#pasien-baru').hidden = m !== 'baru'; $('#pasien-lama').hidden = m !== 'terdaftar';
+}
+document.querySelectorAll('input[name=pasien_mode]').forEach((r) => r.addEventListener('change', modePasien));
+function bacaForm() {
+  const v = (id) => $('#' + id).value.trim();
+  const num = (id) => { const x = v(id).replace(/[^0-9]/g, ''); return x ? Number(x) : null; };
+  return {
+    pasien_mode: document.querySelector('input[name=pasien_mode]:checked').value,
+    peserta_id: num('peserta_id'), nama_pasien: v('nama_pasien'), no_rm: v('no_rm'), no_sep: v('no_sep'), segmen: v('segmen') || null,
+    rs_id: v('rs_id'), jenis_episode: document.querySelector('input[name=jenis_episode]:checked').value,
+    tanggal_masuk: v('tanggal_masuk'), tanggal_pulang: v('tanggal_pulang') || null, kelas_rawat: v('kelas_rawat') ? Number(v('kelas_rawat')) : null,
+    hak_kelas: v('hak_kelas') ? Number(v('hak_kelas')) : null, status_pulang: v('status_pulang') || null, diagnosis_utama: v('diagnosis_utama'),
+    diagnosis_sekunder: v('diagnosis_sekunder').split(',').map((s) => s.trim()).filter(Boolean),
+    tindakan: $('#tindakan').value.split('\n').map((s) => s.trim()).filter(Boolean),
+    inacbg_kode: v('inacbg_kode').toUpperCase(), tarif_inacbg_rp: num('tarif_inacbg_rp'), topup_jenis: v('topup_jenis') || '',
+    topup_rp: num('topup_rp') || 0, biaya_tagih_rp: num('biaya_tagih_rp'), rekam_medis: bacaRme(),
+  };
+}
+// ---------------------------------------------------------------- the electronic medical record (SATUSEHAT FHIR Bundle)
+function bacaRme() {  // the parsed Bundle, null when empty, {__galat} when it is not JSON
+  const t = $('#rekam_medis').value.trim();
+  if (!t) return null;
+  try { return JSON.parse(t); } catch (e) { return {__galat: 'Rekam medis bukan JSON yang valid: ' + e.message}; }
+}
+function ringkasRme() {
+  const el = $('#rme-ringkas'), b = bacaRme();
+  if (!b) { el.textContent = 'Tidak ada rekam medis: klaim dinilai tanpa pencocokan rekam medis.'; return; }
+  if (b.__galat) { el.textContent = b.__galat; return; }
+  if (b.resourceType !== 'Bundle') { el.textContent = 'Bukan FHIR Bundle (resourceType harus "Bundle").'; return; }
+  const n = {}; for (const e of b.entry || []) { const t = e && e.resource && e.resource.resourceType; if (t) n[t] = (n[t] || 0) + 1; }
+  const enc = (b.entry || []).map((e) => e.resource).filter((r) => r && r.resourceType === 'Encounter')
+    .map((r) => `${(r.class || {}).code || '?'} ${String((r.period || {}).start || '').slice(0, 10)}${(r.period || {}).end ? ' s.d. ' + String(r.period.end).slice(0, 10) : ''}`);
+  const NM = {Encounter: 'kunjungan', Condition: 'diagnosis', Procedure: 'tindakan', Observation: 'hasil ukur', MedicationRequest: 'resep', MedicationAdministration: 'pemberian obat', Device: 'alat'};
+  el.innerHTML = `<b>Bundle ${(b.entry || []).length} resource</b> · ${Object.entries(NM).filter(([k]) => n[k]).map(([k, l]) => `${n[k]} ${l}`).join(' · ') || 'tanpa resource klinis'}`
+    + (enc.length ? `<br>Kunjungan: ${enc.map(esc).join('; ')}` : '<br>Tidak ada Encounter: rekam medis tidak dapat dicocokkan.');
+}
+function isiRme(b) { $('#rekam_medis').value = b ? JSON.stringify(b, null, 1) : ''; ringkasRme(); }
+$('#rekam_medis').addEventListener('input', ringkasRme);
+$('#rme-hapus').addEventListener('click', () => isiRme(null));
+$('#rme-file').addEventListener('change', async (e) => {
+  const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+  try { isiRme(JSON.parse(await f.text())); } catch (err) { $('#rme-ringkas').textContent = `${f.name} bukan JSON yang valid.`; }
+});
+$('#rme-buat').addEventListener('click', async () => {
+  const f = bacaForm(); delete f.rekam_medis;
+  const salah = periksa(f).filter(([k]) => k !== 'rekam_medis');
+  if (salah.length) { $('#rme-ringkas').textContent = 'Lengkapi klaim dulu: ' + salah.map((x) => x[1]).join(' '); return; }
+  $('#rme-ringkas').textContent = 'Membuat rekam medis sintetis…';
+  try {
+    const d = await api('rme/buat', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({klaim: f, varian: $('#rme-varian').value})});
+    isiRme(d.rekam_medis);
+  } catch (err) { $('#rme-ringkas').textContent = 'Gagal membuat rekam medis: ' + JSON.stringify(err.detail || err.message); }
+});
+function isiForm(f, tandai) {
+  const set = (id, val) => { const el = $('#' + id); if (!el || val === undefined) return; el.value = val == null ? '' : val; if (tandai) el.classList.add('filled'); };
+  if (f.pasien_mode) { document.querySelector(`input[name=pasien_mode][value=${f.pasien_mode}]`).checked = true; modePasien(); }
+  if (f.jenis_episode) document.querySelector(`input[name=jenis_episode][value=${f.jenis_episode}]`).checked = true;
+  for (const k of ['peserta_id', 'nama_pasien', 'no_rm', 'no_sep', 'segmen', 'tanggal_masuk', 'tanggal_pulang', 'kelas_rawat', 'hak_kelas', 'status_pulang',
+    'diagnosis_utama', 'inacbg_kode', 'tarif_inacbg_rp', 'topup_jenis', 'topup_rp', 'biaya_tagih_rp']) if (k in f) set(k, f[k]);
+  if ('diagnosis_sekunder' in f) set('diagnosis_sekunder', (f.diagnosis_sekunder || []).join(', '));
+  if ('tindakan' in f) set('tindakan', (f.tindakan || []).join('\n'));
+  if ('rekam_medis' in f) { isiRme(f.rekam_medis); if (tandai && f.rekam_medis) $('#rekam_medis').classList.add('filled'); }
+  if (f.rs_id) { const r = RS.find((x) => x.id === f.rs_id); if (r) { pilihRS(r); if (tandai) $('#rs_cari').classList.add('filled'); } }
+}
+function bersihkanTanda() { document.querySelectorAll('.filled, .err').forEach((e) => e.classList.remove('filled', 'err')); document.querySelectorAll('.ferr').forEach((e) => e.remove()); $('#form-galat').hidden = true; }
+function kosongkan() { $('#form').reset(); isiRme(null); bersihkanTanda(); pilihRS(null); BATCH = null; $('#batch').hidden = true; $('#batch').dataset.jenis = ''; modePasien(); $('#contoh-ket').textContent = ''; $('#dok-status').replaceChildren(); }
+$('#kosongkan').addEventListener('click', kosongkan);
+document.querySelectorAll('#form input, #form select, #form textarea').forEach((el) => el.addEventListener('input', () => { el.classList.remove('filled', 'err'); }));
+
+// ---------------------------------------------------------------- examples
+async function muatContoh(j, nilaiLangsung) {
+  if (!SIAP) { $('#contoh-ket').textContent = 'Contoh tersedia setelah layanan siap.'; return; }
+  $('#contoh-ket').textContent = 'Menyiapkan contoh…';
+  $('#kirim').disabled = true; document.querySelectorAll('#contoh .ex').forEach((b) => { b.disabled = true; });
+  try {
+    const c = await api('contoh?jenis=' + j);
+    kosongkan();
+    isiForm(c.klaim[0], false);
+    BATCH = c.klaim.length > 1 ? c.klaim : null;
+    const bt = $('#batch'); bt.hidden = false; bt.dataset.jenis = j;
+    bt.innerHTML = `<b>${esc(c.judul)}${BATCH ? ` · ${BATCH.length} klaim dinilai berurutan` : ''}</b><span class="muted">${esc(c.keterangan)}${BATCH ? ' Formulir menampilkan klaim pertama.' : ''}</span>`;
+    $('#contoh-ket').textContent = '';
+    tab('masuk', 'form');
+    if (nilaiLangsung) $('#form').requestSubmit();
+  } catch (e) { $('#contoh-ket').textContent = 'Gagal menyiapkan contoh: ' + (e.detail || e.message); }
+  finally { $('#kirim').disabled = !SIAP; document.querySelectorAll('#contoh .ex').forEach((b) => { b.disabled = false; }); }
+}
+document.querySelectorAll('#contoh .ex').forEach((b) => b.addEventListener('click', () => muatContoh(b.dataset.j, false)));
+document.querySelectorAll('[data-cepat]').forEach((b) => b.addEventListener('click', () => muatContoh(b.dataset.cepat, true)));
+
+// ---------------------------------------------------------------- document upload
+const drop = $('#drop'), berkas = $('#berkas');
+drop.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); berkas.click(); } });
+['dragover', 'dragenter'].forEach((t) => drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.add('over'); }));
+['dragleave', 'drop'].forEach((t) => drop.addEventListener(t, () => drop.classList.remove('over')));
+drop.addEventListener('drop', (e) => { e.preventDefault(); if (e.dataTransfer.files[0]) unggah(e.dataTransfer.files[0]); });
+berkas.addEventListener('change', () => { if (berkas.files[0]) unggah(berkas.files[0]); berkas.value = ''; });
+async function unggah(file) {
+  const st = $('#dok-status');
+  st.innerHTML = `<div class="step jalan"><i></i><span>Membaca ${esc(file.name)}…</span></div>`;
+  const fd = new FormData(); fd.append('file', file);
+  try {
+    const d = await api('ekstrak', {method: 'POST', body: fd});
+    kosongkan();
+    isiForm(d.isian, true);
+    st.innerHTML = `<div class="ok-box"><b>${d.terisi.length} isian terisi dari ${esc(file.name)}</b><div class="muted">Ditandai kuning di formulir; periksa sebelum dinilai.</div></div>${d.catatan.map((c) => `<div class="hint">${esc(c)}</div>`).join('')}`;
+    const bt = $('#batch'); bt.hidden = false; bt.dataset.jenis = 'dokumen';
+    bt.innerHTML = `<b>Diisi dari ${esc(file.name)}</b><span class="muted">${d.terisi.length} isian ditandai kuning. ${d.catatan.map(esc).join(' ')}</span>`;
+    tab('masuk', 'form');
+  } catch (e) { st.innerHTML = `<div class="galat">${esc(e.detail || 'Layanan tidak terjangkau.')}</div>`; }
+}
+
+// ---------------------------------------------------------------- scoring
+const LANGKAH = ['Entity resolution pasien', 'Pemeriksaan otomatis: rule + cocokkan rekam medis (SATUSEHAT)', 'ML v7: klaim + tetangga graph', 'Rule route rekam medis + network rule', 'Penjelasan AI (bila terdeteksi)'];
+let timer = null;
+function mulaiLangkah(n) {
+  $('#mulai').hidden = false; $('#kosong').hidden = true; $('#p-hasil').hidden = true; $('#tab-hasil').hidden = true;
+  document.querySelector('[data-panel="teknis"]').hidden = true;
+  const el = $('#langkah'); el.hidden = false;
+  el.innerHTML = (n > 1 ? `<div class="muted">Menilai ${n} klaim berurutan…</div>` : '') + LANGKAH.map((t) => `<div class="step"><i></i><span>${t}</span></div>`).join('');
+  const steps = [...el.querySelectorAll('.step')]; let k = 0;
+  steps[0].classList.add('jalan');
+  timer = setInterval(() => { if (k < steps.length - 1) { steps[k].className = 'step selesai'; k++; steps[k].className = 'step jalan'; } }, 1100);
+}
+function selesaiLangkah() { clearInterval(timer); $('#langkah').hidden = true; }
+const WAJIB = [['rs_id', 'Pilih rumah sakit dari daftar.', 'rs_cari'], ['tanggal_masuk', 'Isi tanggal masuk.'], ['diagnosis_utama', 'Isi diagnosis utama (ICD-10).'],
+  ['inacbg_kode', 'Isi kode INA-CBG.'], ['biaya_tagih_rp', 'Isi total tagihan RS.']];
+function periksa(f) {
+  const salah = [];
+  for (const [k, pesan, el] of WAJIB) if (f[k] === null || f[k] === '' || f[k] === undefined) salah.push([el || k, pesan]);
+  if (f.pasien_mode === 'baru' && !f.nama_pasien && !f.no_rm) salah.push(['nama_pasien', 'Isi nama pasien atau no RM (untuk entity resolution).']);
+  if (f.pasien_mode === 'terdaftar' && f.peserta_id === null) salah.push(['peserta_id', 'Isi ID peserta.']);
+  if (f.jenis_episode === 'ri' && !f.tanggal_pulang) salah.push(['tanggal_pulang', 'Rawat inap butuh tanggal pulang.']);
+  if (f.rekam_medis && f.rekam_medis.__galat) salah.push(['rekam_medis', f.rekam_medis.__galat]);
+  else if (f.rekam_medis && f.rekam_medis.resourceType !== 'Bundle') salah.push(['rekam_medis', 'Rekam medis harus FHIR Bundle (resourceType "Bundle").']);
+  return salah;
+}
+const NAMA = {rekam_medis: 'rekam medis', tanggal_masuk: 'tanggal masuk', tanggal_pulang: 'tanggal pulang', biaya_tagih_rp: 'total tagihan', tarif_inacbg_rp: 'tarif INA-CBG', topup_rp: 'nilai special CMG',
+  peserta_id: 'ID peserta', kelas_rawat: 'kelas rawat', hak_kelas: 'hak kelas', diagnosis_utama: 'diagnosis utama', inacbg_kode: 'kode INA-CBG', rs_id: 'rumah sakit'};
+function tandaiSalah(id, pesan) { const el = $('#' + id); if (!el) return; el.classList.add('err'); const s = document.createElement('span'); s.className = 'ferr'; s.textContent = pesan; el.after(s); }
+$('#form').addEventListener('submit', async (e) => {
+  e.preventDefault(); bersihkanTanda();
+  const f = bacaForm();
+  const salah = periksa(f);
+  if (salah.length) {
+    tab('masuk', 'form');
+    const g = $('#form-galat'); g.hidden = false; g.textContent = 'Lengkapi dulu: ' + salah.map((x) => x[1]).join(' ');
+    for (const [id, pesan] of salah) tandaiSalah(id, pesan);
+    const first = $('#' + salah[0][0]); if (first) first.focus();
+    return;
+  }
+  const daftar = BATCH ? [f, ...BATCH.slice(1)] : [f];
+  $('#kirim').disabled = true; mulaiLangkah(daftar.length);
+  try {
+    const d = await api('nilai', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({klaim: daftar})});
+    selesaiLangkah();
+    KASUS.batch = d.hasil.filter((h) => !h.galat);
+    if (KASUS.batch.length) tampilKasus(KASUS.batch[KASUS.batch.length - 1]);
+    else tampilGalat(d.hasil.map((h) => (h.galat && (h.galat.pesan || h.galat)) || '').join('; '));
+    riwayat();
+  } catch (err) { selesaiLangkah(); tampilGalat(err.detail || 'Layanan tidak terjangkau.'); }
+  finally { $('#kirim').disabled = !SIAP; }
+});
+function tampilGalat(det) {
+  if (KASUS.aktif) { $('#mulai').hidden = true; $('#tab-hasil').hidden = false; tab('hasil', 'hasil'); } else $('#kosong').hidden = false;
+  tab('masuk', 'form');
+  const g = $('#form-galat'); g.hidden = false;
+  if (Array.isArray(det)) {
+    g.textContent = 'Periksa isian: ' + det.map((x) => `${NAMA[(x.loc || []).slice(-1)[0]] || (x.loc || []).slice(-1)[0]} tidak valid`).join('; ') + '.';
+    for (const x of det) { const id = (x.loc || []).slice(-1)[0]; const el = $('#' + id); if (el) el.classList.add('err'); }
+  } else if (det && det.field) {
+    g.textContent = det.pesan;
+    tandaiSalah(det.field === 'rs_id' ? 'rs_cari' : det.field, det.pesan);
+  } else g.textContent = typeof det === 'string' ? det : JSON.stringify(det);
+}
+
+// ---------------------------------------------------------------- one claim: verdict, network + explanation, technical detail
+const KASUS = {batch: [], riwayat: [], aktif: null};
+function tampilKasus(h) {
+  KASUS.aktif = h.id;
+  $('#mulai').hidden = true; $('#tab-hasil').hidden = false;
+  tab('hasil', 'hasil');
+  vonis(h); penjelasan(h); bukti(h); strip();
+  NET.fokusAsli = {graf: h.graf, hasil: h};
+  // open on the evidence: the hospital network for a ring (M10), the comparison claims for other fraud, everything for a safe claim
+  const kodeJ = daftarJenis(h.penjelasan || {}).map((j) => j.kode);
+  NET.sorot = !h.terdeteksi ? 'semua' : (h.rule_jaringan || h.alert_ring || kodeJ.includes('M10')) ? 'model2' : 'model1';
+  muatNetwork(h.graf, h, judulKlaim(h));
+  const p = h.penjelasan || {};
+  if (h.terdeteksi && (p.menunggu_ai || p.sumber === 'aturan')) mintaAI(h);
+}
+async function mintaAI(h) {
+  try {
+    const d = await api('jelaskan/' + h.id, {method: 'POST'});
+    Object.assign(h, d);
+    const i = KASUS.batch.findIndex((x) => x.id === h.id); if (i >= 0) KASUS.batch[i] = h;
+    if (KASUS.aktif === h.id) { vonis(h); penjelasan(h); }
+  } catch (e) { if (KASUS.aktif === h.id) { const w = $('#ai .menunggu'); if (w) w.innerHTML = '<span>Penjelasan AI belum tersedia; ringkasan otomatis ditampilkan.</span>'; } }
+}
+const judulKlaim = (h) => `<b>${esc(h.klaim_id)}</b> · ${esc(h.klaim.rs)} · ${esc(h.klaim.tgl_datang)}`;
+function daftarJenis(p) {  // the modes (a list); older results kept one name as text
+  const j = (p || {}).jenis_fraud;
+  if (Array.isArray(j)) return j;
+  return j ? [{kode: (String(j).match(/^M\d{2}/) || ['-'])[0], nama: String(j), keyakinan: p.keyakinan || '', bukti: ''}] : [];
+}
+function vonis(h) {
+  const p = h.penjelasan || {};
+  const el = $('#vonis'); el.hidden = false; el.className = 'vonis ' + (h.terdeteksi ? 'fraud' : 'aman');
+  const v7 = h.arsitektur === 'ml_v7';
+  const jenis = daftarJenis(p);
+  const judul = h.terdeteksi ? (jenis.length > 1 ? `Terdeteksi: ${jenis.length} jenis fraud` : `Terdeteksi: ${esc(jenis[0] ? jenis[0].nama : 'fraud')}`) : 'Klaim aman.';
+  el.innerHTML = `<div class="ic" aria-hidden="true">${h.terdeteksi ? IKON.fraud : IKON.aman}</div>
+    <div><div class="t">${judul}</div>
+      ${h.terdeteksi ? `<div class="jenis-chips" id="jenis-chips">${jenis.map((j) => `<span class="mchip${j.kode === '-' ? ' lain' : ''}"><b>${esc(j.kode === '-' ? '?' : j.kode)}</b>${esc(j.nama)}</span>`).join('')}</div>` : ''}
+      <div class="m"><span>${esc(h.klaim_id)}</span><span>${esc(h.klaim.rs)}</span><span>${esc(h.klaim.kode)} · ${esc(h.klaim.tgl_datang)}</span>${h.alert_ring ? '<span><b>Alert jaringan RS</b></span>' : ''}${v7 && h.tier ? `<span><b>${((h.rme || {}).rute || {}).aktif ? 'Keputusan' : 'ML v7'}: ${esc(KEP[h.tier] || h.tier)}</b></span>` : ''}${((h.rme || {}).rute || {}).aktif ? `<span><b>Rule rekam medis: ${esc(KEP[h.rme.rute.tingkat] || h.rme.rute.tingkat)}</b></span>` : (h.rme && h.rme.hasil ? '<span>Rekam medis dicocokkan</span>' : '')}</div></div>
+    <div class="gauge"><div class="v">${pct(h.peluang)}</div><div class="track ${h.terdeteksi ? 'f' : 'a'}"><i style="width:${Math.min(100, 100 * h.peluang)}%"></i><b style="left:${100 * h.ambang_peluang}%"></b>${v7 ? `<b style="left:${100 * h.ambang_tahan}%"></b>` : ''}</div><div class="l">${v7 ? `peluang fraud · PERIKSA ${pct(h.ambang_peluang)} · TAHAN ${pct(h.ambang_tahan)}` : `peluang fraud · ambang ${pct(h.ambang_peluang)}`}</div></div>`;
+}
+const skorSection = () => `<section><h4>${IKON.skor} Skor model</h4><div id="scorecard"></div><div class="cat">Klik skor untuk menyorot simpul yang mendasarinya di graph.</div></section>`;
+function penjelasan(h) {
+  const p = h.penjelasan || {};
+  const ai = $('#ai');
+  if (!h.terdeteksi) {
+    const en = h.engine || {};
+    const temuan = (en.sinyal || []).filter((s) => s.kontribusi > 0 || en.keputusan !== 'LOLOS');
+    const catatan = temuan.length ? `<div class="menunggu" style="background:var(--warn-soft)"><span>Catatan: pemeriksaan otomatis ${esc(KEP[en.keputusan] || en.keputusan)} karena ${temuan.map((s) => esc((s.temuan || s.label || '').toLowerCase())).join('; ')}. Model menilai pola ini sering juga muncul pada klaim wajar, jadi klaim tidak ditandai; verifikator tetap bisa memeriksanya.</span></div>` : '';
+    const v7 = h.arsitektur === 'ml_v7';
+    ai.innerHTML = `<section><h4>${IKON.aman} Klaim aman</h4><p class="awam">Klaim ini lolos: peluang fraud ${pct(h.peluang)}, di bawah ambang ${v7 ? 'PERIKSA ' : ''}${pct(h.ambang_peluang)}${v7 ? '' : ', dan tidak ada tanda jaringan RS yang tidak wajar'}.</p>${catatan}
+      <ul class="items ok"><li>Pemeriksaan otomatis: ${esc(KEP[en.keputusan] || en.keputusan)}${(en.sinyal || []).length ? ` (${en.sinyal.length} catatan)` : ''}.</li>
+      ${v7 ? `<li>ML v7 membaca klaim ini bersama klaim tetangganya di graph (peserta sama, RS sama, RS + kode, kode sama) dan fitur mekanisme fraud: ${pct(h.peluang)}.</li>`
+        : `<li>Dibandingkan dengan klaim serupa di graph (Model 1): ${pct(h.model1)}.</li><li>${h.model2 != null ? `Jaringan RS (Model 2): ${pct(h.model2)}` : `Jaringan RS: ${h.rule_jaringan ? 'ada peserta lain yang berbagi RS' : 'tidak ada pola berbagi RS yang tidak wajar'}`}.</li>`}
+      <li>Pasien: ${esc(h.entitas.mode === 'baru' ? 'pasien baru, dicocokkan lewat entity resolution' : 'peserta terdaftar')}.</li>
+      <li>Rekam medis: ${h.rme && h.rme.hasil ? `${h.rme.hasil.length} butir dicocokkan dengan rekam medis SATUSEHAT${(h.rme.rute || {}).temuan ? `, ${h.rme.rute.temuan} temuan tetapi belum cukup untuk menandai` : ', tidak ada yang bertentangan'}` : 'tidak dikirim, klaim tidak dicocokkan dengan rekam medis'}.</li></ul></section>
+      ${rmeSection(h)}
+      ${skorSection()}`;
+  } else {
+    const jenis = daftarJenis(p);
+    const menunggu = p.menunggu_ai || p.sumber === 'aturan';
+    ai.innerHTML = `${menunggu ? '<section style="padding-bottom:0;border-bottom:0"><div class="menunggu"><i></i><span>AI sedang menyusun penjelasan; sementara ini ringkasan otomatis.</span></div></section>' : ''}
+      <section><h4>${IKON.ai} Kenapa klaim ini terdeteksi</h4><p class="awam" id="awam">${esc(p.penjelasan_awam || p.ringkasan || '')}</p></section>
+      ${rmeSection(h)}
+      <section><h4>${IKON.fraud} Jenis fraud (Permenkes 16/2019)</h4><div class="modus" id="modus">${jenis.map((j) => `<div><span class="k">${esc(j.kode === '-' ? '?' : j.kode)}</span><span class="n">${esc(j.nama)}</span><span class="y">${esc(j.keyakinan ? 'keyakinan ' + j.keyakinan : '')}</span>${j.bukti ? `<span class="b">${esc(j.bukti)}</span>` : ''}</div>`).join('')}</div></section>
+      <section><h4>${IKON.cari} Bukti</h4><ul class="items" id="alasan">${(p.alasan || []).map((x) => `<li>${esc(x)}</li>`).join('')}</ul></section>
+      <section><h4>${IKON.cek} Yang perlu diperiksa atau diperbaiki</h4><ol class="items" id="perbaikan">${(p.perbaikan || []).map((x) => `<li>${esc(x)}</li>`).join('')}</ol>
+        ${p.catatan ? `<div class="cat" id="catatan">${esc(p.catatan)}</div>` : ''}</section>
+      ${skorSection()}`;
+  }
+  scorecard(h);
+}
+function bukti(h) {
+  const e = h.entitas || {}, k = h.klaim || {}, en = h.engine || {};
+  const maxC = Math.max(0.001, ...(h.alasan_model1 || []).map((a) => a.kontribusi));
+  const kep = en.keputusan === 'TAHAN' ? '<span class="tg f"><i></i>ditahan</span>' : en.keputusan === 'PERIKSA' ? '<span class="tg w"><i></i>perlu diperiksa</span>' : '<span class="tg a"><i></i>lolos</span>';
+  $('#bukti').innerHTML = `
+    <div class="cards2">
+      <div class="card" id="bukti-entitas"><h4>Entity resolution</h4><dl class="facts">
+        <div><dt>Mode</dt><dd>${e.mode === 'baru' ? 'pasien baru' : 'peserta terdaftar'}</dd></div><div><dt>Peserta</dt><dd>${esc(e.peserta)}</dd></div>
+        <div><dt>Aturan pencocokan</dt><dd>${esc(e.aturan || '-')}</dd></div>${e.skor != null ? `<div><dt>Skor kecocokan</dt><dd>${Number(e.skor).toFixed(2)}</dd></div>` : ''}
+        ${e.entitas ? `<div><dt>Entitas</dt><dd>${esc(e.entitas)}</dd></div>` : ''}</dl>${(e.catatan || []).length ? `<div class="hint">${e.catatan.map(esc).join('<br>')}</div>` : ''}</div>
+      <div class="card"><h4>Pemeriksaan otomatis (rule)</h4><dl class="facts"><div><dt>Keputusan</dt><dd>${kep} <small>skor ${en.skor ?? '-'}</small></dd></div></dl>
+        ${(en.sinyal || []).length ? `<div class="sig">${en.sinyal.map((s) => `<div><b>${esc(s.temuan || s.label)}${s.dimitigasi ? ' · dimitigasi' : ''}</b><span class="chipline">${(s.modus || []).map((m) => `<span class="mmini"><b>${esc(m.slice(0, 3))}</b>${esc(m.slice(4))}</span>`).join('')}</span></div>`).join('')}</div>` : '<div class="dv-kosong">Tidak ada temuan.</div>'}</div>
+    </div>
+    <div class="card" style="margin-top:14px"><h4>Klaim</h4><dl class="facts">
+      <div><dt>Rumah sakit</dt><dd>${esc(k.rs)}</dd></div><div><dt>Kode INA-CBG</dt><dd>${esc(k.kode)}</dd></div><div><dt>Keparahan</dt><dd>${esc(k.keparahan || '-')}</dd></div>
+      <div><dt>Diagnosis utama</dt><dd>${esc(k.dx)}</dd></div><div><dt>Lama rawat</dt><dd>${k.los ?? '-'} hari${k.los_median_kode != null ? ` <small>biasanya ${k.los_median_kode}</small>` : ''}</dd></div>
+      <div><dt>Tagihan</dt><dd>${rp(k.biaya)}</dd></div><div><dt>Tarif INA-CBG</dt><dd>${rp(k.tarif)}${k.tarif_median_kode ? ` <small>biasanya ${rp(k.tarif_median_kode)}</small>` : ''}</dd></div>
+      <div><dt>Diagnosis sekunder</dt><dd>${k.dx_sekunder ?? 0}</dd></div><div><dt>Kelas · status</dt><dd>${esc(k.kelas_rawat || '-')} · ${esc(k.status_pulang || '-')}</dd></div></dl></div>
+    ${rmeTeknis(h)}
+    <div class="card" style="margin-top:14px"><h4>${h.arsitektur === 'ml_v7' ? 'ML v7' : 'Model 1'} · fitur yang paling menaikkan skor</h4>
+      ${(h.alasan_model1 || []).length ? `<div class="shap"><span class="h">Fitur</span><span class="h n">Nilai</span><span class="h">Kontribusi</span>${h.alasan_model1.map((a) => `<span>${esc(a.fitur)}</span><span class="n">${a.nilai ?? '–'}</span><span style="display:flex;gap:8px;align-items:center"><span class="bar"><i style="width:${100 * a.kontribusi / maxC}%"></i></span><span class="n" style="width:44px">+${a.kontribusi}</span></span>`).join('')}</div>` : '<div class="dv-kosong">Tidak ada fitur yang menaikkan skor.</div>'}</div>
+    <div class="card" style="margin-top:14px"><h4>Jaringan RS · peserta yang berbagi RS (dasar network rule dan M10)</h4><div class="tblw"><table><thead><tr><th>Jendela</th><th class="n">Peserta lain di RS yang sama</th><th class="n">Total</th><th class="n">RS lain dikunjungi</th><th>RS yang berbagi peserta</th></tr></thead><tbody>${
+      ['w7', 'w14', 'w30'].map((w) => { const r = h.ring[w]; return `<tr><td>±${w.slice(1)} hari</td><td class="n">${r.peserta_lain_berbagi_maks}</td><td class="n">${r.peserta_lain_berbagi_total}</td><td class="n">${r.rs_lain_dikunjungi}</td><td>${r.rs.slice(0, 3).map((x) => `${esc(x.rs)} <span class="muted">(${x.berbagi})</span>`).join('<br>') || '<span class="muted">–</span>'}</td></tr>`; }).join('')}</tbody></table></div></div>`;
+}
+function rmeTeknis(h) {  // the record's measurements in brief, the RME_* signals with their full evidence, the custom-rule values
+  const r = h.rme || {};
+  if (!r.hasil) return '';
+  const ru = r.rute || {}, rg = r.ringkas || {}, uk = rg.ukur || {}, kj = r.kunjungan || {};
+  const sig = ((h.engine || {}).sinyal || []).filter((s) => String(s.kode || '').startsWith('RME_'));
+  const angka = (v) => v == null ? '–' : Number(v).toLocaleString('id-ID', {maximumFractionDigits: 2});
+  return `<div class="card" style="margin-top:14px"><h4>Rekam medis elektronik (SATUSEHAT FHIR) · rule route</h4>
+    <dl class="facts"><div><dt>Kunjungan dicocokkan</dt><dd>${esc(kj.kelas || '–')} ${esc(kj.mulai || '')}${kj.selesai ? ' s.d. ' + esc(kj.selesai) : ''}</dd></div>
+      <div><dt>Resource</dt><dd>${Object.entries(rg.jumlah || {}).map(([k, v]) => `${v} ${esc(k)}`).join(', ') || '–'}</dd></div>
+      <div><dt>Rule route rekam medis</dt><dd>skor ${ru.skor ?? '–'} · ${ru.aktif ? esc(KEP[ru.tingkat] || ru.tingkat) : 'tidak menandai'} <small>ambang ${ru.ambang_periksa}/${ru.ambang_tahan}</small></dd></div>
+      <div><dt>Diagnosis di rekam medis</dt><dd>${(rg.diagnosis || []).map(esc).join(', ') || '–'}</dd></div>
+      <div><dt>Tindakan di rekam medis</dt><dd>${(rg.tindakan || []).map(esc).join(', ') || '–'}</dd></div></dl>
+    ${Object.keys(uk).length ? `<div class="tblw"><table><thead><tr><th>Hasil ukur</th><th class="n">n</th><th class="n">Terendah</th><th class="n">Tertinggi</th><th class="n">Di luar normal</th></tr></thead><tbody>${
+      Object.values(uk).map((u) => `<tr><td>${esc(u.label)} <span class="muted">${esc(u.satuan || '')}</span></td><td class="n">${u.n}</td><td class="n">${angka(u.min)}</td><td class="n">${angka(u.maks)}</td><td class="n">${u.abnormal ? `<span class="tg w">${u.abnormal}</span>` : '0'}</td></tr>`).join('')}</tbody></table></div>` : ''}
+    ${sig.length ? `<div class="sig">${sig.map((s) => `<div><b>${esc(s.label)} · kontribusi ${s.kontribusi}${s.dimitigasi ? ' · dimitigasi' : ''}</b><span class="hint">${esc(s.bukti || '')}</span></div>`).join('')}</div>` : '<div class="dv-kosong">Tidak ada temuan rekam medis.</div>'}
+    <div class="hint">Nilai untuk aturan kustom: ${Object.entries(r.nilai || {}).filter(([, v]) => v != null).map(([k, v]) => `${esc(k)} = ${esc(typeof v === 'number' ? angka(v) : v)}`).join(' · ')}</div></div>`;
+}
+function strip() {
+  const el = $('#strip'); const b = KASUS.batch;
+  if (b.length < 2) { el.hidden = true; return; }
+  el.hidden = false;
+  el.innerHTML = `<span class="lab">Batch ${b.length} klaim</span>` + b.map((h, n) => `<button class="c${h.terdeteksi ? ' f' : ''}" type="button" data-i="${n}" aria-current="${KASUS.aktif === h.id}" title="${esc(h.klaim.rs)} · ${esc(h.klaim.tgl_datang)}"><i></i>#${n + 1} ${pct(h.peluang)}</button>`).join('')
+    + '<button class="btn s" type="button" id="gabung">Network gabungan</button>';
+  el.querySelectorAll('button.c').forEach((x) => x.addEventListener('click', () => tampilKasus(b[Number(x.dataset.i)])));
+  $('#gabung').addEventListener('click', gabungBatch);
+}
+function gabungBatch() {
+  const ok = KASUS.batch;
+  const g = {nodes: [], links: []}; const seen = new Set(), seenL = new Set();
+  for (const h of ok) {
+    for (const n of h.graf.nodes) if (!seen.has(n.id)) { seen.add(n.id); g.nodes.push({...n, fokus: false, sorot: [...(n.sorot || [])].filter((s) => s !== 'fokus')}); }
+    for (const l of h.graf.links) { const k = l.source + '|' + l.target + '|' + l.rel; if (!seenL.has(k)) { seenL.add(k); g.links.push({...l}); } }
+  }
+  const ids = new Set(ok.map((h) => h.graf.fokus));
+  for (const n of g.nodes) if (ids.has(n.id)) n.sorot = [...new Set([...(n.sorot || []), 'fokus'])];
+  const last = ok[ok.length - 1];
+  for (const n of g.nodes) if (n.id === last.graf.fokus) n.fokus = true;
+  tab('hasil', 'hasil');
+  muatNetwork(g, last, `<b>Network gabungan ${ok.length} klaim batch</b>`);
+  $('#ke-fokus').disabled = false;
+}
+
+// ---------------------------------------------------------------- history view
+const HF = {filter: 'semua', cari: ''};
+async function riwayat() {
+  try { KASUS.riwayat = await api('riwayat'); } catch (e) { /* a convenience */ }
+  $('#n-riwayat').textContent = KASUS.riwayat.length;
+  tabelHistori();
+}
+function tabelHistori() {
+  const q = HF.cari.toLowerCase();
+  const rows = KASUS.riwayat.filter((h) => (HF.filter === 'semua' || (HF.filter === 'terdeteksi') === !!h.terdeteksi)
+    && (!q || [h.rs, h.kode, h.jenis, h.klaim_id, ...(h.jenis_daftar || []).map((j) => j.kode + ' ' + j.nama)].join(' ').toLowerCase().includes(q)));
+  const tb = $('#histori-tabel tbody'); tb.replaceChildren();
+  const nT = KASUS.riwayat.filter((h) => h.terdeteksi).length;
+  $('#h-ringkas').innerHTML = `<span><b>${KASUS.riwayat.length}</b> klaim</span><span>· <b>${nT}</b> terdeteksi</span><span>· <b>${KASUS.riwayat.length - nT}</b> aman</span>`;
+  $('#h-kosong').hidden = rows.length > 0;
+  $('#h-kosong').textContent = KASUS.riwayat.length ? 'Tidak ada klaim yang cocok.' : 'Belum ada klaim yang dinilai.';
+  for (const h of rows) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td class="muted" style="white-space:nowrap">${esc((h.pada || '').slice(5, 16).replace('-', '/'))}<div class="hint">${esc(h.klaim_id || '')}</div></td>
+      <td>${h.terdeteksi ? '<span class="tg f"><i></i>terdeteksi</span>' : '<span class="tg a"><i></i>aman</span>'}</td>
+      <td><span class="chipline">${(h.jenis_daftar || []).map((j) => `<span class="mmini"><b>${esc(j.kode === '-' ? '?' : j.kode)}</b>${esc(j.nama)}</span>`).join('') || '<span class="muted">–</span>'}</span></td>
+      <td>${esc(h.rs || '')}</td><td style="white-space:nowrap">${esc(h.kode || '')}<div class="hint">${esc(h.tgl || '')}</div></td>
+      <td class="muted">${h.pasien === 'baru' ? 'pasien baru' : 'terdaftar'}</td><td class="n">${pct(h.peluang)}</td>`;
+    tr.addEventListener('click', async () => { const d = await api('hasil/' + h.id); KASUS.batch = []; lihat('uji'); tampilKasus(d); });
+    tb.appendChild(tr);
+  }
+}
+document.querySelectorAll('#h-filter button').forEach((b) => b.addEventListener('click', () => { HF.filter = b.dataset.f; document.querySelectorAll('#h-filter button').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); tabelHistori(); }));
+$('#h-cari').addEventListener('input', (e) => { HF.cari = e.target.value.trim(); tabelHistori(); });
+
+// ---------------------------------------------------------------- the network (documents + entities)
+const NET = {nodes: new Map(), links: [], hasil: null, mode: 'dok', sorot: 'semua', pilih: null, fokusAsli: null, sim: null, W: 800, H: 520, hari: null};
+const svg = d3.select('#net');
+const gRoot = svg.append('g');
+const gLink = gRoot.append('g'), gNode = gRoot.append('g');
+const zoom = d3.zoom().scaleExtent([0.3, 4]).on('zoom', (ev) => { gRoot.attr('transform', ev.transform); if (ev.sourceEvent) NET.disentuh = true; });
+svg.call(zoom); svg.on('dblclick.zoom', null);
+const css = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const warnaKlaim = (d) => d.keputusan === 'TAHAN' ? css('--n-tahan') : d.keputusan === 'PERIKSA' ? css('--n-periksa') : css('--n-klaim');
+function bentuk(sel) {
+  sel.each(function (d) {
+    const g = d3.select(this); g.selectAll('.bentuk, .glyph, .hit, .halo').remove();
+    const r = d.fokus ? 1.35 : 1;
+    g.insert('circle', 'text').attr('class', 'hit').attr('r', 20).attr('fill', 'transparent');
+    if (d.tipe === 'klaim') {
+      g.insert('path', 'text').attr('class', 'bentuk').attr('d', `M${-8 * r},${-10 * r} h${11 * r} l${5 * r},${5 * r} v${15 * r} h${-16 * r} z`)
+        .attr('fill', warnaKlaim(d)).attr('stroke', d.fokus ? css('--bad') : css('--canvas')).attr('stroke-width', d.fokus ? 3 : 1.5).attr('stroke-linejoin', 'round');
+      g.insert('path', 'text').attr('class', 'glyph').attr('d', `M${-4 * r},${-2 * r} h${8 * r} M${-4 * r},${2 * r} h${8 * r} M${-4 * r},${6 * r} h${5 * r}`).attr('stroke', '#fff').attr('stroke-width', 1.2);
+    } else if (d.tipe === 'peserta') {
+      g.insert('circle', 'text').attr('class', 'bentuk').attr('r', 11).attr('fill', css('--n-peserta')).attr('stroke', css('--canvas')).attr('stroke-width', 2);
+      g.insert('path', 'text').attr('class', 'glyph').attr('d', 'M0,-6 a3,3 0 1,0 0.01,0 M-6,7 a6,5.5 0 0,1 12,0').attr('fill', '#fff');
+    } else if (d.tipe === 'rs') {
+      g.insert('rect', 'text').attr('class', 'bentuk').attr('x', -12).attr('y', -12).attr('width', 24).attr('height', 24).attr('rx', 6).attr('fill', css('--n-rs')).attr('stroke', css('--canvas')).attr('stroke-width', 2);
+      g.insert('path', 'text').attr('class', 'glyph').attr('d', 'M-2,-7 h4 v5 h5 v4 h-5 v5 h-4 v-5 h-5 v-4 h5 z').attr('fill', '#fff');
+    } else {
+      g.insert('rect', 'text').attr('class', 'bentuk').attr('x', -9).attr('y', -9).attr('width', 18).attr('height', 18).attr('rx', 2).attr('transform', 'rotate(45)').attr('fill', css('--n-kode')).attr('stroke', css('--canvas')).attr('stroke-width', 2);
+    }
+    // a thin dashed ring, behind the shape, on the entities the focal claim's form names (its patient, hospital and code)
+    if (d.dariForm) g.insert('circle', ':first-child').attr('class', 'halo').attr('r', d.tipe === 'rs' ? 19 : 15.5);
+  });
+}
+/** The entities named on the focal claim's own form: its patient, hospital and INA-CBG code (the links of the focal document). */
+function entitasFormulir() {
+  const f = [...NET.nodes.values()].find((n) => n.fokus);
+  const out = new Set();
+  if (f) for (const l of NET.links) if (l.s === f.id && ['milik peserta', 'di RS', 'kode INA-CBG'].includes(l.rel)) out.add(l.t);
+  return out;
+}
+/** The form's patient when the focal claim came from the form; a stream claim made the focus has no form. */
+const sebutPasien = () => NET.hasil ? 'pasien di formulir' : 'pasien klaim ini';
+/** What the form said about the patient and how entity resolution turned it into the P- code. */
+function asalPasien() {
+  const e = (NET.hasil || {}).entitas;
+  if (!e) return null;
+  const isian = e.mode === 'baru' ? [e.nama_tersamar && `nama ${e.nama_tersamar}`, e.no_rm && `No RM ${e.no_rm}`].filter(Boolean).join(' · ') : 'ID peserta yang diisi';
+  const cara = {cocok_no_rm: 'cocok dengan pasien lama lewat No RM', baru: 'belum pernah tercatat, dibuatkan nomor baru', peserta_terdaftar: 'peserta terdaftar'}[e.aturan] || e.aturan || '';
+  return {isian, cara};
+}
+/** Why the automatic check held or flagged a comparison claim (its Permenkes modes and strongest findings). */
+function alasanTip(d) {
+  if (d.fokus) return '';
+  return (d.modus || []).map((m) => `<br><span class="tf">${esc(m)}</span>`).join('') + (d.alasan || []).slice(0, 2).map((a) => `<br>· ${esc(a.temuan)}`).join('');
+}
+function tipFormulir(d) {
+  if (d.tipe !== 'peserta') return `<br><span class="tf">${NET.hasil ? 'Tertulis di formulir' : 'Milik klaim ini'}</span>`;
+  const s = sebutPasien(), a = asalPasien();
+  return `<br><span class="tf">${esc(s[0].toUpperCase() + s.slice(1))}</span>` + (a ? `<br>Di formulir: ${esc(a.isian)}<br>Kode ${esc(d.label)} dibuat sistem (${esc(a.cara)})` : '');
+}
+function legenda() {
+  const item = (svgInner, t) => `<span><svg viewBox="-13 -13 26 26" aria-hidden="true">${svgInner}</svg>${t}</span>`;
+  const doc = (fill, extra = '') => `<path d="M-8,-10 h11 l5,5 v15 h-16 z" fill="${fill}" ${extra}/>`;
+  $('#legend').innerHTML = [
+    item(doc('none', `stroke="${css('--bad')}" stroke-width="3"`), 'klaim ini'),
+    item(`<circle r="10" fill="none" stroke="${css('--ink-2')}" stroke-width="1.6" stroke-dasharray="3 3"/>`, 'putus-putus = pasien, RS, kode di formulir'),
+    item(doc(css('--n-klaim')), 'klaim lolos'), item(doc(css('--n-periksa')), 'perlu diperiksa'), item(doc(css('--n-tahan')), 'ditahan'),
+    item(`<circle r="11" fill="${css('--n-peserta')}"/>`, 'peserta'), item(`<rect x="-11" y="-11" width="22" height="22" rx="5" fill="${css('--n-rs')}"/>`, 'rumah sakit'),
+    item(`<rect x="-8" y="-8" width="16" height="16" transform="rotate(45)" fill="${css('--n-kode')}"/>`, 'kode INA-CBG'),
+  ].join('') + '<span>· klik = detail · klik dua kali = expand · seret = pin · scroll = zoom</span>';
+}
+function muatNetwork(g, hasil, judul) {
+  NET.nodes = new Map(); NET.links = []; NET.hasil = hasil; NET.pilih = null; NET.hari = hasil ? hasil.hari : NET.hari;
+  gabungkan(g, false);
+  $('#inv-fokus').innerHTML = judul;
+  $('#ke-fokus').disabled = true;
+  dataViewer(null);
+  svg.call(zoom.transform, d3.zoomIdentity);
+  render(true);
+}
+function gabungkan(g, tandaiBaru) {
+  for (const n of g.nodes) {
+    const ada = NET.nodes.get(n.id);
+    if (ada) { ada.sorot = [...new Set([...(ada.sorot || []), ...(n.sorot || [])])]; if (n.relasi && !ada.relasi) ada.relasi = n.relasi; continue; }
+    const baru = {...n, sorot: [...(n.sorot || [])]};
+    if (tandaiBaru && NET.pilih) { const p = NET.nodes.get(NET.pilih); if (p) { baru.x = p.x + (Math.random() - .5) * 60; baru.y = p.y + (Math.random() - .5) * 60; } }
+    NET.nodes.set(n.id, baru);
+  }
+  const ada = new Set(NET.links.map((l) => `${l.s}|${l.t}|${l.rel}`));
+  for (const l of g.links) { const k = `${l.source}|${l.target}|${l.rel}`; if (!ada.has(k)) { ada.add(k); NET.links.push({s: l.source, t: l.target, rel: l.rel}); } }
+}
+function dataTampil() {
+  const nodes = [...NET.nodes.values()];
+  if (NET.mode === 'dok') return {nodes, links: NET.links.filter((l) => NET.nodes.has(l.s) && NET.nodes.has(l.t)).map((l) => ({source: l.s, target: l.t, rel: l.rel}))};
+  const ent = nodes.filter((n) => n.tipe === 'peserta' || n.tipe === 'rs');
+  const per = new Map(), byKlaim = new Map();
+  for (const l of NET.links) {
+    const a = NET.nodes.get(l.s); if (!a || a.tipe !== 'klaim') continue;
+    const o = byKlaim.get(l.s) || {}; const b = NET.nodes.get(l.t); if (b) o[b.tipe] = b.id; byKlaim.set(l.s, o);
+  }
+  for (const [, o] of byKlaim) {
+    if (!o.peserta || !o.rs) continue;
+    const k = o.peserta + '|' + o.rs; const e = per.get(k) || {source: o.peserta, target: o.rs, rel: 'klaim', n: 0};
+    e.n++; per.set(k, e);
+  }
+  return {nodes: ent, links: [...per.values()]};
+}
+function render(baru) {
+  const box = $('#net').getBoundingClientRect();
+  if (!box.width) return;  // hidden: drawn when shown
+  const {nodes, links} = dataTampil();
+  NET.W = box.width; NET.H = box.height;
+  svg.attr('viewBox', `0 0 ${NET.W} ${NET.H}`);
+  $('#hitung').textContent = `${nodes.length} simpul · ${links.length} edge`;
+  const form = entitasFormulir();
+  for (const n of nodes) n.dariForm = form.has(n.id);
+  const fokusId = (nodes.find((n) => n.fokus) || {}).id;
+  const keForm = (d) => fokusId && (d.source.id || d.source) === fokusId && form.has(d.target.id || d.target);
+  const link = gLink.selectAll('line').data(links, (d) => (d.source.id || d.source) + '|' + (d.target.id || d.target) + '|' + d.rel)
+    .join('line').attr('class', (d) => 'edge' + (NET.mode === 'e2e' ? ' e2e' : '') + (keForm(d) ? ' formulir' : '')).attr('stroke-width', (d) => d.n ? Math.min(1.5 + d.n, 7) : 1.4);
+  const node = gNode.selectAll('g.simpul').data(nodes, (d) => d.id).join((enter) => {
+    const g = enter.append('g').attr('class', 'simpul').attr('tabindex', 0).attr('role', 'button');
+    g.append('text').attr('x', 15).attr('dy', '0.35em');
+    return g;
+  });
+  node.attr('aria-label', (d) => `${d.tipe} ${d.label}${d.dariForm && d.tipe === 'peserta' ? ' · ' + sebutPasien() : ''}`).classed('formulir', (d) => d.dariForm)
+    .classed('kasus', (d) => d.tipe === 'klaim' && !d.fokus).call(bentuk);
+  node.filter((d) => d.fokus).raise();  // this claim is drawn on top of its neighbours
+  node.select('text').text((d) => {
+    if (d.tipe === 'klaim') {
+      if (d.fokus) return 'klaim ini';
+      const m = (d.modus || []).map((x) => x.slice(0, 3)).join(' · ');  // why a comparison claim was held: its Permenkes modes
+      return $('#label-klaim').checked ? `${d.tgl} · ${d.kode}${m ? ' · ' + m : ''}` : m;
+    }
+    if (d.tipe === 'peserta' && d.dariForm) return `${d.label} · ${NET.hasil ? 'di formulir' : 'klaim ini'}`;
+    return d.label.length > 34 ? d.label.slice(0, 32) + '…' : d.label;
+  });
+  const tip = $('.wadah .tip');
+  node.on('pointerenter', (ev, d) => {
+    tip.hidden = false;
+    tip.innerHTML = `<b>${esc(d.fokus ? 'Klaim ini' : d.label)}</b>${d.dariForm ? tipFormulir(d) : ''}${d.tipe === 'klaim' ? `<br>${esc(d.rs)}<br>${esc(KEP[d.keputusan] || d.keputusan)} · ${rp(d.biaya)}${alasanTip(d)}${d.relasi ? `<br>pembanding (tetangga graph): ${esc(d.relasi)}` : ''}` : d.klaim_di_aliran != null ? `<br>${d.klaim_di_aliran.toLocaleString('id-ID')} klaim di aliran` : ''}`;
+    const r = $('.wadah').getBoundingClientRect();
+    tip.style.left = Math.min(ev.clientX - r.left + 14, r.width - 290) + 'px'; tip.style.top = Math.max(4, ev.clientY - r.top - 10) + 'px';
+  }).on('pointerleave', () => { tip.hidden = true; })
+    .on('click', (ev, d) => { ev.stopPropagation(); NET.disentuh = true; pilihSimpul(d.id); })
+    .on('dblclick', (ev, d) => { ev.stopPropagation(); NET.disentuh = true; ekspansi(d.id); })
+    .on('keydown', (ev, d) => { if (ev.key === 'Enter') pilihSimpul(d.id); if (ev.key === 'e' || ev.key === 'E') ekspansi(d.id); });
+  node.call(d3.drag().on('start', (e) => { NET.disentuh = true; if (!e.active) NET.sim.alphaTarget(.2).restart(); })
+    .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; }).on('end', (e) => { if (!e.active) NET.sim.alphaTarget(0); }));
+  if (NET.sim) NET.sim.stop();
+  const jarak = (l) => NET.mode === 'e2e' ? 110 : l.rel === 'milik peserta' ? 38 : l.rel === 'di RS' ? 58 : 75;
+  if (baru) { const f = nodes.find((n) => n.fokus); if (f && f.x == null) { f.x = NET.W / 2; f.y = NET.H / 2; } }
+  NET.sim = d3.forceSimulation(nodes).force('link', d3.forceLink(links).id((d) => d.id).distance(jarak).strength(0.7))
+    .force('charge', d3.forceManyBody().strength(NET.mode === 'e2e' ? -320 : -190)).force('center', d3.forceCenter(NET.W / 2, NET.H / 2).strength(0.05))
+    .force('x', d3.forceX(NET.W / 2).strength(0.04)).force('y', d3.forceY(NET.H / 2).strength(0.06)).force('collide', d3.forceCollide((d) => d.tipe === 'rs' ? 30 : d.tipe === 'kode' ? 22 : 18));
+  const tick = () => {
+    link.attr('x1', (d) => d.source.x).attr('y1', (d) => d.source.y).attr('x2', (d) => d.target.x).attr('y2', (d) => d.target.y);
+    node.attr('transform', (d) => `translate(${d.x},${d.y})`);
+  };
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { NET.sim.stop(); for (let i = 0; i < 300; i++) NET.sim.tick(); tick(); if (baru) pas(false); }
+  else {
+    NET.sim.on('tick', tick).alpha(baru ? 1 : 0.5).restart();
+    // fit once it has spread out and again when it settles, unless the user has already zoomed, dragged or clicked
+    if (baru) { NET.disentuh = false; clearTimeout(NET.tPas); NET.tPas = setTimeout(() => pas(true, true), 1100); NET.sim.on('end', () => pas(true, true)); }
+  }
+  terapkanSorot();
+}
+svg.on('click', () => { NET.pilih = null; dataViewer(null); terapkanSorot(); });
+/** Zoom so every node (with its label) fits the canvas. */
+function pas(animasi, otomatis = false) {
+  if (otomatis && NET.disentuh) return;
+  const semua = [...gNode.selectAll('g.simpul').data()].filter((d) => d.x != null);
+  const sorot = himpunanSorot();  // fit the highlighted evidence when there is one
+  const ns = sorot && semua.filter((d) => sorot.has(d.id)).length >= 2 ? semua.filter((d) => sorot.has(d.id)) : semua;
+  if (!ns.length || !NET.W) return;
+  const x0 = Math.min(...ns.map((d) => d.x)) - 24, x1 = Math.max(...ns.map((d) => d.x)) + 150;
+  const y0 = Math.min(...ns.map((d) => d.y)) - 24, y1 = Math.max(...ns.map((d) => d.y)) + 24;
+  const k = Math.max(0.3, Math.min(1.4, Math.min(NET.W / (x1 - x0), NET.H / (y1 - y0))));
+  const t = d3.zoomIdentity.translate(NET.W / 2 - k * (x0 + x1) / 2, NET.H / 2 - k * (y0 + y1) / 2).scale(k);
+  (animasi ? svg.transition().duration(450) : svg).call(zoom.transform, t);
+}
+$('#pas').addEventListener('click', () => pas(true));
+/** One line under the graph: what the highlight shows and why it matters. */
+function ketSorot() {
+  const h = NET.hasil || {};
+  const n = (tag) => [...NET.nodes.values()].filter((x) => (x.sorot || []).includes(tag)).length;
+  const k = {
+    semua: 'Semua simpul. Pilih sorotan untuk melihat dasar penilaian.',
+    fokus: '<b>Klaim ini</b> dengan pesertanya, RS-nya, dan kode INA-CBG-nya.',
+    model1: `<b>Pembanding:</b> ${n('model1')} klaim tetangga graph yang dibaca ${h.arsitektur === 'ml_v7' ? 'ML v7' : 'Model 1 dan 4 spesialis'} (peserta sama, RS sama, RS + kode, kode sama).${ditandaiPembanding()}`,
+    model2: `<b>Jaringan RS:</b> RS dan peserta yang berbagi peserta dengan klaim ini${h.rule_jaringan ? '; network rule aktif' : ''}. Dasar modus M10.`,
+  };
+  $('#sorot-ket').innerHTML = NET.pilih ? 'Simpul terpilih dan tetangga langsungnya. Klik area kosong untuk kembali.' : (k[NET.sorot] || '');
+}
+/** How many comparison claims the automatic check also held or flagged, and for which Permenkes modes. */
+function ditandaiPembanding() {
+  const ds = [...NET.nodes.values()].filter((x) => x.tipe === 'klaim' && !x.fokus && (x.sorot || []).includes('model1') && (x.keputusan === 'TAHAN' || x.keputusan === 'PERIKSA'));
+  if (!ds.length) return '';
+  const c = {};
+  for (const x of ds) for (const m of x.modus || []) c[m.slice(0, 3)] = (c[m.slice(0, 3)] || 0) + 1;
+  const daftar = Object.entries(c).sort((a, b) => b[1] - a[1]).map(([m, k]) => `${m} ×${k}`).join(', ');
+  return ` ${ds.length} di antaranya juga ditandai pemeriksaan otomatis${daftar ? ` (${daftar})` : ''}; arahkan kursor ke dokumennya untuk alasannya.`;
+}
+function himpunanSorot() {
+  if (NET.pilih) {
+    const s = new Set([NET.pilih]);
+    for (const l of dataTampil().links) { const a = l.source.id || l.source, b = l.target.id || l.target; if (a === NET.pilih) s.add(b); if (b === NET.pilih) s.add(a); }
+    return s;
+  }
+  if (NET.sorot === 'semua') return null;
+  const s = new Set();
+  for (const n of NET.nodes.values()) if ((n.sorot || []).includes(NET.sorot) || (NET.sorot !== 'fokus' && n.fokus)) s.add(n.id);
+  for (const l of NET.links) if (s.has(l.s) && NET.nodes.get(l.s).tipe === 'klaim') s.add(l.t);
+  return s;
+}
+function terapkanSorot() {
+  const s = himpunanSorot();
+  gNode.selectAll('g.simpul').classed('redup', (d) => s && !s.has(d.id)).classed('pilih', (d) => d.id === NET.pilih);
+  gLink.selectAll('line').classed('redup', (d) => s && !(s.has(d.source.id || d.source) && s.has(d.target.id || d.target)))
+    .classed('terang', (d) => NET.pilih && ((d.source.id || d.source) === NET.pilih || (d.target.id || d.target) === NET.pilih));
+  document.querySelectorAll('#sorot button').forEach((b) => b.setAttribute('aria-pressed', String(!NET.pilih && b.dataset.s === NET.sorot)));
+  ketSorot();
+  document.querySelectorAll('#scorecard .skor').forEach((b) => b.setAttribute('aria-pressed', String(!NET.pilih && b.dataset.s === NET.sorot && NET.sorot !== 'semua')));
+}
+document.querySelectorAll('#sorot button').forEach((b) => b.addEventListener('click', () => { NET.sorot = b.dataset.s; NET.pilih = null; dataViewer(null); terapkanSorot(); pas(true); }));
+document.querySelectorAll('#mode button').forEach((b) => b.addEventListener('click', () => {
+  NET.mode = b.dataset.m; document.querySelectorAll('#mode button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+  NET.pilih = null; dataViewer(null); render(true);
+}));
+$('#label-klaim').addEventListener('change', () => render(false));
+$('#tata').addEventListener('click', () => { for (const n of NET.nodes.values()) { n.fx = null; n.fy = null; } render(true); });
+$('#ke-fokus').addEventListener('click', () => { if (NET.fokusAsli) { const h = NET.fokusAsli.hasil; muatNetwork(NET.fokusAsli.graf, h, judulKlaim(h)); } });
+async function ekspansi(id) {
+  NET.pilih = id;
+  try {
+    const n = NET.nodes.get(id);
+    const g = await api(`ekspansi?node=${encodeURIComponent(id)}${n && n.tipe === 'rs' && NET.hari != null ? `&hari=${NET.hari}` : ''}`);
+    const sebelum = NET.nodes.size;
+    gabungkan(g, true); render(false);
+    dataViewer(id, `${NET.nodes.size - sebelum} simpul baru dari expand.`);
+  } catch (e) { dataViewer(id, 'Expand gagal: ' + (e.detail || e.message)); }
+}
+async function jadikanFokus(idx) {
+  try {
+    const d = await api('jaringan?idx=' + idx);
+    NET.hari = d.hari;
+    const k = d.klaim;
+    muatNetwork(d.graf, null, `<b>Klaim aliran ${esc(k.tgl)} · ${esc(k.kode)}</b> · ${esc(k.rs)} (fokus baru)`);
+    $('#ke-fokus').disabled = !NET.fokusAsli;
+  } catch (e) { dataViewer(null, 'Gagal memuat network: ' + (e.detail || e.message)); }
+}
+function pilihSimpul(id) { NET.pilih = NET.pilih === id ? null : id; dataViewer(NET.pilih); terapkanSorot(); }
+
+// ---------------------------------------------------------------- scorecard + data viewer
+/** This claim through the v3 flow: rules -> Model 1 + the strongest specialist -> fusion -> the two rules -> decision. */
+function alurKlaim(h) {
+  const en = h.engine || {};
+  const NM = {koding: 'koding', tagihan: 'tagihan', episode: 'episode', identitas: 'identitas'};
+  const sp = Object.entries(h.lapisan || {}).filter(([k]) => k in NM).sort((a, b) => b[1] - a[1])[0];
+  const c = (t, cls = '') => `<span class="c ${cls}">${t}</span>`;
+  const p = '<i>→</i>';
+  if (h.arsitektur === 'ml_v7') {  // rule findings and the claim's fields, its graph neighbours, the mechanism features -> one model -> tier
+    const b = h.blok || {}, n = (en.sinyal || []).length, ru = (h.rme || {}).rute || {};
+    return `<div class="alurk" aria-label="Alur ML v7 untuk klaim ini">${c(`Rule <b>${n} temuan</b>`, n ? 'on' : '')}`
+      + (ru.ada_rme ? c(`Rekam medis <b>${ru.aktif ? esc(KEP[ru.tingkat] || ru.tingkat) : ru.temuan + ' temuan'}</b>`, ru.aktif ? 'on' : ru.temuan ? '' : 'ok') : '') + p
+      + c(`Klaim sendiri <b>${pct(b.klaim)}</b>`) + c(`Tetangga graph <b>${pct(b.graph)}</b>`) + c(`Mekanisme <b>${pct(b.mekanisme)}</b>`) + p
+      + c(`ML v7 <b>${pct(h.peluang)}</b>`, h.terdeteksi ? 'on' : '') + p
+      + c(`<b>${h.terdeteksi ? esc(KEP[h.tier] || 'Terdeteksi') : 'Aman'}</b>`, h.terdeteksi ? 'on' : 'ok') + '</div>';
+  }
+  return `<div class="alurk" aria-label="Alur arsitektur v3 untuk klaim ini">${c(`Rule <b>${(en.sinyal || []).length} temuan</b>`, (en.sinyal || []).length ? 'on' : '')}${p}`
+    + c(`Model 1 <b>${pct(h.model1)}</b>`, h.model1 >= 0.5 ? 'on' : '') + (sp ? c(`Spesialis ${NM[sp[0]]} <b>${pct(sp[1])}</b>`, sp[1] >= 0.5 ? 'on' : '') : '') + p
+    + c(`Fusion <b>${pct(h.peluang)}</b>`, h.peluang >= h.ambang_peluang ? 'on' : '') + p
+    + c(`Rule route <b>${h.rute_rule ? 'aktif' : '–'}</b>`, h.rute_rule ? 'on' : '') + c(`Network rule <b>${h.rule_jaringan ? 'aktif' : '–'}</b>`, h.rule_jaringan ? 'on' : '') + p
+    + c(h.terdeteksi ? '<b>Terdeteksi</b>' : '<b>Aman</b>', h.terdeteksi ? 'on' : 'ok') + '</div>';
+}
+function scorecard(h) {
+  const el = $('#scorecard'); if (!el) return;
+  const row = (lab, val, thr, s, cls) => `<button class="skor" type="button" data-s="${s}"><span>${lab}</span><b>${pct(val)}</b><div class="track ${cls}"><i style="width:${Math.min(100, 100 * val)}%"></i>${thr != null ? `<b style="left:${100 * thr}%"></b>` : ''}</div></button>`;
+  const en = h.engine || {};
+  // architecture v2: the rule layer and the Permenkes-family specialists, and the rule route for signals without labelled examples
+  const LAP = {rule: 'Rule layer · 45 sinyal', koding: 'Spesialis coding · M04 M14 M15 M20', tagihan: 'Spesialis tagihan · M07 M13 M17 M18',
+    episode: 'Spesialis episode · M08 M09 M12 M16', identitas: 'Spesialis identitas · M05 M06 M11'};
+  const lap = h.lapisan ? Object.entries(LAP).filter(([k]) => k in h.lapisan).map(([k, lab]) => row(lab, h.lapisan[k], null, 'fokus', h.lapisan[k] >= 0.5 ? 'f' : '')).join('') : '';
+  const rute = h.rute_rule ? `<button class="skor" type="button" data-s="fokus"><span>Rule route · sinyal tanpa contoh berlabel</span><b>perlu diperiksa</b></button>` : '';
+  const periksa = `<button class="skor" type="button" data-s="fokus"><span>Pemeriksaan otomatis · ${esc(KEP[en.keputusan] || en.keputusan)}</span><b>${(en.sinyal || []).length} temuan</b>${
+      (en.sinyal || []).length ? `<span class="sub2">${en.sinyal.map((s) => esc(s.temuan || s.label)).join(' · ')}</span>` : ''}</button>`;
+  if (h.arsitektur === 'ml_v7') {  // one model with two tiers; what pushed its score up, per feature block
+    const b = h.blok || {}, nRs = ((h.ring && h.ring.w14 && h.ring.w14.rs) || []).length, ru = (h.rme || {}).rute || {};
+    el.innerHTML = alurKlaim(h)
+      + (ru.ada_rme ? `<button class="skor" type="button" data-s="fokus"><span>Rule rekam medis (SATUSEHAT) · ${ru.aktif ? esc(KEP[ru.tingkat] || ru.tingkat) : 'tidak menandai'}</span><b>${ru.skor}</b><div class="track ${ru.aktif ? 'f' : 'a'}"><i style="width:${Math.min(100, ru.skor)}%"></i><b style="left:${ru.ambang_periksa}%"></b><b style="left:${ru.ambang_tahan}%"></b></div><span class="sub2">${ru.temuan} temuan dari pencocokan klaim dengan rekam medis; menandai sendiri mulai skor ${ru.ambang_periksa}, karena ML v7 dilatih tanpa rekam medis</span></button>` : '')
+      + `<button class="skor" type="button" data-s="semua"><span>Peluang fraud · ML v7${h.tier ? ' · ' + esc(KEP[h.tier] || h.tier) : ''}</span><b>${pct(h.peluang)}</b><div class="track ${h.terdeteksi ? 'f' : 'a'}"><i style="width:${Math.min(100, 100 * h.peluang)}%"></i><b style="left:${100 * h.ambang_peluang}%"></b><b style="left:${100 * h.ambang_tahan}%"></b></div></button>`
+      + row('Dorongan skor dari tetangga graph (pembanding)', b.graph || 0, null, 'model1', '')
+      + row('Dorongan skor dari klaim sendiri (termasuk rule)', b.klaim || 0, null, 'fokus', '')
+      + row('Dorongan skor dari mekanisme fraud', b.mekanisme || 0, null, 'fokus', '')
+      + `<button class="skor" type="button" data-s="model2"><span>Jaringan RS · berbagi peserta ±14 hari</span><b>${nRs} RS</b></button>` + periksa;
+  } else
+  el.innerHTML = alurKlaim(h) + row('Peluang fraud (gabungan)', h.peluang, h.ambang_peluang, 'semua', h.terdeteksi ? 'f' : 'a') + rute + lap
+    + row('Model 1 · dibanding klaim serupa', h.model1, null, 'model1', '')
+    + (h.model2 != null ? row('Model 2 · jaringan RS', h.model2, null, 'model2', '') : '')
+    + (h.ambang_alert_ring != null ? row(`Alert jaringan RS${h.alert_ring ? ' · aktif' : ''}`, h.skor_alert_ring, h.ambang_alert_ring, 'model2', h.alert_ring ? 'f' : '')
+      : `<button class="skor" type="button" data-s="model2"><span>Network rule · tanpa label</span><b>${h.rule_jaringan ? 'aktif' : 'tidak'}</b></button>`)
+    + periksa;
+  el.querySelectorAll('.skor').forEach((b) => b.addEventListener('click', () => { NET.sorot = b.dataset.s; NET.pilih = null; dataViewer(null); terapkanSorot(); }));
+  terapkanSorot();
+}
+const WARNA_TIPE = {klaim: '--n-klaim', peserta: '--n-peserta', rs: '--n-rs', kode: '--n-kode'};
+async function dataViewer(id, pesan) {
+  const el = $('#dataviewer');
+  if (!id) { el.hidden = true; el.replaceChildren(); return; }
+  const n = NET.nodes.get(id); if (!n) return;
+  el.hidden = false;
+  const jenis = {klaim: 'Klaim (dokumen)', peserta: 'Peserta (entitas)', rs: 'Rumah sakit (entitas)', kode: 'Kode INA-CBG'}[n.tipe];
+  const warna = n.tipe === 'klaim' ? warnaKlaim(n) : css(WARNA_TIPE[n.tipe]);
+  let facts = '';
+  if (n.tipe === 'klaim') facts = `<div><dt>Tanggal</dt><dd>${esc(n.tgl)}</dd></div><div><dt>Kode</dt><dd>${esc(n.kode)}</dd></div><div><dt>Diagnosis</dt><dd>${esc(n.dx)}</dd></div>
+    <div><dt>Rawat · lama</dt><dd>${esc(n.tingkat === 'RITL' ? 'inap' : n.tingkat === 'RJTL' ? 'jalan' : (n.tingkat || '-'))} · ${n.los ?? '-'} hr</dd></div><div><dt>Tagihan</dt><dd>${rp(n.biaya)}</dd></div>
+    <div><dt>Pemeriksaan</dt><dd>${esc(KEP[n.keputusan] || n.keputusan)}</dd></div>
+    <div><dt>Peserta</dt><dd>${esc(n.peserta)}</dd></div>${n.relasi ? `<div><dt>Pembanding</dt><dd>${esc(n.relasi)}</dd></div>` : ''}<div style="grid-column:1/-1"><dt>RS</dt><dd>${esc(n.rs)}</dd></div>`
+    + (!n.fokus && ((n.modus || []).length || (n.alasan || []).length)
+      ? `<div style="grid-column:1/-1"><dt>Kenapa ${esc(KEP[n.keputusan] || n.keputusan)}</dt><dd>${(n.modus || []).map(esc).join('<br>') || '–'}</dd></div>`
+        + `<div style="grid-column:1/-1"><dt>Temuan pemeriksaan otomatis</dt><dd>${(n.alasan || []).map((a) => `${esc(a.temuan)}${a.dimitigasi ? ' (dimitigasi)' : ''}${a.bukti ? `<br><small>${esc(a.bukti)}</small>` : ''}`).join('<br>')}</dd></div>`
+      : '');
+  else facts = `<div><dt>Klaim di aliran</dt><dd>${(n.klaim_di_aliran ?? 0).toLocaleString('id-ID')}</dd></div>${(n.sorot || []).includes('model2') ? '<div><dt>Jaringan RS</dt><dd>bagian jaringan ±14 hari</dd></div>' : ''}`;
+  if (n.dariForm) {
+    const a = n.tipe === 'peserta' ? asalPasien() : null;
+    const baris = (dt, dd) => `<div style="grid-column:1/-1"><dt>${dt}</dt><dd>${esc(dd)}</dd></div>`;
+    facts = baris('Asal', n.tipe === 'peserta' ? sebutPasien() : NET.hasil ? 'tertulis di formulir' : 'milik klaim ini')
+      + (a ? baris('Di formulir', a.isian) + baris(`Kode ${esc(n.label)}`, `dibuat sistem: ${a.cara}`) : '') + facts;
+  }
+  el.innerHTML = `<div class="dv-h"><span class="ic" style="background:${warna}"></span><div><b>${esc(n.fokus ? 'Klaim ini' : n.label)}</b><span>${jenis}</span></div><button class="x" type="button" aria-label="Tutup">×</button></div>
+    <dl class="facts">${facts}</dl>
+    <div class="aksi"><button class="btn s" type="button" data-a="ekspansi">Expand</button>${n.tipe === 'klaim' && !n.fokus ? '<button class="btn s" type="button" data-a="fokus">Jadikan fokus</button>' : ''}
+    ${n.fx != null ? '<button class="btn s" type="button" data-a="lepas">Lepas pin</button>' : ''}${!n.fokus ? '<button class="btn s" type="button" data-a="sembunyi">Sembunyikan</button>' : ''}</div>
+    ${pesan ? `<div class="hint">${esc(pesan)}</div>` : ''}<div id="lini"></div>`;
+  el.querySelector('.x').addEventListener('click', () => { NET.pilih = null; dataViewer(null); terapkanSorot(); });
+  el.querySelectorAll('button[data-a]').forEach((b) => b.addEventListener('click', () => {
+    const a = b.dataset.a;
+    if (a === 'ekspansi') ekspansi(id);
+    if (a === 'fokus') jadikanFokus(n.idx);
+    if (a === 'lepas') { n.fx = null; n.fy = null; NET.sim.alpha(0.3).restart(); dataViewer(id); }
+    if (a === 'sembunyi') { NET.nodes.delete(id); NET.links = NET.links.filter((l) => l.s !== id && l.t !== id); NET.pilih = null; dataViewer(null); render(false); }
+  }));
+  if (n.tipe === 'peserta') {
+    try {
+      const rows = await api('lini_masa?node=' + encodeURIComponent(id));
+      const fokus = [...NET.nodes.values()].find((x) => x.fokus);
+      if (!rows.length || !$('#lini')) return;
+      $('#lini').innerHTML = `<div class="lbl" style="margin:2px 0 6px">Lini masa klaim peserta</div><div class="lini"><table><thead><tr><th>Tanggal</th><th>RS</th><th>Kode</th><th></th></tr></thead><tbody>${
+        rows.map((r) => `<tr data-id="${r.id}" class="${fokus && fokus.id === r.id ? 'ini' : ''}"><td style="white-space:nowrap">${esc(r.tgl)}</td><td>${esc(r.rs)}</td><td>${esc(r.kode)}</td><td>${r.keputusan === 'TAHAN' ? '<span class="tg f">ditahan</span>' : r.keputusan === 'PERIKSA' ? '<span class="tg w">periksa</span>' : ''}</td></tr>`).join('')}</tbody></table></div>`;
+      $('#lini').querySelectorAll('tr[data-id]').forEach((tr) => tr.addEventListener('click', () => { if (NET.nodes.has(tr.dataset.id)) pilihSimpul(tr.dataset.id); else jadikanFokus(Number(tr.dataset.id.slice(2))); }));
+    } catch (e) { /* the timeline is a convenience */ }
+  }
+}
+
+new ResizeObserver(() => { if (!NET.nodes.size) return; const b = $('#net').getBoundingClientRect(); if (b.width && (Math.abs(b.width - NET.W) > 40 || Math.abs(b.height - NET.H) > 40)) render(false); }).observe($('#net'));
+legenda();
+modePasien();
+status();
+</script>
+</body>
+</html>

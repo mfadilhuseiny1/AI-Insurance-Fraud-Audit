@@ -1,0 +1,212 @@
+{
+ "klaim_latih": 54947,
+ "fraud_latih": 984,
+ "plant_bersih_latih": 1791,
+ "plant_bersih_holdout": 798,
+ "oof_auprc": 0.959551702702207,
+ "oof_auroc": 0.9993009268319801,
+ "oof_auprc_model1": 0.9317529412295444,
+ "oof_precision_top2pct": 0.8580527752502275,
+ "oof_recall_top2pct": 0.9583333333333334,
+ "oof_ditandai": 1017,
+ "oof_ditandai_precision": 0.8977384464110127,
+ "oof_ditandai_recall": 0.9278455284552846,
+ "oof_fpr_normal": 0.0019017191541153202,
+ "ambang_peluang": 0.5,
+ "ambang_alert_ring": 0.59524746615962,
+ "masking_riwayat_peserta": true,
+ "dilatih": "2026-11-11 19:53",
+ "oof_simulator_saja": {
+  "auprc": 0.936404872367683,
+  "precision": 0.8397435897435898,
+  "recall": 0.916083916083916
+ },
+ "oof_per_skenario": {
+  "aug:dx_sekunder": {
+   "n": 41,
+   "ditandai": 1.0
+  },
+  "aug:kelas_naik": {
+   "n": 44,
+   "ditandai": 1.0
+  },
+  "aug:kloning": {
+   "n": 40,
+   "ditandai": 0.825
+  },
+  "aug:kode_tidak_sesuai": {
+   "n": 40,
+   "ditandai": 1.0
+  },
+  "aug:los_bergeser": {
+   "n": 65,
+   "ditandai": 0.908
+  },
+  "aug:normal": {
+   "n": 1379,
+   "ditandai": 0.003
+  },
+  "aug:prosedur_fiktif": {
+   "n": 45,
+   "ditandai": 0.911
+  },
+  "aug:topup_fiktif": {
+   "n": 38,
+   "ditandai": 1.0
+  },
+  "aug:topup_inflasi": {
+   "n": 39,
+   "ditandai": 0.949
+  },
+  "aug:upcoding": {
+   "n": 60,
+   "ditandai": 0.933
+  },
+  "cincin_kolusi": {
+   "n": 318,
+   "ditandai": 0.915
+  },
+  "episode_hari_sama": {
+   "n": 20,
+   "ditandai": 0.45
+  },
+  "hasil_manipulasi": {
+   "n": 19,
+   "ditandai": 0.947
+  },
+  "kartu_dipinjam": {
+   "n": 40,
+   "ditandai": 1.0
+  },
+  "kartu_keluarga": {
+   "n": 20,
+   "ditandai": 0.95
+  },
+  "klaim_ganda": {
+   "n": 20,
+   "ditandai": 1.0
+  },
+  "klaim_mirip": {
+   "n": 19,
+   "ditandai": 1.0
+  },
+  "normal": {
+   "n": 52584,
+   "ditandai": 0.002
+  },
+  "obat_dikurangi": {
+   "n": 19,
+   "ditandai": 1.0
+  },
+  "obat_fiktif": {
+   "n": 19,
+   "ditandai": 0.947
+  },
+  "pemecahan_episode": {
+   "n": 19,
+   "ditandai": 0.947
+  },
+  "readmisi": {
+   "n": 19,
+   "ditandai": 1.0
+  },
+  "setelah_meninggal": {
+   "n": 40,
+   "ditandai": 0.85
+  }
+ },
+ "holdout_bersih_recall": 0.9548022598870056,
+ "holdout_bersih_per_skenario": {
+  "dx_sekunder": {
+   "n": 16,
+   "ditandai": 1.0,
+   "model1_median": 0.987
+  },
+  "kelas_naik": {
+   "n": 13,
+   "ditandai": 1.0,
+   "model1_median": 0.99
+  },
+  "kloning": {
+   "n": 17,
+   "ditandai": 0.941,
+   "model1_median": 0.986
+  },
+  "kode_tidak_sesuai": {
+   "n": 17,
+   "ditandai": 1.0,
+   "model1_median": 0.981
+  },
+  "los_bergeser": {
+   "n": 28,
+   "ditandai": 0.893,
+   "model1_median": 0.973
+  },
+  "normal": {
+   "n": 621,
+   "ditandai": 0.0,
+   "model1_median": 0.0
+  },
+  "prosedur_fiktif": {
+   "n": 12,
+   "ditandai": 0.833,
+   "model1_median": 0.98
+  },
+  "topup_fiktif": {
+   "n": 19,
+   "ditandai": 1.0,
+   "model1_median": 0.993
+  },
+  "topup_inflasi": {
+   "n": 18,
+   "ditandai": 0.944,
+   "model1_median": 0.977
+  },
+  "upcoding": {
+   "n": 37,
+   "ditandai": 0.973,
+   "model1_median": 0.998
+  }
+ },
+ "holdout_normal_bersih_n": 621,
+ "holdout_normal_bersih_fpr": 0.0,
+ "holdout_plant_simulator_recall": 0.7951030927835051,
+ "holdout_plant_simulator_per_skenario": {
+  "dx_sekunder": {
+   "n": 20,
+   "ditandai": 1.0
+  },
+  "kelas_naik": {
+   "n": 20,
+   "ditandai": 1.0
+  },
+  "kloning": {
+   "n": 72,
+   "ditandai": 0.889
+  },
+  "kode_tidak_sesuai": {
+   "n": 19,
+   "ditandai": 1.0
+  },
+  "los_bergeser": {
+   "n": 320,
+   "ditandai": 0.828
+  },
+  "prosedur_fiktif": {
+   "n": 20,
+   "ditandai": 0.05
+  },
+  "topup_fiktif": {
+   "n": 19,
+   "ditandai": 1.0
+  },
+  "topup_inflasi": {
+   "n": 20,
+   "ditandai": 0.2
+  },
+  "upcoding": {
+   "n": 266,
+   "ditandai": 0.771
+  }
+ }
+}

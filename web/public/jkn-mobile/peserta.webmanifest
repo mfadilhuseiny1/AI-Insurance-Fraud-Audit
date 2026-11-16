@@ -1,0 +1,33 @@
+{
+  "id": "/jkn-mobile/peserta",
+  "name": "JKN Peserta",
+  "short_name": "JKN Saya",
+  "description": "Kartu digital, riwayat layanan atas nama saya, lapor kejanggalan (demo)",
+  "lang": "id",
+  "start_url": "/jkn-mobile/peserta",
+  "scope": "/jkn-mobile/peserta",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f4f6f8",
+  "theme_color": "#15803d",
+  "icons": [
+    {
+      "src": "/jkn-mobile/peserta-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/jkn-mobile/peserta-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/jkn-mobile/peserta-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

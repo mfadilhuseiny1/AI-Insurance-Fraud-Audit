@@ -1,0 +1,268 @@
+<title>Uji Generator 1</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+/*STYLE*/
+<style>
+.split { display: flex; height: 26px; border-radius: 6px; overflow: hidden; gap: 2px }
+.split > div { display: flex; align-items: center; justify-content: center; font-family: var(--f-mono); font-size: 12px; color: var(--surface); white-space: nowrap; min-width: 0; overflow: hidden }
+.qrow { display: grid; grid-template-columns: minmax(0, 160px) 1fr; gap: 12px; align-items: center }
+.qrow .lbl { font-size: 13px }
+.big { font-family: var(--f-display); font-size: 40px; font-weight: 600; line-height: 1 }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; flex-shrink: 0 }
+.seg button { font: 500 12px var(--f-body); padding: 5px 10px; border: 0; background: transparent; color: var(--muted); cursor: pointer }
+.seg button.on { background: var(--soft); color: var(--ink) }
+.tbl { overflow-x: auto }
+.tbl table { border-collapse: collapse; width: 100%; font-size: 13px }
+.tbl th, .tbl td { padding: 6px 10px; border-bottom: 1px solid var(--line); text-align: right; font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap }
+.tbl th:first-child, .tbl td:first-child { text-align: left; font-family: var(--f-body) }
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="eyebrow">BluesandAI · Healthkathon · laporan teknis</span>
+    <h1>Uji Generator 1</h1>
+    <p class="lede">Hasil sistem audit klaim JKN kami pada data sintetis Generator 1, yang meniru distribusi data sampel BPJS. Model dilatih dan dipilih di data latih dan validasi, lalu diuji sekali pada set test terpisah berisi peserta yang tidak pernah dilihat model.</p>
+    <div class="grid g4" id="hero-stats"></div>
+    <div class="row"><span class="chip dash">Data sintetis, bukan angka fraud BPJS sebenarnya</span><span class="chip">FPR = klaim normal yang ikut ditandai</span><span class="chip">prec@2% = precision bila 2% klaim adalah fraud</span></div>
+  </header>
+
+  <section id="antrean">
+    <span class="eyebrow">Gambaran praktis</span>
+    <h2>Dari 10.000 klaim dengan 2% fraud, apa yang sampai ke meja verifikator?</h2>
+    <div class="panel" id="antrean-panel"></div>
+  </section>
+
+  <section id="data">
+    <span class="eyebrow">Data dan protokol</span>
+    <h2>Latih, pilih, lalu uji sekali di peserta yang berbeda</h2>
+    <div class="grid g3" id="data-cards"></div>
+  </section>
+
+  <section id="arsitektur">
+    <span class="eyebrow">Sistem</span>
+    <h2>Rule engine dan model ML menyaring, manusia memutuskan</h2>
+    <div class="flow">
+      <div class="node"><span class="step">1 · masuk</span><span class="t">Klaim batch</span><span class="s">dari rumah sakit, per Kantor Cabang</span></div>
+      <div class="node"><span class="step">2 · aturan</span><span class="t">Rule engine</span><span class="s">aturan Permenkes 16/2019; skornya menjadi masukan model</span></div>
+      <div class="node"><span class="step">3 · skor</span><span class="t">Model ML v4</span><span class="s">LightGBM × 3 seed; 646 fitur: klaim, graph tetangga (peserta, RS, kode INA-CBG), mekanisme</span></div>
+      <div class="node"><span class="step">4 · tier</span><span class="t">Dua tier</span>
+        <div class="zones"><span class="zone tahan"><b>TAHAN</b><span>skor sangat tinggi</span></span><span class="zone ragu"><b>PERIKSA</b><span>antrean verifikasi</span></span><span class="zone lolos"><b>LOLOS</b><span>sisanya</span></span></div></div>
+      <div class="node"><span class="step">5 · bukti</span><span class="t">AI Agent Swarm</span><span class="s">menyusun berkas bukti per klaim untuk verifikator (Google ADK)</span></div>
+      <div class="node human"><span class="step">6 · putusan</span><span class="t">Verifikator Kantor Cabang</span><span class="s">manusia yang memutuskan; hasilnya jadi tag di ledger dan Box Karantina</span></div>
+    </div>
+    <p class="small muted" id="swarm-note"></p>
+  </section>
+
+  <section id="hasil">
+    <span class="eyebrow">Hasil test</span>
+    <h2>Perbandingan versi model di test Generator 1</h2>
+    <div class="legend" id="leg-versi"></div>
+    <div class="grid g2">
+      <div class="panel"><h3>Recall (fraud yang tertangkap)</h3><div id="chart-recall"></div></div>
+      <div class="panel"><h3>prec@2% (antrean yang benar fraud)</h3><div id="chart-prec"></div></div>
+    </div>
+    <p class="small muted" id="versi-note"></p>
+  </section>
+
+  <section id="prevalensi">
+    <span class="eyebrow">Precision dan tingkat fraud</span>
+    <h2>Precision bergantung pada berapa banyak fraud di populasi</h2>
+    <div class="panel">
+      <div class="row" style="justify-content:space-between;align-items:flex-start;gap:12px">
+        <div style="display:grid;gap:4px;min-width:0;flex:1"><h3>Precision di berbagai tingkat fraud · test Generator 1</h3><p class="small muted" id="prev-sub"></p></div>
+        <div class="seg" role="group" aria-label="Tampilan"><button id="prev-grafik" class="on" type="button">Grafik</button><button id="prev-tabel" type="button">Tabel</button></div>
+      </div>
+      <div id="chart-prev"></div><div id="table-prev" hidden></div>
+      <div class="legend" id="leg-prev"></div>
+      <div class="row" style="justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:10px">
+        <span class="small muted">Garis tegak = fraud 2% (acuan) · titik = tingkat fraud set test (<span id="prev-prev"></span>)</span>
+        <div class="seg" role="group" aria-label="Ambang"><button id="prev-beku" class="on" type="button">Ambang beku</button><button id="prev-fpr1" type="button">FPR disamakan 1%</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skema">
+    <span class="eyebrow">Per skema</span>
+    <h2>Skema mana yang tertangkap, mana yang masih lemah</h2>
+    <div class="panel"><div class="legend" id="leg-skema"></div><div id="chart-skema"></div></div>
+  </section>
+
+  <section id="tier">
+    <span class="eyebrow">Dua tier</span>
+    <h2>Tier TAHAN: separuh fraud dengan kesalahan sangat sedikit</h2>
+    <div class="grid g2"><div class="panel" id="tier-panel"></div><div class="panel"><h3>Sebaran skor v4</h3><div class="legend" id="leg-hist"></div><div id="chart-hist"></div></div></div>
+  </section>
+
+  <section id="batas">
+    <span class="eyebrow">Batasan masalah</span>
+    <h2>Ruang lingkup dan batasan</h2>
+    <ul class="list warn" id="batas-list"></ul>
+  </section>
+
+  <footer><span id="foot-gen"></span><span>Sumber: testing/laporan_gen1.py, v4_final.py, kriteria_v4.json (repo ai-jkn-synthetic).</span></footer>
+</div>
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script>
+const DATA = /*DATA*/null;
+const C = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const MOD = [["v3", "v3", "--base"], ["v4", "v4", "--g3"], ["ml_v5", "ML v5", "--g1"], ["ml_v7", "ML v7", "--g2"]];
+const FAM = { koding: "Koding & klinis", tagihan: "Tagihan", episode: "Episode", identitas: "Identitas", jaringan: "Jaringan" };
+const id = (v, d = 0) => (v == null || isNaN(v)) ? "—" : Number(v).toLocaleString("id-ID", { minimumFractionDigits: d, maximumFractionDigits: d });
+const pct = (v, d = 1) => (v == null || isNaN(v)) ? "—" : id(v * 100, d) + "%";
+const $ = (s) => document.getElementById(s);
+const el = (tag, attrs = {}, kids = []) => { const e = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) { if (k === "html") e.innerHTML = v; else if (k === "text") e.textContent = v; else e.setAttribute(k, v); } for (const k of [].concat(kids)) if (k) e.append(k); return e; };
+const NS = "http://www.w3.org/2000/svg";
+const s = (tag, attrs = {}, text) => { const e = document.createElementNS(NS, tag); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); if (text != null) e.textContent = text; return e; };
+const tip = $("tip");
+document.addEventListener("pointermove", (e) => { const t = e.target.closest && e.target.closest("[data-tip]"); if (t) { tip.textContent = t.getAttribute("data-tip"); tip.style.opacity = 1; tip.style.left = Math.min(e.clientX + 14, innerWidth - 270) + "px"; tip.style.top = (e.clientY + 14) + "px"; } else tip.style.opacity = 0; });
+const legend = (box, items) => box.replaceChildren(...items.map(([n, c]) => el("span", {}, [el("i", { style: `background:${C(c)}` }), n])));
+function stat(v, k, sub) { return el("div", { class: "panel stat" }, [el("div", { class: "v num", text: v }), el("div", { class: "k", text: k }), sub ? el("div", { class: "small muted", text: sub }) : null]); }
+
+/* horizontal bars with CI whiskers */
+function bars(box, rows, opt = {}) {
+  const W = Math.max(300, box.clientWidth || 600), lw = Math.min(90, W * 0.25), bh = 16, rh = 30, mx = opt.max || 1, right = 64;
+  const x = (v) => lw + (v / mx) * (W - lw - right);
+  const svg = s("svg", { viewBox: `0 0 ${W} ${rows.length * rh + 22}`, role: "img", "aria-label": opt.label || "grafik" });
+  rows.forEach((r, i) => {
+    const y = i * rh + 6;
+    svg.append(s("text", { x: lw - 8, y: y + 12, "text-anchor": "end", class: "ink", "font-weight": r.bold ? 700 : 400 }, r.label));
+    svg.append(s("rect", { x: lw, y, width: Math.max(2, x(r.v) - lw), height: bh, rx: 3, fill: C(r.c), "data-tip": `${r.label}: ${pct(r.v)}${r.ci ? ` (95% CI ${pct(r.ci[0])}–${pct(r.ci[1])})` : ""}` }));
+    if (r.ci) { svg.append(s("line", { x1: x(r.ci[0]), x2: x(r.ci[1]), y1: y + bh / 2, y2: y + bh / 2, stroke: C("--ink"), "stroke-width": 1.5 })); for (const c of r.ci) svg.append(s("line", { x1: x(c), x2: x(c), y1: y + 3, y2: y + bh - 3, stroke: C("--ink"), "stroke-width": 1.5 })); }
+    svg.append(s("text", { x: x(r.ci ? r.ci[1] : r.v) + 6, y: y + 12, class: "ink" }, pct(r.v)));
+  });
+  const yb = rows.length * rh + 16;
+  [0, 0.5, 1].forEach((t) => svg.append(s("text", { x: x(t * mx), y: yb, "text-anchor": t === 0 ? "start" : t === 1 ? "end" : "middle" }, pct(t * mx, 0))));
+  box.replaceChildren(svg);
+}
+
+function render() {
+  const D = DATA, v4 = D.model.v4, P2 = (m) => m.presisi_prev["0.02"];
+  // hero
+  const hs = $("hero-stats");
+  hs.append(stat(pct(v4.recall), "Recall: fraud yang tertangkap", `95% CI ${pct(v4.ci.recall[0])}–${pct(v4.ci.recall[1])}`));
+  hs.append(stat(pct(P2(v4), 0), "prec@2%: antrean yang benar fraud", `95% CI ${pct(v4.ci.prec2[0], 0)}–${pct(v4.ci.prec2[1], 0)}`));
+  hs.append(stat(pct(v4.fpr, 2), "FPR: klaim normal yang ikut ditandai", `95% CI ${pct(v4.ci.fpr[0], 2)}–${pct(v4.ci.fpr[1], 2)}`));
+  hs.append(stat(id(v4.auprc, 3), "AUPRC (1 = sempurna)", `AUROC ${id(v4.auroc, 3)}`));
+  // queue of 10,000
+  const nF = 200, nN = 9800, tp = Math.round(nF * v4.recall), fn = nF - tp, fp = Math.round(nN * v4.fpr), q = tp + fp;
+  const ap = $("antrean-panel");
+  const row = (lbl, parts) => el("div", { class: "qrow" }, [el("span", { class: "lbl", text: lbl }), el("div", { class: "split", role: "img", "aria-label": lbl },
+    parts.map(([n, w, c, t]) => el("div", { style: `flex:${Math.max(w, 0.015)};background:var(${c})`, "data-tip": t, text: w > 0.08 ? id(n) : "" })))]);
+  ap.append(row(`${id(nF)} klaim fraud`, [[tp, tp / nF, "--g3", `${id(tp)} tertangkap`], [fn, fn / nF, "--risk", `${id(fn)} lolos`]]),
+    row(`${id(nN)} klaim normal`, [[fp, Math.max(fp / nN, 0.02), "--warn", `${id(fp)} ikut ditandai`], [nN - fp, 1 - Math.max(fp / nN, 0.02), "--base", `${id(nN - fp)} lolos`]]),
+    el("div", { class: "grid g3", style: "margin-top:6px" }, [
+      el("div", { class: "verdict" }, [el("span", { class: "big num", text: id(q) }), el("span", { class: "small muted", text: "klaim masuk antrean PERIKSA (2,3% dari semua klaim)" })]),
+      el("div", { class: "verdict" }, [el("span", { class: "big num", text: id(tp) }), el("span", { class: "small muted", text: `benar fraud (${pct(tp / q, 0)} dari antrean)` })]),
+      el("div", { class: "verdict" }, [el("span", { class: "big num", text: id(fp) }), el("span", { class: "small muted", text: "klaim normal yang ikut diperiksa (batang normal di atas diperbesar agar terlihat)" })])]));
+  // data cards
+  const L = D.v4_latih, val = L.validasi && L.validasi.nilai;
+  const card = (eb, t, kv, p) => el("div", { class: "panel" }, [el("span", { class: "eyebrow", text: eb }), el("h3", { text: t }), el("div", { class: "kv", html: kv }), p ? el("p", { class: "small muted", text: p }) : null]);
+  $("data-cards").append(
+    card("latih", "Belajar", `<span><b>${id(L.latih.baris)}</b> klaim</span><span><b>${id(L.latih.fraud)}</b> fraud</span>`, "Generator 1, peserta kelompok latih."),
+    card("validasi", "Memilih ambang", val ? `<span><b>${id(val.n)}</b> klaim</span><span><b>${id(val.fraud)}</b> fraud</span><span>recall <b>${pct(val.recall_fpr1)}</b> pada FPR 1%</span>` : "", "Ambang PERIKSA dipilih agar FPR ≈ 1% di sini; tier TAHAN pada FPR 0,1%."),
+    card("test C2", "Ujian, dinilai sekali", `<span><b>${id(D.klaim)}</b> klaim</span><span><b>${id(D.fraud)}</b> fraud</span><span><b>${D.skema_n}</b> skema</span><span><b>${id(D.peserta)}</b> peserta</span>`, "Peserta tidak pernah muncul di latih atau validasi."));
+  const sv = D.swarm_validasi;
+  $("swarm-note").textContent = `Angka di laporan ini berasal dari model ML (v4) pada ambang beku. AI Agent Swarm sudah diuji sebagai filter tambahan di validasi Generator 1 dan tidak menambah recall di distribusi ini (${pct(sv.v4_B.recall)} → ${pct(sv.v5.recall)} pada FPR yang sama), jadi di sini perannya menyusun bukti untuk verifikator.`;
+  // versions
+  legend($("leg-versi"), MOD.map(([, n, c]) => [n, c]));
+  bars($("chart-recall"), MOD.map(([k, n, c]) => ({ label: n, v: D.model[k].recall, ci: D.model[k].ci.recall, c, bold: k === "v4" })), { label: "Recall per versi" });
+  bars($("chart-prec"), MOD.map(([k, n, c]) => ({ label: n, v: P2(D.model[k]), ci: D.model[k].ci.prec2, c, bold: k === "v4" })), { label: "prec@2% per versi" });
+  $("versi-note").textContent = `v4 tertinggi di data ini. ML v5 dan ML v7 juga dilatih pada generator lain agar tahan distribusi berbeda, dan di Generator 1 sedikit lebih rendah (recall ${pct(D.model.ml_v5.recall)} dan ${pct(D.model.ml_v7.recall)}). AUPRC: ${MOD.map(([k, n]) => `${n} ${id(D.model[k].auprc, 3)}`).join(" · ")}.`;
+  // precision across fraud rates (log scale), every version; frozen threshold or FPR equalised at 1%
+  { const box = $("chart-prev"), MODS = [["ml_v5", "ML v5", "--g1", 1.75], ["ml_v7", "ML v7", "--g2", 1.75], ["v4", "v4", "--g3", 3], ["v3", "v3 (garis putus)", "--ink", 1.25, "4 4"]];
+    const P0 = 0.001, P1 = 0.2, TK = [0.001, 0.005, 0.01, 0.02, 0.05, 0.1, 0.2];
+    let mode = "beku";
+    const rf = (k) => mode === "beku" ? [D.model[k].recall, D.model[k].fpr] : [D.model[k].recall_fpr1, 0.01];
+    const prec = (k, p) => { const [r, f] = rf(k); return p * r / Math.max(1e-12, p * r + (1 - p) * f); };
+    const lab = (p) => pct(p, p < 0.01 ? 1 : 0);
+    $("prev-prev").textContent = pct(D.prevalensi, 1);
+    legend($("leg-prev"), MODS.map(([, n, c]) => [n, c]));
+    const sub = () => { $("prev-sub").textContent = `Saat fraud langka: v4 ${pct(prec("v4", 0.001), 1)} pada 0,1% dan ${pct(prec("v4", 0.01), 1)} pada 1% (ML v7 ${pct(prec("ml_v7", 0.001), 1)} dan ${pct(prec("ml_v7", 0.01), 1)}). ` + (mode === "beku" ? "Setiap model pada ambang bekunya sendiri; v3 berimpit dengan v4 karena recall-nya lebih rendah tetapi FPR-nya juga lebih rendah." : "Setiap model dipaksa ke FPR 1% di test, supaya adil antar model."); };
+    const draw = () => {
+      const W = Math.max(300, box.clientWidth || 800), H = 300, l = 44, r = 14, t = 12, b = 44;
+      const xs = (p) => l + (Math.log(p / P0) / Math.log(P1 / P0)) * (W - l - r), ys = (v) => t + (1 - v) * (H - t - b);
+      const svg = s("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Precision menurut tingkat fraud, skala log" });
+      [0, 0.25, 0.5, 0.75, 1].forEach((v) => svg.append(s("line", { x1: l, x2: W - r, y1: ys(v), y2: ys(v), stroke: C("--line") }), s("text", { x: l - 6, y: ys(v) + 4, "text-anchor": "end" }, pct(v, 0))));
+      TK.forEach((p) => svg.append(s("text", { x: xs(p), y: H - b + 16, "text-anchor": p === P0 ? "start" : p === P1 ? "end" : "middle" }, lab(p))));
+      svg.append(s("text", { x: l + (W - l - r) / 2, y: H - 6, "text-anchor": "middle" }, "tingkat fraud (skala log)"));
+      svg.append(s("line", { x1: xs(0.02), x2: xs(0.02), y1: t, y2: H - b, stroke: C("--muted"), "stroke-dasharray": "3 3" }), s("text", { x: xs(0.02) + 4, y: H - b - 6 }, "fraud 2%"));
+      const N = 90;
+      for (const [k, , c, w, dash] of MODS) {
+        const d = Array.from({ length: N + 1 }, (_, i) => { const p = P0 * Math.pow(P1 / P0, i / N); return `${i ? "L" : "M"}${xs(p).toFixed(1)},${ys(prec(k, p)).toFixed(1)}`; }).join("");
+        svg.append(s("path", { d, fill: "none", stroke: C(c), "stroke-width": w, "stroke-linejoin": "round", "stroke-dasharray": dash || "none" }));
+        svg.append(s("circle", { cx: xs(D.prevalensi), cy: ys(prec(k, D.prevalensi)), r: 4.5, fill: C(c), stroke: C("--surface"), "stroke-width": 2 }));
+      }
+      const cross = s("line", { x1: 0, x2: 0, y1: t, y2: H - b, stroke: C("--ink"), "stroke-width": 1, opacity: 0 });
+      const hit = s("rect", { x: l, y: t, width: W - l - r, height: H - t - b, fill: "transparent" });
+      svg.append(cross, hit);
+      hit.addEventListener("pointermove", (e) => {
+        const bb = svg.getBoundingClientRect(), x = (e.clientX - bb.left) * (W / bb.width);
+        const p = P0 * Math.pow(P1 / P0, Math.min(1, Math.max(0, (x - l) / (W - l - r))));
+        cross.setAttribute("x1", x); cross.setAttribute("x2", x); cross.setAttribute("opacity", 0.35);
+        tip.textContent = `fraud ${pct(p, p < 0.01 ? 2 : 1)} · ` + MODS.slice().reverse().map(([k, n]) => `${n} ${pct(prec(k, p), 0)}`).join(" · ");
+        tip.style.opacity = 1; tip.style.left = Math.min(e.clientX + 14, innerWidth - 270) + "px"; tip.style.top = (e.clientY + 14) + "px";
+      });
+      hit.addEventListener("pointerleave", () => { cross.setAttribute("opacity", 0); tip.style.opacity = 0; });
+      box.replaceChildren(svg);
+      const head = `<thead><tr><th>Model</th><th>recall</th><th>FPR</th>${TK.map((p) => `<th>fraud ${lab(p)}</th>`).join("")}</tr></thead>`;
+      const body = MODS.slice().reverse().map(([k, n]) => { const [rr, ff] = rf(k); return `<tr><td>${n}</td><td>${pct(rr)}</td><td>${pct(ff, 2)}</td>${TK.map((p) => `<td>${pct(prec(k, p), 1)}</td>`).join("")}</tr>`; }).join("");
+      $("table-prev").replaceChildren(el("div", { class: "tbl" }, [el("table", { html: head + "<tbody>" + body + "</tbody>" })]));
+      sub();
+    };
+    const seg = (a, b, on) => { $(a).classList.toggle("on", on); $(b).classList.toggle("on", !on); };
+    $("prev-beku").addEventListener("click", () => { mode = "beku"; seg("prev-beku", "prev-fpr1", true); draw(); });
+    $("prev-fpr1").addEventListener("click", () => { mode = "fpr1"; seg("prev-beku", "prev-fpr1", false); draw(); });
+    $("prev-grafik").addEventListener("click", () => { seg("prev-grafik", "prev-tabel", true); box.hidden = false; $("leg-prev").hidden = false; $("table-prev").hidden = true; });
+    $("prev-tabel").addEventListener("click", () => { seg("prev-grafik", "prev-tabel", false); box.hidden = true; $("leg-prev").hidden = true; $("table-prev").hidden = false; });
+    draw(); }
+  // per scheme (v4 vs ML v7), grouped by family
+  legend($("leg-skema"), [["v4", "--g3"], ["ML v7", "--g2"]]);
+  { const box = $("chart-skema"), W = Math.max(300, box.clientWidth || 900), lw = Math.min(200, W * 0.45), rh = 24, right = 50;
+    const rows = [];
+    for (const f of Object.keys(FAM)) { const ks = Object.keys(D.skema).filter((k) => D.skema[k].famili === f).sort(); if (!ks.length) continue; rows.push({ head: FAM[f] }); ks.forEach((k) => rows.push({ k })); }
+    const svg = s("svg", { viewBox: `0 0 ${W} ${rows.length * rh + 22}`, role: "img", "aria-label": "Recall per skema" });
+    const x = (v) => lw + v * (W - lw - right);
+    rows.forEach((r, i) => { const y = i * rh + 12;
+      if (r.head) { svg.append(s("text", { x: 0, y: y + 4, fill: C("--accent"), "font-size": 11, "letter-spacing": "0.06em" }, r.head.toUpperCase())); return; }
+      const k = r.k, sk = D.skema[k], a = v4.per_skema[k], b7 = D.model.ml_v7.per_skema[k];
+      svg.append(s("text", { x: 12, y: y + 4, class: "ink" }, `${k.replace(/_/g, " ")} (${sk.n})`));
+      svg.append(s("line", { x1: lw, x2: W - right, y1: y, y2: y, stroke: C("--line") }));
+      svg.append(s("circle", { cx: x(b7), cy: y, r: 5, fill: C("--g2"), stroke: C("--surface"), "stroke-width": 2, "data-tip": `${k} · ML v7 ${pct(b7, 0)}` }));
+      svg.append(s("circle", { cx: x(a), cy: y, r: 6, fill: C("--g3"), stroke: C("--surface"), "stroke-width": 2, "data-tip": `${k} · v4 ${pct(a, 0)} (${sk.n} klaim fraud)` }));
+      svg.append(s("text", { x: W, y: y + 4, "text-anchor": "end", class: "ink" }, pct(a, 0))); });
+    [0, 0.5, 1].forEach((t) => svg.append(s("text", { x: x(t), y: rows.length * rh + 16, "text-anchor": t === 0 ? "start" : t === 1 ? "end" : "middle" }, pct(t, 0))));
+    box.replaceChildren(svg); }
+  // tiers
+  const T = D.v4_tahan, tp2 = 0.02 * T.recall / (0.02 * T.recall + 0.98 * T.fpr);
+  $("tier-panel").append(el("h3", { text: "TAHAN vs PERIKSA (v4, test)" }),
+    el("div", { class: "grid g2", style: "gap:10px" }, [
+      el("div", { class: "verdict" }, [el("span", { class: "eyebrow", text: "TAHAN" }), el("span", { class: "big num", text: pct(T.recall, 0) }), el("span", { class: "small muted", text: `fraud tertangkap · FPR ${pct(T.fpr, 2)} · prec@2% ${pct(tp2, 0)}` })]),
+      el("div", { class: "verdict" }, [el("span", { class: "eyebrow", text: "PERIKSA" }), el("span", { class: "big num", text: pct(v4.recall, 0) }), el("span", { class: "small muted", text: `fraud tertangkap · FPR ${pct(v4.fpr, 2)} · prec@2% ${pct(P2(v4), 0)}` })])]),
+    el("p", { class: "small", text: `Di test, ${id(T.ditandai)} klaim masuk tier TAHAN dan ${id(T.tp)} di antaranya fraud. Tier ini cocok untuk penahanan pembayaran sementara sambil diverifikasi; tier PERIKSA untuk antrean verifikasi biasa.` }));
+  // histogram
+  legend($("leg-hist"), [["klaim normal", "--base"], ["klaim fraud", "--g3"]]);
+  { const box = $("chart-hist"), W = Math.max(300, box.clientWidth || 500), H = 150, n = D.hist.normal.length, bw = W / n;
+    const svg = s("svg", { viewBox: `0 -14 ${W} ${H + 30}`, role: "img", "aria-label": "Sebaran skor v4" });
+    const sq = (v) => Math.sqrt(v), mx = Math.max(...D.hist.normal.map(sq), ...D.hist.fraud.map(sq));
+    svg.append(s("line", { x1: 0, x2: W, y1: H, y2: H, stroke: C("--line") }));
+    D.hist.normal.forEach((v, i) => { const h = sq(v) / mx * (H - 4); svg.append(s("rect", { x: i * bw + 1, y: H - h, width: bw / 2 - 1, height: Math.max(h, 0.5), fill: C("--base"), "data-tip": `skor ${id(i / n, 2)}–${id((i + 1) / n, 2)}: ${pct(v, 2)} klaim normal` })); });
+    D.hist.fraud.forEach((v, i) => { const h = sq(v) / mx * (H - 4); svg.append(s("rect", { x: i * bw + bw / 2, y: H - h, width: bw / 2 - 1, height: Math.max(h, 0.5), fill: C("--g3"), "data-tip": `skor ${id(i / n, 2)}–${id((i + 1) / n, 2)}: ${pct(v, 1)} klaim fraud` })); });
+    for (const [t, nm] of [[D.hist.ambang, "PERIKSA"], [D.hist.tahan, "TAHAN"]]) svg.append(s("line", { x1: t * W, x2: t * W, y1: 0, y2: H, stroke: C("--ink"), "stroke-dasharray": "3 3" }), s("text", { x: t * W + 4, y: -2 }, nm));
+    svg.append(s("text", { x: 0, y: H + 14 }, "skor 0"), s("text", { x: W, y: H + 14, "text-anchor": "end" }, "1"));
+    box.replaceChildren(svg, el("p", { class: "small muted", text: "Tinggi batang memakai skala akar agar batang kecil tetap terlihat." })); }
+  // limitations
+  const lemah = Object.keys(v4.per_skema).filter((k) => v4.per_skema[k] < 0.8).sort((a, c) => v4.per_skema[a] - v4.per_skema[c]);
+  const items = [
+    "Sistem diuji pada data yang distribusinya mendekati distribusi data sampel BPJS (Generator 1). Kinerja pada data dengan distribusi berbeda belum diuji.",
+    "Semua data adalah data sintetis. Angka di sini mengukur kemampuan model menemukan pola fraud yang ditanam, bukan tingkat fraud di BPJS.",
+    `Recall di set validasi (${val ? pct(val.recall_fpr1) : "—"}) lebih rendah dari test (${pct(v4.recall)}) karena campuran skemanya berbeda; angka validasi adalah batas bawah yang lebih hati-hati.`,
+    `Skema yang masih lemah: ${lemah.map((k) => `${k.replace(/_/g, " ")} ${pct(v4.per_skema[k], 0)}`).join(", ")}.`,
+    `Peserta yang baru pertama kali berobat lebih sering ikut ditandai (FPR ${pct(v4.fpr_pertama, 1)} vs ${pct(v4.fpr_lama, 1)} untuk peserta lama).`,
+    "Precision bergantung pada tingkat fraud sebenarnya, yang belum diketahui. Keputusan akhir tetap di tangan verifikator Kantor Cabang."];
+  $("batas-list").replaceChildren(...items.map((t) => el("li", {}, [el("span", { text: t })])));
+  $("foot-gen").textContent = `Dibuat dari file hasil repo pada ${D.dibuat}. Data sintetis.`;
+}
+try { render(); } catch (e) { document.querySelector(".wrap").prepend(el("div", { class: "pending", text: "Gagal menggambar: " + e.message })); }
+</script>

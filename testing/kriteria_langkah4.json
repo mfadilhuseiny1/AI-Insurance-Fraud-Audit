@@ -1,0 +1,60 @@
+{
+ "ditulis": "2026-11-12, sebelum uji C dan generator 2 seed baru selesai dibangun dan sebelum satu pun skor model_v3_bersih pada keduanya dilihat",
+ "model_utama": "model_v3_bersih (testing/model_v3_bersih, arsitektur v3, satu jalur fitur, data latih tanpa gema)",
+ "pembanding": "model_v3 seperti dilayani sekarang (dilatih pada fitur jalur lama); angkanya diberi label itu, bukan kriteria",
+ "set_uji": {
+  "uji_c": "generator 1, peserta peran uji_c, klaim Jan–15 Nov dipindah ke jendela, klaim asli dihapus dari riwayat (tanpa gema), dipakai sekali",
+  "gen2_baru": "generator 2 (parameter yang sama), seed baru, peserta peran gen2_baru, dipakai sekali"
+ },
+ "aturan": [
+  "ambang setiap model seperti saat dilatih; tidak ada yang disetel pada uji C atau gen2_baru",
+  "pilihan desain (varian arsitektur) hanya pada peserta validasi (chunk 8–9 data_v2_bersih), tidak pada set ini",
+  "FPR dilaporkan terpisah untuk kunjungan pertama dan pasien lama, ditambah FPR yang ditimbang ke campuran aliran (20% kunjungan pertama)"
+ ],
+ "kriteria": {
+  "K1_jalan_pintas": {
+   "ukuran": "FPR kunjungan pertama / FPR pasien lama, pada tiap set",
+   "konsisten_sampai": 2.0,
+   "sebagian_sampai": 3.0
+  },
+  "K2_recall_antar_generator": {
+   "ukuran": "|recall uji C − recall gen2_baru| dalam poin",
+   "konsisten_sampai": 5.0,
+   "sebagian_sampai": 15.0
+  },
+  "K3_fpr_antar_generator": {
+   "ukuran": "rasio FPR (yang lebih besar / yang lebih kecil), FPR ditimbang 20% kunjungan pertama",
+   "konsisten_sampai": 1.5,
+   "sebagian_sampai": 3.0
+  },
+  "K4_presisi_antar_generator": {
+   "ukuran": "|precision uji C − precision gen2_baru pada prevalensi uji C| dalam poin",
+   "konsisten_sampai": 5.0,
+   "sebagian_sampai": 15.0
+  },
+  "K5_recall_skema_bersama": {
+   "ukuran": "|recall uji C − recall gen2_baru| pada skema yang ada di keduanya, dalam poin",
+   "konsisten_sampai": 5.0,
+   "sebagian_sampai": 15.0
+  }
+ },
+ "vonis": {
+  "jalan_pintas": "hasil terburuk K1 dari kedua set",
+  "antar_generator": "hasil terburuk K2–K5"
+ },
+ "adendum": [
+  {
+   "ditulis": "2026-11-12 20:03, setelah build uji C pertama dinyatakan tidak valid dan SEBELUM satu pun skor model_v3_bersih atau model_v3 pada uji C yang dibangun ulang dilihat",
+   "alasan": "Build uji C pertama memindahkan semua klaim Jan–15 Nov seorang peserta ke jendela dua minggu yang sama (84% klaim normal dari peserta dengan >= 2 klaim seperti itu; FPR v3 bersih 0,7% untuk 1 klaim sampai 31% untuk >= 10 klaim). Bug ini ditemukan karena skornya tampak janggal (FPR 14,8% vs 0,77% di validasi), jadi angka build itu dilaporkan, bukan dibuang.",
+   "aturan_build_ulang": [
+    "satu klaim per peserta (acak di antara klaim Jan–15 Nov peserta itu), seperti data latih",
+    "peserta peran uji_c, 10 chunk (ember10)",
+    "dikeluarkan: peserta aliran replay, peserta data latih lama (data_v2), peran lain (latih, validasi, gen2_baru), dan klaim SUMBER uji A/B",
+    "peserta uji A/B boleh masuk lagi (hanya pernah diuji, tidak pernah dilatih); peserta generator 2 run pertama boleh",
+    "klaim asli dihapus dari riwayat sebelum ingest (tanpa gema)",
+    "kriteria K1–K5, model, dan ambang tidak berubah"
+   ],
+   "cek_tambahan": "FPR menurut jumlah klaim peserta di jendela (1, 2, 3–4, 5+) dilaporkan untuk uji C, generator 2 baru dan validasi"
+  }
+ ]
+}

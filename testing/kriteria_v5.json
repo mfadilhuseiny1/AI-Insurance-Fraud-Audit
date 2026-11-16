@@ -1,0 +1,52 @@
+{
+ "ditulis": "2026-11-13, sebelum set uji baru dibuat dan sebelum swarm menilai satu klaim pun",
+ "perubahan_sebelum_hasil": ["kerangka swarm = Google ADK dan penyedia = Vertex AI (permintaan pengguna, sebelum smoke test)",
+                             "prompt v5-adk-p2 (permintaan pengguna 'prompt yang bagus'): panduan membaca berkas, penjelasan normal, modus Permenkes per spesialis, skala p, bukti dulu, hakim memeriksa ulang bukti; ditulis dari pengetahuan domain SEBELUM akurasi apa pun dilihat (run p1 terhenti karena 429 setelah 136 klaim, akurasinya tidak dibuka)",
+                             "paralel 2 batch + backoff untuk 429 Vertex",
+                             "batas biaya set baru dinaikkan ke $4 (prompt p2 ~$0,011/batch; pengguna: 'gpp agak mahal juga kan percobaan')"],
+ "permintaan": "v5 = v4 (B) + rule engine (recall naik) + multi-agent swarm untuk klaim yang ragu (precision dijaga)",
+ "data_sintetis_saja": true,
+ "komponen": {
+  "model": "testing/model_v4 (varian B, beku; skor s = rata-rata 3 LightGBM)",
+  "rule": "set rule engine yang sama dengan testing/v4_rule_tambah.py: 5 rule v4 (aturan_v4.json dipilih) + 23 sinyal rule bawaan v3 + network rule",
+  "swarm": {
+   "agen": ["spesialis koding & klinis", "spesialis tagihan", "spesialis episode, identitas & jaringan", "hakim (membaca berkas + tiga pendapat)"],
+   "kerangka": "Google ADK 2.12 (permintaan pengguna): SequentialAgent(ParallelAgent(3 spesialis), hakim), testing/swarm_v5_adk.py di .venv-adk",
+   "model_ai": "DeepSeek V4.1 Flash di Google Vertex AI Model Garden (MaaS), kredensial Google platform; TANPA OpenRouter (permintaan pengguna)",
+   "batch": "8 klaim per batch (4 panggilan model: 3 spesialis paralel + hakim); urutan diacak; id klaim disamarkan",
+   "berkas": "hanya fakta dari fitur (kode INA-CBG, jenis rawat, kelas, biaya/LOS/top-up/dx sekunder relatif terhadap kode, riwayat peserta, sinyal rule yang menyala, fitur mekanisme X4, jaringan); TANPA skor model, label, nama skema",
+   "keluaran": "per klaim: peluang fraud p (0-1), famili, alasan singkat",
+   "prompt": "versi dibekukan setelah smoke test format (<= 16 klaim validasi, cek format dan biaya saja, bukan akurasi)"
+  }
+ },
+ "zona": {
+  "TAHAN": "s >= ambang_tahan v4 (FPR 0,1% di validasi): langsung, tanpa swarm",
+  "RAGU": "bukan TAHAN dan (s >= t_lebar ATAU ada rule yang menyala); t_lebar = skor model pada FPR 3% normal validasi",
+  "LOLOS": "sisanya, tanpa swarm"
+ },
+ "kandidat_keputusan": {
+  "V5a": "PERIKSA = TAHAN + klaim RAGU dengan p >= tau",
+  "V5b": "PERIKSA = TAHAN + klaim RAGU dengan (p + q(s)) / 2 >= tau; q(s) = persentil s di antara klaim normal validasi"
+ },
+ "pemilihan_di_validasi": {
+  "tau": "per kandidat, tau terkecil dengan FPR total (TAHAN + PERIKSA) <= 1% di normal validasi (anggaran alarm salah sama dengan v4)",
+  "pilih": "recall tertinggi; selisih < 1 poin = seri -> V5a (lebih sederhana)",
+  "catatan": "angka validasi optimistis (tau dipilih di set yang sama); angka utama = set baru"
+ },
+ "titik_kedua_dilaporkan": "lebar: klaim RAGU dengan p >= 0,5 (tanpa anggaran FPR), untuk menunjukkan opsi recall naik",
+ "set_uji_baru": {
+  "generator": "testing/generator3.py dengan GEN3_GARAM=gen3-v5 (RS curang, pembagian peserta, dan semua acakan baru), 8 chunk, .tmp/gen3_v5",
+  "dinilai": "SEKALI, setelah model, rule, ambang, prompt, kandidat, dan tau dibekukan",
+  "mutu": "pulang_dini (mutu) dikeluarkan dari hitungan fraud/normal",
+  "ci": "bootstrap per peserta, 1000 kali"
+ },
+ "aturan_adopsi": "v5 menggantikan v4 sebagai sistem terbaru hanya jika di set baru: selisih recall PERIKSA (v5 - v4) > 0 dengan 95% CI di atas 0, DAN precision pada fraud 2% tidak lebih rendah dari v4 lebih dari 2 poin. Jika tidak, v4 tetap dan hasil v5 dilaporkan apa adanya",
+ "biaya": {
+  "penyedia": "Vertex AI saja; harga DeepSeek V4.1 Flash $0,30 / $1,20 per 1 juta token (api/aip/models.py)",
+  "batas_total_usd": 3.0,
+  "batas_per_panggilan_usd": 0.05,
+  "berhenti": "5 kegagalan berturut-turut atau batas total tercapai",
+  "cache": "setiap jawaban disimpan per (klaim, agen, versi prompt): tidak pernah dibayar dua kali",
+  "run_penuh": "menunggu persetujuan pengguna setelah smoke test"
+ }
+}

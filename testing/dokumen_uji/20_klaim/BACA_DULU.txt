@@ -1,0 +1,26 @@
+Dokumen uji /testing: 10 klaim normal (N01-N10) dan 10 klaim fraud (F11-F20). Semua data fiktif (sintetis).
+
+Cara pakai: buka http://localhost:8320/testing, unggah satu PDF, periksa isian, lalu nilai klaimnya.
+Unggah N01-N10 dulu, baru F11-F20: F17, F18 dan F19 adalah pasangan N01, N02 dan N03 (pasien dan RS yang sama).
+Satu dokumen cukup sekali diunggah: mengunggah dokumen yang sama dua kali memang akan terbaca sebagai klaim ganda.
+
+N01_normal.pdf                     NORMAL  -     Rawat inap biasa: tagihan wajar, kode sesuai diagnosis, kelas sesuai hak.
+N02_normal.pdf                     NORMAL  -     Rawat inap biasa: tagihan wajar, kode sesuai diagnosis, kelas sesuai hak.
+N03_normal.pdf                     NORMAL  -     Rawat inap biasa: tagihan wajar, kode sesuai diagnosis, kelas sesuai hak.
+N04_normal.pdf                     NORMAL  -     Rawat inap biasa: tagihan wajar, kode sesuai diagnosis, kelas sesuai hak.
+N05_normal.pdf                     NORMAL  -     Rawat inap biasa: tagihan wajar, kode sesuai diagnosis, kelas sesuai hak.
+N06_normal.pdf                     NORMAL  -     Rawat inap biasa: tagihan wajar, kode sesuai diagnosis, kelas sesuai hak.
+N07_normal.pdf                     NORMAL  -     Rawat inap biasa: tagihan wajar, kode sesuai diagnosis, kelas sesuai hak.
+N08_normal.pdf                     NORMAL  -     Rawat inap biasa: tagihan wajar, kode sesuai diagnosis, kelas sesuai hak.
+N09_normal.pdf                     NORMAL  -     Rawat inap biasa: tagihan wajar, kode sesuai diagnosis, kelas sesuai hak.
+N10_normal.pdf                     NORMAL  -     Rawat inap biasa: tagihan wajar, kode sesuai diagnosis, kelas sesuai hak.
+F11_dx_sekunder.pdf                FRAUD   M04   Diagnosis sekunder jauh lebih banyak dari klaim lain dengan kode yang sama (upcoding).
+F12_topup_fiktif.pdf               FRAUD   M17   Top-up special CMG yang hampir tidak pernah ada untuk kode ini (obat/alkes fiktif).
+F13_topup_inflasi.pdf              FRAUD   M07   Top-up special CMG berkali-kali lipat dari yang lazim untuk kode ini (inflated bills).
+F14_prosedur_fiktif.pdf            FRAUD   M14   Kode INA-CBG kelompok prosedur, tetapi tidak ada satu tindakan pun (phantom procedure).
+F15_kode_tidak_sesuai.pdf          FRAUD   M15   Kode INA-CBG yang hampir tidak pernah dipakai untuk diagnosis utama ini.
+F16_kelas_naik.pdf                 FRAUD   M13   Peserta PBI dengan hak Kelas 3 dirawat dan ditagihkan di Kelas 1.
+F17_klaim_ganda.pdf                FRAUD   M11   Rawat inap N01 ditagihkan sekali lagi: pasien, RS, tanggal, kode, dan biaya sama, hanya nomor SEP berbeda (repeat billing). (unggah setelah N01)
+F18_pemecahan_episode.pdf          FRAUD   M09   Pasien N02 masuk lagi sehari setelah pulang, di RS yang sama, dengan diagnosis yang sama: satu perawatan ditagih dua kali (unbundling). (unggah setelah N02)
+F19_readmisi.pdf                   FRAUD   M16   Pasien N03 dirawat inap lagi enam hari setelah pulang, di RS yang sama, dengan diagnosis yang sama (readmisi). (unggah setelah N03)
+F20_los_panjang.pdf                FRAUD   M12   Lama rawat dibuat 13 hari, padahal klaim kode ini biasanya 4 hari (prolonged LOS).

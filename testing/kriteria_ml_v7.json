@@ -1,0 +1,34 @@
+{
+ "ditulis": "2026-11-13, sebelum data generator 2 'halus' dibuat, sebelum kandidat ML v7 dilatih, sebelum generator 4 ditulis, sebelum generator 3 seed gen3-ml7 dibuat",
+ "permintaan": "masukan reviewer (distribution shift): perbaiki data generating process dulu, lalu validasi lintas generator, lalu domain generalization / DRO; untuk laporan hackathon",
+ "data_sintetis_saja": true,
+ "dasar": "testing/diagnosa_shift.py: klaim normal hampir tidak bergeser; klaim fraud G3 jauh lebih mirip normal; 4 sinyal 'sidik jari' G1/G2 (jarak domisili, jeda kunjungan) hilang di G3. Diagnosis itu MELIHAT label G3 (seed gen3-ml5, gen3-ml6), jadi uji jujur utama = generator 4.",
+ "langkah_1_data": {
+  "apa": "generator 2 varian 'halus' (GEN2_HALUS=1): phantom billing, kartu dipinjam, dan cincin kolusi memakai peserta lokal yang punya riwayat, bukan peserta dari wilayah lain / peserta baru",
+  "latih": "peran 'latih', benih 555000, 8 chunk -> .tmp/gen2_ml7h_latih",
+  "dev": "peran 'validasi', benih 666000, 4 chunk -> .tmp/gen2_ml7h_dev",
+  "keputusan": "data ini DITAMBAHKAN ke latih semua kandidat A1-A4 (keputusan desain, bukan hasil seleksi)"
+ },
+ "kandidat": {
+  "A0": "ML v5 beku (pembanding)",
+  "A1": "resep ML v5 (fitur v4, LightGBM x 3 seed, parameter sama) dilatih di G1 + G2 + G2-halus",
+  "A2": "A1 + bobot seimbang per generator (total bobot normal dan fraud sama untuk G1, G2, G2-halus)",
+  "A3": "A1 + group DRO ringan: 2 putaran; bobot grup (generator x famili skema untuk fraud, generator untuk normal) sebanding rata-rata log-loss OOF grup itu, dibatasi 0,5-4",
+  "A4": "A1 + acak konteks: fitur yang tidak stabil antar generator latih (|AUROC_G1 - AUROC_G2| >= 0,10 atau arah berlawanan dengan |AUROC-0,5| >= 0,05 di keduanya; dihitung di data latih saja) diganti nilai baris normal acak dari generator yang sama pada 50% baris fraud latih"
+ },
+ "seleksi": {
+  "ukuran_utama": "leave-one-generator-out: latih di G1 saja -> uji di dev G2 + dev G2-halus; latih di G2 + G2-halus -> uji di dev G1. Recall pada FPR 1% (ambang dari normal set uji itu). Skor kandidat = arah TERBURUK.",
+  "aturan": "pilih skor terburuk tertinggi di antara A1-A4; seri (< 1 poin) -> yang lebih sederhana (urutan A1, A2, A3, A4)",
+  "penjaga": "rata-rata recall dev gabungan (model dilatih di semua generator latih) tidak boleh lebih dari 3 poin di bawah A1; kalau dilanggar, kandidat berikutnya",
+  "catatan_A4": "pada arah LOGO, fitur tidak stabil A4 dihitung tanpa generator yang ditahan: memakai belahan chunk/anggota dari generator latih yang tersisa (paruh A vs paruh B), sehingga tidak melihat label generator uji"
+ },
+ "uji_akhir": {
+  "generator1": "test C2 (dipakai ulang)",
+  "generator2": "gen2 seed 3 (dipakai ulang; varian lama, bukan halus)",
+  "generator3": "seed BARU GEN3_GARAM=gen3-ml7, dinilai SEKALI; catatan: diagnosis melihat mekanik G3, jadi bukan sepenuhnya asing",
+  "generator4": "testing/generator4.py, ditulis oleh agen terpisah yang TIDAK membaca diagnosis, model, fitur, rule engine, atau kriteria ini; dinilai SEKALI; uji utama",
+  "dilaporkan": "SEMUA kandidat A0-A4 + v3 bersih + v4 di keempat generator (tanpa memilih dari hasil uji)"
+ },
+ "adopsi": "ML v7 (= pilihan seleksi) menggantikan ML v5 bila CI bootstrap per peserta untuk selisih recall (ML v7 - ML v5) di generator 4 punya batas bawah > 0, dan prec@2% di generator 4 tidak turun > 2 poin. Kalau tidak, ML v5 tetap; hasil dilaporkan apa adanya.",
+ "cek_overfit": "AUPRC latih in-sample vs OOF per peserta vs dev, sebaran antar-seed, porsi gain per blok"
+}

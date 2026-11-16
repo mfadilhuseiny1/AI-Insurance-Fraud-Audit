@@ -1,0 +1,79 @@
+{
+  "name": "JKN audit copilot, golden set v1",
+  "notes": "Questions an auditor asks the JKN copilot (Bahasa Indonesia). Numbers are checked against live truth: the runner reads them from the same platform API as the signed-in user at run time, so the set stays right when the demo data changes. must_call: at least one of these tools must be called successfully. truth: every value must appear in the answer. must_say_any: at least one phrase must appear. Wording of the questions and expected phrases is to be reviewed by a BPJS auditor.",
+  "questions": [
+    {
+      "id": "kpi-terflag",
+      "q": "Berapa klaim yang saat ini terflag oleh mesin fraud, dan dari total berapa klaim?",
+      "must_call": ["fraud_summary"],
+      "truth": [
+        {"get": "/api/demo/jkn/fraud/overview", "pick": "kpi.klaim_terflag"},
+        {"get": "/api/demo/jkn/fraud/overview", "pick": "kpi.total_klaim"}
+      ]
+    },
+    {
+      "id": "kasus-investigasi",
+      "q": "Ada berapa kasus investigasi fraud saat ini?",
+      "must_call": ["fraud_summary"],
+      "truth": [{"get": "/api/demo/jkn/fraud/overview", "pick": "kpi.kasus_investigasi"}]
+    },
+    {
+      "id": "jaringan-kolusi",
+      "q": "Berapa jaringan kolusi yang terdeteksi oleh mesin fraud?",
+      "must_call": ["fraud_summary"],
+      "truth": [{"get": "/api/demo/jkn/fraud/overview", "pick": "kpi.jaringan_kolusi"}]
+    },
+    {
+      "id": "belum-dibayar",
+      "q": "Berapa klaim yang belum dibayar dan masih melewati skrining pre-payment?",
+      "must_call": ["fraud_summary"],
+      "truth": [{"get": "/api/demo/jkn/fraud/overview", "pick": "kpi.klaim_belum_dibayar"}]
+    },
+    {
+      "id": "temuan-upcoding",
+      "q": "Berapa temuan upcoding yang tercatat di mesin fraud?",
+      "must_call": ["fraud_summary"],
+      "truth": [{"get": "/api/demo/jkn/fraud/overview", "pick": "charts.distribusi_temuan.upcoding"}]
+    },
+    {
+      "id": "cek-klaim-jalur",
+      "q": "Periksa klaim di RS-01 dengan prosedur 87.44, diagnosa J18.9, tarif Rp 3.000.000, dokumen lengkap. Klaim ini masuk jalur apa?",
+      "must_call": ["check_claim"],
+      "truth": [{"post": "/api/demo/jkn/mobile/rs/RS-01/cek", "pick": "jalur",
+                 "body": {"prosedur": "87.44", "diagnosa": "J18.9", "tarif_klaim": 3000000, "severity_diklaim": 1, "severity_didukung": 1,
+                          "dokumen": {"resume_medis": true, "hasil_lab": true, "log_tindakan": true, "kehadiran": true}}}]
+    },
+    {
+      "id": "tipe-objek-klaim",
+      "q": "Jelaskan tipe objek Klaim JKN di Nexus: properti utamanya dan relasinya ke tipe lain.",
+      "must_call": ["describe_object_type"],
+      "must_say_any": ["properti", "relasi"]
+    },
+    {
+      "id": "lineage-hulu",
+      "q": "Dataset faskes_audit berasal dari mana? Telusuri hulunya di Data Lineage.",
+      "must_call": ["trace_lineage"]
+    },
+    {
+      "id": "pipeline-audit",
+      "q": "Pipeline audit JKN punya berapa node, dan apa status build terakhirnya?",
+      "must_call": ["get_pipeline"]
+    },
+    {
+      "id": "recall-model",
+      "q": "Berapa recall model fraud yang sudah dirilis?",
+      "must_call": ["model_benchmark"]
+    },
+    {
+      "id": "fungsi-logic",
+      "q": "Fungsi AIP Logic apa saja yang tersedia untuk JKN?",
+      "must_call": ["list_logic_functions"]
+    },
+    {
+      "id": "faskes-fiktif",
+      "q": "Berapa skor risiko faskes 'RS Fiktif Sejahtera 999'?",
+      "must_call": ["search_nexus", "query_objects", "describe_object_type"],
+      "must_say_any": ["tidak ditemukan", "tidak ada", "tidak tersedia", "tidak menemukan", "belum ada", "tidak terdaftar"]
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+ "dibekukan": "2026-11-13 12:56",
+ "kriteria": "testing/kriteria_ml_v5.json",
+ "kandidat": {
+  "K1g": {
+   "per_dev": {
+    "gen1": {
+     "recall": 0.7546,
+     "fpr": 0.00992
+    },
+    "gen2": {
+     "recall": 0.6456,
+     "fpr": 0.00997
+    }
+   },
+   "rata_recall": 0.7001
+  },
+  "K1s": {
+   "per_dev": {
+    "gen1": {
+     "recall": 0.7429,
+     "fpr": 0.00979
+    },
+    "gen2": {
+     "recall": 0.6185,
+     "fpr": 0.00992
+    }
+   },
+   "rata_recall": 0.6807
+  },
+  "K2g": {
+   "per_dev": {
+    "gen1": {
+     "recall": 0.7479,
+     "fpr": 0.00992
+    },
+    "gen2": {
+     "recall": 0.6479,
+     "fpr": 0.00997
+    }
+   },
+   "rata_recall": 0.6979
+  },
+  "K2s": {
+   "per_dev": {
+    "gen1": {
+     "recall": 0.7513,
+     "fpr": 0.00979
+    },
+    "gen2": {
+     "recall": 0.6185,
+     "fpr": 0.00992
+    }
+   },
+   "rata_recall": 0.6849
+  }
+ },
+ "v4_di_dev": {
+  "gen1": {
+   "recall": 0.7613
+  },
+  "gen2": {
+   "recall": 0.4718
+  }
+ },
+ "pilihan": "K1g",
+ "ambang_periksa": {
+  "global": 0.32967317422235204
+ },
+ "ambang_tahan": {
+  "global": 0.8034062168312456
+ },
+ "kolom": 646,
+ "latih": {
+  "gen1": 89122,
+  "gen2": 40005,
+  "fraud": 5278
+ },
+ "dev": {
+  "gen1": 8152,
+  "gen2": 19996
+ },
+ "cek_overfit": {
+  "auprc_latih_insample": 0.9331,
+  "auprc_latih_oof_per_peserta": 0.8865,
+  "auprc_dev": {
+   "gen1": 0.8519,
+   "gen2": 0.6648
+  },
+  "selisih_insample_oof": 0.0465,
+  "recall_dev_per_seed": {
+   "gen1": [
+    0.7479,
+    0.7429,
+    0.7563
+   ],
+   "gen2": [
+    0.6411,
+    0.6479,
+    0.6524
+   ]
+  },
+  "porsi_gain_blok": {
+   "X1 klaim sendiri": 0.6849,
+   "X1 tetangga graph": 0.1622,
+   "X4 mekanisme": 0.1529,
+   "X5 modus baru": 0.0
+  },
+  "fitur_teratas": [
+   {
+    "fitur": "skor_aturan",
+    "porsi": 0.2335
+   },
+   {
+    "fitur": "skor_tanpa_mitigasi",
+    "porsi": 0.1882
+   },
+   {
+    "fitur": "log_biaya",
+    "porsi": 0.0519
+   },
+   {
+    "fitur": "v4: domisili_fktp_jarak",
+    "porsi": 0.046
+   },
+   {
+    "fitur": "klaim: hari_sejak_sebelumnya",
+    "porsi": 0.04
+   },
+   {
+    "fitur": "klaim: rasio_tagih_tarif",
+    "porsi": 0.0231
+   },
+   {
+    "fitur": "klaim: kunjungan_peserta_faskes",
+    "porsi": 0.0206
+   },
+   {
+    "fitur": "v4: los_rasio_median_kode",
+    "porsi": 0.0183
+   },
+   {
+    "fitur": "klaim: biaya_tagih",
+    "porsi": 0.0178
+   },
+   {
+    "fitur": "v4: topup_rasio_median_kode",
+    "porsi": 0.0174
+   },
+   {
+    "fitur": "v4: dx_sekunder_di_atas_p90",
+    "porsi": 0.0172
+   },
+   {
+    "fitur": "v4: domisili_tinggal_jarak",
+    "porsi": 0.0123
+   },
+   {
+    "fitur": "s:KLAIM_SETELAH_MENINGGAL",
+    "porsi": 0.0121
+   },
+   {
+    "fitur": "s:TIDAK_SESUAI_PESERTA",
+    "porsi": 0.0113
+   },
+   {
+    "fitur": "tetangga RS + kode INA-CBG sama: log_biaya",
+    "porsi": 0.01
+   }
+  ],
+  "peringatan": []
+ }
+}

@@ -1,0 +1,30 @@
+{
+ "ditulis": "2026-11-13, sebelum data gen2 baru dibuat, sebelum kandidat dilatih, sebelum generator 3 seed baru dibuat",
+ "permintaan": "perbaikan ML (Lapis 1) -> ML v5; benchmark di generator 1, 2, 3 dibanding v3 dan v4; generator 3 tetap data asing",
+ "data_sintetis_saja": true,
+ "pool_peserta": "testing/bersih.py: latih (ember 0-13), validasi (14-15), uji_c (16-17), gen2_baru (18-19); tidak ada peserta set uji di data latih",
+ "data": {
+  "latih": "stream + data_v4 chunk 0-7 (generator 1, peserta latih) + generator 2 seed baru BENIH 333000, peserta latih, 8 chunk (.tmp/gen2_ml5_latih)",
+  "dev": "data_v4 chunk 8-9 (generator 1, peserta validasi) + generator 2 seed baru BENIH 444000, peserta validasi, 4 chunk (.tmp/gen2_ml5_dev)",
+  "benchmark": {
+   "generator1": "test C2 (.tmp/uji100k_c2, peserta uji_c) - sudah dipakai menilai v4 dan perbandingan v3/v4; TIDAK dipakai memilih apa pun untuk ML v5",
+   "generator2": "gen2 seed 3 (.tmp/gen2_seed3, peserta gen2_baru) - sudah dipakai menilai v4; TIDAK dipakai memilih apa pun untuk ML v5",
+   "generator3": "generator 3 seed BARU GEN3_GARAM=gen3-ml5 (.tmp/gen3_ml5), dibuat SETELAH ML v5 dibekukan, dinilai SEKALI"
+  }
+ },
+ "kandidat": {
+  "K1": "fitur v4 (X1 + X4), LightGBM x 3 seed (param v3 Model 1), latih generator 1 + generator 2",
+  "K2": "K1 + X5 (fitur modus Permenkes dari peserta/RS/tanggal/kode: kelangkaan kode untuk jenis kelamin & umur, kode mustahil secara demografi, sesi kode sama 14/30 hari, hari sejak kode sama, lonjakan RS-kode, peserta di banyak RS 7 hari, pasangan RS berbagi peserta 7 hari)",
+  "ambang": "global (FPR 1% di normal dev) ATAU per segmen kunjungan pertama vs pasien lama (masing-masing FPR 1% di normal dev segmen itu)"
+ },
+ "pemilihan": {
+  "ukuran": "rata-rata recall pada FPR 1% di dua set dev (generator 1 dev, generator 2 dev), ambang disetel di normal dev masing-masing",
+  "aturan": "tertinggi; selisih < 1 poin = seri -> yang lebih sederhana (K1 < K2; global < segmen)",
+  "dibekukan": "model + ambang PERIKSA (FPR 1%) dan TAHAN (FPR 0,1%) dari normal dev gabungan, di testing/model_ml_v5"
+ },
+ "laporan_benchmark": "per generator: recall, FPR, precision mentah, precision pada fraud 2%, AUPRC, FPR kunjungan pertama vs pasien lama, recall per skema, CI bootstrap per peserta untuk selisih ML v5 - v4; v3 lama dan v3 bersih pada ambang sendiri DAN pada FPR yang disamakan (pembanding)",
+ "jujur": "generator 1 & 2 menjadi 'dikenal' bagi ML v5 (dilatih dengan keduanya); generator 3 satu-satunya data asing. Benchmark generator 1/2 memakai set yang sudah pernah dilihat (bukan untuk memilih).",
+ "perubahan_sebelum_hasil": [
+  "generator 3 seed baru (gen3-ml5) dibuat paralel SEBELUM ML v5 dibekukan, demi kecepatan (permintaan pengguna); tidak ada skor yang dihitung atau dibaca sebelum pembekuan, dan benchmark tetap dijaga sekali jalan (testing/model_ml_v5/benchmark_sekali.txt)"
+ ]
+}

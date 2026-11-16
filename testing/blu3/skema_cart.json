@@ -1,0 +1,1352 @@
+{
+ "Provinsi (BPJS)": {
+  "id": "ot-677c2a65dd26",
+  "pk": "provinsi_kode",
+  "dataset_id": "2d22cefc46484151",
+  "dataset": "provinsi.parquet",
+  "kolom": {
+   "provinsi_kode": "provinsi_kode",
+   "provinsi": "provinsi",
+   "lokasi": "lokasi",
+   "kabkota": "kabkota",
+   "ibukota": "ibukota",
+   "klaim_fkrtl": "klaim_fkrtl",
+   "peserta_fkrtl": "peserta_fkrtl",
+   "biaya_tagih_rp": "biaya_tagih_rp",
+   "biaya_verifikasi_rp": "biaya_verifikasi_rp",
+   "pct_readmisi_30": "pct_readmisi_30",
+   "klaim_berisiko": "klaim_berisiko"
+  },
+  "props": [
+   {
+    "api": "provinsi_kode",
+    "type": "integer"
+   },
+   {
+    "api": "provinsi",
+    "type": "string"
+   },
+   {
+    "api": "kabkota",
+    "type": "long"
+   },
+   {
+    "api": "ibukota",
+    "type": "string"
+   },
+   {
+    "api": "lokasi",
+    "type": "geopoint"
+   },
+   {
+    "api": "klaim_fkrtl",
+    "type": "long"
+   },
+   {
+    "api": "peserta_fkrtl",
+    "type": "long"
+   },
+   {
+    "api": "biaya_tagih_rp",
+    "type": "double"
+   },
+   {
+    "api": "biaya_verifikasi_rp",
+    "type": "double"
+   },
+   {
+    "api": "pct_readmisi_30",
+    "type": "double"
+   },
+   {
+    "api": "klaim_berisiko",
+    "type": "long"
+   }
+  ]
+ },
+ "Kabupaten/Kota (BPJS)": {
+  "id": "ot-38ff2abfae40",
+  "pk": "kabkota_kode",
+  "dataset_id": "211e9d8e2017470f",
+  "dataset": "kabkota.parquet",
+  "kolom": {
+   "kabkota_kode": "kabkota_kode",
+   "kabkota": "kabkota",
+   "provinsi_kode": "provinsi_kode",
+   "provinsi": "provinsi",
+   "klaim_fkrtl": "klaim_fkrtl",
+   "klaim_inap": "klaim_inap",
+   "peserta_fkrtl": "peserta_fkrtl",
+   "biaya_tagih_rp": "biaya_tagih_rp",
+   "biaya_verifikasi_rp": "biaya_verifikasi_rp",
+   "pct_readmisi_30": "pct_readmisi_30",
+   "calon_klaim_ganda": "calon_klaim_ganda",
+   "selisih_verifikasi": "selisih_verifikasi",
+   "los_ekstrem": "los_ekstrem",
+   "klaim_berisiko": "klaim_berisiko",
+   "profil_faskes": "profil_faskes"
+  },
+  "props": [
+   {
+    "api": "kabkota_kode",
+    "type": "integer"
+   },
+   {
+    "api": "kabkota",
+    "type": "string"
+   },
+   {
+    "api": "provinsi_kode",
+    "type": "integer"
+   },
+   {
+    "api": "provinsi",
+    "type": "string"
+   },
+   {
+    "api": "klaim_fkrtl",
+    "type": "long"
+   },
+   {
+    "api": "klaim_inap",
+    "type": "long"
+   },
+   {
+    "api": "peserta_fkrtl",
+    "type": "long"
+   },
+   {
+    "api": "biaya_tagih_rp",
+    "type": "double"
+   },
+   {
+    "api": "biaya_verifikasi_rp",
+    "type": "double"
+   },
+   {
+    "api": "pct_readmisi_30",
+    "type": "double"
+   },
+   {
+    "api": "calon_klaim_ganda",
+    "type": "long"
+   },
+   {
+    "api": "selisih_verifikasi",
+    "type": "long"
+   },
+   {
+    "api": "los_ekstrem",
+    "type": "long"
+   },
+   {
+    "api": "klaim_berisiko",
+    "type": "long"
+   },
+   {
+    "api": "profil_faskes",
+    "type": "long"
+   }
+  ]
+ },
+ "Profil Faskes (BPJS)": {
+  "id": "ot-6773447b8ad0",
+  "pk": "faskes_profil_id",
+  "dataset_id": "1e1c111a13de4e35",
+  "dataset": "profil_faskes.parquet",
+  "kolom": {
+   "faskes_profil_id": "faskes_profil_id",
+   "nama_profil": "nama_profil",
+   "tingkat": "tingkat",
+   "kabkota_kode": "kabkota_kode",
+   "kabkota": "kabkota",
+   "provinsi_kode": "provinsi_kode",
+   "provinsi": "provinsi",
+   "kepemilikan": "kepemilikan",
+   "jenis": "jenis",
+   "tipe": "tipe",
+   "kunjungan": "kunjungan",
+   "klaim_fkrtl": "klaim_fkrtl",
+   "klaim_inap": "klaim_inap",
+   "biaya_tagih_rp": "biaya_tagih_rp",
+   "biaya_verifikasi_rp": "biaya_verifikasi_rp",
+   "pct_readmisi_30": "pct_readmisi_30",
+   "calon_klaim_ganda": "calon_klaim_ganda",
+   "selisih_verifikasi": "selisih_verifikasi",
+   "los_ekstrem": "los_ekstrem",
+   "klaim_berisiko": "klaim_berisiko",
+   "klaim_inap_berat": "klaim_inap_berat",
+   "pct_keparahan_berat": "pct_keparahan_berat"
+  },
+  "props": [
+   {
+    "api": "faskes_profil_id",
+    "type": "string"
+   },
+   {
+    "api": "nama_profil",
+    "type": "string"
+   },
+   {
+    "api": "tingkat",
+    "type": "string"
+   },
+   {
+    "api": "kabkota_kode",
+    "type": "integer"
+   },
+   {
+    "api": "kabkota",
+    "type": "string"
+   },
+   {
+    "api": "provinsi_kode",
+    "type": "integer"
+   },
+   {
+    "api": "provinsi",
+    "type": "string"
+   },
+   {
+    "api": "kepemilikan",
+    "type": "string"
+   },
+   {
+    "api": "jenis",
+    "type": "string"
+   },
+   {
+    "api": "tipe",
+    "type": "string"
+   },
+   {
+    "api": "kunjungan",
+    "type": "long"
+   },
+   {
+    "api": "klaim_fkrtl",
+    "type": "long"
+   },
+   {
+    "api": "klaim_inap",
+    "type": "long"
+   },
+   {
+    "api": "biaya_tagih_rp",
+    "type": "double"
+   },
+   {
+    "api": "biaya_verifikasi_rp",
+    "type": "double"
+   },
+   {
+    "api": "pct_readmisi_30",
+    "type": "double"
+   },
+   {
+    "api": "calon_klaim_ganda",
+    "type": "long"
+   },
+   {
+    "api": "selisih_verifikasi",
+    "type": "long"
+   },
+   {
+    "api": "los_ekstrem",
+    "type": "long"
+   },
+   {
+    "api": "klaim_berisiko",
+    "type": "long"
+   },
+   {
+    "api": "klaim_inap_berat",
+    "type": "long"
+   },
+   {
+    "api": "pct_keparahan_berat",
+    "type": "double"
+   },
+   {
+    "api": "status_audit",
+    "type": "string"
+   },
+   {
+    "api": "prioritas_audit",
+    "type": "string"
+   },
+   {
+    "api": "tanggal_audit",
+    "type": "date"
+   },
+   {
+    "api": "catatan_audit",
+    "type": "string"
+   }
+  ]
+ },
+ "Indikator INA-CBG (BPJS)": {
+  "id": "ot-68a4de49e61d",
+  "pk": "indikator_id",
+  "dataset_id": "9cbe8373657f4542",
+  "dataset": "indikator_peer.parquet",
+  "kolom": {
+   "indikator_id": "indikator_id",
+   "inacbg_deskripsi": "inacbg_deskripsi",
+   "edisi": "edisi",
+   "inacbg_kode": "inacbg_kode",
+   "cmg": "cmg",
+   "tipe_kasus": "tipe_kasus",
+   "keparahan": "keparahan",
+   "tipe_fkrtl": "tipe_fkrtl",
+   "regional_tarif": "regional_tarif",
+   "klaim": "klaim",
+   "klaim_inap": "klaim_inap",
+   "biaya_tagih_rp": "biaya_tagih_rp",
+   "biaya_verifikasi_rp": "biaya_verifikasi_rp",
+   "rata_biaya_tagih_rp": "rata_biaya_tagih_rp",
+   "biaya_tagih_p50_rp": "biaya_tagih_p50_rp",
+   "los_inap_p50": "los_inap_p50",
+   "los_inap_p90": "los_inap_p90",
+   "pct_readmisi_30": "pct_readmisi_30",
+   "pct_calon_klaim_ganda": "pct_calon_klaim_ganda",
+   "pct_los_ekstrem": "pct_los_ekstrem",
+   "pct_selisih_verifikasi": "pct_selisih_verifikasi"
+  },
+  "props": [
+   {
+    "api": "indikator_id",
+    "type": "string"
+   },
+   {
+    "api": "edisi",
+    "type": "string"
+   },
+   {
+    "api": "inacbg_kode",
+    "type": "string"
+   },
+   {
+    "api": "inacbg_deskripsi",
+    "type": "string"
+   },
+   {
+    "api": "cmg",
+    "type": "string"
+   },
+   {
+    "api": "tipe_kasus",
+    "type": "string"
+   },
+   {
+    "api": "keparahan",
+    "type": "string"
+   },
+   {
+    "api": "tipe_fkrtl",
+    "type": "string"
+   },
+   {
+    "api": "regional_tarif",
+    "type": "string"
+   },
+   {
+    "api": "klaim",
+    "type": "long"
+   },
+   {
+    "api": "klaim_inap",
+    "type": "long"
+   },
+   {
+    "api": "biaya_tagih_rp",
+    "type": "double"
+   },
+   {
+    "api": "biaya_verifikasi_rp",
+    "type": "double"
+   },
+   {
+    "api": "rata_biaya_tagih_rp",
+    "type": "double"
+   },
+   {
+    "api": "biaya_tagih_p50_rp",
+    "type": "double"
+   },
+   {
+    "api": "los_inap_p50",
+    "type": "double"
+   },
+   {
+    "api": "los_inap_p90",
+    "type": "double"
+   },
+   {
+    "api": "pct_readmisi_30",
+    "type": "double"
+   },
+   {
+    "api": "pct_calon_klaim_ganda",
+    "type": "double"
+   },
+   {
+    "api": "pct_los_ekstrem",
+    "type": "double"
+   },
+   {
+    "api": "pct_selisih_verifikasi",
+    "type": "double"
+   },
+   {
+    "api": "status_pemantauan",
+    "type": "string"
+   },
+   {
+    "api": "catatan_pemantauan",
+    "type": "string"
+   }
+  ]
+ },
+ "Klaim Berisiko (BPJS)": {
+  "id": "ot-c56b42f023d4",
+  "pk": "klaim_id",
+  "dataset_id": "187af224f2cc41dd",
+  "dataset": "klaim_berisiko.parquet",
+  "kolom": {
+   "klaim_id": "klaim_id",
+   "edisi": "edisi",
+   "kunjungan_fkrtl_id": "kunjungan_fkrtl_id",
+   "peserta_key": "peserta_key",
+   "peserta_id": "peserta_id",
+   "tgl_datang": "tgl_datang",
+   "tgl_pulang": "tgl_pulang",
+   "bulan": "bulan",
+   "kabkota_kode": "kabkota_kode",
+   "kabkota": "kabkota",
+   "provinsi_kode": "provinsi_kode",
+   "provinsi": "provinsi",
+   "faskes_profil_id": "faskes_profil_id",
+   "indikasi_utama": "indikasi_utama",
+   "tipe_fkrtl": "tipe_fkrtl",
+   "kepemilikan_fkrtl": "kepemilikan_fkrtl",
+   "kelas_rawat": "kelas_rawat",
+   "poli": "poli",
+   "inacbg_kode": "inacbg_kode",
+   "inacbg_keparahan": "inacbg_keparahan",
+   "regional_tarif": "regional_tarif",
+   "tahun_tarif": "tahun_tarif",
+   "dx_primer_icd3": "dx_primer_icd3",
+   "dx_primer_nama": "dx_primer_nama",
+   "rawat_inap": "rawat_inap",
+   "los_hari": "los_hari",
+   "tarif_inacbg_rp": "tarif_inacbg_rp",
+   "topup_subakut_rp": "topup_subakut_rp",
+   "topup_khusus_rp": "topup_khusus_rp",
+   "biaya_tagih_rp": "biaya_tagih_rp",
+   "biaya_verifikasi_rp": "biaya_verifikasi_rp",
+   "selisih_rp": "selisih_rp",
+   "sisa_di_luar_tarif_rp": "sisa_di_luar_tarif_rp",
+   "readmisi_30": "readmisi_30",
+   "flag_calon_klaim_ganda": "flag_calon_klaim_ganda",
+   "flag_selisih_verifikasi": "flag_selisih_verifikasi",
+   "flag_los_ekstrem": "flag_los_ekstrem",
+   "indikator_id": "indikator_id",
+   "peer_klaim": "peer_klaim",
+   "peer_biaya_p50_rp": "peer_biaya_p50_rp",
+   "peer_pct_topup_khusus": "peer_pct_topup_khusus",
+   "peer_los_inap_p90": "peer_los_inap_p90",
+   "rasio_biaya_peer": "rasio_biaya_peer",
+   "jumlah_indikasi": "jumlah_indikasi",
+   "skor_risiko": "skor_risiko",
+   "alasan_risiko": "alasan_risiko"
+  },
+  "props": [
+   {
+    "api": "klaim_id",
+    "type": "string"
+   },
+   {
+    "api": "edisi",
+    "type": "string"
+   },
+   {
+    "api": "kunjungan_fkrtl_id",
+    "type": "string"
+   },
+   {
+    "api": "peserta_key",
+    "type": "string"
+   },
+   {
+    "api": "peserta_id",
+    "type": "string"
+   },
+   {
+    "api": "tgl_datang",
+    "type": "date"
+   },
+   {
+    "api": "tgl_pulang",
+    "type": "date"
+   },
+   {
+    "api": "bulan",
+    "type": "string"
+   },
+   {
+    "api": "kabkota_kode",
+    "type": "integer"
+   },
+   {
+    "api": "kabkota",
+    "type": "string"
+   },
+   {
+    "api": "provinsi_kode",
+    "type": "integer"
+   },
+   {
+    "api": "provinsi",
+    "type": "string"
+   },
+   {
+    "api": "faskes_profil_id",
+    "type": "string"
+   },
+   {
+    "api": "indikasi_utama",
+    "type": "string"
+   },
+   {
+    "api": "tipe_fkrtl",
+    "type": "string"
+   },
+   {
+    "api": "kepemilikan_fkrtl",
+    "type": "string"
+   },
+   {
+    "api": "kelas_rawat",
+    "type": "string"
+   },
+   {
+    "api": "poli",
+    "type": "string"
+   },
+   {
+    "api": "inacbg_kode",
+    "type": "string"
+   },
+   {
+    "api": "inacbg_keparahan",
+    "type": "string"
+   },
+   {
+    "api": "regional_tarif",
+    "type": "string"
+   },
+   {
+    "api": "tahun_tarif",
+    "type": "integer"
+   },
+   {
+    "api": "dx_primer_icd3",
+    "type": "string"
+   },
+   {
+    "api": "dx_primer_nama",
+    "type": "string"
+   },
+   {
+    "api": "rawat_inap",
+    "type": "boolean"
+   },
+   {
+    "api": "los_hari",
+    "type": "long"
+   },
+   {
+    "api": "tarif_inacbg_rp",
+    "type": "double"
+   },
+   {
+    "api": "topup_subakut_rp",
+    "type": "double"
+   },
+   {
+    "api": "topup_khusus_rp",
+    "type": "double"
+   },
+   {
+    "api": "biaya_tagih_rp",
+    "type": "double"
+   },
+   {
+    "api": "biaya_verifikasi_rp",
+    "type": "double"
+   },
+   {
+    "api": "selisih_rp",
+    "type": "double"
+   },
+   {
+    "api": "sisa_di_luar_tarif_rp",
+    "type": "double"
+   },
+   {
+    "api": "readmisi_30",
+    "type": "boolean"
+   },
+   {
+    "api": "flag_calon_klaim_ganda",
+    "type": "boolean"
+   },
+   {
+    "api": "flag_selisih_verifikasi",
+    "type": "boolean"
+   },
+   {
+    "api": "flag_los_ekstrem",
+    "type": "boolean"
+   },
+   {
+    "api": "indikator_id",
+    "type": "string"
+   },
+   {
+    "api": "peer_klaim",
+    "type": "long"
+   },
+   {
+    "api": "peer_biaya_p50_rp",
+    "type": "double"
+   },
+   {
+    "api": "peer_pct_topup_khusus",
+    "type": "double"
+   },
+   {
+    "api": "peer_los_inap_p90",
+    "type": "double"
+   },
+   {
+    "api": "rasio_biaya_peer",
+    "type": "double"
+   },
+   {
+    "api": "jumlah_indikasi",
+    "type": "integer"
+   },
+   {
+    "api": "skor_risiko",
+    "type": "integer"
+   },
+   {
+    "api": "alasan_risiko",
+    "type": "string"
+   },
+   {
+    "api": "status_verifikasi",
+    "type": "string"
+   },
+   {
+    "api": "hasil_verifikasi",
+    "type": "string"
+   },
+   {
+    "api": "catatan_verifikasi",
+    "type": "string"
+   },
+   {
+    "api": "tanggal_keputusan",
+    "type": "date"
+   }
+  ]
+ },
+ "Alur Rujukan (BPJS)": {
+  "id": "ot-41d1ea0c01a1",
+  "pk": "alur_rujukan_id",
+  "dataset_id": "51e4037fde5a4c9e",
+  "dataset": "alur_rujukan.parquet",
+  "kolom": {
+   "alur_rujukan_id": "alur_rujukan_id",
+   "edisi": "edisi",
+   "kabkota_asal_kode": "kabkota_asal_kode",
+   "kabkota_asal": "kabkota_asal",
+   "provinsi_asal": "provinsi_asal",
+   "kabkota_tujuan_kode": "kabkota_tujuan_kode",
+   "kabkota_tujuan": "kabkota_tujuan",
+   "provinsi_tujuan": "provinsi_tujuan",
+   "tipe_faskes_tujuan": "tipe_faskes_tujuan",
+   "rujukan": "rujukan",
+   "median_hari_ke_fkrtl": "median_hari_ke_fkrtl",
+   "pct_dx_sama": "pct_dx_sama",
+   "lintas_kabkota": "lintas_kabkota",
+   "lintas_provinsi": "lintas_provinsi"
+  },
+  "props": [
+   {
+    "api": "alur_rujukan_id",
+    "type": "string"
+   },
+   {
+    "api": "edisi",
+    "type": "string"
+   },
+   {
+    "api": "kabkota_asal_kode",
+    "type": "integer"
+   },
+   {
+    "api": "kabkota_asal",
+    "type": "string"
+   },
+   {
+    "api": "provinsi_asal",
+    "type": "string"
+   },
+   {
+    "api": "kabkota_tujuan_kode",
+    "type": "integer"
+   },
+   {
+    "api": "kabkota_tujuan",
+    "type": "string"
+   },
+   {
+    "api": "provinsi_tujuan",
+    "type": "string"
+   },
+   {
+    "api": "tipe_faskes_tujuan",
+    "type": "string"
+   },
+   {
+    "api": "rujukan",
+    "type": "long"
+   },
+   {
+    "api": "median_hari_ke_fkrtl",
+    "type": "double"
+   },
+   {
+    "api": "pct_dx_sama",
+    "type": "double"
+   },
+   {
+    "api": "lintas_kabkota",
+    "type": "integer"
+   },
+   {
+    "api": "lintas_provinsi",
+    "type": "integer"
+   }
+  ]
+ },
+ "Klaim Bulanan Provinsi (BPJS)": {
+  "id": "ot-44b846f283ef",
+  "pk": "klaim_bulanan_id",
+  "dataset_id": "f92b6b05647a4370",
+  "dataset": "klaim_bulanan_provinsi.parquet",
+  "kolom": {
+   "klaim_bulanan_id": "klaim_bulanan_id",
+   "edisi": "edisi",
+   "bulan": "bulan",
+   "provinsi_kode": "provinsi_kode",
+   "provinsi": "provinsi",
+   "klaim": "klaim",
+   "klaim_inap": "klaim_inap",
+   "peserta": "peserta",
+   "biaya_tagih_rp": "biaya_tagih_rp",
+   "biaya_verifikasi_rp": "biaya_verifikasi_rp",
+   "rata_biaya_tagih_rp": "rata_biaya_tagih_rp",
+   "rata_los_inap_hari": "rata_los_inap_hari",
+   "readmisi_30": "readmisi_30",
+   "pct_readmisi_30": "pct_readmisi_30",
+   "calon_klaim_ganda": "calon_klaim_ganda",
+   "selisih_verifikasi": "selisih_verifikasi",
+   "los_ekstrem": "los_ekstrem"
+  },
+  "props": [
+   {
+    "api": "klaim_bulanan_id",
+    "type": "string"
+   },
+   {
+    "api": "edisi",
+    "type": "string"
+   },
+   {
+    "api": "bulan",
+    "type": "string"
+   },
+   {
+    "api": "provinsi_kode",
+    "type": "integer"
+   },
+   {
+    "api": "provinsi",
+    "type": "string"
+   },
+   {
+    "api": "klaim",
+    "type": "long"
+   },
+   {
+    "api": "klaim_inap",
+    "type": "long"
+   },
+   {
+    "api": "peserta",
+    "type": "long"
+   },
+   {
+    "api": "biaya_tagih_rp",
+    "type": "double"
+   },
+   {
+    "api": "biaya_verifikasi_rp",
+    "type": "double"
+   },
+   {
+    "api": "rata_biaya_tagih_rp",
+    "type": "double"
+   },
+   {
+    "api": "rata_los_inap_hari",
+    "type": "double"
+   },
+   {
+    "api": "readmisi_30",
+    "type": "long"
+   },
+   {
+    "api": "pct_readmisi_30",
+    "type": "double"
+   },
+   {
+    "api": "calon_klaim_ganda",
+    "type": "long"
+   },
+   {
+    "api": "selisih_verifikasi",
+    "type": "long"
+   },
+   {
+    "api": "los_ekstrem",
+    "type": "long"
+   }
+  ]
+ },
+ "Klaim per Kab/Kota (BPJS)": {
+  "id": "ot-555abade794b",
+  "pk": "klaim_kabkota_id",
+  "dataset_id": "8865a9a22cc44e03",
+  "dataset": "klaim_kabkota.parquet",
+  "kolom": {
+   "klaim_kabkota_id": "klaim_kabkota_id",
+   "edisi": "edisi",
+   "kabkota_kode": "kabkota_kode",
+   "kabkota": "kabkota",
+   "provinsi_kode": "provinsi_kode",
+   "provinsi": "provinsi",
+   "tipe_fkrtl": "tipe_fkrtl",
+   "klaim": "klaim",
+   "klaim_inap": "klaim_inap",
+   "peserta": "peserta",
+   "biaya_tagih_rp": "biaya_tagih_rp",
+   "biaya_verifikasi_rp": "biaya_verifikasi_rp",
+   "rata_biaya_tagih_rp": "rata_biaya_tagih_rp",
+   "rata_los_inap_hari": "rata_los_inap_hari",
+   "readmisi_30": "readmisi_30",
+   "pct_readmisi_30": "pct_readmisi_30",
+   "calon_klaim_ganda": "calon_klaim_ganda",
+   "pct_calon_klaim_ganda": "pct_calon_klaim_ganda",
+   "selisih_verifikasi": "selisih_verifikasi",
+   "los_ekstrem": "los_ekstrem"
+  },
+  "props": [
+   {
+    "api": "klaim_kabkota_id",
+    "type": "string"
+   },
+   {
+    "api": "edisi",
+    "type": "string"
+   },
+   {
+    "api": "kabkota_kode",
+    "type": "integer"
+   },
+   {
+    "api": "kabkota",
+    "type": "string"
+   },
+   {
+    "api": "provinsi_kode",
+    "type": "integer"
+   },
+   {
+    "api": "provinsi",
+    "type": "string"
+   },
+   {
+    "api": "tipe_fkrtl",
+    "type": "string"
+   },
+   {
+    "api": "klaim",
+    "type": "long"
+   },
+   {
+    "api": "klaim_inap",
+    "type": "long"
+   },
+   {
+    "api": "peserta",
+    "type": "long"
+   },
+   {
+    "api": "biaya_tagih_rp",
+    "type": "double"
+   },
+   {
+    "api": "biaya_verifikasi_rp",
+    "type": "double"
+   },
+   {
+    "api": "rata_biaya_tagih_rp",
+    "type": "double"
+   },
+   {
+    "api": "rata_los_inap_hari",
+    "type": "double"
+   },
+   {
+    "api": "readmisi_30",
+    "type": "long"
+   },
+   {
+    "api": "pct_readmisi_30",
+    "type": "double"
+   },
+   {
+    "api": "calon_klaim_ganda",
+    "type": "long"
+   },
+   {
+    "api": "pct_calon_klaim_ganda",
+    "type": "double"
+   },
+   {
+    "api": "selisih_verifikasi",
+    "type": "long"
+   },
+   {
+    "api": "los_ekstrem",
+    "type": "long"
+   }
+  ]
+ },
+ "Peserta Klaim Berisiko (BPJS)": {
+  "id": "ot-1124d9158068",
+  "pk": "peserta_key",
+  "dataset_id": "6cc8e3ea2df1455d",
+  "dataset": "peserta_klaim_berisiko.parquet",
+  "kolom": {
+   "peserta_key": "peserta_key",
+   "edisi": "edisi",
+   "peserta_id": "peserta_id",
+   "jenis_kelamin": "jenis_kelamin",
+   "usia_akhir_2024": "usia_akhir_2024",
+   "hubungan_keluarga": "hubungan_keluarga",
+   "segmen": "segmen",
+   "kelas_rawat": "kelas_rawat",
+   "status_kepesertaan": "status_kepesertaan",
+   "provinsi_tinggal": "provinsi_tinggal",
+   "kabkota_tinggal_kode": "kabkota_tinggal_kode",
+   "kabkota_tinggal": "kabkota_tinggal",
+   "jenis_fktp_terdaftar": "jenis_fktp_terdaftar",
+   "kabkota_fktp_terdaftar_kode": "kabkota_fktp_terdaftar_kode",
+   "flag_tgl_lahir_pengganti": "flag_tgl_lahir_pengganti",
+   "klaim_berisiko": "klaim_berisiko",
+   "biaya_klaim_berisiko_rp": "biaya_klaim_berisiko_rp",
+   "skor_risiko_maks": "skor_risiko_maks"
+  },
+  "props": [
+   {
+    "api": "peserta_key",
+    "type": "string"
+   },
+   {
+    "api": "edisi",
+    "type": "string"
+   },
+   {
+    "api": "peserta_id",
+    "type": "string"
+   },
+   {
+    "api": "jenis_kelamin",
+    "type": "string"
+   },
+   {
+    "api": "usia_akhir_2024",
+    "type": "long"
+   },
+   {
+    "api": "hubungan_keluarga",
+    "type": "string"
+   },
+   {
+    "api": "segmen",
+    "type": "string"
+   },
+   {
+    "api": "kelas_rawat",
+    "type": "string"
+   },
+   {
+    "api": "status_kepesertaan",
+    "type": "string"
+   },
+   {
+    "api": "provinsi_tinggal",
+    "type": "string"
+   },
+   {
+    "api": "kabkota_tinggal_kode",
+    "type": "integer"
+   },
+   {
+    "api": "kabkota_tinggal",
+    "type": "string"
+   },
+   {
+    "api": "jenis_fktp_terdaftar",
+    "type": "string"
+   },
+   {
+    "api": "kabkota_fktp_terdaftar_kode",
+    "type": "integer"
+   },
+   {
+    "api": "flag_tgl_lahir_pengganti",
+    "type": "boolean"
+   },
+   {
+    "api": "klaim_berisiko",
+    "type": "long"
+   },
+   {
+    "api": "biaya_klaim_berisiko_rp",
+    "type": "double"
+   },
+   {
+    "api": "skor_risiko_maks",
+    "type": "integer"
+   }
+  ]
+ },
+ "Kunjungan FKTP Bulanan (BPJS)": {
+  "id": "ot-dce8cf5b6784",
+  "pk": "kunjungan_fktp_bulanan_id",
+  "dataset_id": "12f54792dd9a4313",
+  "dataset": "kunjungan_fktp_provinsi.parquet",
+  "kolom": {
+   "kunjungan_fktp_bulanan_id": "kunjungan_fktp_bulanan_id",
+   "edisi": "edisi",
+   "bulan": "bulan",
+   "provinsi_kode": "provinsi_kode",
+   "provinsi": "provinsi",
+   "jenis_fktp": "jenis_fktp",
+   "kunjungan": "kunjungan",
+   "peserta": "peserta",
+   "kunjungan_sakit": "kunjungan_sakit",
+   "rujuk_lanjut": "rujuk_lanjut",
+   "pct_rujuk_lanjut": "pct_rujuk_lanjut"
+  },
+  "props": [
+   {
+    "api": "kunjungan_fktp_bulanan_id",
+    "type": "string"
+   },
+   {
+    "api": "edisi",
+    "type": "string"
+   },
+   {
+    "api": "bulan",
+    "type": "string"
+   },
+   {
+    "api": "provinsi_kode",
+    "type": "integer"
+   },
+   {
+    "api": "provinsi",
+    "type": "string"
+   },
+   {
+    "api": "jenis_fktp",
+    "type": "string"
+   },
+   {
+    "api": "kunjungan",
+    "type": "long"
+   },
+   {
+    "api": "peserta",
+    "type": "long"
+   },
+   {
+    "api": "kunjungan_sakit",
+    "type": "long"
+   },
+   {
+    "api": "rujuk_lanjut",
+    "type": "long"
+   },
+   {
+    "api": "pct_rujuk_lanjut",
+    "type": "double"
+   }
+  ]
+ },
+ "Skor Risiko Klaim ML (BPJS)": {
+  "id": "ot-4c9e1d581d3f",
+  "pk": "klaim_id",
+  "dataset_id": "634c9286930c44fe",
+  "dataset": "skor_risiko_klaim_ml.parquet",
+  "kolom": {
+   "klaim_id": "klaim_id",
+   "judul": "judul",
+   "faskes_profil_id": "faskes_profil_id",
+   "tgl_datang": "tgl_datang",
+   "dx_primer_icd3": "dx_primer_icd3",
+   "inacbg_kode": "inacbg_kode",
+   "tingkat_pelayanan": "tingkat_pelayanan",
+   "jenis_fkrtl": "jenis_fkrtl",
+   "tipe_fkrtl": "tipe_fkrtl",
+   "provinsi_kode": "provinsi_kode",
+   "biaya_tagih": "biaya_tagih",
+   "tarif_inacbg": "tarif_inacbg",
+   "los": "los",
+   "inacbg_keparahan": "inacbg_keparahan",
+   "segmen": "segmen",
+   "segmen_model": "segmen_model",
+   "risiko": "risiko",
+   "peringkat_segmen": "peringkat_segmen",
+   "ditandai": "ditandai",
+   "tingkat_risiko": "tingkat_risiko",
+   "sudah_dikoreksi": "sudah_dikoreksi",
+   "lolos_verifikasi_berisiko": "lolos_verifikasi_berisiko",
+   "risiko_pct": "risiko_pct",
+   "alasan_utama": "alasan_utama",
+   "alasan_json": "alasan_json",
+   "nama_profil": "nama_profil",
+   "provinsi": "provinsi"
+  },
+  "props": [
+   {
+    "api": "klaim_id",
+    "type": "string"
+   },
+   {
+    "api": "judul",
+    "type": "string"
+   },
+   {
+    "api": "faskes_profil_id",
+    "type": "string"
+   },
+   {
+    "api": "tgl_datang",
+    "type": "date"
+   },
+   {
+    "api": "dx_primer_icd3",
+    "type": "string"
+   },
+   {
+    "api": "inacbg_kode",
+    "type": "string"
+   },
+   {
+    "api": "tingkat_pelayanan",
+    "type": "string"
+   },
+   {
+    "api": "jenis_fkrtl",
+    "type": "string"
+   },
+   {
+    "api": "tipe_fkrtl",
+    "type": "string"
+   },
+   {
+    "api": "provinsi_kode",
+    "type": "integer"
+   },
+   {
+    "api": "biaya_tagih",
+    "type": "double"
+   },
+   {
+    "api": "tarif_inacbg",
+    "type": "double"
+   },
+   {
+    "api": "los",
+    "type": "double"
+   },
+   {
+    "api": "inacbg_keparahan",
+    "type": "string"
+   },
+   {
+    "api": "segmen",
+    "type": "string"
+   },
+   {
+    "api": "segmen_model",
+    "type": "string"
+   },
+   {
+    "api": "risiko",
+    "type": "double"
+   },
+   {
+    "api": "peringkat_segmen",
+    "type": "long"
+   },
+   {
+    "api": "ditandai",
+    "type": "boolean"
+   },
+   {
+    "api": "tingkat_risiko",
+    "type": "string"
+   },
+   {
+    "api": "sudah_dikoreksi",
+    "type": "boolean"
+   },
+   {
+    "api": "lolos_verifikasi_berisiko",
+    "type": "boolean"
+   },
+   {
+    "api": "risiko_pct",
+    "type": "double"
+   },
+   {
+    "api": "alasan_utama",
+    "type": "string"
+   },
+   {
+    "api": "alasan_json",
+    "type": "string"
+   },
+   {
+    "api": "nama_profil",
+    "type": "string"
+   },
+   {
+    "api": "provinsi",
+    "type": "string"
+   }
+  ]
+ },
+ "Risiko Faskes ML (BPJS)": {
+  "id": "ot-602137e1c7e1",
+  "pk": "faskes_profil_id",
+  "dataset_id": "4b727ca5d20b4952",
+  "dataset": "risiko_faskes_ml.parquet",
+  "kolom": {
+   "faskes_profil_id": "faskes_profil_id",
+   "nama_profil": "nama_profil",
+   "segmen_model": "segmen_model",
+   "klaim": "klaim",
+   "koreksi_aktual": "koreksi_aktual",
+   "ekspektasi_koreksi": "ekspektasi_koreksi",
+   "jenis_fkrtl": "jenis_fkrtl",
+   "tipe_fkrtl": "tipe_fkrtl",
+   "provinsi_kode": "provinsi_kode",
+   "klaim_ditandai": "klaim_ditandai",
+   "berisiko_lolos_verifikasi": "berisiko_lolos_verifikasi",
+   "rasio_aktual_ekspektasi": "rasio_aktual_ekspektasi",
+   "risiko_per_1000_klaim": "risiko_per_1000_klaim",
+   "provinsi": "provinsi",
+   "kabkota": "kabkota",
+   "peringkat": "peringkat"
+  },
+  "props": [
+   {
+    "api": "faskes_profil_id",
+    "type": "string"
+   },
+   {
+    "api": "nama_profil",
+    "type": "string"
+   },
+   {
+    "api": "segmen_model",
+    "type": "string"
+   },
+   {
+    "api": "klaim",
+    "type": "long"
+   },
+   {
+    "api": "koreksi_aktual",
+    "type": "integer"
+   },
+   {
+    "api": "ekspektasi_koreksi",
+    "type": "double"
+   },
+   {
+    "api": "jenis_fkrtl",
+    "type": "string"
+   },
+   {
+    "api": "tipe_fkrtl",
+    "type": "string"
+   },
+   {
+    "api": "provinsi_kode",
+    "type": "integer"
+   },
+   {
+    "api": "klaim_ditandai",
+    "type": "double"
+   },
+   {
+    "api": "berisiko_lolos_verifikasi",
+    "type": "double"
+   },
+   {
+    "api": "rasio_aktual_ekspektasi",
+    "type": "double"
+   },
+   {
+    "api": "risiko_per_1000_klaim",
+    "type": "double"
+   },
+   {
+    "api": "provinsi",
+    "type": "string"
+   },
+   {
+    "api": "kabkota",
+    "type": "string"
+   },
+   {
+    "api": "peringkat",
+    "type": "long"
+   }
+  ]
+ }
+}

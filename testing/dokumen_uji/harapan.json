@@ -1,0 +1,28 @@
+{
+ "nama_pasien": "Sri Wahyuningsih (FIKTIF)",
+ "no_rm": "RM-778812",
+ "no_sep": "0301R0021224V004417",
+ "tanggal_masuk": "2024-12-24",
+ "tanggal_pulang": "2024-12-26",
+ "kelas_rawat": 3,
+ "hak_kelas": 3,
+ "status_pulang": "Sehat",
+ "diagnosis_utama": "T30.2",
+ "diagnosis_sekunder": [
+  "I10"
+ ],
+ "tindakan": [
+  "8622 - Excisional debridement of wound, infection, or burn",
+  "8744 - Routine chest x-ray, so described",
+  "9059 - Other microscopic examination of blood"
+ ],
+ "inacbg_kode": "S-4-16-I",
+ "tarif_inacbg_rp": 4817700,
+ "biaya_tagih_rp": 4817700,
+ "rs": "RSUD Contoh Bandung",
+ "kelas_rs": "C",
+ "kepemilikan": "Swasta",
+ "kabkota": "BANDUNG",
+ "provinsi": "JAWA BARAT",
+ "rs_id": "1aa976e1010da038b117d9dd298c15bb"
+}

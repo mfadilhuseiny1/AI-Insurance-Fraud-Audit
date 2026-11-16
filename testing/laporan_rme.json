@@ -1,0 +1,99 @@
+{
+ "klaim": 2100,
+ "keputusan": {
+  "LOLOS": 300,
+  "TAHAN": 1176,
+  "PERIKSA": 624
+ },
+ "temuan": {
+  "RME_DIAGNOSIS_TIDAK_TERCATAT": 625,
+  "RME_TINDAKAN_TIDAK_TERCATAT": 574,
+  "RME_DIAGNOSIS_TIDAK_DIDUKUNG": 566,
+  "RME_KLINIS_TIDAK_MENDUKUNG": 345,
+  "RME_JENIS_RAWAT_BERBEDA": 300,
+  "RME_PASIEN_BERBEDA": 300,
+  "RME_LOS_TIDAK_SESUAI": 300,
+  "RME_KUNJUNGAN_TIDAK_ADA": 300,
+  "RME_RAWAT_INAP_TANPA_INDIKASI": 111
+ },
+ "per_skenario": {
+  "dx_tidak_didukung": {
+   "n": 300,
+   "ditandai": 300,
+   "ditahan": 300,
+   "porsi_ditandai": 1.0
+  },
+  "kunjungan_fiktif": {
+   "n": 300,
+   "ditandai": 300,
+   "ditahan": 300,
+   "porsi_ditandai": 1.0
+  },
+  "los_diperpanjang": {
+   "n": 300,
+   "ditandai": 300,
+   "ditahan": 0,
+   "porsi_ditandai": 1.0
+  },
+  "normal": {
+   "n": 300,
+   "ditandai": 0,
+   "ditahan": 0,
+   "porsi_ditandai": 0.0
+  },
+  "pasien_berbeda": {
+   "n": 300,
+   "ditandai": 300,
+   "ditahan": 0,
+   "porsi_ditandai": 1.0
+  },
+  "rawat_jalan_ditagih_inap": {
+   "n": 300,
+   "ditandai": 300,
+   "ditahan": 276,
+   "porsi_ditandai": 1.0
+  },
+  "tindakan_fiktif": {
+   "n": 300,
+   "ditandai": 300,
+   "ditahan": 300,
+   "porsi_ditandai": 1.0
+  }
+ },
+ "fraud": {
+  "n": 1800,
+  "ditandai": 1800,
+  "recall": 1.0
+ },
+ "normal": {
+  "n": 300,
+  "ditandai": 0,
+  "false_alert_rate": 0.0,
+  "temuan_pada_false_alert": {},
+  "contoh": []
+ },
+ "galat": 0,
+ "ambang": {
+  "periksa": 45.0,
+  "tahan": 75.0
+ },
+ "versi_aturan": "rme-1",
+ "bobot": {
+  "RME_KUNJUNGAN_TIDAK_ADA": 1.6,
+  "RME_JENIS_RAWAT_BERBEDA": 1.2,
+  "RME_LOS_TIDAK_SESUAI": 1.0,
+  "RME_PASIEN_BERBEDA": 1.2,
+  "RME_TINDAKAN_TIDAK_TERCATAT": 1.4,
+  "RME_KLINIS_TIDAK_MENDUKUNG": 1.0,
+  "RME_DIAGNOSIS_TIDAK_TERCATAT": 0.8,
+  "RME_DIAGNOSIS_TIDAK_DIDUKUNG": 1.0,
+  "RME_OBAT_ALKES_TIDAK_TERCATAT": 1.0,
+  "RME_KELAS_BERBEDA": 1.0,
+  "RME_EPISODE_DIPECAH": 0.9,
+  "RME_KUNJUNGAN_DIPAKAI_ULANG": 1.2,
+  "RME_RAWAT_INAP_TANPA_INDIKASI": 0.7
+ },
+ "masukan": ".tmp/rme_sintetis_300.jsonl",
+ "detik": 5.9,
+ "catatan": "Data sintetis. Basis pengetahuan klinis rme.py adalah subset kerja untuk demonstrasi; perlu ditinjau TKMKB/tim medis BPJS sebelum dipakai pada klaim riil."
+}

@@ -1,0 +1,89 @@
+{
+ "dibekukan": "2026-11-13 04:23",
+ "varian": "B",
+ "kolom": 646,
+ "seed": [
+  0,
+  1,
+  2
+ ],
+ "param": {
+  "n_estimators": 300,
+  "learning_rate": 0.05,
+  "num_leaves": 15,
+  "min_child_samples": 20,
+  "subsample": 0.8,
+  "subsample_freq": 1,
+  "colsample_bytree": 0.8,
+  "reg_lambda": 1.0,
+  "verbose": -1
+ },
+ "latih": {
+  "baris": 89122,
+  "fraud": 4352
+ },
+ "aturan_v4": [],
+ "rute_v3": [],
+ "jaringan_v3": {},
+ "seleksi_rute": [
+  {
+   "langkah": "model saja",
+   "recall": 0.7613
+  }
+ ],
+ "ambang_periksa": 0.41073504090013585,
+ "ambang_tahan": 0.8484769884403315,
+ "validasi": {
+  "periksa": {
+   "recall": 0.7613,
+   "fpr": 0.00992,
+   "rute_saja_fpr": 0.0,
+   "rute_tambah_fraud": 0
+  },
+  "tahan": {
+   "recall": 0.4639,
+   "fpr": 0.00093
+  },
+  "nilai": {
+   "n": 8152,
+   "fraud": 595,
+   "normal": 7557,
+   "recall_fpr1": 0.7613,
+   "fpr1_aktual": 0.00992,
+   "presisi_fpr1_mentah": 0.858,
+   "presisi_fpr1_prev": {
+    "0.005": 0.2782,
+    "0.02": 0.6102,
+    "0.05": 0.8015
+   },
+   "recall_fpr01": 0.4639,
+   "fpr01_aktual": 0.00093,
+   "presisi_fpr01_prev2": 0.9109,
+   "presisi_fpr01_mentah": 0.9753,
+   "auprc": 0.8595,
+   "auroc": 0.9703,
+   "recall_per_skema_fpr1": {
+    "cincin_kolusi": 0.8889,
+    "dx_sekunder": 0.78,
+    "kartu_dipinjam": 1.0,
+    "kelas_naik": 1.0,
+    "klaim_fiktif_jauh": 0.8125,
+    "klaim_ganda": 0.8333,
+    "kloning": 0.8611,
+    "kode_tidak_sesuai": 0.95,
+    "los_bergeser": 0.0,
+    "pemecahan_episode": 0.4583,
+    "prosedur_fiktif": 0.6,
+    "pulang_cepat": 0.2143,
+    "pulang_cepat_readmisi": 0.475,
+    "topup_fiktif": 1.0,
+    "topup_inflasi": 0.98,
+    "upcoding": 0.6406
+   },
+   "fpr1_kunjungan_pertama": 0.01865,
+   "fpr1_pasien_lama": 0.0057,
+   "n_normal_pertama": 2466,
+   "n_normal_lama": 5091
+  }
+ }
+}

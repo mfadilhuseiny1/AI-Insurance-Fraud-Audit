@@ -1,0 +1,3351 @@
+{
+ "catatan": "DATA SINTETIS. Contoh satu Bundle SATUSEHAT untuk satu klaim rawat inap PCI (rekam medis yang sesuai klaim).",
+ "klaim": {
+  "klaim_id": "CONTOH-1",
+  "jenis_episode": "ri",
+  "tanggal_masuk": "2024-12-20",
+  "tanggal_pulang": "2024-12-23",
+  "diagnosis_utama": "I21.4",
+  "diagnosis_sekunder": [
+   "I10"
+  ],
+  "tindakan": [
+   "3722 - Left heart cardiac catheterization",
+   "0066 - Percutaneous transluminal coronary angioplasty",
+   "3607 - Insertion of drug-eluting coronary artery stent(s)"
+  ],
+  "inacbg_kode": "I-1-40-I"
+ },
+ "rekam_medis": {
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+   {
+    "fullUrl": "urn:uuid:96427893-8db4-42c5-bdac-1e0110672a4d",
+    "resource": {
+     "resourceType": "Patient",
+     "identifier": [
+      {
+       "use": "official",
+       "system": "https://fhir.kemkes.go.id/id/patient-ihs-number",
+       "value": "P29776066968"
+      }
+     ],
+     "active": true,
+     "name": [
+      {
+       "use": "official",
+       "text": "PASIEN SINTETIS"
+      }
+     ],
+     "gender": "male",
+     "birthDate": "1962-05-01",
+     "multipleBirthBoolean": false,
+     "id": "96427893-8db4-42c5-bdac-1e0110672a4d",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-patient"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:d83810d5-c883-43cb-b005-7f540649725e",
+    "resource": {
+     "resourceType": "Encounter",
+     "identifier": [
+      {
+       "system": "http://sys-ids.kemkes.go.id/encounter/10000004",
+       "value": "ENC75008365"
+      }
+     ],
+     "status": "finished",
+     "class": {
+      "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+      "code": "IMP",
+      "display": "inpatient encounter"
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "period": {
+      "start": "2024-12-20T08:00:00+07:00",
+      "end": "2024-12-23T11:00:00+07:00"
+     },
+     "statusHistory": [
+      {
+       "status": "arrived",
+       "period": {
+        "start": "2024-12-20T07:00:00+07:00",
+        "end": "2024-12-20T08:00:00+07:00"
+       }
+      },
+      {
+       "status": "in-progress",
+       "period": {
+        "start": "2024-12-20T08:00:00+07:00",
+        "end": "2024-12-23T10:00:00+07:00"
+       }
+      },
+      {
+       "status": "finished",
+       "period": {
+        "start": "2024-12-23T10:00:00+07:00",
+        "end": "2024-12-23T11:00:00+07:00"
+       }
+      }
+     ],
+     "serviceProvider": {
+      "reference": "Organization/10000004"
+     },
+     "location": [
+      {
+       "location": {
+        "reference": "Location/7f47cc86-2103-433e-83b4-85c281607aa6",
+        "display": "Ruang rawat inap"
+       },
+       "period": {
+        "start": "2024-12-20T08:00:00+07:00"
+       }
+      }
+     ],
+     "id": "d83810d5-c883-43cb-b005-7f540649725e",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-encounter"
+      ]
+     },
+     "diagnosis": [
+      {
+       "condition": {
+        "reference": "Condition/bd7674dd-f8a4-4403-ae0c-59b13c83ca78"
+       },
+       "use": {
+        "coding": [
+         {
+          "system": "http://terminology.hl7.org/CodeSystem/diagnosis-role",
+          "code": "DD"
+         }
+        ]
+       },
+       "rank": 1
+      },
+      {
+       "condition": {
+        "reference": "Condition/6bb1a8cf-d94b-4a1b-86c9-e87a275f9bbd"
+       },
+       "use": {
+        "coding": [
+         {
+          "system": "http://terminology.hl7.org/CodeSystem/diagnosis-role",
+          "code": "DD"
+         }
+        ]
+       },
+       "rank": 2
+      }
+     ],
+     "reasonCode": [
+      {
+       "coding": [
+        {
+         "system": "http://hl7.org/fhir/sid/icd-10",
+         "code": "I21.4"
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:bd7674dd-f8a4-4403-ae0c-59b13c83ca78",
+    "resource": {
+     "resourceType": "Condition",
+     "clinicalStatus": {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+        "code": "active"
+       }
+      ]
+     },
+     "verificationStatus": {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+        "code": "confirmed"
+       }
+      ]
+     },
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+         "code": "encounter-diagnosis"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://hl7.org/fhir/sid/icd-10",
+        "code": "I21.4",
+        "display": "Infark miokard akut"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "recordedDate": "2024-12-20T09:00:00+07:00",
+     "id": "bd7674dd-f8a4-4403-ae0c-59b13c83ca78",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-condition"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:6bb1a8cf-d94b-4a1b-86c9-e87a275f9bbd",
+    "resource": {
+     "resourceType": "Condition",
+     "clinicalStatus": {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+        "code": "active"
+       }
+      ]
+     },
+     "verificationStatus": {
+      "coding": [
+       {
+        "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+        "code": "confirmed"
+       }
+      ]
+     },
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+         "code": "encounter-diagnosis"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://hl7.org/fhir/sid/icd-10",
+        "code": "I10",
+        "display": "Hipertensi esensial"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "recordedDate": "2024-12-20T09:00:00+07:00",
+     "id": "6bb1a8cf-d94b-4a1b-86c9-e87a275f9bbd",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-condition"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:38672934-4568-4e9f-b230-d6db65a66d66",
+    "resource": {
+     "resourceType": "Procedure",
+     "identifier": [
+      {
+       "system": "http://sys-ids.kemkes.go.id/procedure/10000004",
+       "value": "7357771"
+      }
+     ],
+     "status": "completed",
+     "code": {
+      "coding": [
+       {
+        "system": "http://hl7.org/fhir/sid/icd-9-cm",
+        "code": "37.22",
+        "display": "Left heart cardiac catheterization"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "performedPeriod": {
+      "start": "2024-12-21T09:00:00+07:00",
+      "end": "2024-12-21T11:00:00+07:00"
+     },
+     "note": [
+      {
+       "text": "Tindakan Left heart cardiac catheterization dilakukan sesuai prosedur."
+      }
+     ],
+     "id": "38672934-4568-4e9f-b230-d6db65a66d66",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-procedure"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:f00b8a63-a78b-4683-a648-da4a7480447d",
+    "resource": {
+     "resourceType": "Procedure",
+     "identifier": [
+      {
+       "system": "http://sys-ids.kemkes.go.id/procedure/10000004",
+       "value": "5007614"
+      }
+     ],
+     "status": "completed",
+     "code": {
+      "coding": [
+       {
+        "system": "http://hl7.org/fhir/sid/icd-9-cm",
+        "code": "00.66",
+        "display": "Percutaneous transluminal coronary angioplasty"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "performedPeriod": {
+      "start": "2024-12-21T09:00:00+07:00",
+      "end": "2024-12-21T11:00:00+07:00"
+     },
+     "note": [
+      {
+       "text": "Tindakan Percutaneous transluminal coronary angioplasty dilakukan sesuai prosedur."
+      }
+     ],
+     "focalDevice": [
+      {
+       "manipulated": {
+        "display": "Drug-eluting coronary stent 3.0 x 28 mm"
+       }
+      }
+     ],
+     "id": "f00b8a63-a78b-4683-a648-da4a7480447d",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-procedure"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:5e0d3dd1-e289-4e30-b606-a45c90beda6d",
+    "resource": {
+     "resourceType": "Procedure",
+     "identifier": [
+      {
+       "system": "http://sys-ids.kemkes.go.id/procedure/10000004",
+       "value": "9768915"
+      }
+     ],
+     "status": "completed",
+     "code": {
+      "coding": [
+       {
+        "system": "http://hl7.org/fhir/sid/icd-9-cm",
+        "code": "36.07",
+        "display": "Insertion of drug-eluting coronary artery stent(s)"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "performedPeriod": {
+      "start": "2024-12-21T09:00:00+07:00",
+      "end": "2024-12-21T11:00:00+07:00"
+     },
+     "note": [
+      {
+       "text": "Tindakan Insertion of drug-eluting coronary artery stent(s) dilakukan sesuai prosedur."
+      }
+     ],
+     "focalDevice": [
+      {
+       "manipulated": {
+        "display": "Drug-eluting coronary stent 3.0 x 28 mm"
+       }
+      }
+     ],
+     "id": "5e0d3dd1-e289-4e30-b606-a45c90beda6d",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-procedure"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:904e99fd-fbd4-42d3-af3e-6de4a3e85d5e",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "85354-9",
+        "display": "Blood pressure panel with all children optional"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T06:00:00+07:00",
+     "component": [
+      {
+       "code": {
+        "coding": [
+         {
+          "system": "http://loinc.org",
+          "code": "8480-6",
+          "display": "Systolic blood pressure"
+         }
+        ]
+       },
+       "valueQuantity": {
+        "value": 127,
+        "unit": "mmHg",
+        "system": "http://unitsofmeasure.org",
+        "code": "mm[Hg]"
+       }
+      },
+      {
+       "code": {
+        "coding": [
+         {
+          "system": "http://loinc.org",
+          "code": "8462-4",
+          "display": "Diastolic blood pressure"
+         }
+        ]
+       },
+       "valueQuantity": {
+        "value": 67,
+        "unit": "mmHg",
+        "system": "http://unitsofmeasure.org",
+        "code": "mm[Hg]"
+       }
+      }
+     ],
+     "id": "904e99fd-fbd4-42d3-af3e-6de4a3e85d5e",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:d2c10792-5b73-4675-a80a-4727f88566bc",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "8867-4",
+        "display": "Heart rate"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T06:00:00+07:00",
+     "valueQuantity": {
+      "value": 74,
+      "unit": "beats/minute",
+      "system": "http://unitsofmeasure.org",
+      "code": "/min"
+     },
+     "id": "d2c10792-5b73-4675-a80a-4727f88566bc",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:e58c30e4-a449-4fa7-b516-d6a92d6c5974",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "9279-1",
+        "display": "Respiratory rate"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T06:00:00+07:00",
+     "valueQuantity": {
+      "value": 18,
+      "unit": "breaths/minute",
+      "system": "http://unitsofmeasure.org",
+      "code": "/min"
+     },
+     "id": "e58c30e4-a449-4fa7-b516-d6a92d6c5974",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:a13b442e-e3a5-4a6e-a273-4f466b7b07c3",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "8310-5",
+        "display": "Body temperature"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T06:00:00+07:00",
+     "valueQuantity": {
+      "value": 36.9,
+      "unit": "C",
+      "system": "http://unitsofmeasure.org",
+      "code": "Cel"
+     },
+     "id": "a13b442e-e3a5-4a6e-a273-4f466b7b07c3",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:daac8909-12f9-451f-9c27-9eb2241e1ddf",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "59408-5",
+        "display": "Oxygen saturation in Arterial blood by Pulse oximetry"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T06:00:00+07:00",
+     "valueQuantity": {
+      "value": 96,
+      "unit": "%",
+      "system": "http://unitsofmeasure.org",
+      "code": "%"
+     },
+     "id": "daac8909-12f9-451f-9c27-9eb2241e1ddf",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:700efca2-ce8a-4eb0-9185-7a9a23de885e",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "85354-9",
+        "display": "Blood pressure panel with all children optional"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T18:00:00+07:00",
+     "component": [
+      {
+       "code": {
+        "coding": [
+         {
+          "system": "http://loinc.org",
+          "code": "8480-6",
+          "display": "Systolic blood pressure"
+         }
+        ]
+       },
+       "valueQuantity": {
+        "value": 119,
+        "unit": "mmHg",
+        "system": "http://unitsofmeasure.org",
+        "code": "mm[Hg]"
+       }
+      },
+      {
+       "code": {
+        "coding": [
+         {
+          "system": "http://loinc.org",
+          "code": "8462-4",
+          "display": "Diastolic blood pressure"
+         }
+        ]
+       },
+       "valueQuantity": {
+        "value": 78,
+        "unit": "mmHg",
+        "system": "http://unitsofmeasure.org",
+        "code": "mm[Hg]"
+       }
+      }
+     ],
+     "id": "700efca2-ce8a-4eb0-9185-7a9a23de885e",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:6039dfb5-262e-4be7-ad1a-95674819872a",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "8867-4",
+        "display": "Heart rate"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T18:00:00+07:00",
+     "valueQuantity": {
+      "value": 62,
+      "unit": "beats/minute",
+      "system": "http://unitsofmeasure.org",
+      "code": "/min"
+     },
+     "id": "6039dfb5-262e-4be7-ad1a-95674819872a",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:25f76c1b-d0dc-444e-83ca-95e3bc07292b",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "9279-1",
+        "display": "Respiratory rate"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T18:00:00+07:00",
+     "valueQuantity": {
+      "value": 16,
+      "unit": "breaths/minute",
+      "system": "http://unitsofmeasure.org",
+      "code": "/min"
+     },
+     "id": "25f76c1b-d0dc-444e-83ca-95e3bc07292b",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:267d3faf-0f92-499f-ae0f-aa5f39cba66c",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "8310-5",
+        "display": "Body temperature"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T18:00:00+07:00",
+     "valueQuantity": {
+      "value": 36.5,
+      "unit": "C",
+      "system": "http://unitsofmeasure.org",
+      "code": "Cel"
+     },
+     "id": "267d3faf-0f92-499f-ae0f-aa5f39cba66c",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:6cb732a4-814e-4f43-ba35-9d186c2e013f",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "59408-5",
+        "display": "Oxygen saturation in Arterial blood by Pulse oximetry"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T18:00:00+07:00",
+     "valueQuantity": {
+      "value": 100,
+      "unit": "%",
+      "system": "http://unitsofmeasure.org",
+      "code": "%"
+     },
+     "id": "6cb732a4-814e-4f43-ba35-9d186c2e013f",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:349ce5a1-f50f-4799-86cc-36a7c8fc6221",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "85354-9",
+        "display": "Blood pressure panel with all children optional"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-21T06:00:00+07:00",
+     "component": [
+      {
+       "code": {
+        "coding": [
+         {
+          "system": "http://loinc.org",
+          "code": "8480-6",
+          "display": "Systolic blood pressure"
+         }
+        ]
+       },
+       "valueQuantity": {
+        "value": 112,
+        "unit": "mmHg",
+        "system": "http://unitsofmeasure.org",
+        "code": "mm[Hg]"
+       }
+      },
+      {
+       "code": {
+        "coding": [
+         {
+          "system": "http://loinc.org",
+          "code": "8462-4",
+          "display": "Diastolic blood pressure"
+         }
+        ]
+       },
+       "valueQuantity": {
+        "value": 81,
+        "unit": "mmHg",
+        "system": "http://unitsofmeasure.org",
+        "code": "mm[Hg]"
+       }
+      }
+     ],
+     "id": "349ce5a1-f50f-4799-86cc-36a7c8fc6221",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:edde944f-7e47-48f2-bcaf-e5b9ffae60ea",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "8867-4",
+        "display": "Heart rate"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-21T06:00:00+07:00",
+     "valueQuantity": {
+      "value": 84,
+      "unit": "beats/minute",
+      "system": "http://unitsofmeasure.org",
+      "code": "/min"
+     },
+     "id": "edde944f-7e47-48f2-bcaf-e5b9ffae60ea",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:cd06fac2-7e29-4703-9250-d25c2785a697",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "9279-1",
+        "display": "Respiratory rate"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-21T06:00:00+07:00",
+     "valueQuantity": {
+      "value": 16,
+      "unit": "breaths/minute",
+      "system": "http://unitsofmeasure.org",
+      "code": "/min"
+     },
+     "id": "cd06fac2-7e29-4703-9250-d25c2785a697",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:832a1fab-b1b4-4b1e-8d70-5b3b1f939625",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "8310-5",
+        "display": "Body temperature"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-21T06:00:00+07:00",
+     "valueQuantity": {
+      "value": 36.5,
+      "unit": "C",
+      "system": "http://unitsofmeasure.org",
+      "code": "Cel"
+     },
+     "id": "832a1fab-b1b4-4b1e-8d70-5b3b1f939625",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:d87ce577-bf6e-4242-bb6a-680ba29f78f7",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "59408-5",
+        "display": "Oxygen saturation in Arterial blood by Pulse oximetry"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-21T06:00:00+07:00",
+     "valueQuantity": {
+      "value": 99,
+      "unit": "%",
+      "system": "http://unitsofmeasure.org",
+      "code": "%"
+     },
+     "id": "d87ce577-bf6e-4242-bb6a-680ba29f78f7",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:3212f99a-f0fa-407e-aca6-8b41991e6d29",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "85354-9",
+        "display": "Blood pressure panel with all children optional"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-21T18:00:00+07:00",
+     "component": [
+      {
+       "code": {
+        "coding": [
+         {
+          "system": "http://loinc.org",
+          "code": "8480-6",
+          "display": "Systolic blood pressure"
+         }
+        ]
+       },
+       "valueQuantity": {
+        "value": 106,
+        "unit": "mmHg",
+        "system": "http://unitsofmeasure.org",
+        "code": "mm[Hg]"
+       }
+      },
+      {
+       "code": {
+        "coding": [
+         {
+          "system": "http://loinc.org",
+          "code": "8462-4",
+          "display": "Diastolic blood pressure"
+         }
+        ]
+       },
+       "valueQuantity": {
+        "value": 78,
+        "unit": "mmHg",
+        "system": "http://unitsofmeasure.org",
+        "code": "mm[Hg]"
+       }
+      }
+     ],
+     "id": "3212f99a-f0fa-407e-aca6-8b41991e6d29",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:d2e78ca2-d31d-4edc-873a-fa4ca9af57f1",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "8867-4",
+        "display": "Heart rate"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-21T18:00:00+07:00",
+     "valueQuantity": {
+      "value": 75,
+      "unit": "beats/minute",
+      "system": "http://unitsofmeasure.org",
+      "code": "/min"
+     },
+     "id": "d2e78ca2-d31d-4edc-873a-fa4ca9af57f1",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:62486af6-b5cc-44e3-8995-950cb3116319",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "9279-1",
+        "display": "Respiratory rate"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-21T18:00:00+07:00",
+     "valueQuantity": {
+      "value": 17,
+      "unit": "breaths/minute",
+      "system": "http://unitsofmeasure.org",
+      "code": "/min"
+     },
+     "id": "62486af6-b5cc-44e3-8995-950cb3116319",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:6ea7e222-e32c-4a52-b0e2-b9e25374a6eb",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "8310-5",
+        "display": "Body temperature"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-21T18:00:00+07:00",
+     "valueQuantity": {
+      "value": 36.6,
+      "unit": "C",
+      "system": "http://unitsofmeasure.org",
+      "code": "Cel"
+     },
+     "id": "6ea7e222-e32c-4a52-b0e2-b9e25374a6eb",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:6cbb0dd4-f670-4af0-907c-0aecad450d83",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "59408-5",
+        "display": "Oxygen saturation in Arterial blood by Pulse oximetry"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-21T18:00:00+07:00",
+     "valueQuantity": {
+      "value": 97,
+      "unit": "%",
+      "system": "http://unitsofmeasure.org",
+      "code": "%"
+     },
+     "id": "6cbb0dd4-f670-4af0-907c-0aecad450d83",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:f85fd4dd-67be-478b-9c0b-e182030599f4",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "85354-9",
+        "display": "Blood pressure panel with all children optional"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-22T06:00:00+07:00",
+     "component": [
+      {
+       "code": {
+        "coding": [
+         {
+          "system": "http://loinc.org",
+          "code": "8480-6",
+          "display": "Systolic blood pressure"
+         }
+        ]
+       },
+       "valueQuantity": {
+        "value": 128,
+        "unit": "mmHg",
+        "system": "http://unitsofmeasure.org",
+        "code": "mm[Hg]"
+       }
+      },
+      {
+       "code": {
+        "coding": [
+         {
+          "system": "http://loinc.org",
+          "code": "8462-4",
+          "display": "Diastolic blood pressure"
+         }
+        ]
+       },
+       "valueQuantity": {
+        "value": 87,
+        "unit": "mmHg",
+        "system": "http://unitsofmeasure.org",
+        "code": "mm[Hg]"
+       }
+      }
+     ],
+     "id": "f85fd4dd-67be-478b-9c0b-e182030599f4",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:70584c29-a86c-4395-ad09-a040dfca7946",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "8867-4",
+        "display": "Heart rate"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-22T06:00:00+07:00",
+     "valueQuantity": {
+      "value": 79,
+      "unit": "beats/minute",
+      "system": "http://unitsofmeasure.org",
+      "code": "/min"
+     },
+     "id": "70584c29-a86c-4395-ad09-a040dfca7946",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:b830b3db-1fe6-4995-9dea-cce36ec7b8eb",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "9279-1",
+        "display": "Respiratory rate"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-22T06:00:00+07:00",
+     "valueQuantity": {
+      "value": 19,
+      "unit": "breaths/minute",
+      "system": "http://unitsofmeasure.org",
+      "code": "/min"
+     },
+     "id": "b830b3db-1fe6-4995-9dea-cce36ec7b8eb",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:258170af-de23-4f89-b0b2-03df3c530423",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "8310-5",
+        "display": "Body temperature"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-22T06:00:00+07:00",
+     "valueQuantity": {
+      "value": 36.5,
+      "unit": "C",
+      "system": "http://unitsofmeasure.org",
+      "code": "Cel"
+     },
+     "id": "258170af-de23-4f89-b0b2-03df3c530423",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:2b386eac-bd82-4300-b4c0-d18e84cc77e7",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "59408-5",
+        "display": "Oxygen saturation in Arterial blood by Pulse oximetry"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-22T06:00:00+07:00",
+     "valueQuantity": {
+      "value": 99,
+      "unit": "%",
+      "system": "http://unitsofmeasure.org",
+      "code": "%"
+     },
+     "id": "2b386eac-bd82-4300-b4c0-d18e84cc77e7",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:ebfd8ef3-fdc6-435c-b326-b1064597cee0",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "85354-9",
+        "display": "Blood pressure panel with all children optional"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-22T18:00:00+07:00",
+     "component": [
+      {
+       "code": {
+        "coding": [
+         {
+          "system": "http://loinc.org",
+          "code": "8480-6",
+          "display": "Systolic blood pressure"
+         }
+        ]
+       },
+       "valueQuantity": {
+        "value": 104,
+        "unit": "mmHg",
+        "system": "http://unitsofmeasure.org",
+        "code": "mm[Hg]"
+       }
+      },
+      {
+       "code": {
+        "coding": [
+         {
+          "system": "http://loinc.org",
+          "code": "8462-4",
+          "display": "Diastolic blood pressure"
+         }
+        ]
+       },
+       "valueQuantity": {
+        "value": 76,
+        "unit": "mmHg",
+        "system": "http://unitsofmeasure.org",
+        "code": "mm[Hg]"
+       }
+      }
+     ],
+     "id": "ebfd8ef3-fdc6-435c-b326-b1064597cee0",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:0e60969a-e18e-4c66-a426-5af912ac372d",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "8867-4",
+        "display": "Heart rate"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-22T18:00:00+07:00",
+     "valueQuantity": {
+      "value": 78,
+      "unit": "beats/minute",
+      "system": "http://unitsofmeasure.org",
+      "code": "/min"
+     },
+     "id": "0e60969a-e18e-4c66-a426-5af912ac372d",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:1b6954a6-5db3-4dc1-8b33-4ae50751b294",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "9279-1",
+        "display": "Respiratory rate"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-22T18:00:00+07:00",
+     "valueQuantity": {
+      "value": 16,
+      "unit": "breaths/minute",
+      "system": "http://unitsofmeasure.org",
+      "code": "/min"
+     },
+     "id": "1b6954a6-5db3-4dc1-8b33-4ae50751b294",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:25ca97af-ed56-4835-92c3-db4c719b9cb4",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "8310-5",
+        "display": "Body temperature"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-22T18:00:00+07:00",
+     "valueQuantity": {
+      "value": 36.8,
+      "unit": "C",
+      "system": "http://unitsofmeasure.org",
+      "code": "Cel"
+     },
+     "id": "25ca97af-ed56-4835-92c3-db4c719b9cb4",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:244809c8-dc83-4b69-a84f-70620ebb533c",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "59408-5",
+        "display": "Oxygen saturation in Arterial blood by Pulse oximetry"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-22T18:00:00+07:00",
+     "valueQuantity": {
+      "value": 96,
+      "unit": "%",
+      "system": "http://unitsofmeasure.org",
+      "code": "%"
+     },
+     "id": "244809c8-dc83-4b69-a84f-70620ebb533c",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:4ae282ba-b8ad-487f-bb2e-47b2a11c1795",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "85354-9",
+        "display": "Blood pressure panel with all children optional"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-23T06:00:00+07:00",
+     "component": [
+      {
+       "code": {
+        "coding": [
+         {
+          "system": "http://loinc.org",
+          "code": "8480-6",
+          "display": "Systolic blood pressure"
+         }
+        ]
+       },
+       "valueQuantity": {
+        "value": 122,
+        "unit": "mmHg",
+        "system": "http://unitsofmeasure.org",
+        "code": "mm[Hg]"
+       }
+      },
+      {
+       "code": {
+        "coding": [
+         {
+          "system": "http://loinc.org",
+          "code": "8462-4",
+          "display": "Diastolic blood pressure"
+         }
+        ]
+       },
+       "valueQuantity": {
+        "value": 73,
+        "unit": "mmHg",
+        "system": "http://unitsofmeasure.org",
+        "code": "mm[Hg]"
+       }
+      }
+     ],
+     "id": "4ae282ba-b8ad-487f-bb2e-47b2a11c1795",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:6ed9ba4b-16b0-426d-93e6-06e88e5eedc9",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "8867-4",
+        "display": "Heart rate"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-23T06:00:00+07:00",
+     "valueQuantity": {
+      "value": 81,
+      "unit": "beats/minute",
+      "system": "http://unitsofmeasure.org",
+      "code": "/min"
+     },
+     "id": "6ed9ba4b-16b0-426d-93e6-06e88e5eedc9",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:f3ecee11-4baa-4251-9d42-1bad32d77da3",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "9279-1",
+        "display": "Respiratory rate"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-23T06:00:00+07:00",
+     "valueQuantity": {
+      "value": 16,
+      "unit": "breaths/minute",
+      "system": "http://unitsofmeasure.org",
+      "code": "/min"
+     },
+     "id": "f3ecee11-4baa-4251-9d42-1bad32d77da3",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:b98d8182-0b95-4a31-b43c-e2ef5fac6dd4",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "8310-5",
+        "display": "Body temperature"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-23T06:00:00+07:00",
+     "valueQuantity": {
+      "value": 36.5,
+      "unit": "C",
+      "system": "http://unitsofmeasure.org",
+      "code": "Cel"
+     },
+     "id": "b98d8182-0b95-4a31-b43c-e2ef5fac6dd4",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:a724b327-8e88-4609-aa68-12ea4d8d44e0",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "59408-5",
+        "display": "Oxygen saturation in Arterial blood by Pulse oximetry"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-23T06:00:00+07:00",
+     "valueQuantity": {
+      "value": 98,
+      "unit": "%",
+      "system": "http://unitsofmeasure.org",
+      "code": "%"
+     },
+     "id": "a724b327-8e88-4609-aa68-12ea4d8d44e0",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:3c67ae52-41ef-4ad1-98aa-34f42ef7e547",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "85354-9",
+        "display": "Blood pressure panel with all children optional"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-23T18:00:00+07:00",
+     "component": [
+      {
+       "code": {
+        "coding": [
+         {
+          "system": "http://loinc.org",
+          "code": "8480-6",
+          "display": "Systolic blood pressure"
+         }
+        ]
+       },
+       "valueQuantity": {
+        "value": 112,
+        "unit": "mmHg",
+        "system": "http://unitsofmeasure.org",
+        "code": "mm[Hg]"
+       }
+      },
+      {
+       "code": {
+        "coding": [
+         {
+          "system": "http://loinc.org",
+          "code": "8462-4",
+          "display": "Diastolic blood pressure"
+         }
+        ]
+       },
+       "valueQuantity": {
+        "value": 69,
+        "unit": "mmHg",
+        "system": "http://unitsofmeasure.org",
+        "code": "mm[Hg]"
+       }
+      }
+     ],
+     "id": "3c67ae52-41ef-4ad1-98aa-34f42ef7e547",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:673d13a2-c9b7-490f-9cf1-78ebb945d706",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "8867-4",
+        "display": "Heart rate"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-23T18:00:00+07:00",
+     "valueQuantity": {
+      "value": 74,
+      "unit": "beats/minute",
+      "system": "http://unitsofmeasure.org",
+      "code": "/min"
+     },
+     "id": "673d13a2-c9b7-490f-9cf1-78ebb945d706",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:93e78b72-050f-43d2-a28c-a6d107ce485f",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "9279-1",
+        "display": "Respiratory rate"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-23T18:00:00+07:00",
+     "valueQuantity": {
+      "value": 17,
+      "unit": "breaths/minute",
+      "system": "http://unitsofmeasure.org",
+      "code": "/min"
+     },
+     "id": "93e78b72-050f-43d2-a28c-a6d107ce485f",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:08cf6901-4ccd-41df-b461-da37404de3e8",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "8310-5",
+        "display": "Body temperature"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-23T18:00:00+07:00",
+     "valueQuantity": {
+      "value": 36.8,
+      "unit": "C",
+      "system": "http://unitsofmeasure.org",
+      "code": "Cel"
+     },
+     "id": "08cf6901-4ccd-41df-b461-da37404de3e8",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:877a46fc-6eee-4976-85d2-1f3c40c62c0f",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "vital-signs",
+         "display": "Vital Signs"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "59408-5",
+        "display": "Oxygen saturation in Arterial blood by Pulse oximetry"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-23T18:00:00+07:00",
+     "valueQuantity": {
+      "value": 97,
+      "unit": "%",
+      "system": "http://unitsofmeasure.org",
+      "code": "%"
+     },
+     "id": "877a46fc-6eee-4976-85d2-1f3c40c62c0f",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:c00e43a5-09b1-45f4-aac8-4481ced6db65",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "laboratory",
+         "display": "Laboratory"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "89579-7",
+        "display": "Troponin I.cardiac [Mass/volume] in Serum or Plasma by High sensitivity method"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T07:00:00+07:00",
+     "valueQuantity": {
+      "value": 260.0,
+      "unit": "ng/L",
+      "system": "http://unitsofmeasure.org",
+      "code": "ng/L"
+     },
+     "referenceRange": [
+      {
+       "high": {
+        "value": 14.0,
+        "unit": "ng/L"
+       }
+      }
+     ],
+     "id": "c00e43a5-09b1-45f4-aac8-4481ced6db65",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:5f7f745d-0deb-4200-94d9-34792b4cb5c6",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "laboratory",
+         "display": "Laboratory"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "89579-7",
+        "display": "Troponin I.cardiac [Mass/volume] in Serum or Plasma by High sensitivity method"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T13:00:00+07:00",
+     "valueQuantity": {
+      "value": 221.0,
+      "unit": "ng/L",
+      "system": "http://unitsofmeasure.org",
+      "code": "ng/L"
+     },
+     "referenceRange": [
+      {
+       "high": {
+        "value": 14.0,
+        "unit": "ng/L"
+       }
+      }
+     ],
+     "id": "5f7f745d-0deb-4200-94d9-34792b4cb5c6",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:69271bd9-5eec-4513-9fc4-7666e57c3daf",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "procedure"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "11524-6",
+        "display": "EKG study"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T09:00:00+07:00",
+     "valueCodeableConcept": {
+      "text": "Irama sinus, ST elevasi V1-V4 (iskemia anterior)"
+     },
+     "interpretation": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+         "code": "A"
+        }
+       ]
+      }
+     ],
+     "id": "69271bd9-5eec-4513-9fc4-7666e57c3daf",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:9fdbd104-934d-49ee-80aa-e3eba02da003",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "laboratory",
+         "display": "Laboratory"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "718-7",
+        "display": "Hemoglobin [Mass/volume] in Blood"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T07:00:00+07:00",
+     "valueQuantity": {
+      "value": 13.7,
+      "unit": "g/dL",
+      "system": "http://unitsofmeasure.org",
+      "code": "g/dL"
+     },
+     "id": "9fdbd104-934d-49ee-80aa-e3eba02da003",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:ebb72705-5f83-49c4-9a16-30bc6477dfc5",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "laboratory",
+         "display": "Laboratory"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "6690-2",
+        "display": "Leukocytes [#/volume] in Blood"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T07:00:00+07:00",
+     "valueQuantity": {
+      "value": 8.6,
+      "unit": "10*3/uL",
+      "system": "http://unitsofmeasure.org",
+      "code": "10*3/uL"
+     },
+     "id": "ebb72705-5f83-49c4-9a16-30bc6477dfc5",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:809c268b-b093-4ed2-a34e-5bc685a375f6",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "laboratory",
+         "display": "Laboratory"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "777-3",
+        "display": "Platelets [#/volume] in Blood"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T07:00:00+07:00",
+     "valueQuantity": {
+      "value": 283,
+      "unit": "10*3/uL",
+      "system": "http://unitsofmeasure.org",
+      "code": "10*3/uL"
+     },
+     "id": "809c268b-b093-4ed2-a34e-5bc685a375f6",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:64c08d17-7782-4ceb-a734-741cc7d92c89",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "laboratory",
+         "display": "Laboratory"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "2160-0",
+        "display": "Creatinine [Mass/volume] in Serum or Plasma"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T07:00:00+07:00",
+     "valueQuantity": {
+      "value": 1.0,
+      "unit": "mg/dL",
+      "system": "http://unitsofmeasure.org",
+      "code": "mg/dL"
+     },
+     "id": "64c08d17-7782-4ceb-a734-741cc7d92c89",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:1a433dc2-6a55-4f7e-8fe4-e33c6c71576c",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "laboratory",
+         "display": "Laboratory"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "2951-2",
+        "display": "Sodium [Moles/volume] in Serum or Plasma"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T07:00:00+07:00",
+     "valueQuantity": {
+      "value": 136,
+      "unit": "mmol/L",
+      "system": "http://unitsofmeasure.org",
+      "code": "mmol/L"
+     },
+     "id": "1a433dc2-6a55-4f7e-8fe4-e33c6c71576c",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:f9938298-341f-44c8-a0e8-eda12c30f9c7",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "laboratory",
+         "display": "Laboratory"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "2823-3",
+        "display": "Potassium [Moles/volume] in Serum or Plasma"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T07:00:00+07:00",
+     "valueQuantity": {
+      "value": 3.8,
+      "unit": "mmol/L",
+      "system": "http://unitsofmeasure.org",
+      "code": "mmol/L"
+     },
+     "id": "f9938298-341f-44c8-a0e8-eda12c30f9c7",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:60687534-7072-496a-a8d3-fde4be6a9bb5",
+    "resource": {
+     "resourceType": "Observation",
+     "status": "final",
+     "category": [
+      {
+       "coding": [
+        {
+         "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+         "code": "laboratory",
+         "display": "Laboratory"
+        }
+       ]
+      }
+     ],
+     "code": {
+      "coding": [
+       {
+        "system": "http://loinc.org",
+        "code": "2345-7",
+        "display": "Glucose [Mass/volume] in Serum or Plasma"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T07:00:00+07:00",
+     "valueQuantity": {
+      "value": 118.9,
+      "unit": "mg/dL",
+      "system": "http://unitsofmeasure.org",
+      "code": "mg/dL"
+     },
+     "id": "60687534-7072-496a-a8d3-fde4be6a9bb5",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-observation"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:9e08bf82-feba-4146-926b-e5ba77a8e779",
+    "resource": {
+     "resourceType": "MedicationRequest",
+     "status": "completed",
+     "intent": "order",
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "authoredOn": "2024-12-20T09:00:00+07:00",
+     "medicationCodeableConcept": {
+      "coding": [
+       {
+        "system": "http://sys-ids.kemkes.go.id/kfa",
+        "code": "92000101",
+        "display": "Parasetamol 1 g infus"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "id": "9e08bf82-feba-4146-926b-e5ba77a8e779",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-medication-request"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:06c1f890-5c5b-4cc9-b2f6-884a56e7117a",
+    "resource": {
+     "resourceType": "MedicationAdministration",
+     "status": "completed",
+     "context": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T10:00:00+07:00",
+     "medicationCodeableConcept": {
+      "coding": [
+       {
+        "system": "http://sys-ids.kemkes.go.id/kfa",
+        "code": "92000101",
+        "display": "Parasetamol 1 g infus"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "id": "06c1f890-5c5b-4cc9-b2f6-884a56e7117a",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-medication-administration"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:7b7291f6-197e-41db-b966-df2cbdf5a068",
+    "resource": {
+     "resourceType": "MedicationRequest",
+     "status": "completed",
+     "intent": "order",
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "authoredOn": "2024-12-20T09:00:00+07:00",
+     "medicationCodeableConcept": {
+      "coding": [
+       {
+        "system": "http://sys-ids.kemkes.go.id/kfa",
+        "code": "92000105",
+        "display": "Ondansetron 4 mg injeksi"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "id": "7b7291f6-197e-41db-b966-df2cbdf5a068",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-medication-request"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:4f22b236-882d-46b8-b6f3-f3241ffb1994",
+    "resource": {
+     "resourceType": "MedicationAdministration",
+     "status": "completed",
+     "context": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T10:00:00+07:00",
+     "medicationCodeableConcept": {
+      "coding": [
+       {
+        "system": "http://sys-ids.kemkes.go.id/kfa",
+        "code": "92000105",
+        "display": "Ondansetron 4 mg injeksi"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "id": "4f22b236-882d-46b8-b6f3-f3241ffb1994",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-medication-administration"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:45e1fd83-a180-4bd4-866f-14a41f285d73",
+    "resource": {
+     "resourceType": "MedicationRequest",
+     "status": "completed",
+     "intent": "order",
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "authoredOn": "2024-12-20T09:00:00+07:00",
+     "medicationCodeableConcept": {
+      "coding": [
+       {
+        "system": "http://sys-ids.kemkes.go.id/kfa",
+        "code": "92000103",
+        "display": "Omeprazol 40 mg injeksi"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "id": "45e1fd83-a180-4bd4-866f-14a41f285d73",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-medication-request"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:f0abf283-c6c3-4ce4-a973-58fc430174ed",
+    "resource": {
+     "resourceType": "MedicationAdministration",
+     "status": "completed",
+     "context": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T10:00:00+07:00",
+     "medicationCodeableConcept": {
+      "coding": [
+       {
+        "system": "http://sys-ids.kemkes.go.id/kfa",
+        "code": "92000103",
+        "display": "Omeprazol 40 mg injeksi"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "id": "f0abf283-c6c3-4ce4-a973-58fc430174ed",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-medication-administration"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:7896f690-18a9-4d88-9129-3bfd62f6977a",
+    "resource": {
+     "resourceType": "MedicationRequest",
+     "status": "completed",
+     "intent": "order",
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "authoredOn": "2024-12-20T09:00:00+07:00",
+     "medicationCodeableConcept": {
+      "coding": [
+       {
+        "system": "http://sys-ids.kemkes.go.id/kfa",
+        "code": "92000201",
+        "display": "Asam asetilsalisilat 80 mg tablet"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "id": "7896f690-18a9-4d88-9129-3bfd62f6977a",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-medication-request"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:68e22d9c-000d-46eb-9c4b-1341762cadc0",
+    "resource": {
+     "resourceType": "MedicationAdministration",
+     "status": "completed",
+     "context": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T10:00:00+07:00",
+     "medicationCodeableConcept": {
+      "coding": [
+       {
+        "system": "http://sys-ids.kemkes.go.id/kfa",
+        "code": "92000201",
+        "display": "Asam asetilsalisilat 80 mg tablet"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "id": "68e22d9c-000d-46eb-9c4b-1341762cadc0",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-medication-administration"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:50ced83b-433a-4366-be8f-5969e4e2a583",
+    "resource": {
+     "resourceType": "MedicationRequest",
+     "status": "completed",
+     "intent": "order",
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "authoredOn": "2024-12-20T09:00:00+07:00",
+     "medicationCodeableConcept": {
+      "coding": [
+       {
+        "system": "http://sys-ids.kemkes.go.id/kfa",
+        "code": "92000204",
+        "display": "Atorvastatin 40 mg tablet"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "id": "50ced83b-433a-4366-be8f-5969e4e2a583",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-medication-request"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:708c42fc-115d-43c0-8ddf-6691ae6a4737",
+    "resource": {
+     "resourceType": "MedicationAdministration",
+     "status": "completed",
+     "context": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T10:00:00+07:00",
+     "medicationCodeableConcept": {
+      "coding": [
+       {
+        "system": "http://sys-ids.kemkes.go.id/kfa",
+        "code": "92000204",
+        "display": "Atorvastatin 40 mg tablet"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "id": "708c42fc-115d-43c0-8ddf-6691ae6a4737",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-medication-administration"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:f615a339-6357-47ae-bbd4-16a059604d52",
+    "resource": {
+     "resourceType": "MedicationRequest",
+     "status": "completed",
+     "intent": "order",
+     "encounter": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "authoredOn": "2024-12-20T09:00:00+07:00",
+     "medicationCodeableConcept": {
+      "coding": [
+       {
+        "system": "http://sys-ids.kemkes.go.id/kfa",
+        "code": "92000205",
+        "display": "Nitrogliserin 5 mg/mL injeksi"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "id": "f615a339-6357-47ae-bbd4-16a059604d52",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-medication-request"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:e76c03cc-4c15-42bc-b3de-83b8f58d8627",
+    "resource": {
+     "resourceType": "MedicationAdministration",
+     "status": "completed",
+     "context": {
+      "reference": "Encounter/d83810d5-c883-43cb-b005-7f540649725e"
+     },
+     "effectiveDateTime": "2024-12-20T10:00:00+07:00",
+     "medicationCodeableConcept": {
+      "coding": [
+       {
+        "system": "http://sys-ids.kemkes.go.id/kfa",
+        "code": "92000205",
+        "display": "Nitrogliserin 5 mg/mL injeksi"
+       }
+      ]
+     },
+     "subject": {
+      "reference": "Patient/96427893-8db4-42c5-bdac-1e0110672a4d"
+     },
+     "id": "e76c03cc-4c15-42bc-b3de-83b8f58d8627",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-medication-administration"
+      ]
+     }
+    }
+   },
+   {
+    "fullUrl": "urn:uuid:8b17b97a-ebd8-4c3f-b9f7-90fe9d131829",
+    "resource": {
+     "resourceType": "Device",
+     "status": "active",
+     "deviceName": [
+      {
+       "name": "Drug-eluting coronary stent",
+       "type": "user-friendly-name"
+      }
+     ],
+     "type": {
+      "text": "implant"
+     },
+     "id": "8b17b97a-ebd8-4c3f-b9f7-90fe9d131829",
+     "meta": {
+      "profile": [
+       "https://fhir.kemkes.go.id/r4/StructureDefinition/id-core-device"
+      ]
+     }
+    }
+   }
+  ]
+ }
+}

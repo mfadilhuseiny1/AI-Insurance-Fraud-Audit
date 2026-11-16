@@ -1,0 +1,28 @@
+﻿{
+    "files_scanned":  17449,
+    "gb_scanned":  23.05,
+    "files_with_real_ids":  {
+
+                            },
+    "weak_numeric_matches":  {
+                                 "data\\drive\\1e0e9a669b66404c":  180,
+                                 "data\\drive\\c342df432a1040af":  180,
+                                 "data\\duckdb-checkpoints\\26f13601699a446c\\cp_t_fakta-0021138b8f6bfea6e249837b8c9a3a62.parquet":  180,
+                                 "data\\lineage\\versions\\1e0e9a669b66404c\\1b7aa208d115.parquet":  180,
+                                 "data\\lineage\\versions\\1e0e9a669b66404c\\3fe1ac028b12.parquet":  180,
+                                 "data\\lineage\\versions\\c342df432a1040af\\2f8bbe82eb1c.parquet":  180,
+                                 "data\\lineage\\versions\\c342df432a1040af\\be473c71f6f0.parquet":  180,
+                                 "data\\lineage\\versions\\c342df432a1040af\\e7586c2cebb1.parquet":  180,
+                                 "data\\lineage\\versions\\cd194520cb4e404b\\591a34507035.parquet":  1,
+                                 "data\\lineage\\versions\\cd194520cb4e404b\\638533326424.parquet":  1,
+                                 "data\\ontology\\objects\\ot-0abec7db8247.json":  1,
+                                 "data\\ontology\\objects\\ot-38ff2abfae40.json":  2,
+                                 "data\\ontology\\objects\\ot-6773447b8ad0.json":  5
+                             },
+    "secs":  6758,
+    "catatan":  "files_with_real_ids: alphanumeric real visit ids (13-16 chars) or real participant numbers in participant columns; weak_numeric_matches: 10-12 digit numbers equal to a real numeric visit id (can be chance: timestamps, counts)",
+    "unreadable_files":  [
+                             "data\\ontology\\indexing\\.watcher.lock"
+                         ],
+    "penjelasan":  "files_with_real_ids kosong: satu-satunya file yang dulu tercatat adalah .watcher.lock (file kunci yang dipegang API, tak terbaca, keliru dihitung). Kecocokan lemah: kolom peserta_id (nomor peserta SINTETIS 10 digit sebagai teks) di klaim_fkrtl dan klaim_fkrtl_fakta beserta versi/checkpoint-nya; 180 nomor kebetulan sama dengan nomor KUNJUNGAN asli berbentuk angka 10 digit (ruang ID entitas lain). Nomor peserta sintetis dijamin tidak sama dengan nomor peserta asli mana pun."
+}

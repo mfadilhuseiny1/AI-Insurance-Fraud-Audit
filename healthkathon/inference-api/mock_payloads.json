@@ -1,0 +1,23 @@
+{
+  "_catatan": "Dua payload pertama sama persis dengan repositori juri (github.com/saidachmadd/ai-inference-pipeline-demo). Klaim nyata dari data sampel BPJS: python export_paket.py menulis paket/contoh_klaim_nyata.json (tidak di-commit).",
+  "legitimate_claim": {
+    "claim_id": "CLM-2026-8801",
+    "patient_age": 58,
+    "ina_cbg_code": "I-4-10-II",
+    "primary_diagnosis": "I21.0",
+    "claimed_cost": 15100000,
+    "real_cost": 14200000,
+    "length_of_stay_days": 6,
+    "clinical_notes": "Pasien serangan jantung. Dirawat di ICU 3 hari, observasi 3 hari. Terapi trombolitik dan insulin berjalan lancar. Kondisi stabil dan diizinkan pulang."
+  },
+  "fraud_upcoding_claim": {
+    "claim_id": "CLM-2026-9942",
+    "patient_age": 29,
+    "ina_cbg_code": "A-4-13-III",
+    "primary_diagnosis": "A41.9",
+    "claimed_cost": 18450000,
+    "real_cost": 3150000,
+    "length_of_stay_days": 2,
+    "clinical_notes": "Pasien datang dengan keluhan demam tifoid dan mual. Diberikan infus RL dan obat oral. Hari kedua demam turun dan pasien meminta pulang paksa. Tidak ada tindakan pemasangan ventilator atau observasi ICU."
+  }
+}

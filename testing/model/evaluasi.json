@@ -1,0 +1,228 @@
+{
+ "catatan": "Tiga varian pelatihan /testing pada aliran sintetis FKRTL. model_tanpa_aug = hanya klaim simulator (seperti riset sebelumnya); model_tanpa_plant_sim = plant bersih + normal hasil salinan, plant simulator 9 skema tidak dilatih (holdout kedua); model = semua digabung (dipakai layanan). holdout_bersih = plant bersih yang tidak pernah dilatih (generator yang sama); holdout_normal_bersih = klaim normal hasil salinan lewat formulir yang tidak pernah dilatih.",
+ "varian": {
+  "model_tanpa_aug": {
+   "oof_auprc": 0.9818307262085143,
+   "oof_ditandai_precision": 0.9070422535211268,
+   "oof_ditandai_recall": 0.9554896142433235,
+   "oof_fpr_normal": 0.002510269283432223,
+   "holdout_bersih_recall": 0.5466893039049237,
+   "holdout_normal_bersih_fpr": 0.0605,
+   "holdout_plant_simulator_recall": null,
+   "holdout_bersih_per_skenario": {
+    "dx_sekunder": {
+     "n": 57,
+     "ditandai": 0.614,
+     "model1_median": 0.623
+    },
+    "kelas_naik": {
+     "n": 57,
+     "ditandai": 1.0,
+     "model1_median": 0.983
+    },
+    "kloning": {
+     "n": 57,
+     "ditandai": 0.684,
+     "model1_median": 0.815
+    },
+    "kode_tidak_sesuai": {
+     "n": 57,
+     "ditandai": 0.439,
+     "model1_median": 0.423
+    },
+    "los_bergeser": {
+     "n": 93,
+     "ditandai": 0.204,
+     "model1_median": 0.073
+    },
+    "normal": {
+     "n": 2000,
+     "ditandai": 0.06,
+     "model1_median": 0.008
+    },
+    "prosedur_fiktif": {
+     "n": 57,
+     "ditandai": 0.035,
+     "model1_median": 0.028
+    },
+    "topup_fiktif": {
+     "n": 57,
+     "ditandai": 0.965,
+     "model1_median": 0.799
+    },
+    "topup_inflasi": {
+     "n": 57,
+     "ditandai": 0.07,
+     "model1_median": 0.072
+    },
+    "upcoding": {
+     "n": 97,
+     "ditandai": 0.887,
+     "model1_median": 0.986
+    }
+   },
+   "holdout_plant_simulator_per_skenario": null
+  },
+  "model_tanpa_plant_sim": {
+   "oof_auprc": 0.959551702702207,
+   "oof_ditandai_precision": 0.8977384464110127,
+   "oof_ditandai_recall": 0.9278455284552846,
+   "oof_fpr_normal": 0.0019017191541153202,
+   "holdout_bersih_recall": 0.9548022598870056,
+   "holdout_normal_bersih_fpr": 0.0,
+   "holdout_plant_simulator_recall": 0.7951030927835051,
+   "holdout_bersih_per_skenario": {
+    "dx_sekunder": {
+     "n": 16,
+     "ditandai": 1.0,
+     "model1_median": 0.987
+    },
+    "kelas_naik": {
+     "n": 13,
+     "ditandai": 1.0,
+     "model1_median": 0.99
+    },
+    "kloning": {
+     "n": 17,
+     "ditandai": 0.941,
+     "model1_median": 0.986
+    },
+    "kode_tidak_sesuai": {
+     "n": 17,
+     "ditandai": 1.0,
+     "model1_median": 0.981
+    },
+    "los_bergeser": {
+     "n": 28,
+     "ditandai": 0.893,
+     "model1_median": 0.973
+    },
+    "normal": {
+     "n": 621,
+     "ditandai": 0.0,
+     "model1_median": 0.0
+    },
+    "prosedur_fiktif": {
+     "n": 12,
+     "ditandai": 0.833,
+     "model1_median": 0.98
+    },
+    "topup_fiktif": {
+     "n": 19,
+     "ditandai": 1.0,
+     "model1_median": 0.993
+    },
+    "topup_inflasi": {
+     "n": 18,
+     "ditandai": 0.944,
+     "model1_median": 0.977
+    },
+    "upcoding": {
+     "n": 37,
+     "ditandai": 0.973,
+     "model1_median": 0.998
+    }
+   },
+   "holdout_plant_simulator_per_skenario": {
+    "dx_sekunder": {
+     "n": 20,
+     "ditandai": 1.0
+    },
+    "kelas_naik": {
+     "n": 20,
+     "ditandai": 1.0
+    },
+    "kloning": {
+     "n": 72,
+     "ditandai": 0.889
+    },
+    "kode_tidak_sesuai": {
+     "n": 19,
+     "ditandai": 1.0
+    },
+    "los_bergeser": {
+     "n": 320,
+     "ditandai": 0.828
+    },
+    "prosedur_fiktif": {
+     "n": 20,
+     "ditandai": 0.05
+    },
+    "topup_fiktif": {
+     "n": 19,
+     "ditandai": 1.0
+    },
+    "topup_inflasi": {
+     "n": 20,
+     "ditandai": 0.2
+    },
+    "upcoding": {
+     "n": 266,
+     "ditandai": 0.771
+    }
+   }
+  },
+  "model": {
+   "oof_auprc": 0.9848361625676461,
+   "oof_ditandai_precision": 0.9205043859649122,
+   "oof_ditandai_recall": 0.9539772727272727,
+   "oof_fpr_normal": 0.0025863380495968354,
+   "holdout_bersih_recall": 0.9717514124293786,
+   "holdout_normal_bersih_fpr": 0.0,
+   "holdout_plant_simulator_recall": null,
+   "holdout_bersih_per_skenario": {
+    "dx_sekunder": {
+     "n": 16,
+     "ditandai": 1.0,
+     "model1_median": 0.985
+    },
+    "kelas_naik": {
+     "n": 13,
+     "ditandai": 1.0,
+     "model1_median": 0.992
+    },
+    "kloning": {
+     "n": 17,
+     "ditandai": 0.941,
+     "model1_median": 0.99
+    },
+    "kode_tidak_sesuai": {
+     "n": 17,
+     "ditandai": 1.0,
+     "model1_median": 0.981
+    },
+    "los_bergeser": {
+     "n": 28,
+     "ditandai": 0.964,
+     "model1_median": 0.979
+    },
+    "normal": {
+     "n": 621,
+     "ditandai": 0.0,
+     "model1_median": 0.001
+    },
+    "prosedur_fiktif": {
+     "n": 12,
+     "ditandai": 0.833,
+     "model1_median": 0.988
+    },
+    "topup_fiktif": {
+     "n": 19,
+     "ditandai": 1.0,
+     "model1_median": 0.989
+    },
+    "topup_inflasi": {
+     "n": 18,
+     "ditandai": 0.944,
+     "model1_median": 0.984
+    },
+    "upcoding": {
+     "n": 37,
+     "ditandai": 1.0,
+     "model1_median": 0.998
+    }
+   },
+   "holdout_plant_simulator_per_skenario": null
+  }
+ }
+}
